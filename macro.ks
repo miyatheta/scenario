@@ -1,18 +1,18 @@
 *macros
+
 [macro name="progressbar"]
 [eval exp="f.progress = f.goal" cond="f.progress > f.goal"]
 [iscript]
 f.progressbar = "進行度：" + f.progress + "/" + f.goal;
-f.pos_pb = f.progressbar.length * (-12) + 1270;
 [endscript]
-[ptext  layer="0"  x=&f.pos_pb  y="540"  text=&f.progressbar 　size="20"  color="white"  bold="bold"  name="progressbar"  overwrite="true" ]
+[ptext  layer="0"  x="0"  y="540"  width="1270"  text=&f.progressbar  size="20"  color="white"  bold="bold"  align="right"  name="progressbar"  overwrite="true"  ]
 [endmacro]
 
 [macro name="WriteAhead"]
 [iscript]
 tf.txt = "移動力：" + f.ahead ;
 [endscript]
-[ptext  layer="0"  x="1208"  y="490"  text=&tf.txt  size="20"  color="red"  bold="bold"  name="movepower"  overwrite="true"  ]
+[ptext  layer="0"  x="0"  y="520"  width="1270"  text=&tf.txt  size="20"  color="white"  bold="bold"  align="right"  name="movepower"  overwrite="true"  ]
 [endmacro]
 
 ; [getMathRound var="XXX"]
