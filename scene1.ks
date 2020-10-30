@@ -7,8 +7,6 @@
 [start_keyconfig]
 
 
-[bg storage="syosai1-1080.jpg" time="100"]
-
 ;メニューボタンの表示
 @showmenubutton
 
@@ -36,6 +34,18 @@
 [chara_face name="suzune" face="surprise" storage="chara/suzune/doki.png"]
 [chara_face name="suzune" face="happy" storage="chara/suzune/happy.png"]
 [chara_face name="suzune" face="sad" storage="chara/suzune/sad.png"]
+
+;変数宣言
+[eval exp="f.HP_MAX = 1000, f.SAN_MAX = 60, f.NIZ = 1"]
+[eval exp="f.STR_MAX = 60 , f.POW_MAX=30, f.SPD_MAX = 15, f.MOVE_MAX = 10"]
+[eval exp="f.CURSE=0, f.ERO=0"]
+[eval exp="f.ANAL = 100, f.VGNA = 100, f.BOOB = 100"]
+[eval exp="f.poison=0, f.slowly=0, f.excite=0, f.closed=0"]
+[eval exp="f.date = 1"]
+[eval exp="f.escape = 0"]
+[eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
+[eval exp="f.HP = f.HP_MAX, f.SAN = f.SAN_MAX"]
+[eval exp="f.BUFF_ATP = 1, f.ambush = 1"]
 
 [jump storage="home.ks" target="**home_start"]
 

@@ -1,11 +1,26 @@
 *macros
 
+[macro name="MND1"]
+[eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
+[endmacro]
+
+[macro name="MND0"]
+[eval exp="f.MND -= 1" cond="f.MND > 0"][WSs]
+[endmacro]
+
+[macro name="MP10"]
+[eval exp="f.MP += 10" cond="f.MP < 100"][WSs]
+[endmacro]
+
 [macro name="progressbar"]
 [eval exp="f.progress = f.goal" cond="f.progress > f.goal"]
 [iscript]
 f.progressbar = "進行度：" + f.progress + "/" + f.goal;
+tf.security = "警戒度：" + f.security ;
 [endscript]
 [ptext layer="0" x="0" y="540" width="1270" text=&f.progressbar size="20" color="white" bold="bold" align="right" name="progressbar" overwrite="true" ]
+[ptext layer="0" x="0" y="5600" width="1270" text=&f.security size="20" color="0x000000" edge="white" bold="bold" align="left" name="security" overwrite="true" ]
+
 [endmacro]
 
 [macro name="WriteAhead"]
@@ -15,26 +30,49 @@ tf.txt = "移動力：" + f.ahead ;
 [ptext layer="0" x="0" y="520" width="1270" text=&tf.txt size="20" color="white" bold="bold" align="right" name="movepower" overwrite="true" ]
 [endmacro]
 
+[macro name="WriteEnemy"]
+[iscript]
+tf.txt = "敵：" + f.en_Name ;
+[endscript]
+[ptext layer="0" x="0" y="500" width="1270" text=&tf.txt size="20" color="red" bold="bold" align="right" name="enemyname" overwrite="true" ]
+[endmacro]
+
+[macro name="WriteDate"]
+[iscript]
+tf.txt = f.date + "/60日" ;
+[endscript]
+[ptext layer="0" x="0" y="10" width="1270" text=&tf.txt size="30" color="white" bold="bold" align="right" name="calender" overwrite="true" ]
+[endmacro]
+
 [macro name="WSs"]
 ;WriteStatus
 [iscript]
 tf.hp = "体力：" + f.HP ;
+tf.mp = "気力：" + f.MP ;
+tf.mnd = "集中：" + f.MND ;
 tf.ero = "欲情：" + f.ERO ;
 tf.curse = "淫気：" + f.CURSE ;
+tf.vital = "状態：";
+if(f.poison > 0){tf.vital = tf.vital + "毒　";}
+if(f.slowly > 0){tf.vital = tf.vital + "鈍足　";}
+if(f.excite > 0){tf.vital = tf.vital + "興奮　";}
 [endscript]
-[ptext layer="0" x="0" y="640" text=&tf.hp size="20" color="0x000000" edge="white" bold="bold" align="left" name="hitpoint" overwrite="true" ]
-[ptext layer="0" x="0" y="660" text=&tf.ero size="20" color="0xff00ff" edge="white" bold="bold" align="left" name="ero" overwrite="true" ]
-[ptext layer="0" x="0" y="680" text=&tf.curse size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="curse" overwrite="true" ]
+[ptext layer="0" x="0" y="580" text=&tf.hp size="20" color="0x000000" edge="white" bold="bold" align="left" name="hitpoint" overwrite="true" ]
+[ptext layer="0" x="0" y="600" text=&tf.mp size="20" color="0x000000" edge="white" bold="bold" align="left" name="magicpoint" overwrite="true" ]
+[ptext layer="0" x="0" y="620" text=&tf.mnd size="20" color="0x000000" edge="white" bold="bold" align="left" name="concentration" overwrite="true" ]
+[ptext layer="0" x="0" y="640" text=&tf.ero size="20" color="0xff00ff" edge="white" bold="bold" align="left" name="ero" overwrite="true" ]
+[ptext layer="0" x="0" y="660" text=&tf.curse size="20" color="0x9400d3" edge="white" bold="bold" align="left" name="curse" overwrite="true" ]
+[ptext layer="0" x="0" y="680" text=&tf.vital size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="health" overwrite="true" ]
 [endmacro]
 
 ; [getMathRound var="XXX"]
-; 一時変数 tf.round に小数点以下を四捨五入した整数をセットするマクロです。
+; 一時変数 tf.arg に小数点以下を四捨五入した整数をセットするマクロです。
 ; var には変数の名前を指定できます（var="f.a"のように）。
-; 指定すると、tf.round の内容をその変数にコピーします。
+; 指定すると、tf.arg の内容をその変数にコピーします。
 [macro name="getMathRound"]
  [iscript]
- tf.round = Math.round(tf.round)
- if (mp['var']) eval(mp['var'] + ' = ' + tf.round)
+ tf.arg = Math.round(tf.arg)
+ if (mp['var']) eval(mp['var'] + ' = ' + tf.arg)
  [endscript]
 [endmacro]
 
