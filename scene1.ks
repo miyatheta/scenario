@@ -42,7 +42,7 @@
 [eval exp="f.ANAL = 100, f.VGNA = 100, f.BOOB = 100"]
 [eval exp="f.poison=0, f.slowly=0, f.excite=0, f.closed=0"]
 [eval exp="f.date = 1"]
-[eval exp="f.escape = 0"]
+[eval exp="f.escape = 0 , f.charm = 0"]
 [eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
 [eval exp="f.HP = f.HP_MAX, f.SAN = f.SAN_MAX"]
 [eval exp="f.BUFF_ATP = 1, f.ambush = 1"]

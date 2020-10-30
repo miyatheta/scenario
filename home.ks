@@ -94,7 +94,8 @@
 *select_holiday
 [glink  color="black"  target="*rest"  x="450"  y="150"  width=""  height=""  text="休養" ]
 [glink  color="black"  target="*pray"  x="450"  y="250"  width=""  height=""  text="浄化" ]
-[glink  color="black"  target="*meditation"  x="450"  y="250"  width=""  height=""  text="瞑想" ]
+[glink  color="black"  target="*meditation"  x="450"  y="350"  width=""  height=""  text="瞑想" ]
+[s]
 
 *rest
 体力を回復します[p]

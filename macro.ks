@@ -41,7 +41,7 @@ tf.txt = "敵：" + f.en_Name ;
 [iscript]
 tf.txt = f.date + "/60日" ;
 [endscript]
-[ptext layer="0" x="0" y="10" width="1270" text=&tf.txt size="30" color="white" bold="bold" align="right" name="calender" overwrite="true" ]
+[ptext layer="0" x="0" y="10" width="1270" text=&tf.txt size="30" color="0x000000" edge="white" bold="bold" align="right" name="calender" overwrite="true" ]
 [endmacro]
 
 [macro name="WSs"]

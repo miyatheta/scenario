@@ -1,11 +1,10 @@
 *start
-
-;-------------------------------------------------------------------------------
-*PL_battle_select
 [eval exp="f.Round += 1"]
 [eval exp="f.GRD = 1 , f.AVD =  0" ]
 [eval exp="f.BUFF_ATP = 1 + f.ambush" cond="f.Round < 2"]
+;-------------------------------------------------------------------------------
 
+*PL_battle_select
 [glink color="black" target="*PL_attack_select" x="450" y="100" width="" height="" text="攻撃" ]
 [glink color="black" target="*PL_magic_select" x="450" y="200" width="" height="" text="忍術" ]
 [glink color="black" target="*PL_item_select" x="450" y="300" width="" height="" text="道具" ]
@@ -13,15 +12,17 @@
 [s]
 
 *PL_attack_select
-[glink color="black" target="*PL_attack_00" x="450" y="100" width="" height="" text="防御" cond="f.MND <= 2"]
-[glink color="black" target="*PL_attack_01" x="450" y="200" width="" height="" text="回避上昇" cond="f.MND <= 3"]
-[glink color="black" target="*PL_attack_02" x="450" y="300" width="" height="" text="物理通常" cond="f.MND < 3"]
+[glink color="black" target="*PL_battle_select" x="450" y="100" width="" height="" text="戻　る" ]
+[glink color="black" target="*PL_attack_00" x="450" y="200" width="" height="" text="防　御" cond="f.MND <= 2"]
+[glink color="black" target="*PL_attack_01" x="450" y="300" width="" height="" text="回避上昇" cond="f.MND <= 3"]
+[glink color="black" target="*PL_attack_02" x="450" y="400" width="" height="" text="物理通常" cond="f.MND < 3"]
 [glink color="black" target="*PL_attack_03" x="450" y="400" width="" height="" text="物理強打" cond="f.MND >= 3" ]
 [glink color="black" target="*PL_attack_04" x="450" y="500" width="" height="" text="回避減少" cond="f.MND >= 3"]
-[glink color="black" target="*PL_attack_05" x="450" y="600" width="" height="" text="物理集中消費" cond="f.MND >= 4"]
+[glink color="black" target="*PL_attack_05" x="450" y="600" width="" height="" text="集中消費" cond="f.MND >= 4"]
 [s]
 
 *PL_magic_select
+[glink color="black" target="*PL_battle_select" x="450" y="100" width="" height="" text="戻　る" ]
 [glink color="black" target="*PL_magic_01" x="450" y="200" width="" height="" text="退魔攻撃弱" cond="f.MP >= 20"]
 [glink color="black" target="*PL_magic_02" x="450" y="300" width="" height="" text="退魔攻撃強" cond="f.MND >= 4 && f.MP >= 30"]
 [glink color="black" target="*PL_magic_03" x="450" y="400" width="" height="" text="魔法弱" cond="f.MP >= 10"]
@@ -117,9 +118,10 @@
 
 *PL_magic_03
 鈴猫の魅了(魔法弱)[r]
-回避の成功確率が上昇[p]
-[eval exp="f.AVD = 50"]
-[eval exp="f.MP -= 20"][eval exp="f.MP = 0" cond="f.MP < 0"]
+敵はムラムラした[p]
+;敵に拘束を誘発させる
+[eval exp="f.charm = 1"]
+[eval exp="f.MP -= 10"][eval exp="f.MP = 0" cond="f.MP < 0"]
 [WSs]
 [return]
 
