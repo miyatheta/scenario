@@ -30,8 +30,8 @@
 
 *menu
 [cm]
-@layopt layer=message1 visible=true
-[current layer="message1"]
+@layopt layer=message0 visible=true
+[current layer="message0"]
 #鈴耶
 残念！！[r]
 そいつは未実装なのさー[p]
@@ -39,8 +39,8 @@
 
 *goahead
 [cm]
-@layopt layer=message1 visible=true
-[current layer="message1"]
+@layopt layer=message0 visible=true
+[current layer="message0"]
 [eval exp="f.ahead = f.MOVE"]
 [WriteAhead]
 [eval exp="f.progress += f.ahead"]
@@ -102,17 +102,20 @@
 [s]
 
 *PL_attack_00
+#
 鈴耶は守りを固めた(防御上昇)[r]
-[eval exp="f.MP += 10 , f.GRD = 0.5 , f.AVD = -100"]
+[eval exp="f.MP += 5 , f.GRD = 0.5 , f.AVD = -100"]
 [return]
 
 *PL_attack_01
+#
 鈴耶の牽制(回避上昇)[r]
 回避の成功確率が上昇[p]
 [eval exp="f.AVD = 50"]
 [return]
 
 *PL_attack_02
+#
 [getrand min="1" max="10" var="f.rand"]
 [eval exp="tf.ATP = 60 + f.rand "]
 [eval exp="tf.ATP = tf.ATP - 50 " cond="f.type==2"]
@@ -129,6 +132,7 @@
 [return]
 
 *PL_attack_03
+#
 [getrand min="1" max="30" var="f.rand"]
 [eval exp="tf.ATP = f.STR + f.rand"]
 [eval exp="tf.ATP = tf.ATP - 50 " cond="f.type==2"]
@@ -139,6 +143,7 @@
 [return]
 
 *PL_attack_04
+#
 [getrand min="30" max="60" var="f.rand"]
 [eval exp="tf.ATP = f.STR + f.rand"]
 [eval exp="tf.ATP = tf.ATP - 50 " cond="f.type==2"]
@@ -151,6 +156,7 @@
 [return]
 
 *PL_attack_05
+#
 [getrand min="1" max="30" var="f.rand"]
 [eval exp="tf.ATP = (f.STR * 2) + f.rand"]
 [eval exp="tf.ATP = tf.ATP - 50 " cond="f.type==2"]
@@ -162,6 +168,7 @@
 [return]
 
 *PL_attack_06
+#
 [getrand min="10" max="20" var="f.rand"]
 [eval exp="tf.ATP = (f.POW * 2) + f.rand"]
 [eval exp="tf.ATP = tf.ATP * 0 " cond="f.type==1"]
@@ -173,6 +180,7 @@
 [return]
 
 *PL_attack_07
+#
 [getrand min="1" max="20" var="f.rand"]
 [eval exp="tf.ATP = (f.POW * 4) + f.rand"]
 [eval exp="tf.ATP = tf.ATP * 0 " cond="f.type==1"]
@@ -185,6 +193,7 @@
 [return]
 
 *PL_attack_08
+#
 鈴耶の魅了(魔法弱)[r]
 回避の成功確率が上昇[p]
 [eval exp="f.AVD = 50"]
@@ -193,6 +202,7 @@
 [return]
 
 *PL_attack_09
+#
 [getrand min="10" max="20" var="f.rand"]
 [eval exp="tf.ATP = (f.POW * 3) + f.rand"]
 鈴耶の火遁(魔法中)[r]
@@ -204,6 +214,7 @@
 [return]
 
 *PL_attack_10
+#
 [getrand min="1" max="20" var="f.rand"]
 [eval exp="tf.ATP = (f.POW * 5) + f.rand"]
 鈴耶の螺旋(魔法強)[r]
@@ -246,10 +257,12 @@
 
 ;-------------------------------------------------------------------------------
 *enemy_01
+#
 鈴耶の攻撃[r]
 [call target="*PL_battle_select"]
 
 [if exp="f.en_HP < 1"]
+#
 荒くれ者を倒した[p]
 [eval exp="f.en_Name = ''"][WriteEnemy]
 [jump target="*no_goal"][s]
@@ -263,6 +276,7 @@
 [endif]
 
 *enemy_01_attack
+#
 荒くれ者の攻撃[p]
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50 + f.AVD"]

@@ -10,11 +10,11 @@
 
 [wait time=1000]
 [bg storage="mori_yoru.jpg" time="500"]
-[chara_show name="suzune" left="-70" top="-30"]
-[eval exp="f.goal=100 , f.progress=0 , f.Achievement=0"]
+[chara_show name="suzune" left="-100" top="-20"]
+[eval exp="f.goal=150 , f.progress=0 , f.Achievement=0"]
 
 ;暫定ステータス
-[eval exp="f.MP = f.SAN , f.MND=2"]
+[eval exp="f.MP = f.POW , f.MND=2"]
 [eval exp="f.AVD = 20 , f.type = 1"]
 [eval exp="f.poison=0, f.slowly=0, f.excite=0"]
 [WSs]
@@ -30,8 +30,8 @@
 
 *menu
 [cm]
-@layopt layer=message1 visible=true
-[current layer="message1"]
+@layopt layer=message0 visible=true
+[current layer="message0"]
 #鈴耶
 残念！！[r]
 そいつは未実装なのさー[p]
@@ -39,8 +39,8 @@
 
 *goahead
 [cm]
-@layopt layer=message1 visible=true
-[current layer="message1"]
+@layopt layer=message0 visible=true
+[current layer="message0"]
 [eval exp="f.ahead = f.MOVE"]
 [eval exp="f.ahead -= 3 " cond="f.slowly > 0"]
 [WriteAhead]
@@ -60,19 +60,16 @@
 
 *select_event
 [getrand min="1" max="70" var="f.event"]
-[if exp="f.event<10"][jump target=*event_enemy]
+[if exp="f.event<=20 && f.Pre_event != 1"]
+[eval exp="f.Pre_event = 1"][jump target=*event_enemy]
 
-[elsif exp="f.event<20"][jump target=*event_youkai]
+[elsif exp="f.event<=40 && f.Pre_event != 2"]
+[eval exp="f.Pre_event = 2"][jump target=*event_youkai]
 
-[elsif exp="f.event<30"][jump target=*event_trouble]
+[elsif exp="f.event<=60 && f.Pre_event != 3"]
+[eval exp="f.Pre_event = 3"][jump target=*event_trouble]
 
-[elsif exp="f.event<40"][jump target=*event_enemy]
-
-[elsif exp="f.event<50"][jump target=*event_youkai]
-
-[elsif exp="f.event<60"][jump target=*event_trouble]
-
-[else][jump target=*event_none]
+[else][jump target=*event_trouble]
 [endif]
 
 [s]
@@ -85,33 +82,35 @@
 ;-------------------------------------------------------------------------------
 
 *event_enemy
+#
 [eval exp="f.En_Raptured = 0 , f.En_Wiseman_time = 0"]
 
 [getrand min="1" max="100" var="f.event"]
-[if exp="f.event<50"]
-荒くれ者が現れた[p]
-[eval exp="f.en_Name = '荒くれ者'"][WriteEnemy]
-[eval exp="f.en_DEX = 6, f.GRB=80, f.en_HP = 120 , f.type = 1, f.Round = 0"]
-[call storage="SR_En_arakure.ks"]
+
+[if exp="f.event<=30"]
+野犬が現れた[p]
+[eval exp="f.en_Name = '野犬'"][WriteEnemy]
+[eval exp="f.en_DEX = 30, f.GRB=80, f.en_HP = 120 , f.type = 1, f.Round = 0"]
+[call storage="SR_En_yaken.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
 [s]
 
-[elsif exp="f.event<60"]
+[elsif exp="f.event<=60"]
 野盗が現れた[p]
 [eval exp="f.en_Name = '野盗'"][WriteEnemy]
-[eval exp="f.en_DEX=8, f.GRB=90, f.en_HP = 160 , f.type = 1, f.Round = 0"]
+[eval exp="f.en_DEX=8, f.GRB=90, f.SEX=100 , f.en_HP = 160 , f.type = 1, f.Round = 0"]
 [call storage="SR_En_yatou.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
 [s]
 
-[elsif exp="f.event<80"]
+[elsif exp="f.event<=80"]
 落ち武者が現れた[p]
 [eval exp="f.en_Name = '落ち武者'"][WriteEnemy]
-[eval exp="f.en_DEX=8, f.GRB=110, f.en_HP = 250 , f.type = 1, f.Round = 0"]
+[eval exp="f.en_DEX=8, f.GRB=110, f.SEX=120, f.en_HP = 250 , f.type = 1, f.Round = 0"]
 [call storage="SR_EN_otimusha.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
@@ -121,7 +120,7 @@
 [else]
 忍者が現れた[p]
 [eval exp="f.en_Name = '忍者'"][WriteEnemy]
-[eval exp="f.en_DEX=20, f.GRB=100, f.en_HP = 190 , f.type = 1, f.Round = 0"]
+[eval exp="f.en_DEX=20, f.GRB=100, f.SEX=150 , f.en_HP = 190 , f.type = 1, f.Round = 0"]
 [call storage="SR_EN_genin.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
@@ -146,7 +145,8 @@
 ;-------------------------------------------------------------------------------
 *event_youkai
 #
-[getrand min="1" max="135" var="f.event"]
+[getrand min="1" max="90" var="f.event"]
+
 [if exp="f.event<40"]
 すらいむが現れた[p]
 [eval exp="f.en_Name = 'すらいむ'"][WriteEnemy]
@@ -155,21 +155,13 @@
 [eval exp="f.en_DEX = 50, f.en_HP = 135 , f.type = 2, f.Round = 0"]
 [jump target=*youkai_01]
 
-[elsif exp="f.event<60"]
+[elsif exp="f.event<70"]
 ひとだまが現れた[p]
 [eval exp="f.en_Name = 'ひとだま'"][WriteEnemy]
 妖怪に遭遇したことで鈴耶の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 30"][WSs]
 [eval exp="f.en_DEX = 50, f.en_HP = 105 , f.type = 2, f.Round = 0"]
 [jump target=*youkai_02]
-
-[elsif exp="f.event<80"]
-一反木綿が現れた[p]
-[eval exp="f.en_Name = '一反もめん'"][WriteEnemy]
-妖怪に遭遇したことで鈴耶の淫気が上昇[p]
-[eval exp="f.CURSE = f.CURSE + 20"][WSs]
-[eval exp="f.en_DEX = 50, f.en_HP = 135 , f.type = 2, f.Round = 0"]
-[jump target=*youkai_03]
 
 [else]
 触手塊が現れた[p]
@@ -183,6 +175,7 @@
 
 ;-------------------------------------------------------------------------------
 *youkai_01
+#
 鈴耶の攻撃[r]
 [call storage="SR_PL_battle.ks" target="*start"]
 [jump target="*escape" cond="f.escape > 0"]
@@ -202,10 +195,12 @@
 [endif]
 
 *youkai_01_attack
+#
 すらいむの攻撃[p]
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50"]
 [if exp="f.hit > f.rand"]
+#
 鈴耶は敵の攻撃を回避した[p][MND1][WSs]
 [else]
 鈴耶のすばやさが3減少[p]
@@ -215,6 +210,7 @@
 [jump target="*youkai_01"][s]
 
 *youkai_01_sexhara
+#
 すらいむは鈴耶にまとわりついた[p]
 すらいむは鈴耶の尻穴に潜り込んだ[p]
 #鈴耶
@@ -223,6 +219,7 @@
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
 [eval exp="tf.arg = tf.tmp * f.ANAL / 100 "]
 [getMathRound var="tf.tmp"]
+#
 鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.tmp"][MND0][WSs]
 [if exp="f.ERO >= 1000 "]
@@ -239,11 +236,13 @@
 [jump target="*youkai_01"][s]
 
 *youkai_01_escape
+#
 すらいむは地面に吸い込まれるように消えた[p]
 [eval exp="f.en_Name = ''"][WriteEnemy]
 [jump target="*no_goal"][s]
 ;-------------------------------------------------------------------------------
 *youkai_02
+#
 鈴耶の攻撃[r]
 [call storage="SR_PL_battle.ks" target="*start"]
 [jump target="*escape" cond="f.escape > 0"]
@@ -263,6 +262,7 @@
 [endif]
 
 *youkai_02_attack
+#
 ひとだまの攻撃[p]
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50"]
@@ -276,6 +276,7 @@
 [jump target="*youkai_02"][s]
 
 *youkai_02_sexhara
+#
 ひとだまは鈴耶に取りついた[p]
 ひとだまは鈴耶の胸に吸い付いた[p]
 #鈴耶
@@ -284,6 +285,7 @@
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
 [eval exp="tf.arg = tf.tmp * f.BOOB / 100 "]
 [getMathRound var="tf.tmp"]
+#
 鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.tmp"][MND0][WSs]
 [if exp="f.ERO >= 1000 "]
@@ -300,16 +302,19 @@
 [jump target="*youkai_02"][s]
 
 *youkai_02_escape
+#
 ひとだまは虚空に溶けるように消えた[p]
 [eval exp="f.en_Name = ''"][WriteEnemy]
 [jump target="*no_goal"][s]
 ;-------------------------------------------------------------------------------
 *youkai_03
+#
 鈴耶の攻撃[r]
 [call storage="SR_PL_battle.ks" target="*start"]
 [jump target="*escape" cond="f.escape > 0"]
 
 [if exp="f.en_HP < 1"]
+#
 一反もめんを倒した[p]
 [eval exp="f.en_Name = ''"][WriteEnemy]
 [jump target="*battle_end"][s]
@@ -324,6 +329,7 @@
 [endif]
 
 *youkai_03_attack
+#
 一反もめんの攻撃[p]
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50"]
@@ -337,6 +343,7 @@
 [jump target="*youkai_03"][s]
 
 *youkai_03_sexhara
+#
 一反もめんは鈴耶を縛り上げた[p]
 一反もめんが鈴耶の股間に食い込む[p]
 #鈴耶
@@ -345,6 +352,7 @@
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
 [eval exp="tf.arg = tf.tmp * f.VGNA / 100 "]
 [getMathRound var="tf.tmp"]
+#
 鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.tmp"][MND0][WSs]
 [if exp="f.ERO >= 1000 "]
@@ -361,16 +369,19 @@
 [jump target="*youkai_03"][s]
 
 *youkai_03_escape
+#
 一反もめんは空へ舞い上がり姿を消した[p]
 [eval exp="f.en_Name = ''"][WriteEnemy]
 [jump target="*no_goal"][s]
 ;-------------------------------------------------------------------------------
 *youkai_04
+#
 鈴耶の攻撃[r]
 [call storage="SR_PL_battle.ks" target="*start"]
 [jump target="*escape" cond="f.escape > 0"]
 
 [if exp="f.en_HP < 1"]
+#
 触手塊を倒した[p]
 [eval exp="f.en_Name = ''"][WriteEnemy]
 [jump target="*battle_end"][s]
@@ -385,6 +396,7 @@
 [endif]
 
 *youkai_04_attack
+#
 触手塊の攻撃[p]
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50"]
@@ -398,6 +410,7 @@
 [jump target="*youkai_04"][s]
 
 *youkai_04_sexhara
+#
 触手塊は鈴耶に取りついた[p]
 触手塊は鈴耶の胸に吸い付いた[p]
 #鈴耶
@@ -406,6 +419,7 @@
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
 [eval exp="tf.arg = tf.tmp * f.BOOB / 100 "]
 [getMathRound var="tf.tmp"]
+#
 鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.tmp"][MND0][WSs]
 [if exp="f.ERO >= 1000 "]
@@ -422,6 +436,7 @@
 [jump target="*youkai_04"][s]
 
 *youkai_04_escape
+#
 触手塊は茂みへと姿を消した[p]
 [eval exp="f.en_Name = ''"][WriteEnemy]
 [jump target="*no_goal"][s]
@@ -469,24 +484,28 @@
 [s]
 
 *trouble_good_01
+#
 薬草を見つけた[r]
 鈴耶の体力が回復した[p]
 [eval exp="f.HP += 100" ][eval exp="f.HP = 1000" cond="f.HP > 1000"]
 [jump target="*no_goal"][s]
 
 *trouble_good_02
+#
 狐を見つけた[r]
 鈴耶の集中力が増加した[p]
 [eval exp="f.MND += 1" ][eval exp="f.MND = 5" cond="f.MND > 5"]
 [jump target="*no_goal"][s]
 
 *trouble_good_03
+#
 湧き水を見つけた[r]
 鈴耶の気力が増加した[p]
 [eval exp="f.MP += 10"][eval exp="f.MP = 100" cond="f.MP > 100"]
 [jump target="*no_goal"][s]
 
 *trouble_good_04
+#
 抜け道を発見した[r]
 進行度が上昇した[p]
 [eval exp="f.progress += 10"][eval exp="f.progress = f.goal" cond="f.progress > f.goal"]
@@ -495,6 +514,7 @@
 
 
 *trouble_bad_01
+#
 人影を見つけた[r]
 こちらの気配には気づいていないようだ[p]
 どうする？[p]
@@ -502,11 +522,14 @@
 [glink color="black" target="*trouble_bad_01-B" x="450" y="200" width="" height="" text="不意打ちする" ]
 [s]
 *trouble_bad_01-A
+#
 [getrand min="1" max="100" var="tf.rand"]
 [eval exp="tf.tag = f.MND * 10 + 49"]
-[if exp="tf.rand <= tf.tag "]
+[if exp="tf.rand <= tf.tag && f.MND >= 1"]
 ・・・・・・[p]
 やりすごすことができたようだ[p]
+集中力を１消費した[p]
+[eval exp="f.MND -= 1"]
 [jump target="*no_goal"][s]
 [else]
 ・・・・・・[p]
@@ -519,6 +542,7 @@
 [s]
 
 *trouble_bad_01-B
+#
 [getrand min="1" max="100" var="tf.rand"]
 [eval exp="tf.tag = f.MND * 10 + 70"]
 [if exp="tf.rand <= tf.tag "]
@@ -534,6 +558,7 @@
 [s]
 
 *trouble_bad_02
+#
 妖怪を見つけた[r]
 こちらの気配には気づいていないようだ[p]
 
@@ -541,11 +566,13 @@
 [glink color="black" target="*trouble_bad_02-B" x="450" y="200" width="" height="" text="不意打ちする" ]
 [s]
 *trouble_bad_02-A
+#
 [getrand min="1" max="100" var="tf.rand"]
 [eval exp="tf.tag = f.MND * 10 + 49"]
-[if exp="tf.rand <= tf.tag "]
+[if exp="tf.rand <= tf.tag && f.MND >= 1"]
 ・・・・・・[p]
 やりすごすことができたようだ[p]
+[eval exp="f.MND -= 1"]
 [jump target="*no_goal"][s]
 [else]
 ・・・・・・[p]
@@ -554,10 +581,11 @@
 #
 見つかってしまった！[p]
 [endif]
-[jump target="*event_enemy"]
+[jump target="*event_youkai"]
 [s]
 
 *trouble_bad_02-B
+#
 [getrand min="1" max="100" var="tf.rand"]
 [eval exp="tf.tag = f.MND * 10 + 70"]
 [if exp="tf.rand <= tf.tag "]
@@ -574,29 +602,33 @@
 
 
 *trouble_bad_03
-トラブル6[p]
+#
 鈴耶の気力が減少した[p]
-[eval exp="f.MP += 10" ][eval exp="f.MP = 0" cond="f.MP < 0"]
+[eval exp="f.MP -= 10" ][eval exp="f.MP = 0" cond="f.MP < 0"]
 [jump target="*no_goal"][s]
 
 *trouble_bad_04
+#
 足場が崩れている[l]仕方ないので回り道をした[p]進行度が減少した[p]
 [eval exp="f.progress -= 10"][eval exp="f.progress = 0" cond="f.progress < 0"]
 [jump target="*no_goal"][s]
 
 *trouble_bad_05
+#
 ぬかるみに足を取られた[p]
 鈍足状態になった[p]一時的に移動力が低下した[p]
 [eval exp="f.slowly = 5" ][eval exp="f.slowly = 5" cond="f.slowly > 5"]
 [jump target="*no_goal"][s]
 
 *trouble_bad_06
+#
 毒蜘蛛に噛まれた[p]
 毒状態になった[p]一時的に行動のたびにダメージを受ける[p]
 [eval exp="f.poison = 5" ][eval exp="f.poison = 5" cond="f.poison > 5"]
 [jump target="*no_goal"][s]
 
 *trouble_bad_07
+#
 あやしげな花の花粉を吸った[p]
 興奮状態になった[p]一時的に快感が減少しなくなった[p]
 [eval exp="f.excite = 5" ][eval exp="f.excite = 5" cond="f.excite > 5"]
@@ -604,11 +636,11 @@
 
 ;-------------------------------------------------------------------------------
 *no_goal
-#鈴耶
+#
 ;[chara_mod name="suzune" face="default" cross="true" ]
 [eval exp="f.ERO = f.ERO - f.SAN" cond="f.excite == 0"]
 [eval exp="f.ERO = 0" cond="f.ERO < 0"][WSs]
-[eval exp="f.MP += 5" cond="f.MP <= 100"]
+[MP1]
 
 [if exp="f.poison > 0"]
 毒により鈴耶の体力が減少[p]
@@ -644,7 +676,7 @@
 [s]
 ;-------------------------------------------------------------------------------
 *battle_end
-[eval exp="f.Round = 0, f.ambush=1"]
+[eval exp="f.Round = 0, f.ambush=0"]
 [jump target="*no_goal"]
 [s]
 ;-------------------------------------------------------------------------------

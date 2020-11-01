@@ -17,6 +17,7 @@
 鈴耶は敵から逃れようともがいた[p]
 [getrand min="10" max="20" var="f.damage"]
 [eval exp="f.damage = f.HP - 1" cond="f.HP <= f.damage"]
+[eval exp="f.HP -= f.damage"]
 鈴耶の体力が[emb exp="f.damage"]減少[p]
 ・・・・・・・・・・・・・・・[p]
 [eval exp="f.bind -= f.damage"]
@@ -39,6 +40,7 @@
 鈴耶は敵から逃れようともがいた[p]
 [getrand min="20" max="30" var="f.damage"]
 [eval exp="f.damage = f.HP - 1" cond="f.HP <= f.damage"]
+[eval exp="f.HP -= f.damage"]
 鈴耶の体力が[emb exp="f.damage"]減少[p]
 ・・・・・・・・・・・・・・・[p]
 [eval exp="f.bind -= f.damage"]
@@ -54,7 +56,7 @@
 [s]
 
 *PL_bochu
-鈴耶の房中術
+鈴耶の房中術[p]
 [eval exp="f.rapture = 1"]
 [return]
 [s]

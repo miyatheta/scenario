@@ -11,24 +11,22 @@
 @showmenubutton
 
 ;メッセージウィンドウの設定
-[position layer="message0" left=350 top=10 width=800 height=150 page=fore visible=true]
-[position layer="message1" left=350 top=570 width=800 height=150 page=fore visible=false]
+[position layer="message0" left=350 top=560 width=800 height=150 page=fore visible=false]
 ;文字が表示される領域を調整
-[position layer=message0 page=fore margint="45" marginl="50" marginr="70" marginb="60"]
-[position layer=message1 page=fore margint="40" marginl="50" marginr="70" marginb="40"]
+[position layer=message0 page=fore margint="25" marginl="50" marginr="70" marginb="50"]
 
 ;メッセージウィンドウの表示
-@layopt layer=message0 visible=true
+@layopt layer=message0 visible=false
 
 ;キャラクターの名前が表示される文字領域
-[ptext name="chara_name_area" layer="message0" color="white" size=28 bold=true x=400 y=10]
+[ptext name="chara_name_area" layer="message0" color="white" size=28 bold=true x=370 y=560]
 
 ;上記で定義した領域がキャラクターの名前表示であることを宣言（これがないと#の部分でエラーになります）
 [chara_config ptext="chara_name_area" ]
 
 ;このゲームで登場するキャラクターを宣言
 ;suzune
-[chara_new  name="suzune" storage="chara/suzune/normal.png" jname="鈴耶" width=600]
+[chara_new  name="suzune" storage="chara/suzune/normal.png" jname="鈴耶" width=660]
 ;キャラクターの表情登録
 [chara_face name="suzune" face="angry" storage="chara/suzune/angry.png"]
 [chara_face name="suzune" face="surprise" storage="chara/suzune/doki.png"]
@@ -39,13 +37,13 @@
 [eval exp="f.HP_MAX = 1000, f.SAN_MAX = 60, f.NIZ = 1"]
 [eval exp="f.STR_MAX = 60 , f.POW_MAX=30, f.SPD_MAX = 15, f.MOVE_MAX = 10"]
 [eval exp="f.CURSE=0, f.ERO=0"]
-[eval exp="f.ANAL = 100, f.VGNA = 100, f.BOOB = 100"]
+[eval exp="f.ANAL = 50, f.VGNA = 100, f.BOOB = 50"]
 [eval exp="f.poison=0, f.slowly=0, f.excite=0, f.closed=0"]
 [eval exp="f.date = 1"]
 [eval exp="f.escape = 0 , f.charm = 0"]
 [eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
 [eval exp="f.HP = f.HP_MAX, f.SAN = f.SAN_MAX"]
-[eval exp="f.BUFF_ATP = 1, f.ambush = 1"]
+[eval exp="f.BUFF_ATP = 1, f.ambush = 0"]
 
 
 [jump storage="home.ks" target="**home_start"]

@@ -9,7 +9,7 @@
 [endmacro]
 
 [macro name="MP1"]
-[eval exp="f.MP += 5" ][eval exp="f.MP = 100" cond="f.MP < 100"][WSs]
+[eval exp="f.MP += 5" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [endmacro]
 
 [macro name="progressbar"]
@@ -66,10 +66,13 @@ if(f.excite > 0){tf.vital = tf.vital + "興奮　";}
 [endmacro]
 
 [macro name="orgasm"]
-[eval exp="f.SAN -= 1 ,f.MND = 0"]
+鈴耶の理性が１減少した[p]
+[eval exp="f.ERO = 0 , f.SAN -= 1 , f.MND = 0"]
 [eval exp="f.SAN = 0" cond="f.SAN < 0"]
-[eval exp="f.ERO = 0, f.CURSE -= 100 "]
-[eval exp="f.CURSE = 0" cond="f.CURSE < 0"][WSs]
+[eval exp=" tf.arg = tf.fack / 10"][getMathRound var="f.damage"]
+[eval exp="f.HP -= f.damage"][eval exp="f.HP = 0" cond="f.HP < 0"]
+鈴耶の体力が[emb exp="f.damage"]減少した[p]
+[WSs]
 [endmacro]
 ; [getMathRound var="XXX"]
 ; 一時変数 tf.arg に小数点以下を四捨五入した整数をセットするマクロです。

@@ -203,7 +203,7 @@
 	[endscript]
 
 ;	テキスト速度のサンプル表示に使用していたメッセージレイヤを非表示に
-	[layopt layer="message1" visible="false"]
+	[layopt layer="message0" visible="false"]
 
 ;	fixボタンをクリア
 	[clearfix]
@@ -266,9 +266,9 @@
 	[configdelay speed="&tf.set_ch_speed"]
 
 ;	テキスト表示速度のサンプルに使用するメッセージレイヤの設定
-	[position layer="message1" left="90" top="580" width="1100" height="100" margint="2" marginl="30" page="fore" visible="true" opacity="0"]
-	[layopt layer="message1" visible="true"]
-	[current layer="message1"]
+	[position layer="message0" left="90" top="580" width="1100" height="100" margint="2" marginl="30" page="fore" visible="true" opacity="0"]
+	[layopt layer="message0" visible="true"]
+	[current layer="message0"]
 
 ;	サンプルテキストを表示する
 	[emb exp="tf.text_sample"]
@@ -283,7 +283,7 @@
 	[wait time="&tf.text_sample_speed"]
 
 	[er]
-	[layopt layer="message1" visible="false"]
+	[layopt layer="message0" visible="false"]
 
 [return]
 

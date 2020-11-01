@@ -1,7 +1,8 @@
 *home_start
 [cm]
 [bg storage="syosai1-1080.jpg" time="100"]
-[chara_show  name="suzune"  left="-70" top="-30"]
+[chara_show  name="suzune"  left="-100" top="-20"]
+@layopt layer=message0 visible=true
 [WriteDate]
 #鈴耶
 ホーム画面よ[r]
