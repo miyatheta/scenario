@@ -65,6 +65,10 @@ if(f.excite > 0){tf.vital = tf.vital + "興奮　";}
 [ptext layer="0" x="0" y="680" text=&tf.vital size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="health" overwrite="true" ]
 [endmacro]
 
+[macro name="TESTER"]
+目標値：[emb exp="f.hit"]>判定値：[emb exp="f.rand"][p]
+[endmacro]
+
 [macro name="orgasm"]
 鈴耶の理性が１減少した[p]
 [eval exp="f.ERO = 0 , f.SAN -= 1 , f.MND = 0"]
@@ -451,10 +455,10 @@ if(f.excite > 0){tf.vital = tf.vital + "興奮　";}
 
  ; 資料編がないなら資料編は描画しない。
  ;                                         !!!
- [image layer="0" storage="&tf.image"   x=" 0" y="& tf.index * 95 + 5 " width="960" height="90"]
- [ptext layer="0" text="%text1"      x=" 20" y="& tf.index * 95 + 9 " bold="bold"  size="40"]
- [ptext layer="0" text="%text2"      x=" 20" y="& tf.index * 95 + 52 "        size="24"]
- [clickable color="white" opacity="0"   x=" 0" y="& tf.index * 95 + 5 " width="960" height="90" mouseopacity="50" storage="& 'kaisetsu/' + mp.storage" target="%target"]
+ ;[image layer="0" storage="&tf.image"   x=" 0" y="& tf.index * 95 + 5 " width="960" height="90"]
+ ;[ptext layer="0" text="%text1"      x=" 20" y="& tf.index * 95 + 9 " bold="bold"  size="40"]
+ ;[ptext layer="0" text="%text2"      x=" 20" y="& tf.index * 95 + 52 "        size="24"]
+ ;[clickable color="white" opacity="0"   x=" 0" y="& tf.index * 95 + 5 " width="960" height="90" mouseopacity="50" storage="& 'kaisetsu/' + mp.storage" target="%target"]
 
  [endif]
 

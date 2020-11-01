@@ -56,7 +56,7 @@
 [eval exp="f.charm = 0"]
 荒くれ者の組付き[p]
 [getrand min="1" max="100" var="f.rand"]
-[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 30 + f.AVD"]
+[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 10 + f.AVD"]
 [if exp="f.hit > f.rand"]
 鈴耶は敵の組付きを回避した[p][MND1][WSs]
 [jump target="*start"][s]
@@ -353,7 +353,7 @@
 
 ;フィニッシュ
 男の精を受けて鈴耶の気力が増加した[p]
-[eval exp="f.MP += 30 "]
+[eval exp="f.MP += 30 "][WSs]
 [eval exp="f.MP = 100" cond="f.MP > 100"]
 射精した敵は虚精状態になった（３ラウンド組付封印）[p]
 [eval exp="f.En_Wiseman = 1 , f.En_Wiseman_time = 4 "]
