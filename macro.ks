@@ -8,8 +8,8 @@
 [eval exp="f.MND -= 1" cond="f.MND > 0"][WSs]
 [endmacro]
 
-[macro name="MP10"]
-[eval exp="f.MP += 10" cond="f.MP < 100"][WSs]
+[macro name="MP1"]
+[eval exp="f.MP += 5" ][eval exp="f.MP = 100" cond="f.MP < 100"][WSs]
 [endmacro]
 
 [macro name="progressbar"]
@@ -19,7 +19,7 @@ f.progressbar = "進行度：" + f.progress + "/" + f.goal;
 tf.security = "警戒度：" + f.security ;
 [endscript]
 [ptext layer="0" x="0" y="540" width="1270" text=&f.progressbar size="20" color="white" bold="bold" align="right" name="progressbar" overwrite="true" ]
-[ptext layer="0" x="0" y="5600" width="1270" text=&f.security size="20" color="0x000000" edge="white" bold="bold" align="left" name="security" overwrite="true" ]
+[ptext layer="0" x="0" y="560" width="1270" text=&f.security size="20" color="white" bold="bold" align="left" name="security" overwrite="true" ]
 
 [endmacro]
 
@@ -41,7 +41,7 @@ tf.txt = "敵：" + f.en_Name ;
 [iscript]
 tf.txt = f.date + "/60日" ;
 [endscript]
-[ptext layer="0" x="0" y="10" width="1270" text=&tf.txt size="30" color="0x000000" edge="white" bold="bold" align="right" name="calender" overwrite="true" ]
+[ptext layer="0" x="0" y="0" width="1270" text=&tf.txt size="30" color="black" edge="white" bold="bold" align="right" name="calender" overwrite="true" ]
 [endmacro]
 
 [macro name="WSs"]
@@ -65,6 +65,12 @@ if(f.excite > 0){tf.vital = tf.vital + "興奮　";}
 [ptext layer="0" x="0" y="680" text=&tf.vital size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="health" overwrite="true" ]
 [endmacro]
 
+[macro name="orgasm"]
+[eval exp="f.SAN -= 1 ,f.MND = 0"]
+[eval exp="f.SAN = 0" cond="f.SAN < 0"]
+[eval exp="f.ERO = 0, f.CURSE -= 100 "]
+[eval exp="f.CURSE = 0" cond="f.CURSE < 0"][WSs]
+[endmacro]
 ; [getMathRound var="XXX"]
 ; 一時変数 tf.arg に小数点以下を四捨五入した整数をセットするマクロです。
 ; var には変数の名前を指定できます（var="f.a"のように）。

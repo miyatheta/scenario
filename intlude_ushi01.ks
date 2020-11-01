@@ -1,7 +1,7 @@
 *mission_start
 @layopt layer=message0 visible=true
-#鈴猫
-それじゃあ、鈴猫[r]
+#鈴耶
+それじゃあ、鈴耶[r]
 忍務行ってまいりまーす！[p]
 [cm]
 @layopt layer=message0 visible=false
@@ -32,7 +32,7 @@
 [cm]
 @layopt layer=message1 visible=true
 [current layer="message1"]
-#鈴猫
+#鈴耶
 残念！！[r]
 そいつは未実装なのさー[p]
 [jump target="*goahead"]
@@ -102,12 +102,12 @@
 [s]
 
 *PL_attack_00
-鈴猫は守りを固めた(防御上昇)[r]
+鈴耶は守りを固めた(防御上昇)[r]
 [eval exp="f.MP += 10 , f.GRD = 0.5 , f.AVD = -100"]
 [return]
 
 *PL_attack_01
-鈴猫の牽制(回避上昇)[r]
+鈴耶の牽制(回避上昇)[r]
 回避の成功確率が上昇[p]
 [eval exp="f.AVD = 50"]
 [return]
@@ -116,7 +116,7 @@
 [getrand min="1" max="10" var="f.rand"]
 [eval exp="tf.ATP = 60 + f.rand "]
 [eval exp="tf.ATP = tf.ATP - 50 " cond="f.type==2"]
-鈴猫のくない(確率追撃)[r]
+鈴耶のくない(確率追撃)[r]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.ATP"]
 [getrand min="f.MND" max="6" var="f.rand"]
@@ -132,7 +132,7 @@
 [getrand min="1" max="30" var="f.rand"]
 [eval exp="tf.ATP = f.STR + f.rand"]
 [eval exp="tf.ATP = tf.ATP - 50 " cond="f.type==2"]
-鈴猫の蹴り(物理通常)[r]
+鈴耶の蹴り(物理通常)[r]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.ATP"]
 [WSs]
@@ -142,7 +142,7 @@
 [getrand min="30" max="60" var="f.rand"]
 [eval exp="tf.ATP = f.STR + f.rand"]
 [eval exp="tf.ATP = tf.ATP - 50 " cond="f.type==2"]
-鈴猫の回し蹴り(回避減少)[r]
+鈴耶の回し蹴り(回避減少)[r]
 [emb exp="tf.ATP"]のダメージ[p]
 回避の成功確率が低下[p]
 [eval exp="f.AVD = -30"]
@@ -154,7 +154,7 @@
 [getrand min="1" max="30" var="f.rand"]
 [eval exp="tf.ATP = (f.STR * 2) + f.rand"]
 [eval exp="tf.ATP = tf.ATP - 50 " cond="f.type==2"]
-鈴猫の絶影(物理集中消費)[r]
+鈴耶の絶影(物理集中消費)[r]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.ATP"]
 [eval exp="f.MND -= 2"][eval exp="f.MND = 0" cond="f.MND < 0"]
@@ -165,7 +165,7 @@
 [getrand min="10" max="20" var="f.rand"]
 [eval exp="tf.ATP = (f.POW * 2) + f.rand"]
 [eval exp="tf.ATP = tf.ATP * 0 " cond="f.type==1"]
-鈴猫の斬穢(退魔攻撃弱)[r]
+鈴耶の斬穢(退魔攻撃弱)[r]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.ATP"]
 [eval exp="f.MP -= 20"][eval exp="f.MP = 0" cond="f.MP < 0"]
@@ -176,7 +176,7 @@
 [getrand min="1" max="20" var="f.rand"]
 [eval exp="tf.ATP = (f.POW * 4) + f.rand"]
 [eval exp="tf.ATP = tf.ATP * 0 " cond="f.type==1"]
-鈴猫の凶祓(退魔攻撃強)[r]
+鈴耶の凶祓(退魔攻撃強)[r]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.ATP"]
 [eval exp="f.MP -= 30, f.MND = -1"]
@@ -185,7 +185,7 @@
 [return]
 
 *PL_attack_08
-鈴猫の魅了(魔法弱)[r]
+鈴耶の魅了(魔法弱)[r]
 回避の成功確率が上昇[p]
 [eval exp="f.AVD = 50"]
 [eval exp="f.MP -= 20"][eval exp="f.MP = 0" cond="f.MP < 0"]
@@ -195,7 +195,7 @@
 *PL_attack_09
 [getrand min="10" max="20" var="f.rand"]
 [eval exp="tf.ATP = (f.POW * 3) + f.rand"]
-鈴猫の火遁(魔法中)[r]
+鈴耶の火遁(魔法中)[r]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.ATP"]
 [eval exp="f.MP -= 30, f.MND -= 1"]
@@ -206,7 +206,7 @@
 *PL_attack_10
 [getrand min="1" max="20" var="f.rand"]
 [eval exp="tf.ATP = (f.POW * 5) + f.rand"]
-鈴猫の螺旋(魔法強)[r]
+鈴耶の螺旋(魔法強)[r]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.ATP"]
 [eval exp="f.MP -= 50, f.MND = 0"][eval exp="f.MP = 0" cond="f.MP < 0"]
@@ -246,7 +246,7 @@
 
 ;-------------------------------------------------------------------------------
 *enemy_01
-鈴猫の攻撃[r]
+鈴耶の攻撃[r]
 [call target="*PL_battle_select"]
 
 [if exp="f.en_HP < 1"]
@@ -267,11 +267,11 @@
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50 + f.AVD"]
 [if exp="f.hit > f.rand"]
-鈴猫は敵の攻撃を回避した[p][MND1][WSs]
+鈴耶は敵の攻撃を回避した[p][MND1][WSs]
 [else]
 [eval exp="tf.arg = 100 * f.GRD"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
-[eval exp="f.HP = f.HP - tf.ATP"][MND0][MP10][WSs]
+[eval exp="f.HP = f.HP - tf.ATP"][MND0][MP1][WSs]
 [endif]
 [if exp="f.HP < 1"][jump target="*defeat"][endif]
 [jump target="*enemy_01"][s]
@@ -281,22 +281,22 @@
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 40 + f.AVD"]
 [if exp="f.hit > f.rand"]
-鈴猫は敵の組付きを回避した[p][MND1][WSs]
+鈴耶は敵の組付きを回避した[p][MND1][WSs]
 [jump target="*enemy_01"][s]
 [endif]
-鈴猫は荒くれ者に組み付かれた[p]
-荒くれ者は鈴猫の胸に吸い付いた[p]
-#鈴猫
+鈴耶は荒くれ者に組み付かれた[p]
+荒くれ者は鈴耶の胸に吸い付いた[p]
+#鈴耶
 ひっ！！[p]
 [eval exp="tf.tmp = 100 "]
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
 [eval exp="tf.arg = tf.tmp * f.BOOB / 100 "]
 [getMathRound var="tf.tmp"]
-鈴猫は[emb exp="tf.tmp"]の快感を受けた[p]
+鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.tmp"][MND0][WSs]
 [if exp="f.ERO >= 1000 "]
-鈴猫は絶頂した[p]
-鈴猫の理性が１減少した[p]
+鈴耶は絶頂した[p]
+鈴耶の理性が１減少した[p]
 [eval exp="f.SAN -= 1"]
 [eval exp="f.ERO = 0"]
 [eval exp="f.MND = 0"][WSs]
@@ -305,7 +305,7 @@
 
 ;-------------------------------------------------------------------------------
 *enemy_02
-鈴猫の攻撃[r]
+鈴耶の攻撃[r]
 [call target="*PL_battle_select"]
 
 [if exp="f.en_HP < 1"]
@@ -326,11 +326,11 @@
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50 + f.AVD"]
 [if exp="f.hit > f.rand"]
-鈴猫は敵の攻撃を回避した[p][MND1][WSs]
+鈴耶は敵の攻撃を回避した[p][MND1][WSs]
 [else]
 [eval exp="tf.arg = 100 * f.GRD"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
-[eval exp="f.HP = f.HP - tf.ATP"][MND0][MP10][WSs]
+[eval exp="f.HP = f.HP - tf.ATP"][MND0][MP1][WSs]
 [endif]
 [if exp="f.HP < 1"][jump target="*defeat"][endif]
 [jump target="*enemy_02"][s]
@@ -340,22 +340,22 @@
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 40 + f.AVD"]
 [if exp="f.hit > f.rand"]
-鈴猫は敵の組付きを回避した[p][MND1][WSs]
+鈴耶は敵の組付きを回避した[p][MND1][WSs]
 [jump target="*enemy_02"][s]
 [endif]
-鈴猫は野盗に組み付かれた[p]
-野盗は鈴猫の尻を撫で回した[p]
-#鈴猫
+鈴耶は野盗に組み付かれた[p]
+野盗は鈴耶の尻を撫で回した[p]
+#鈴耶
 ひっ！！[p]
 [eval exp="tf.tmp = 100 "]
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
 [eval exp="tf.arg = tf.tmp * f.ANAL / 100 "]
 [getMathRound var="tf.tmp"]
-鈴猫は[emb exp="tf.tmp"]の快感を受けた[p]
+鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.tmp"][MND0]
 [if exp="f.ERO >= 1000 "]
-鈴猫は絶頂した[p]
-鈴猫の理性が１減少した[p]
+鈴耶は絶頂した[p]
+鈴耶の理性が１減少した[p]
 [eval exp="f.SAN -= 1"]
 [eval exp="f.ERO = 0"]
 [eval exp="f.MND = 0"][WSs]
@@ -364,7 +364,7 @@
 
 ;-------------------------------------------------------------------------------
 *enemy_03
-鈴猫の攻撃[r]
+鈴耶の攻撃[r]
 [call target="*PL_battle_select"]
 
 [if exp="f.en_HP < 1"]
@@ -385,11 +385,11 @@
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50 + f.AVD"]
 [if exp="f.hit > f.rand"]
-鈴猫は敵の攻撃を回避した[p][MND1][WSs]
+鈴耶は敵の攻撃を回避した[p][MND1][WSs]
 [else]
 [eval exp="tf.arg = 200 * f.GRD"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
-[eval exp="f.HP = f.HP - tf.ATP"][MND0][MP10][WSs]
+[eval exp="f.HP = f.HP - tf.ATP"][MND0][MP1][WSs]
 [endif]
 [if exp="f.HP < 1"][jump target="*defeat"][endif]
 [jump target="*enemy_03"][s]
@@ -399,22 +399,22 @@
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 40 + f.AVD"]
 [if exp="f.hit > f.rand"]
-鈴猫は敵の組付きを回避した[p][MND1][WSs]
+鈴耶は敵の組付きを回避した[p][MND1][WSs]
 [jump target="*enemy_03"][s]
 [endif]
-鈴猫は荒くれ者に組み付かれた[p]
-落ち武者は鈴猫の胸に揉みしだいた[p]
-#鈴猫
+鈴耶は荒くれ者に組み付かれた[p]
+落ち武者は鈴耶の胸に揉みしだいた[p]
+#鈴耶
 ひっ！！[p]
 [eval exp="tf.tmp = 100 "]
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
 [eval exp="tf.arg = tf.tmp * f.BOOB / 100 "]
 [getMathRound var="tf.tmp"]
-鈴猫は[emb exp="tf.tmp"]の快感を受けた[p]
+鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.tmp"][MND0][WSs]
 [if exp="f.ERO >= 1000 "]
-鈴猫は絶頂した[p]
-鈴猫の理性が１減少した[p]
+鈴耶は絶頂した[p]
+鈴耶の理性が１減少した[p]
 [eval exp="f.SAN -= 1"]
 [eval exp="f.ERO = 0"]
 [eval exp="f.MND = 0"][WSs]
@@ -423,7 +423,7 @@
 
 ;-------------------------------------------------------------------------------
 *enemy_04
-鈴猫の攻撃[r]
+鈴耶の攻撃[r]
 [call target="*PL_battle_select"]
 
 [if exp="f.en_HP < 1"]
@@ -444,11 +444,11 @@
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50 + f.AVD"]
 [if exp="f.hit > f.rand"]
-鈴猫は敵の攻撃を回避した[p][MND1][WSs]
+鈴耶は敵の攻撃を回避した[p][MND1][WSs]
 [else]
 [eval exp="tf.arg = 200 * f.GRD"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
-[eval exp="f.HP = f.HP - tf.ATP"][MND0][MP10][WSs]
+[eval exp="f.HP = f.HP - tf.ATP"][MND0][MP1][WSs]
 [endif]
 [if exp="f.HP < 1"][jump target="*defeat"][endif]
 [jump target="*enemy_04"][s]
@@ -458,22 +458,22 @@
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 40 + f.AVD"]
 [if exp="f.hit > f.rand"]
-鈴猫は敵の組付きを回避した[p][MND1]
+鈴耶は敵の組付きを回避した[p][MND1]
 [jump target="*enemy_04"][s]
 [endif]
-鈴猫は忍者に組み付かれた[p]
-忍者は鈴猫の女陰をまさぐった[p]
-#鈴猫
+鈴耶は忍者に組み付かれた[p]
+忍者は鈴耶の女陰をまさぐった[p]
+#鈴耶
 ひっ！！[p]
 [eval exp="tf.tmp = 100 "]
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
 [eval exp="tf.arg = tf.tmp * f.VGNA / 100 "]
 [getMathRound var="tf.tmp"]
-鈴猫は[emb exp="tf.tmp"]の快感を受けた[p]
+鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.tmp"][MND0][WSs]
 [if exp="f.ERO >= 1000 "]
-鈴猫は絶頂した[p]
-鈴猫の理性が１減少した[p]
+鈴耶は絶頂した[p]
+鈴耶の理性が１減少した[p]
 [eval exp="f.SAN -= 1"]
 [eval exp="f.ERO = 0"]
 [eval exp="f.MND = 0"][WSs]
@@ -482,10 +482,10 @@
 
 ;-------------------------------------------------------------------------------
 *defeat
-#鈴猫
+#鈴耶
 そ、そんな・・・[p]
 #
-鈴猫は気を失った[p]
+鈴耶は気を失った[p]
 [s]
 
 ;-------------------------------------------------------------------------------
@@ -496,7 +496,7 @@
 [if exp="f.event<40"]
 すらいむが現れた[p]
 [eval exp="f.en_Name = 'すらいむ'"][WriteEnemy]
-妖怪に遭遇したことで鈴猫の淫気が上昇[p]
+妖怪に遭遇したことで鈴耶の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 20"][WSs]
 [eval exp="f.en_DEX = 50, f.en_HP = 135 , f.type = 2"]
 [jump target=*youkai_01]
@@ -504,7 +504,7 @@
 [elsif exp="f.event<60"]
 ひとだまが現れた[p]
 [eval exp="f.en_Name = 'ひとだま'"][WriteEnemy]
-妖怪に遭遇したことで鈴猫の淫気が上昇[p]
+妖怪に遭遇したことで鈴耶の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 30"][WSs]
 [eval exp="f.en_DEX = 50, f.en_HP = 105 , f.type = 2"]
 [jump target=*youkai_02]
@@ -512,7 +512,7 @@
 [elsif exp="f.event<80"]
 一反木綿が現れた[p]
 [eval exp="f.en_Name = '一反もめん'"][WriteEnemy]
-妖怪に遭遇したことで鈴猫の淫気が上昇[p]
+妖怪に遭遇したことで鈴耶の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 20"][WSs]
 [eval exp="f.en_DEX = 50, f.en_HP = 125 , f.type = 2"]
 [jump target=*youkai_03]
@@ -520,7 +520,7 @@
 [else]
 触手塊が現れた[p]
 [eval exp="f.en_Name = '触手塊'"][WriteEnemy]
-妖怪に遭遇したことで鈴猫の淫気が上昇[p]
+妖怪に遭遇したことで鈴耶の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 50"][WSs]
 [eval exp="f.en_DEX = 50, f.en_HP = 200 , f.type = 2"]
 [jump target=*youkai_04]
@@ -574,17 +574,17 @@
 [s]
 
 *trouble_good_01
-鈴猫の体力が回復した[p]
+鈴耶の体力が回復した[p]
 [eval exp="f.HP += 100" ][eval exp="f.HP = 1000" cond="f.HP > 1000"]
 [jump target="*no_goal"][s]
 
 *trouble_good_02
-鈴猫の集中力が増加した[p]
+鈴耶の集中力が増加した[p]
 [eval exp="f.MND += 1" ][eval exp="f.MND = 5" cond="f.MND > 5"]
 [jump target="*no_goal"][s]
 
 *trouble_good_03
-鈴猫の気力が増加した[p]
+鈴耶の気力が増加した[p]
 [eval exp="f.MP += 10"][eval exp="f.MP = 100" cond="f.MP > 100"]
 [jump target="*no_goal"][s]
 
@@ -596,19 +596,19 @@
 
 
 *trouble_bad_01
-鈴猫の体力が減少した[p]
+鈴耶の体力が減少した[p]
 [eval exp="f.HP -= 50"][eval exp="f.HP = 1" cond="f.HP < 1"]
 [jump target="*no_goal"][s]
 
 *trouble_bad_02
 トラブル4[p]
-鈴猫の集中力が減少した[p]
+鈴耶の集中力が減少した[p]
 [eval exp="f.MND -= 1" ][eval exp="f.HP = 0" cond="f.MND < 0"]
 [jump target="*no_goal"][s]
 
 *trouble_bad_03
 トラブル6[p]
-鈴猫の気力が減少した[p]
+鈴耶の気力が減少した[p]
 [eval exp="f.MP += 10" ][eval exp="f.MP = 0" cond="f.MP < 0"]
 [jump target="*no_goal"][s]
 
@@ -635,7 +635,7 @@
 
 ;-------------------------------------------------------------------------------
 *no_goal
-#鈴猫
+#鈴耶
 [chara_mod name="suzune" face="happy" cross="true" ]
 [eval exp="f.ERO = f.ERO - f.SAN"]
 [eval exp="f.ERO = 0" cond="f.ERO < 1"][WSs]
@@ -646,7 +646,7 @@
 
 ;-------------------------------------------------------------------------------
 *goal
-#鈴猫
+#鈴耶
 [chara_mod name="suzune" face="happy" ]
 無事到着っと[p]
 [eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
@@ -655,7 +655,7 @@
 
 *result
 [cm][clearfix][freeimage layer=1]
-#鈴猫
+#鈴耶
 Homeに戻るよ！[p]
 [jump storage="home.ks" target="*home_start"]
 [s]

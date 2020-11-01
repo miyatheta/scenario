@@ -3,7 +3,7 @@
 [bg storage="syosai1-1080.jpg" time="100"]
 [chara_show  name="suzune"  left="-70" top="-30"]
 [WriteDate]
-#鈴猫
+#鈴耶
 ホーム画面よ[r]
 メニューを選択してね[p]
 

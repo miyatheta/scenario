@@ -28,7 +28,7 @@
 
 ;このゲームで登場するキャラクターを宣言
 ;suzune
-[chara_new  name="suzune" storage="chara/suzune/normal.png" jname="鈴猫" width=600]
+[chara_new  name="suzune" storage="chara/suzune/normal.png" jname="鈴耶" width=600]
 ;キャラクターの表情登録
 [chara_face name="suzune" face="angry" storage="chara/suzune/angry.png"]
 [chara_face name="suzune" face="surprise" storage="chara/suzune/doki.png"]
@@ -46,6 +46,7 @@
 [eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
 [eval exp="f.HP = f.HP_MAX, f.SAN = f.SAN_MAX"]
 [eval exp="f.BUFF_ATP = 1, f.ambush = 1"]
+
 
 [jump storage="home.ks" target="**home_start"]
 
