@@ -9,6 +9,10 @@
 [endmacro]
 
 [macro name="MP1"]
+[eval exp="f.MP += 1" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
+[endmacro]
+
+[macro name="MP5"]
 [eval exp="f.MP += 5" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [endmacro]
 

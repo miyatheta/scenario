@@ -59,7 +59,7 @@
 ;-------------------------------------------------------------------------------
 
 *select_event
-[getrand min="1" max="70" var="f.event"]
+[getrand min="1" max="60" var="f.event"]
 [if exp="f.event<=20 && f.Pre_event != 1"]
 [eval exp="f.Pre_event = 1"][jump target=*event_enemy]
 
@@ -90,7 +90,7 @@
 [if exp="f.event<=30"]
 野犬が現れた[p]
 [eval exp="f.en_Name = '野犬'"][WriteEnemy]
-[eval exp="f.en_DEX = 30, f.GRB=80, f.en_HP = 120 , f.type = 1, f.Round = 0"]
+[eval exp="f.en_DEX = 40, f.GRB=80, f.en_HP = 120 , f.type = 1, f.Round = 0"]
 [call storage="SR_En_yaken.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
@@ -100,7 +100,7 @@
 [elsif exp="f.event<=60"]
 野盗が現れた[p]
 [eval exp="f.en_Name = '野盗'"][WriteEnemy]
-[eval exp="f.en_DEX=8, f.GRB=90, f.SEX=100 , f.en_HP = 160 , f.type = 1, f.Round = 0"]
+[eval exp="f.en_DEX=22, f.GRB=90, f.SEX=100 , f.en_HP = 160 , f.type = 1, f.Round = 0"]
 [call storage="SR_En_yatou.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
@@ -110,7 +110,7 @@
 [elsif exp="f.event<=80"]
 落ち武者が現れた[p]
 [eval exp="f.en_Name = '落ち武者'"][WriteEnemy]
-[eval exp="f.en_DEX=8, f.GRB=110, f.SEX=120, f.en_HP = 250 , f.type = 1, f.Round = 0"]
+[eval exp="f.en_DEX=25, f.GRB=110, f.SEX=120, f.en_HP = 250 , f.type = 1, f.Round = 0"]
 [call storage="SR_EN_otimusha.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
@@ -120,7 +120,7 @@
 [else]
 忍者が現れた[p]
 [eval exp="f.en_Name = '忍者'"][WriteEnemy]
-[eval exp="f.en_DEX=20, f.GRB=100, f.SEX=150 , f.en_HP = 190 , f.type = 1, f.Round = 0"]
+[eval exp="f.en_DEX=30, f.GRB=100, f.SEX=150 , f.en_HP = 190 , f.type = 1, f.Round = 0"]
 [call storage="SR_EN_genin.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
@@ -128,17 +128,6 @@
 [endif]
 [s]
 
-
-;-------------------------------------------------------------------------------
-
-
-;-------------------------------------------------------------------------------
-
-
-;-------------------------------------------------------------------------------
-
-
-;-------------------------------------------------------------------------------
 
 
 ;-------------------------------------------------------------------------------
@@ -443,8 +432,8 @@
 ;-------------------------------------------------------------------------------
 ;-------------------------------------------------------------------------------
 *event_trouble
-[getrand min="1" max="100" var="f.event"]
-[if exp="f.event<30"]
+[getrand min="1" max="100" var="f.trouble"]
+[if exp="f.trouble<30"]
 [jump target=*trouble_good]
 [else]
 [jump target=*trouble_bad]
@@ -452,34 +441,51 @@
 [s]
 
 *trouble_good
-[getrand min="1" max="100" var="f.event"]
-[if exp="f.event<25"]
+[getrand min="1" max="100" var="f.trouble"]
+[if exp="f.trouble <= 25 && f.Pre_trouble_g != 1"]
+[eval exp="f.Pre_trouble_g = 1"]
 [jump target=*trouble_good_01]
-[elsif exp="f.event<50"]
+[elsif exp="f.trouble <= 50 && f.Pre_trouble_g != 2"]
+[eval exp="f.Pre_trouble_g = 2"]
 [jump target=*trouble_good_02]
-[elsif exp="f.event<75"]
+[elsif exp="f.trouble <= 75 && f.Pre_trouble_g != 3"]
+[eval exp="f.Pre_trouble_g = 3"]
 [jump target=*trouble_good_03]
-[else]
+[elsif exp="f.trouble <= 100 && f.Pre_trouble_g != 4"]
+[eval exp="f.Pre_trouble_g = 4"]
 [jump target=*trouble_good_04]
+[else]
+[eval exp="f.Pre_trouble_g = 0"]
+[jump target=*trouble_good]
 [endif]
 [s]
 
 *trouble_bad
-[getrand min="1" max="70" var="f.event"]
-[if exp="f.event<10"]
+[getrand min="1" max="70" var="f.trouble"]
+[if exp="f.trouble <= 10 && f.Pre_trouble_b != 1"]
+[eval exp="f.Pre_trouble_b = 1"]
 [jump target=*trouble_bad_01]
-[elsif exp="f.event<20"]
+[elsif exp="f.trouble <= 20 && f.Pre_trouble_b != 2"]
+[eval exp="f.Pre_trouble_b = 2"]
 [jump target=*trouble_bad_02]
-[elsif exp="f.event<30"]
+[elsif exp="f.trouble <= 30 && f.Pre_trouble_b != 3"]
+[eval exp="f.Pre_trouble_b = 3"]
 [jump target=*trouble_bad_03]
-[elsif exp="f.event<40"]
+[elsif exp="f.trouble <= 40 && f.Pre_trouble_b != 4"]
+[eval exp="f.Pre_trouble_b = 4"]
 [jump target=*trouble_bad_04]
-[elsif exp="f.event<50"]
+[elsif exp="f.trouble <= 50 && f.Pre_trouble_b != 5"]
+[eval exp="f.Pre_trouble_b = 5"]
 [jump target=*trouble_bad_05]
-[elsif exp="f.event<60"]
+[elsif exp="f.trouble <= 60 && f.Pre_trouble_b != 6"]
+[eval exp="f.Pre_trouble_b = 6"]
 [jump target=*trouble_bad_06]
-[else]
+[elsif exp="f.trouble <= 70 && f.Pre_trouble_b != 7"]
+[eval exp="f.Pre_trouble_b = 7"]
 [jump target=*trouble_bad_07]
+[else]
+[eval exp="f.Pre_trouble_b = 0"]
+[jump target=*trouble_bad]
 [endif]
 [s]
 
@@ -515,7 +521,7 @@
 
 *trouble_bad_01
 #
-人影を見つけた[r]
+動く影を見つけた[r]
 こちらの気配には気づいていないようだ[p]
 どうする？[p]
 [glink color="black" target="*trouble_bad_01-A" x="450" y="100" width="" height="" text="隠れてやり過ごす" ]
