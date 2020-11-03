@@ -106,7 +106,7 @@
 ;快感ダメージ
 [eval exp="tf.fack = f.SEX "]
 [eval exp="tf.fack = tf.fack * f.CURSE / 100 + tf.fack"]
-[eval exp="tf.arg = tf.fack * f.BOOB / 100 "]
+[eval exp="tf.arg = tf.fack * f.BUST / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.fack"][MND0][WSs]
@@ -658,6 +658,7 @@
 ;-----------------------------------------
 
 *fase4気絶
+[eval exp="f.bind = 0"]
 #
 鈴耶は気絶した！[p]
 #落ち武者
@@ -679,6 +680,7 @@
 
 ;フィニッシュ-----------------------------------------------------------------------
 *finish
+[eval exp="f.bind = 0"]
 #
 男の精を受けて鈴耶の気力が増加した[p]
 [eval exp="f.MP += 30 "][WSs]

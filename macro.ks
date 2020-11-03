@@ -24,14 +24,6 @@ tf.security = "警戒度：" + f.security ;
 [endscript]
 [ptext layer="0" x="0" y="540" width="1270" text=&f.progressbar size="20" color="white" bold="bold" align="right" name="progressbar" overwrite="true" ]
 [ptext layer="0" x="0" y="560" width="1270" text=&f.security size="20" color="white" bold="bold" align="left" name="security" overwrite="true" ]
-
-[endmacro]
-
-[macro name="WriteAhead"]
-[iscript]
-tf.txt = "移動力：" + f.ahead ;
-[endscript]
-[ptext layer="0" x="0" y="520" width="1270" text=&tf.txt size="20" color="white" bold="bold" align="right" name="movepower" overwrite="true" ]
 [endmacro]
 
 [macro name="WriteEnemy"]
@@ -51,6 +43,7 @@ tf.txt = f.date + "/60日" ;
 [macro name="WSs"]
 ;WriteStatus
 [iscript]
+tf.MOVE = "移動力：" + f.MOVE ;
 tf.hp = "体力：" + f.HP ;
 tf.mp = "気力：" + f.MP ;
 tf.mnd = "集中：" + f.MND ;
@@ -60,7 +53,13 @@ tf.vital = "状態：";
 if(f.poison > 0){tf.vital = tf.vital + "毒　";}
 if(f.slowly > 0){tf.vital = tf.vital + "鈍足　";}
 if(f.excite > 0){tf.vital = tf.vital + "興奮　";}
+if(f.mazo > 0){tf.vital = tf.vital + "被虐";}
+if(f.boob > 0){tf.vital = tf.vital + "爆乳";}
+if(f.bags > 0){tf.vital = tf.vital + "虫憑";}
+if(f.slave > 0){tf.vital = tf.vital + "隷属";}
+if(f.tatoo > 0){tf.vital = tf.vital + "淫紋";}
 [endscript]
+[ptext layer="0" x="0" y="560" text=&tf.MOVE size="20" color="0x000000" edge="white" bold="bold" align="left" name="movepower" overwrite="true" ]
 [ptext layer="0" x="0" y="580" text=&tf.hp size="20" color="0x000000" edge="white" bold="bold" align="left" name="hitpoint" overwrite="true" ]
 [ptext layer="0" x="0" y="600" text=&tf.mp size="20" color="0x000000" edge="white" bold="bold" align="left" name="magicpoint" overwrite="true" ]
 [ptext layer="0" x="0" y="620" text=&tf.mnd size="20" color="0x000000" edge="white" bold="bold" align="left" name="concentration" overwrite="true" ]
@@ -70,7 +69,11 @@ if(f.excite > 0){tf.vital = tf.vital + "興奮　";}
 [endmacro]
 
 [macro name="TESTER"]
+[if exp="f.bind > 0"]
+拘束値：[emb exp="f.bind"]>判定値：[emb exp="f.rand"][p]
+[else]
 目標値：[emb exp="f.hit"]>判定値：[emb exp="f.rand"][p]
+[endif]
 [endmacro]
 
 [macro name="orgasm"]

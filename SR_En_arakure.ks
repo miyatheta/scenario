@@ -74,7 +74,7 @@
 ;快感ダメージ
 [eval exp="tf.tmp = 100 "]
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
-[eval exp="tf.arg = tf.tmp * f.BOOB / 100 "]
+[eval exp="tf.arg = tf.tmp * f.BUST / 100 "]
 [getMathRound var="tf.tmp"]
 鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.tmp"][MND0][WSs]

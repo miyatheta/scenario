@@ -41,10 +41,10 @@
 [cm]
 @layopt layer=message0 visible=true
 [current layer="message0"]
-[eval exp="f.ahead = f.MOVE"]
-[eval exp="f.ahead -= 3 " cond="f.slowly > 0"]
-[WriteAhead]
-[eval exp="f.progress += f.ahead"]
+[eval exp="f.MOVE = f.MOVE_MAX"]
+[eval exp="f.MOVE -= 3 " cond="f.slowly > 0"]
+[WSs]
+[eval exp="f.progress += f.MOVE"]
 [if exp="f.progress > f.goal"][eval exp="f.progress = f.goal"]
 [endif]
 [progressbar]
@@ -120,7 +120,7 @@
 [else]
 忍者が現れた[p]
 [eval exp="f.en_Name = '忍者'"][WriteEnemy]
-[eval exp="f.en_DEX=30, f.GRB=100, f.SEX=150 , f.en_HP = 190 , f.type = 1, f.Round = 0"]
+[eval exp="f.en_DEX=28, f.GRB=100, f.SEX=150 , f.en_HP = 190 , f.type = 1, f.Round = 0"]
 [call storage="SR_EN_genin.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
@@ -272,7 +272,7 @@
 ひっ！！[p]
 [eval exp="tf.tmp = 50 "]
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
-[eval exp="tf.arg = tf.tmp * f.BOOB / 100 "]
+[eval exp="tf.arg = tf.tmp * f.BUST / 100 "]
 [getMathRound var="tf.tmp"]
 #
 鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
@@ -406,7 +406,7 @@
 ひっ！！[p]
 [eval exp="tf.tmp = 200 "]
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
-[eval exp="tf.arg = tf.tmp * f.BOOB / 100 "]
+[eval exp="tf.arg = tf.tmp * f.BUST / 100 "]
 [getMathRound var="tf.tmp"]
 #
 鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
@@ -603,7 +603,7 @@
 #
 不意打ちに失敗した[p]
 [endif]
-[jump target="*event_enemy"]
+[jump target="*event_youkai"]
 [s]
 
 
