@@ -70,7 +70,6 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [glink  color="black"  target="*pray"  x="450"  y="250"  width=""  height=""  text="浄化" ]
 [glink  color="black"  target="*meditation"  x="450"  y="350"  width=""  height=""  text="瞑想" ]
 [glink  color="black"  target="*select_menu"  x="450"  y="450"  width=""  height=""  text="戻る" ]
-
 [s]
 
 *rest

@@ -20,7 +20,7 @@
 ;PLの行動------------------------------------------------------------------------
 #
 鈴耶の攻撃[r]
-[call storage="SR_PL_battle.ks" target="*start"]
+[call storage="PL_battle.ks" target="*start"]
 [if exp="f.escape > 0"][return][endif]
 
 [if exp="f.en_HP < 1"]

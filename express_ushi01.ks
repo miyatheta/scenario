@@ -27,15 +27,15 @@
 [glink color="black" target="*menu" x="400" y="350" width="" height="" text="メニュー" ]
 [glink color="black" target="*menu" x="400" y="450" width="" height="" text="撤退する" ]
 [s]
+;-------------------------------------------------------------------------------
 
 *menu
 [cm]
 @layopt layer=message0 visible=true
 [current layer="message0"]
-#鈴耶
-残念！！[r]
-そいつは未実装なのさー[p]
-[jump target="*goahead"]
+[call storage="shomenu.ks"]
+[jump target="*ready"]
+;-------------------------------------------------------------------------------
 
 *goahead
 [cm]
@@ -73,12 +73,6 @@
 [endif]
 
 [s]
-
-;-------------------------------------------------------------------------------
-*event_none
-[jump target=*select_event]
-[s]
-
 ;-------------------------------------------------------------------------------
 
 *event_enemy
@@ -91,7 +85,7 @@
 野犬が現れた[p]
 [eval exp="f.en_Name = '野犬'"][WriteEnemy]
 [eval exp="f.en_DEX = 40, f.GRB=80, f.en_HP = 120 , f.type = 1, f.Round = 0"]
-[call storage="SR_En_yaken.ks"]
+[call storage="En_yaken.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
@@ -101,7 +95,7 @@
 野盗が現れた[p]
 [eval exp="f.en_Name = '野盗'"][WriteEnemy]
 [eval exp="f.en_DEX=22, f.GRB=90, f.SEX=100 , f.en_HP = 160 , f.type = 1, f.Round = 0"]
-[call storage="SR_En_yatou.ks"]
+[call storage="En_yatou.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
@@ -111,7 +105,7 @@
 落ち武者が現れた[p]
 [eval exp="f.en_Name = '落ち武者'"][WriteEnemy]
 [eval exp="f.en_DEX=25, f.GRB=110, f.SEX=120, f.en_HP = 250 , f.type = 1, f.Round = 0"]
-[call storage="SR_EN_otimusha.ks"]
+[call storage="EN_otimusha.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
@@ -121,16 +115,13 @@
 忍者が現れた[p]
 [eval exp="f.en_Name = '忍者'"][WriteEnemy]
 [eval exp="f.en_DEX=28, f.GRB=100, f.SEX=150 , f.en_HP = 190 , f.type = 1, f.Round = 0"]
-[call storage="SR_EN_genin.ks"]
+[call storage="EN_genin.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
 [endif]
 [s]
 
-
-
-;-------------------------------------------------------------------------------
 ;-------------------------------------------------------------------------------
 *event_youkai
 #
@@ -142,7 +133,12 @@
 妖怪に遭遇したことで鈴耶の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 20"][WSs]
 [eval exp="f.en_DEX = 50, f.en_HP = 135 , f.type = 2, f.Round = 0"]
-[jump target=*youkai_01]
+[call storage="Mo_suraimu.ks"]
+[jump target="*defeat" cond="f.HP < 1"]
+[jump target="*escape" cond="f.escape > 0"]
+[jump target="*battle_end" cond="f.en_HP < 1"]
+[jump target="*no_goal"]
+[s]
 
 [elsif exp="f.event<70"]
 ひとだまが現れた[p]
@@ -150,7 +146,12 @@
 妖怪に遭遇したことで鈴耶の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 30"][WSs]
 [eval exp="f.en_DEX = 50, f.en_HP = 105 , f.type = 2, f.Round = 0"]
-[jump target=*youkai_02]
+[call storage="Mo_hitodama.ks"]
+[jump target="*defeat" cond="f.HP < 1"]
+[jump target="*escape" cond="f.escape > 0"]
+[jump target="*battle_end" cond="f.en_HP < 1"]
+[jump target="*no_goal"]
+[s]
 
 [else]
 触手塊が現れた[p]
@@ -158,277 +159,14 @@
 妖怪に遭遇したことで鈴耶の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 50"][WSs]
 [eval exp="f.en_DEX = 50, f.en_HP = 200 , f.type = 2, f.Round = 0"]
-[jump target=*youkai_04]
-[endif]
+[call storage="Mo_shokusyu.ks"]
+[jump target="*defeat" cond="f.HP < 1"]
+[jump target="*escape" cond="f.escape > 0"]
+[jump target="*battle_end" cond="f.en_HP < 1"]
+[jump target="*no_goal"]
 [s]
 
-;-------------------------------------------------------------------------------
-*youkai_01
-#
-鈴耶の攻撃[r]
-[call storage="SR_PL_battle.ks" target="*start"]
-[jump target="*escape" cond="f.escape > 0"]
-
-[if exp="f.en_HP < 1"]
-すらいむを倒した[p]
-[eval exp="f.en_Name = ''"][WriteEnemy]
-[jump target="*battle_end"][s]
 [endif]
-
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < 50"]
-[jump target="*youkai_01_attack"]
-[else]
-[jump target="*youkai_01_escape" cond="f.turn > 3"]
-[jump target="*youkai_01_sexhara"]
-[endif]
-
-*youkai_01_attack
-#
-すらいむの攻撃[p]
-[getrand min="1" max="100" var="f.rand"]
-[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50"]
-[if exp="f.hit > f.rand"]
-#
-鈴耶は敵の攻撃を回避した[p][MND1][WSs]
-[else]
-鈴耶のすばやさが3減少[p]
-[eval exp="f.SPD = f.SPD - 3"]
-[endif]
-[if exp="f.HP < 1"][jump target="*defeat"][endif]
-[jump target="*youkai_01"][s]
-
-*youkai_01_sexhara
-#
-すらいむは鈴耶にまとわりついた[p]
-すらいむは鈴耶の尻穴に潜り込んだ[p]
-#鈴耶
-ひっ！！[p]
-[eval exp="tf.tmp = 100 "]
-[eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
-[eval exp="tf.arg = tf.tmp * f.ANAL / 100 "]
-[getMathRound var="tf.tmp"]
-#
-鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.tmp"][MND0][WSs]
-[if exp="f.ERO >= 1000 "]
-鈴耶は絶頂した[p]
-鈴耶の理性が１減少した[p]
-[eval exp="f.SAN -= 1"]
-[eval exp="f.ERO = 0"]
-[eval exp="f.MND = 0"][WSs]
-すらいむは絶頂した鈴耶から離れると[r]
-地面に吸い込まれるように消えた[p]
-[eval exp="f.en_Name = ''"][WriteEnemy]
-[jump target="*no_goal"][s]
-[endif]
-[jump target="*youkai_01"][s]
-
-*youkai_01_escape
-#
-すらいむは地面に吸い込まれるように消えた[p]
-[eval exp="f.en_Name = ''"][WriteEnemy]
-[jump target="*no_goal"][s]
-;-------------------------------------------------------------------------------
-*youkai_02
-#
-鈴耶の攻撃[r]
-[call storage="SR_PL_battle.ks" target="*start"]
-[jump target="*escape" cond="f.escape > 0"]
-
-[if exp="f.en_HP < 1"]
-ひとだまを倒した[p]
-[eval exp="f.en_Name = ''"][WriteEnemy]
-[jump target="*battle_end"][s]
-[endif]
-
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < 50"]
-[jump target="*youkai_02_attack"]
-[else]
-[jump target="*youkai_02_escape" cond="f.turn > 3"]
-[jump target="*youkai_02_sexhara"]
-[endif]
-
-*youkai_02_attack
-#
-ひとだまの攻撃[p]
-[getrand min="1" max="100" var="f.rand"]
-[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50"]
-[if exp="f.hit > f.rand"]
-鈴耶は敵の攻撃を回避した[p][MND1][WSs]
-[else]
-鈴耶の精神力が2減少[p]
-[eval exp="f.POW = f.POW - 2"]
-[endif]
-[if exp="f.HP < 1"][jump target="*defeat"][endif]
-[jump target="*youkai_02"][s]
-
-*youkai_02_sexhara
-#
-ひとだまは鈴耶に取りついた[p]
-ひとだまは鈴耶の胸に吸い付いた[p]
-#鈴耶
-ひっ！！[p]
-[eval exp="tf.tmp = 50 "]
-[eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
-[eval exp="tf.arg = tf.tmp * f.BUST / 100 "]
-[getMathRound var="tf.tmp"]
-#
-鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.tmp"][MND0][WSs]
-[if exp="f.ERO >= 1000 "]
-鈴耶は絶頂した[p]
-鈴耶の理性が１減少した[p]
-[eval exp="f.SAN -= 1"]
-[eval exp="f.ERO = 0"]
-[eval exp="f.MND = 0"][WSs]
-ひとだまは絶頂した鈴耶から離れると[r]
-空に溶けるように消えた[p]
-[eval exp="f.en_Name = ''"][WriteEnemy]
-[jump target="*no_goal"][s]
-[endif]
-[jump target="*youkai_02"][s]
-
-*youkai_02_escape
-#
-ひとだまは虚空に溶けるように消えた[p]
-[eval exp="f.en_Name = ''"][WriteEnemy]
-[jump target="*no_goal"][s]
-;-------------------------------------------------------------------------------
-*youkai_03
-#
-鈴耶の攻撃[r]
-[call storage="SR_PL_battle.ks" target="*start"]
-[jump target="*escape" cond="f.escape > 0"]
-
-[if exp="f.en_HP < 1"]
-#
-一反もめんを倒した[p]
-[eval exp="f.en_Name = ''"][WriteEnemy]
-[jump target="*battle_end"][s]
-[endif]
-
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < 50"]
-[jump target="*youkai_03_attack"]
-[else]
-[jump target="*youkai_03_escape" cond="f.turn > 3"]
-[jump target="*youkai_03_sexhara"]
-[endif]
-
-*youkai_03_attack
-#
-一反もめんの攻撃[p]
-[getrand min="1" max="100" var="f.rand"]
-[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50"]
-[if exp="f.hit > f.rand"]
-鈴耶は敵の攻撃を回避した[p][MND1][WSs]
-[else]
-鈴耶の腕力が１減少[p]
-[eval exp="f.STR = f.STR - 1"]
-[endif]
-[if exp="f.HP < 1"][jump target="*defeat"][endif]
-[jump target="*youkai_03"][s]
-
-*youkai_03_sexhara
-#
-一反もめんは鈴耶を縛り上げた[p]
-一反もめんが鈴耶の股間に食い込む[p]
-#鈴耶
-ひっ！！[p]
-[eval exp="tf.tmp = 50 "]
-[eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
-[eval exp="tf.arg = tf.tmp * f.VGNA / 100 "]
-[getMathRound var="tf.tmp"]
-#
-鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.tmp"][MND0][WSs]
-[if exp="f.ERO >= 1000 "]
-鈴耶は絶頂した[p]
-鈴耶の理性が１減少した[p]
-[eval exp="f.SAN -= 1"]
-[eval exp="f.ERO = 0"]
-[eval exp="f.MND = 0"][WSs]
-一反もめんは絶頂した鈴耶から離れると[r]
-空へ舞い上がり姿を消した[p]
-[eval exp="f.en_Name = ''"][WriteEnemy]
-[jump target="*no_goal"][s]
-[endif]
-[jump target="*youkai_03"][s]
-
-*youkai_03_escape
-#
-一反もめんは空へ舞い上がり姿を消した[p]
-[eval exp="f.en_Name = ''"][WriteEnemy]
-[jump target="*no_goal"][s]
-;-------------------------------------------------------------------------------
-*youkai_04
-#
-鈴耶の攻撃[r]
-[call storage="SR_PL_battle.ks" target="*start"]
-[jump target="*escape" cond="f.escape > 0"]
-
-[if exp="f.en_HP < 1"]
-#
-触手塊を倒した[p]
-[eval exp="f.en_Name = ''"][WriteEnemy]
-[jump target="*battle_end"][s]
-[endif]
-
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < 50"]
-[jump target="*youkai_04_attack"]
-[else]
-[jump target="*youkai_04_escape" cond="f.turn > 4"]
-[jump target="*youkai_04_sexhara"]
-[endif]
-
-*youkai_04_attack
-#
-触手塊の攻撃[p]
-[getrand min="1" max="100" var="f.rand"]
-[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50"]
-[if exp="f.hit > f.rand"]
-鈴耶は敵の攻撃を回避した[p][MND1]
-[else]
-鈴耶のすばやさが５減少[p]
-[eval exp="f.SPD = f.SPD - 5"]
-[endif]
-[if exp="f.HP < 1"][jump target="*defeat"][endif]
-[jump target="*youkai_04"][s]
-
-*youkai_04_sexhara
-#
-触手塊は鈴耶に取りついた[p]
-触手塊は鈴耶の胸に吸い付いた[p]
-#鈴耶
-ひっ！！[p]
-[eval exp="tf.tmp = 200 "]
-[eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
-[eval exp="tf.arg = tf.tmp * f.BUST / 100 "]
-[getMathRound var="tf.tmp"]
-#
-鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.tmp"][MND0][WSs]
-[if exp="f.ERO >= 1000 "]
-鈴耶は絶頂した[p]
-鈴耶の理性が１減少した[p]
-[eval exp="f.SAN -= 1"]
-[eval exp="f.ERO = 0"]
-[eval exp="f.MND = 0"][WSs]
-触手塊は絶頂した鈴耶から離れると[r]
-茂みへと姿を消した[p]
-[eval exp="f.en_Name = ''"][WriteEnemy]
-[jump target="*no_goal"][s]
-[endif]
-[jump target="*youkai_04"][s]
-
-*youkai_04_escape
-#
-触手塊は茂みへと姿を消した[p]
-[eval exp="f.en_Name = ''"][WriteEnemy]
-[jump target="*no_goal"][s]
 ;-------------------------------------------------------------------------------
 ;-------------------------------------------------------------------------------
 *event_trouble

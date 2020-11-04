@@ -17,7 +17,7 @@
 
 ;PLの行動------------------------------------------------------------------------
 鈴耶の攻撃[r]
-[call storage="SR_PL_battle.ks" target="*start"]
+[call storage="PL_battle.ks" target="*start"]
 [if exp="f.escape > 0"][return][endif]
 
 [if exp="f.en_HP < 1"]
@@ -65,7 +65,7 @@
 [eval exp="f.bind = f.GRB"]
 ;------------------------------------------------------------------------------
 ;抵抗１
-[call storage="SR_PL_bind.ks"]
+[call storage="PL_bind.ks"]
 ;抵抗成功
 [jump target="*start" cond="f.bind <= 0"]
 ;段階１
@@ -126,7 +126,7 @@
 [endif]
 ;------------------------------------------------------------------------------
 ;抵抗２
-[call storage="SR_PL_bind.ks"]
+[call storage="PL_bind.ks"]
 [jump target="*start" cond="f.bind <= 0"]
 ;段階２
 荒くれ者はマラを鈴耶の尻に擦りつけてきた[p]
@@ -187,7 +187,7 @@
 [endif]
 ;------------------------------------------------------------------------------
 ;抵抗3
-[call storage="SR_PL_bind.ks"]
+[call storage="PL_bind.ks"]
 [jump target="*start" cond="f.bind <= 0"]
 ;段階３
 荒くれ者はマラを鈴耶の秘裂に挿入した[p]
@@ -251,7 +251,7 @@
 [endif]
 ;------------------------------------------------------------------------------
 ;抵抗4
-[call storage="SR_PL_bind.ks"]
+[call storage="PL_bind.ks"]
 [jump target="*start" cond="f.bind <= 0"]
 ;段階４
 荒くれ者はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
