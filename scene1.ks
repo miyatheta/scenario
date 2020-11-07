@@ -11,15 +11,15 @@
 @showmenubutton
 
 ;メッセージウィンドウの設定
-[position layer="message0" left=350 top=560 width=800 height=150 page=fore visible=false]
+[position layer="message0" left=390 top=540 width=800 height=170 page=fore visible=false]
 ;文字が表示される領域を調整
-[position layer=message0 page=fore margint="25" marginl="50" marginr="70" marginb="50"]
+[position layer=message0 page=fore margint="25" marginl="60" marginr="70" marginb="50"]
 
 ;メッセージウィンドウの表示
 @layopt layer=message0 visible=false
 
 ;キャラクターの名前が表示される文字領域
-[ptext name="chara_name_area" layer="message0" color="white" size=28 bold=true x=370 y=560]
+[ptext name="chara_name_area" layer="message0" color="white" size=28 bold=true x=400 y=540]
 
 ;上記で定義した領域がキャラクターの名前表示であることを宣言（これがないと#の部分でエラーになります）
 [chara_config ptext="chara_name_area" ]
@@ -46,10 +46,11 @@
 [eval exp="f.HP = f.HP_MAX, f.SAN = f.SAN_MAX"]
 [eval exp="f.MP = f.POW , f.MND=2"]
 [eval exp="f.BUFF_ATP = 1, f.ambush = 0"]
-[eval exp="f.arms = 1 , f.arms_name='忍者刀・夜雀' , f.arms_atp=30 ,f.arms_pow=0 ,f.arms_noz=10"]
-[eval exp="f.acceA = 0 , f.acceA_name='なし' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
-[eval exp="f.acceB = 0 , f.acceB_name='なし' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
-
+[eval exp="f.arms = 1 , f.arms_name='忍者刀・夜雀' , f.arms_atp=30 ,f.arms_pow=0 ,f.arms_noz=8"]
+[eval exp="f.acceA = 0 , f.acceA_name='なし' , f.acceA_atp=0 ,f.acceA_pow=0 ,f.acceA_noz=0"]
+[eval exp="f.acceB = 0 , f.acceB_name='なし' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.acceB_noz=0"]
+[eval exp="f.goal=0 , f.progress=0 , f.Achievement=0"]
+[eval exp="f.security=0 , f.security_MAX=0 , f.warning=0"]
 [jump storage="home.ks" target="**home_start"]
 
 #

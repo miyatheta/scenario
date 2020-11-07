@@ -14,9 +14,7 @@
 [eval exp="f.goal=150 , f.progress=0 , f.Achievement=0"]
 
 ;暫定ステータス
-[eval exp="f.MP = f.POW , f.MND=2"]
-[eval exp="f.AVD = 20 , f.type = 1"]
-[eval exp="f.poison=0, f.slowly=0, f.excite=0"]
+[SetStatus]
 [WSs]
 
 ;-------------------------------------------------------------------------------
@@ -33,7 +31,7 @@
 [cm]
 @layopt layer=message0 visible=true
 [current layer="message0"]
-[call storage="shomenu.ks"]
+[call storage="showmenu.ks"]
 [jump target="*ready"]
 ;-------------------------------------------------------------------------------
 
@@ -132,7 +130,7 @@
 [eval exp="f.en_Name = 'すらいむ'"][WriteEnemy]
 妖怪に遭遇したことで鈴耶の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 20"][WSs]
-[eval exp="f.en_DEX = 50, f.en_HP = 135 , f.type = 2, f.Round = 0"]
+[eval exp="f.en_DEX = 30, f.en_HP = 135 , f.type = 2, f.Round = 0"]
 [call storage="Mo_suraimu.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
@@ -145,7 +143,7 @@
 [eval exp="f.en_Name = 'ひとだま'"][WriteEnemy]
 妖怪に遭遇したことで鈴耶の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 30"][WSs]
-[eval exp="f.en_DEX = 50, f.en_HP = 105 , f.type = 2, f.Round = 0"]
+[eval exp="f.en_DEX = 30, f.en_HP = 105 , f.type = 2, f.Round = 0"]
 [call storage="Mo_hitodama.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
@@ -158,7 +156,7 @@
 [eval exp="f.en_Name = '触手塊'"][WriteEnemy]
 妖怪に遭遇したことで鈴耶の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 50"][WSs]
-[eval exp="f.en_DEX = 50, f.en_HP = 200 , f.type = 2, f.Round = 0"]
+[eval exp="f.en_DEX = 30, f.en_HP = 200 , f.type = 2, f.Round = 0"]
 [call storage="Mo_shokusyu.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
@@ -378,13 +376,41 @@
 [eval exp="f.excite = 5" ][eval exp="f.excite = 5" cond="f.excite > 5"]
 [jump target="*no_goal"][s]
 
+
+;-------------------------------------------------------------------------------
+*escape
+鈴耶は逃走した（20後退）[p]
+[eval exp="f.escape = 0"]
+[eval exp="f.progress -= 20"][eval exp="f.progress = 0" cond="f.progress < 0"]
+[jump target="*no_goal"]
+[s]
+
+;-------------------------------------------------------------------------------
+*battle_end
+[eval exp="f.Round = 0, f.ambush=0"]
+
+[if exp="f.enchant > 0 "]
+退魔の術の効力が切れた
+[eval exp="f.enchant = 0 "]
+[endif]
+
+[if exp="f.invincible > 0 "]
+退魔の術の効力が切れた
+[eval exp="f.invincible = 0 "]
+[endif]
+;no_goalで加算される分を相殺
+[eval exp="f.MP -= 5"]
+[jump target="*no_goal"]
+[s]
+
+
 ;-------------------------------------------------------------------------------
 *no_goal
 #
 ;[chara_mod name="suzune" face="default" cross="true" ]
 [eval exp="f.ERO = f.ERO - f.SAN" cond="f.excite == 0"]
-[eval exp="f.ERO = 0" cond="f.ERO < 0"][WSs]
-[MP1]
+[eval exp="f.ERO = 0" cond="f.ERO < 0"]
+[MP1][WSs]
 
 [if exp="f.poison > 0"]
 毒により鈴耶の体力が減少[p]
@@ -410,27 +436,13 @@
 [jump target="*ready"]
 [s]
 
-
-;-------------------------------------------------------------------------------
-*escape
-鈴耶は逃走した（20後退）[p]
-[eval exp="f.escape = 0"]
-[eval exp="f.progress -= 20"][eval exp="f.progress = 0" cond="f.progress < 0"]
-[jump target="*no_goal"]
-[s]
-;-------------------------------------------------------------------------------
-*battle_end
-[eval exp="f.Round = 0, f.ambush=0"]
-[jump target="*no_goal"]
-[s]
 ;-------------------------------------------------------------------------------
 *defeat
 #鈴耶
 そ、そんな・・・[p]
 #
 鈴耶は気を失った[p]
-[eval exp="f.poison=0, f.slowly=0, f.excite=0"]
-[eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
+[SetStatus]
 [jump　target="*result"]
 [s]
 
@@ -439,8 +451,7 @@
 #鈴耶
 [chara_mod name="suzune" face="happy" ]
 無事到着っと[p]
-[eval exp="f.poison=0, f.slowly=0, f.excite=0"]
-[eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
+[SetStatus]
 [WSs]
 
 *result

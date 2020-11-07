@@ -2,8 +2,13 @@
 ;ラウンド開始時処理--------------------------------------------------------------
 [eval exp="f.Round += 1"]
 [eval exp="f.GRD = 1 , f.AVD =  0" ]
-[eval exp="f.ambush = 0" cond="f.Round >= 2"]
-[eval exp="f.BUFF_ATP = 1 + f.ambush"]
+
+[if exp="f.ambush > 0"]
+#
+鈴耶の不意打ち[r]
+鈴耶の集中力が上昇[p]
+[eval exp="f.MND += 1 , f.ambush = 0"][WSs]
+[endif]
 
 [if exp="f.En_Raptured_time == 1"]
 #
@@ -47,11 +52,11 @@
 [eval exp="f.hit = f.hit + (f.En_Raptured * 5)"]
 [TESTER]
 [if exp="f.hit > f.rand"]
-鈴耶は敵の攻撃を回避した[p][MND1][WSs]
+鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
 [eval exp="tf.arg = 50 * f.GRD"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
-[eval exp="f.HP = f.HP - tf.ATP"][MP5][WSs]
+[eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [endif]
 [if exp="f.HP < 1"][return][endif]
 [jump target="*start"][s]
@@ -65,11 +70,11 @@
 [eval exp="f.hit = f.hit + (f.En_Raptured * 5)"]
 [TESTER]
 [if exp="f.hit > f.rand"]
-鈴耶は敵の攻撃を回避した[p][MND1][WSs]
+鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
 [eval exp="tf.arg = 50 * f.GRD"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
-[eval exp="f.HP = f.HP - tf.ATP"][MP5][WSs]
+[eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [endif]
 [if exp="f.HP < 1"][return][endif]
 [jump target="*start"][s]

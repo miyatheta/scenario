@@ -8,29 +8,63 @@
 [eval exp="f.MND -= 1" cond="f.MND > 0"][WSs]
 [endmacro]
 
+;攻撃成功時
+[macro name="ATKED"]
+;[eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
+[endmacro]
+;回避時
+[macro name="AVOID"]
+[eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
+[endmacro]
+;セクハラ時
+[macro name="SKEBE"]
+[eval exp="f.MND -= 1" cond="f.MND > 0"][WSs]
+[eval exp="f.MP += 10" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
+[endmacro]
+;被弾時
+[macro name="DAMED"]
+[eval exp="f.MND -= 1" cond="f.MND > 0"][WSs]
+[eval exp="f.MP += 10" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
+[endmacro]
+
 [macro name="MP1"]
-[eval exp="f.MP += 1" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
+[eval exp="f.MP += 5" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [endmacro]
 
 [macro name="MP5"]
-[eval exp="f.MP += 5" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
+[eval exp="f.MP += 10" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
+[endmacro]
+
+[macro name="SetStatus"]
+[eval exp="f.MP = f.POW , f.MND = 1 , f.ERO = 0"]
+[eval exp="f.AVD = 0 , f.type = 1"]
+[eval exp="f.poison=0, f.slowly=0, f.excite=0"]
+[eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
 [endmacro]
 
 [macro name="progressbar"]
 [eval exp="f.progress = f.goal" cond="f.progress > f.goal"]
 [iscript]
 f.progressbar = "進行度：" + f.progress + "/" + f.goal;
-tf.security = "警戒度：" + f.security ;
 [endscript]
-[ptext layer="0" x="0" y="540" width="1270" text=&f.progressbar size="20" color="white" bold="bold" align="right" name="progressbar" overwrite="true" ]
-[ptext layer="0" x="0" y="560" width="1270" text=&f.security size="20" color="white" bold="bold" align="left" name="security" overwrite="true" ]
+[ptext layer="0" x="150" y="600" text=&f.progressbar size="20" color="black" edge="white" bold="bold" align="left" name="progressbar" overwrite="true" ]
+[endmacro]
+
+[macro name="securitybar"]
+[eval exp="f.warning = 100" cond="f.warning > 100"]
+[iscript]
+f.warningLv = "警戒度：" + f.warning ;
+f.securityLv = "警戒態勢：" +  f.security + "/" + f.security_MAX;
+[endscript]
+[ptext layer="0" x="150" y="640" text=&f.warningLv size="20" color="black" edge="white" bold="bold" align="left" name="warningbar" overwrite="true" ]
+[ptext layer="0" x="150" y="660" text=&f.securityLv size="20" color="black" edge="white" bold="bold" align="left" name="securitybar" overwrite="true" ]
 [endmacro]
 
 [macro name="WriteEnemy"]
 [iscript]
 tf.txt = "敵：" + f.en_Name ;
 [endscript]
-[ptext layer="0" x="0" y="500" width="1270" text=&tf.txt size="20" color="red" bold="bold" align="right" name="enemyname" overwrite="true" ]
+[ptext layer="0" x="0" y="100" width="1270" text=&tf.txt size="30" color="red" bold="bold" align="right" name="enemyname" overwrite="true" ]
 [endmacro]
 
 [macro name="WriteDate"]
@@ -43,7 +77,10 @@ tf.txt = f.date + "/60日" ;
 [macro name="WSs"]
 ;WriteStatus
 [iscript]
-tf.MOVE = "移動力：" + f.MOVE ;
+tf.move = "移動力：" + f.MOVE ;
+tf.noztmp = f.NOZ + f.arms_noz + f.acceA_noz + f.acceB_noz;
+tf.noztxt = "騒　音：" + tf.noztmp ;
+
 tf.hp = "体力：" + f.HP ;
 tf.mp = "気力：" + f.MP ;
 tf.mnd = "集中：" + f.MND ;
@@ -59,13 +96,15 @@ if(f.bags > 0){tf.vital = tf.vital + "虫憑";}
 if(f.slave > 0){tf.vital = tf.vital + "隷属";}
 if(f.tatoo > 0){tf.vital = tf.vital + "淫紋";}
 [endscript]
-[ptext layer="0" x="0" y="560" text=&tf.MOVE size="20" color="0x000000" edge="white" bold="bold" align="left" name="movepower" overwrite="true" ]
-[ptext layer="0" x="0" y="580" text=&tf.hp size="20" color="0x000000" edge="white" bold="bold" align="left" name="hitpoint" overwrite="true" ]
-[ptext layer="0" x="0" y="600" text=&tf.mp size="20" color="0x000000" edge="white" bold="bold" align="left" name="magicpoint" overwrite="true" ]
-[ptext layer="0" x="0" y="620" text=&tf.mnd size="20" color="0x000000" edge="white" bold="bold" align="left" name="concentration" overwrite="true" ]
-[ptext layer="0" x="0" y="640" text=&tf.ero size="20" color="0xff00ff" edge="white" bold="bold" align="left" name="ero" overwrite="true" ]
-[ptext layer="0" x="0" y="660" text=&tf.curse size="20" color="0x9400d3" edge="white" bold="bold" align="left" name="curse" overwrite="true" ]
-[ptext layer="0" x="0" y="680" text=&tf.vital size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="health" overwrite="true" ]
+[ptext layer="0" x="10" y="580" text=&tf.hp size="20" color="0x000000" edge="white" bold="bold" align="left" name="hitpoint" overwrite="true" ]
+[ptext layer="0" x="10" y="600" text=&tf.mp size="20" color="0x000000" edge="white" bold="bold" align="left" name="magicpoint" overwrite="true" ]
+[ptext layer="0" x="10" y="620" text=&tf.mnd size="20" color="0x000000" edge="white" bold="bold" align="left" name="concentration" overwrite="true" ]
+[ptext layer="0" x="10" y="640" text=&tf.ero size="20" color="0xff00ff" edge="white" bold="bold" align="left" name="ero" overwrite="true" ]
+[ptext layer="0" x="10" y="660" text=&tf.curse size="20" color="0x9400d3" edge="white" bold="bold" align="left" name="curse" overwrite="true" ]
+[ptext layer="0" x="10" y="680" text=&tf.vital size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="health" overwrite="true" ]
+
+[ptext layer="0" x="150" y="580" text=&tf.move size="20" color="0x000000" edge="white" bold="bold" align="left" name="movepower" overwrite="true" ]
+[ptext layer="0" x="150" y="620" text=&tf.noztxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="noisevolume" overwrite="true" ]
 [endmacro]
 
 [macro name="TESTER"]

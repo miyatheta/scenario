@@ -2,8 +2,13 @@
 ;ラウンド開始時処理--------------------------------------------------------------
 [eval exp="f.Round += 1"]
 [eval exp="f.GRD = 1 , f.AVD =  0" ]
-[eval exp="f.ambush = 0" cond="f.Round >= 2"]
-[eval exp="f.BUFF_ATP = 1 + f.ambush"]
+
+[if exp="f.ambush > 0"]
+#
+鈴耶の不意打ち[r]
+鈴耶の集中力が上昇[p]
+[eval exp="f.MND += 1 , f.ambush = 0"][WSs]
+[endif]
 
 [if exp="f.En_Raptured_time == 1"]
 #
@@ -50,12 +55,12 @@
 [eval exp="f.hit = f.hit + (f.En_Raptured * 5)"]
 [TESTER]
 [if exp="f.hit > f.rand"]
-鈴耶は敵の攻撃を回避した[p][MND1][WSs]
+鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
 [eval exp="tf.arg = 100 * f.GRD"]
 [eval exp="tf.arg = tf.arg * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
-[eval exp="f.HP = f.HP - tf.ATP"][MP5][WSs]
+[eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [endif]
 [if exp="f.HP < 1"][return][endif]
 [jump target="*start"][s]
@@ -69,12 +74,12 @@
 [eval exp="f.hit = f.hit + (f.En_Raptured * 5)"]
 [TESTER]
 [if exp="f.hit > f.rand"]
-鈴耶は敵の攻撃を回避した[p][MND1][WSs]
+鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
 [eval exp="tf.arg = 200 * f.GRD"]
 [eval exp="tf.arg = tf.arg * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
-[eval exp="f.HP = f.HP - tf.ATP"][MP5][WSs]
+[eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [endif]
 [if exp="f.HP < 1"][return][endif]
 [jump target="*start"][s]
@@ -88,7 +93,7 @@
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 20 + f.AVD"]
 [TESTER]
 [if exp="f.hit > f.rand"]
-鈴耶は敵の組付きを回避した[p][MND1][WSs]
+鈴耶は敵の組付きを回避した[p][AVOID][WSs]
 [jump target="*start"][s]
 [endif]
 鈴耶は落ち武者に組み付かれた[p]
@@ -109,7 +114,7 @@
 [eval exp="tf.arg = tf.fack * f.BUST / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"][MND0][WSs]
+[eval exp="f.ERO = f.ERO + tf.fack"][SKEBE][WSs]
 
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase1房中術絶頂"]
@@ -127,8 +132,8 @@
 [orgasm]
 [if exp="f.HP <= 0"][call target="*fase1気絶"][endif]
 #落ち武者
-へへっ、なんだぁ？もうイったのかよ？[p]
-デカイだけなじゃなく、感度も抜群たぁ[p]
+へへっ、なんだぁ？もうイったのかよ？[r]
+デカイだけなじゃなく、感度も抜群たぁ[r]
 こいつはとんでもない淫乱だぜ！！[p]
 #
 落ち武者は鈴耶の痴態に相好を崩した[p]
@@ -142,10 +147,10 @@
 #鈴耶
 (駄目ぇ…感じちゃうーーーーーッ！！)[p]
 #
-胸から押し寄せる快感の波に鈴耶は必死に耐えた[p]
+胸から押し寄せる快感の波に鈴耶は必死に耐えた[r]
 鈴耶は絶頂を堪えた！[p]
 #落ち武者
-へへっ、デカイだけなじゃなく、感度も良いみたいだなぁ[p]
+へへっ、デカイだけなじゃなく、感度も良いみたいだなぁ[r]
 何食えばこんなにデカくなるんだ？[p]
 #鈴耶
 んっ！！き、汚い手で触んじゃないわよ！！[p]
@@ -157,17 +162,17 @@
 #鈴耶
 (駄目ぇ…感じちゃうーーーーーッ！！)[p]
 #
-胸からの快感に鈴耶は体を震わせた[p]
+胸からの快感に鈴耶は体を震わせた[r]
 鈴耶は絶頂した[p]
 [orgasm]
 [if exp="f.HP <= 0"][call target="*fase1気絶"][endif]
 #落ち武者
-なんだぁ？この程度でイったのか？[p]
+なんだぁ？この程度でイったのか？[r]
 だらしねぇなぁ[p]
 #鈴耶
 ！そ、そんなわけ無いでしょ！！[p]
 #落ち武者
-デカイだけなじゃなく、感度も抜群たぁ[p]
+デカイだけなじゃなく、感度も抜群たぁ[r]
 こいつはとんでもない淫乱だぜ！！[p]
 #鈴耶
 くっ・・・！[p]
@@ -184,7 +189,7 @@
 房中術の効果で落ち武者のステータスが低下した[p]
 [eval exp="f.En_Raptured += 1"]
 #落ち武者
-おっとぉ？デカイだけなじゃなく、感度も抜群たぁ[p]
+おっとぉ？デカイだけなじゃなく、感度も抜群たぁ[r]
 こいつはとんでもない淫乱だぜ！！[p]
 [jump target="*fase2"]
 [s]
@@ -192,10 +197,10 @@
 
 *fase1通常
 #落ち武者
-おおう！何食えばこんなにデカくなるんだ？[p]
+おおう！何食えばこんなにデカくなるんだ？[r]
 手に収まんないぜ？[p]
 #鈴耶
-ちっ！！汚い手で触んじゃないわよ！！[p]
+くっ！！汚い手で触んじゃないわよ！！[p]
 #
 胸を這い回る男の手の不快感に鈴耶は顔をしかめた[p]
 [jump target="*fase2"]
@@ -210,7 +215,7 @@
 ・・・・・・・・・[p]
 #落ち武者
 ？[p]
-・・・・・・・このアマ！！ノビてやがる！！[p]
+・・・・・・・このアマ！！ノビてやがる！！[r]
 オラァ！！起きろ！！[p]
 #鈴耶
 かはっ！！[p]
@@ -234,7 +239,7 @@
 [eval exp="tf.arg = tf.fack * f.ANAL / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"][MND0][WSs]
+[eval exp="f.ERO = f.ERO + tf.fack"][SKEBE][WSs]
 
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase2房中術絶頂"]
@@ -360,7 +365,7 @@
 [eval exp="tf.arg = tf.fack * f.VGNA / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"][MND0][WSs]
+[eval exp="f.ERO = f.ERO + tf.fack"][SKEBE][WSs]
 
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase3房中術絶頂"]
@@ -373,7 +378,7 @@
 
 *fase3房中術絶頂
 #鈴耶
-ああん！！これぇ！これが欲しかったのぉ！！[p]
+ああん！！これぇ！これが欲しかったのぉ！！[r]
 イクっ！！イクイクイクーーーーっ！！[p]
 #
 鈴耶は挿入と同時に大きな嬌声を上げながら絶頂した[p]
@@ -395,7 +400,7 @@
 #鈴耶
 （ーーーーーーーッ！！）[p]
 #
-鈴耶は挿入の衝撃に歯を食いしばった[p]
+鈴耶は挿入の衝撃に歯を食いしばった[r]
 跳ね回りそうな体を押さえつけ、快感を拒絶する[p]
 鈴耶は絶頂を堪えた！[p]
 #落ち武者
@@ -429,7 +434,7 @@
 
 *fase3房中術
 #鈴耶
-ああん！！これぇ！これが欲しかったのぉ！！[p]
+ああん！！これぇ！これが欲しかったのぉ！！[r]
 #
 鈴耶は自ら腰を振り、膣でマラを締め付けた[p]
 #落ち武者
@@ -446,7 +451,7 @@
 #鈴耶
 （ーーーーーーーッ！！）[p]
 #
-鈴耶は挿入の衝撃に歯を食いしばった[p]
+鈴耶は挿入の衝撃に歯を食いしばった[r]
 #落ち武者
 どうだ！俺のマラの感触は！！[p]
 #鈴耶
@@ -487,7 +492,7 @@
 [eval exp="tf.arg = tf.fack * f.VGNA / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"][MND0][WSs]
+[eval exp="f.ERO = f.ERO + tf.fack"][SKEBE][WSs]
 
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase4房中術絶頂"]
@@ -513,7 +518,7 @@
 #鈴耶
 あああああっ！！！イクイクイクーーーーーー！！[p]
 #
-鈴耶は精の迸りを子宮に感じながら嬌声を上げた[p]
+鈴耶は精の迸りを子宮に感じながら嬌声を上げた[r]
 鈴耶は絶頂した[p]
 [orgasm]
 [if exp="f.HP <= 0"][call target="*fase4気絶"][endif]
@@ -545,7 +550,7 @@
 #鈴耶
 （ーーーーーー！！）[p]
 #
-マラが膣内で爆ぜるのを感じながら鈴耶は快感を押し殺した[p]
+マラが膣内で爆ぜるのを感じながら鈴耶は快感を押し殺した[r]
 鈴耶は絶頂を堪えた！[p]
 #落ち武者
 ちっ、イクの我慢しやがったな…[p]
@@ -577,7 +582,7 @@
 #鈴耶
 あああああっ！！！イクイクイクーーーーーー！！[p]
 #
-鈴耶は精の迸りを子宮に感じながら嬌声を上げた[p]
+鈴耶は精の迸りを子宮に感じながら嬌声を上げた[r]
 鈴耶は絶頂した[p]
 [orgasm]
 [if exp="f.HP <= 0"][call target="*fase4気絶"][endif]
@@ -612,7 +617,7 @@
 #鈴耶
 あああああっ！！！[p]
 #
-鈴耶は精の迸りを子宮に感じながら嬌声を上げた[p]
+鈴耶は精の迸りを子宮に感じながら嬌声を上げた[r]
 その間も鈴耶の膣はうねり男のマラから根こそぎ精を搾り取った[p]
 #落ち武者
 へ、へへ、腰が抜けちまいそうだぜ[p]
@@ -668,10 +673,10 @@
 #鈴耶
 あうぅ・・・[p]
 #
-支えとなっていた肉棒を失い鈴耶はその場に崩折れる[p]
+支えとなっていた肉棒を失い鈴耶はその場に崩折れる[r]
 どろりと鈴耶の秘裂から精液がこぼれた[p]
 #落ち武者
-このままヤリ捨てるのは勿体ねえ上玉だな[p]
+このままヤリ捨てるのは勿体ねえ上玉だな[r]
 ねぐらまでお持ち帰りさせてもらおうか！！[p]
 #
 落ち武者はニヤリとほくそ笑むと鈴耶を担ぎ上げて意気揚々と闇の中へ消えていった[p]

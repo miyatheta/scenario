@@ -10,6 +10,10 @@
 メニューを選択してね[p]
 #
 [cm]
+[SetStatus]
+[WSs]
+[progressbar]
+[securitybar]
 
 *select_menu
 [call target="*show_status"]
@@ -21,19 +25,21 @@
 ;------管理-------------------------------------------------------------------------
 *show_status
 [iscript]
-tf.hp = "体力：" + f.HP ;
-tf.mp = "気力：" + f.MP ;
-tf.mnd = "集中：" + f.MND ;
-tf.ero = "欲情：" + f.ERO ;
-tf.curse = "淫気：" + f.CURSE ;
-f.ATP = f.STR + f.arms_atp + f.acce_atp;
-tf.atp = "攻撃力" + f.ATP;
-f.MGP = f.POW + f.arms_pow + f.acce_pow;
-tf.pow = "精神力" + f.MGP;
-tf.spd = "すばやさ" + f.SPD;
-tf.mov = "移動力：" + f.MOVE ;
-tf.san = "理性" + f.SAN;
-tf.vital1 = "状態：";
+tf.hptxt = "体　力：" + f.HP ;
+tf.mptxt = "気　力：" + f.MP ;
+tf.mndtxt = "集　中：" + f.MND ;
+tf.erotxt = "欲　情：" + f.ERO ;
+tf.cursetxt = "淫　気：" + f.CURSE ;
+tf.strtmp = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp;
+tf.atptxt = "攻撃力" + tf.strtmp;
+tf.powtmp = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow;
+tf.mgptxt = "精神力" + tf.powtmp;
+tf.spdtxt = "すばやさ" + f.SPD;
+tf.movtxt = "移動力：" + f.MOVE ;
+tf.noztmp = f.NOZ + f.arms_noz + f.acceA_noz + f.acceB_noz;
+tf.noztxt = "騒　音：" + tf.noztmp ;
+tf.santxt = "理　性" + f.SAN;
+tf.vital1 = "状態1：";
 if(f.poison > 0){tf.vital1 = tf.vital1 + "毒　";}
 if(f.slowly > 0){tf.vital1 = tf.vital1 + "鈍足　";}
 if(f.excite > 0){tf.vital1 = tf.vital1 + "興奮　";}
@@ -45,22 +51,23 @@ if(f.slave > 0){tf.vital2 = tf.vital2 + "隷属";}
 if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 
 [endscript]
-[ptext layer="2" x="700" y="100" text=&tf.hp size="30" color="0x333631" edge="white" bold="bold" align="left" name="sshp" overwrite="true" ]
-[ptext layer="2" x="700" y="130" text=&tf.mp size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssmp" overwrite="true" ]
-[ptext layer="2" x="700" y="160" text=&tf.mnd size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssmnd" overwrite="true" ]
+[ptext layer="2" x="700" y="100" text=&tf.hptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="sshp" overwrite="true" ]
+[ptext layer="2" x="700" y="130" text=&tf.mptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssmp" overwrite="true" ]
+[ptext layer="2" x="700" y="160" text=&tf.mndtxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssmnd" overwrite="true" ]
 
-[ptext layer="2" x="700" y="190" text=&tf.atp size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssatp" overwrite="true" ]
-[ptext layer="2" x="700" y="220" text=&tf.pow size="30" color="0x333631" edge="white" bold="bold" align="left" name="sspow" overwrite="true" ]
+[ptext layer="2" x="700" y="190" text=&tf.atptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssatp" overwrite="true" ]
+[ptext layer="2" x="700" y="220" text=&tf.mgptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="sspow" overwrite="true" ]
 
-[ptext layer="2" x="700" y="250" text=&tf.spd size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssspd" overwrite="true" ]
-[ptext layer="2" x="700" y="280" text=&tf.mov size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssmov" overwrite="true" ]
+[ptext layer="2" x="700" y="250" text=&tf.spdtxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssspd" overwrite="true" ]
+[ptext layer="2" x="700" y="280" text=&tf.movtxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssmov" overwrite="true" ]
+[ptext layer="2" x="700" y="310" text=&tf.noztxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssnoz" overwrite="true" ]
 
-[ptext layer="2" x="700" y="310" text=&tf.ero size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssero" overwrite="true" ]
-[ptext layer="2" x="700" y="340" text=&tf.curse size="30" color="0x333631" edge="white" bold="bold" align="left" name="sscures" overwrite="true" ]
-[ptext layer="2" x="700" y="370" text=&tf.san size="30" color="0x333631" edge="white" bold="bold" align="left" name="sssan" overwrite="true" ]
+[ptext layer="2" x="700" y="340" text=&tf.erotxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssero" overwrite="true" ]
+[ptext layer="2" x="700" y="370" text=&tf.cursetxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="sscures" overwrite="true" ]
+[ptext layer="2" x="700" y="400" text=&tf.santxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="sssan" overwrite="true" ]
 
-[ptext layer="2" x="700" y="400" text=&tf.vital1 size="20" color="0x333631" edge="white" bold="bold" align="left" name="ssvital1" overwrite="true" ]
-[ptext layer="2" x="700" y="420" text=&tf.vital2 size="20" color="0x333631" edge="white" bold="bold" align="left" name="ssvital2" overwrite="true" ]
+[ptext layer="2" x="700" y="430" text=&tf.vital1 size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssvital1" overwrite="true" ]
+[ptext layer="2" x="700" y="460" text=&tf.vital2 size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssvital2" overwrite="true" ]
 
 [return]
 
@@ -119,43 +126,43 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [s]
 
 *selected_arms1
-[eval exp="f.arms = 1 , f.arms_name='忍者刀・夜雀' , f.arms_atp=30 ,f.arms_pow=0 ,f.arms_noz=10"]
+[eval exp="f.arms = 1 ,f.arms_name='忍者刀・夜雀'  ,f.arms_type = 1 ,f.arms_atp=30 ,f.arms_pow=0 ,f.arms_noz=8"]
 #
 [emb exp="f.arms_name"]を装備した[p]
 [jump target="*select_preparation"]
 [s]
 *selected_arms2
-[eval exp="f.arms = 2 , f.arms_name='退魔刀・陽炎' , f.arms_atp=10 ,f.arms_pow=20 ,f.arms_noz=10"]
+[eval exp="f.arms = 2 ,f.arms_name='退魔刀・陽炎' ,f.arms_type = 2 ,f.arms_atp=10 ,f.arms_pow=20 ,f.arms_noz=10"]
 #
 [emb exp="f.arms_name"]を装備した[p]
 [jump target="*select_preparation"]
 [s]
 *selected_arms3
-[eval exp="f.arms = 3 , f.arms_name='脇差・燕' , f.arms_atp=40 ,f.arms_pow=0 ,f.arms_noz=20"]
+[eval exp="f.arms = 3 ,f.arms_name='脇差・燕' ,f.arms_type = 1 ,f.arms_atp=40 ,f.arms_pow=0 ,f.arms_noz=13"]
 #
 [emb exp="f.arms_name"]を装備した[p]
 [jump target="*select_preparation"]
 [s]
 *selected_arms4
-[eval exp="f.arms = 4 , f.arms_name='打刀・隼' , f.arms_atp=50 ,f.arms_pow=0 ,f.arms_noz=30"]
+[eval exp="f.arms = 4 ,f.arms_name='打刀・隼' ,f.arms_type = 1 ,f.arms_atp=50 ,f.arms_pow=0 ,f.arms_noz=17"]
 #
 [emb exp="f.arms_name"]を装備した[p]
 [jump target="*select_preparation"]
 [s]
 *selected_arms5
-[eval exp="f.arms = 5 , f.arms_name='忍者刀・夜鷹' , f.arms_atp=40 ,f.arms_pow=10 ,f.arms_noz=10"]
+[eval exp="f.arms = 5 ,f.arms_name='忍者刀・夜鷹' ,f.arms_type = 1 ,f.arms_atp=40 ,f.arms_pow=10 ,f.arms_noz=15"]
 #
 [emb exp="f.arms_name"]を装備した[p]
 [jump target="*select_preparation"]
 [s]
 *selected_arms6
-[eval exp="f.arms = 6 , f.arms_name='退魔刀・日天' , f.arms_atp=20 ,f.arms_pow=30 ,f.arms_noz=25"]
+[eval exp="f.arms = 6 ,f.arms_name='退魔刀・日天' ,f.arms_type = 2 ,f.arms_atp=20 ,f.arms_pow=30 ,f.arms_noz=17"]
 #
 [emb exp="f.arms_name"]を装備した[p]
 [jump target="*select_preparation"]
 [s]
 *selected_arms7
-[eval exp="f.arms = 7 , f.arms_name='野太刀・大鵬' , f.arms_atp=60 ,f.arms_pow=-10 ,f.arms_noz=50"]
+[eval exp="f.arms = 7 ,f.arms_name='野太刀・大鵬' ,f.arms_type = 1 ,f.arms_atp=60 ,f.arms_pow=-10 ,f.arms_noz=20"]
 #
 [emb exp="f.arms_name"]を装備した[p]
 [jump target="*select_preparation"]
@@ -179,62 +186,62 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 
 *selected_acceA0
 [freeimage layer=2]
-[eval exp="f.acceA = 0 , f.acceA_name='なし' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceA = 0 , f.acceA_name='なし' , f.acceA_atp=0 ,f.acceA_pow=0 ,f.acceA_noz=0"]
 装飾を外した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceA1
-[eval exp="f.acceA = 1 , f.acceA_name='理力の宝珠' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceA = 1 , f.acceA_name='理力の宝珠' , f.acceA_atp=0 ,f.acceA_pow=0 ,f.acceA_noz=0"]
 [emb exp="f.acceA_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceA2
-[eval exp="f.acceA = 2 , f.acceA_name='魔除けの鈴' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceA = 2 , f.acceA_name='魔除けの鈴' , f.acceA_atp=0 ,f.acceA_pow=0 ,f.acceA_noz=0"]
 [emb exp="f.acceA_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceA3
-[eval exp="f.acceA = 3 , f.acceA_name='忍びの具足' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceA = 3 , f.acceA_name='忍びの具足' , f.acceA_atp=0 ,f.acceA_pow=0 ,f.acceA_noz=0"]
 [emb exp="f.acceA_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceA4
-[eval exp="f.acceA = 4 , f.acceA_name='革の小手' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceA = 4 , f.acceA_name='革の小手' , f.acceA_atp=0 ,f.acceA_pow=0 ,f.acceA_noz=0"]
 [emb exp="f.acceA_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceA5
-[eval exp="f.acceA = 5 , f.acceA_name='剛力の腕輪' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceA = 5 , f.acceA_name='剛力の腕輪' , f.acceA_atp=0 ,f.acceA_pow=0 ,f.acceA_noz=0"]
 [emb exp="f.acceA_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceA6
-[eval exp="f.acceA = 6 , f.acceA_name='法力の数珠' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=5"]
+[eval exp="f.acceA = 6 , f.acceA_name='法力の数珠' , f.acceA_atp=0 ,f.acceA_pow=0 ,f.acceA_noz=5"]
 [emb exp="f.acceA_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceA7
-[eval exp="f.acceA = 7 , f.acceA_name='浄化の護符' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceA = 7 , f.acceA_name='浄化の護符' , f.acceA_atp=0 ,f.acceA_pow=0 ,f.acceA_noz=0"]
 [emb exp="f.acceA_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceA8
-[eval exp="f.acceA = 8 , f.acceA_name='夜天の首輪' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceA = 8 , f.acceA_name='夜天の首輪' , f.acceA_atp=0 ,f.acceA_pow=0 ,f.acceA_noz=0"]
 [emb exp="f.acceA_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceA9
-[eval exp="f.acceA = 9 , f.acceA_name='貞淑の髪飾' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceA = 9 , f.acceA_name='貞淑の髪飾' , f.acceA_atp=0 ,f.acceA_pow=0 ,f.acceA_noz=0"]
 [emb exp="f.acceA_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceA10
-[eval exp="f.acceA = 10 , f.acceA_name='木彫りの仏像' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceA = 10 , f.acceA_name='木彫りの仏像' , f.acceA_atp=0 ,f.acceA_pow=0 ,f.acceA_noz=0"]
 [emb exp="f.acceA_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceA11
-[eval exp="f.acceA = 11 , f.acceA_name='達人の証' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceA = 11 , f.acceA_name='達人の証' , f.acceA_atp=0 ,f.acceA_pow=0 ,f.acceA_noz=0"]
 [emb exp="f.acceA_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
@@ -246,7 +253,6 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [glink  color="black"  target="*selected_acceB3"  x="450"  y="350"  width=""  height=""  text="忍びの具足" cond="f.acceA != 3"]
 [glink  color="black"  target="*selected_acceB4"  x="450"  y="450"  width=""  height=""  text="革の小手" cond="f.acceA != 4"]
 [glink  color="black"  target="*selected_acceB5"  x="450"  y="550"  width=""  height=""  text="剛力の腕輪" cond="f.acceA != 5"]
-[glink  color="black"  target="*selected_acceB0"  x="450"  y="550"  width=""  height=""  text="剛力の腕輪" ]
 [glink  color="black"  target="*selected_acceB6"  x="750"  y="150"  width=""  height=""  text="法力の数珠" cond="f.acceA != 6"]
 [glink  color="black"  target="*selected_acceB7"  x="750"  y="250"  width=""  height=""  text="浄化の護符" cond="f.acceA != 7"]
 [glink  color="black"  target="*selected_acceB8"  x="750"  y="350"  width=""  height=""  text="夜天の首輪" cond="f.acceA != 8"]
@@ -256,62 +262,62 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [s]
 
 *selected_acceB0
-[eval exp="f.acceB = 0 , f.acceB_name='なし' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceB = 0 , f.acceB_name='なし' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.acceB_noz=0"]
 装飾を外した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceB1
-[eval exp="f.acceB = 1 , f.acceB_name='理力の宝珠' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceB = 1 , f.acceB_name='理力の宝珠' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.acceB_noz=0"]
 [emb exp="f.acceB_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceB2
-[eval exp="f.acceB = 2 , f.acceB_name='魔除けの鈴' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceB = 2 , f.acceB_name='魔除けの鈴' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.acceB_noz=0"]
 [emb exp="f.acceB_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceB3
-[eval exp="f.acceB = 3 , f.acceB_name='忍びの具足' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceB = 3 , f.acceB_name='忍びの具足' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.acceB_noz=0"]
 [emb exp="f.acceB_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceB4
-[eval exp="f.acceB = 4 , f.acceB_name='革の小手' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceB = 4 , f.acceB_name='革の小手' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.acceB_noz=0"]
 [emb exp="f.acceB_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceB5
-[eval exp="f.acceB = 5 , f.acceB_name='剛力の腕輪' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceB = 5 , f.acceB_name='剛力の腕輪' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.acceB_noz=0"]
 [emb exp="f.acceB_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceB6
-[eval exp="f.acceB = 6 , f.acceB_name='法力の数珠' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=5"]
+[eval exp="f.acceB = 6 , f.acceB_name='法力の数珠' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.accBe_noz=5"]
 [emb exp="f.acceB_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceB7
-[eval exp="f.acceB = 7 , f.acceB_name='浄化の護符' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceB = 7 , f.acceB_name='浄化の護符' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.acceB_noz=0"]
 [emb exp="f.acceB_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceB8
-[eval exp="f.acceB = 8 , f.acceB_name='夜天の首輪' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceB = 8 , f.acceB_name='夜天の首輪' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.acceB_noz=0"]
 [emb exp="f.acceB_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceB9
-[eval exp="f.acceB = 9 , f.acceB_name='貞淑の髪飾' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceB = 9 , f.acceB_name='貞淑の髪飾' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.acceB_noz=0"]
 [emb exp="f.acceB_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceB20
-[eval exp="f.acceB = 10 , f.acceB_name='木彫りの仏像' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceB = 10 , f.acceB_name='木彫りの仏像' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.acceB_noz=0"]
 [emb exp="f.acceB_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
 *selected_acceB21
-[eval exp="f.acceB = 11 , f.acceB_name='達人の証' , f.acce_atp=0 ,f.acce_pow=0 ,f.acce_noz=0"]
+[eval exp="f.acceB = 11 , f.acceB_name='達人の証' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.acceB_noz=0"]
 [emb exp="f.acceB_name"]を装備した[p]
 [jump target="*select_preparation"][s]
 [s]
