@@ -91,10 +91,11 @@ if(f.poison > 0){tf.vital = tf.vital + "毒　";}
 if(f.slowly > 0){tf.vital = tf.vital + "鈍足　";}
 if(f.excite > 0){tf.vital = tf.vital + "興奮　";}
 if(f.mazo > 0){tf.vital = tf.vital + "被虐";}
-if(f.boob > 0){tf.vital = tf.vital + "爆乳";}
+if(f.milk > 0){tf.vital = tf.vital + "爆乳";}
 if(f.bags > 0){tf.vital = tf.vital + "虫憑";}
 if(f.slave > 0){tf.vital = tf.vital + "隷属";}
 if(f.tatoo > 0){tf.vital = tf.vital + "淫紋";}
+if(f.unescape > 0){tf.vital = tf.vital + "逃走封印";}
 [endscript]
 [ptext layer="0" x="10" y="580" text=&tf.hp size="20" color="0x000000" edge="white" bold="bold" align="left" name="hitpoint" overwrite="true" ]
 [ptext layer="0" x="10" y="600" text=&tf.mp size="20" color="0x000000" edge="white" bold="bold" align="left" name="magicpoint" overwrite="true" ]

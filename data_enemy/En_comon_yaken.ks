@@ -45,8 +45,7 @@
 
 *enemy_attack1
 #
-野犬の攻撃[r]
-「爪」[p]
+野犬の攻撃「爪」[p]
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 10 + f.AVD"]
 [eval exp="f.hit = f.hit + (f.En_Raptured * 5)"]
@@ -54,7 +53,7 @@
 [if exp="f.hit > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
-[eval exp="tf.arg = 50 * f.GRD"][getMathRound var="tf.ATP"]
+[eval exp="tf.arg = f.EN_STR * 5 * f.GRD"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [endif]
@@ -63,8 +62,7 @@
 
 *enemy_attack2
 #
-野犬の攻撃[r]
-「牙」[p]
+野犬の「牙」[p]
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50 + f.AVD"]
 [eval exp="f.hit = f.hit + (f.En_Raptured * 5)"]
@@ -72,7 +70,7 @@
 [if exp="f.hit > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
-[eval exp="tf.arg = 50 * f.GRD"][getMathRound var="tf.ATP"]
+[eval exp="tf.arg = f.EN_STR * 5 * f.GRD"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [endif]

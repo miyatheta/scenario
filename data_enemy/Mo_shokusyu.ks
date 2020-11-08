@@ -42,7 +42,7 @@
 鈴耶は敵の攻撃を回避した[p][AVOID]
 [else]
 鈴耶のすばやさが５減少[p]
-[eval exp="f.SPD = f.SPD - 5"][DAMED]
+[eval exp="f.SPD = f.SPD - 1"][DAMED]
 [endif]
 [if exp="f.HP < 1"][return][endif]
 [jump target="*youkai"][s]
@@ -63,7 +63,7 @@
 ひっ！！[p]
 [eval exp="tf.tmp = 200 "]
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
-[eval exp="tf.arg = tf.tmp * f.BUST / 100 "]
+[eval exp="tf.arg = tf.tmp * f.BOOB / 100 "]
 [getMathRound var="tf.tmp"]
 #
 鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]

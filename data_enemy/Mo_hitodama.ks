@@ -18,7 +18,7 @@
 
 [if exp="f.en_HP < 1"]
 #
-すらいむを倒した[p]
+ひとだまを倒した[p]
 [eval exp="f.en_Name = ''"][WriteEnemy]
 [return][s]
 [endif]
@@ -33,7 +33,7 @@
 
 *youkai_attack
 #
-すらいむの「粘液」[p]
+ひとだまの「怪光」[p]
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50"]
 [TESTER]
@@ -41,15 +41,15 @@
 #
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
-鈴耶のすばやさが3減少[p]
-[eval exp="f.SPD = f.SPD - 3"][DAMED]
+鈴耶の精神力が2減少[p]
+[eval exp="f.POW = f.POW - 2"][DAMED]
 [endif]
 [if exp="f.HP < 1"][return][endif]
 [jump target="*youkai"][s]
 
 *youkai_sexhara
 #
-すらいむの「まとわりつく」[p]
+ひとだまの「取り憑く」[p]
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 20"]
 [TESTER]
@@ -57,13 +57,13 @@
 #
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
-すらいむは鈴耶にまとわりついた[p]
-すらいむは鈴耶の尻穴に潜り込んだ[p]
+ひとだまは鈴耶に取りついた[p]
+ひとだまは鈴耶の胸に吸い付いた[p]
 #鈴耶
 ひっ！！[p]
-[eval exp="tf.tmp = 100 "]
+[eval exp="tf.tmp = 50 "]
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
-[eval exp="tf.arg = tf.tmp * f.ANAL / 100 "]
+[eval exp="tf.arg = tf.tmp * f.BOOB / 100 "]
 [getMathRound var="tf.tmp"]
 #
 鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
@@ -71,9 +71,10 @@
 [endif]
 [if exp="f.ERO >= 1000 "]
 鈴耶は絶頂した[p]
+鈴耶の理性が１減少した[p]
 [orgasm]
-すらいむは絶頂した鈴耶から離れると[r]
-地面に吸い込まれるように消えた[p]
+ひとだまは絶頂した鈴耶から離れると[r]
+空に溶けるように消えた[p]
 [eval exp="f.en_Name = ''"][WriteEnemy]
 [return][s]
 [endif]
@@ -81,6 +82,6 @@
 
 *youkai_escape
 #
-すらいむは地面に吸い込まれるように消えた[p]
+ひとだまは虚空に溶けるように消えた[p]
 [eval exp="f.en_Name = ''"][WriteEnemy]
 [return][s]

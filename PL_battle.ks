@@ -89,8 +89,8 @@
 
 *PL_attack_01
 [eval exp="f.AVD = 50"]
-[eval exp="f.ATP = f.STR + f.arms_atp + f.acce_atp"]
-[eval exp="f.MGP = f.POW + f.arms_pow + f.acce_pow"]
+[eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
+[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [getrand min="1" max="10" var="f.rand"]
 [eval exp="tf.arg = f.ATP / 2 + f.rand "]
 [if exp="f.type==2"]
@@ -108,8 +108,8 @@
 
 *PL_attack_02
 [getrand min="1" max="20" var="f.rand"]
-[eval exp="f.ATP = f.STR + f.arms_atp + f.acce_atp"]
-[eval exp="f.MGP = f.POW + f.arms_pow + f.acce_pow"]
+[eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
+[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.arg = (f.ATP * 1) + f.rand "]
 [if exp="f.type==2"]
 [eval exp="tf.arg = tf.arg / 2 " cond="f.type==2"]
@@ -125,8 +125,8 @@
 
 *PL_attack_06
 [getrand min="1" max="20" var="f.rand"]
-[eval exp="f.ATP = f.STR + f.arms_atp + f.acce_atp"]
-[eval exp="f.MGP = f.POW + f.arms_pow + f.acce_pow"]
+[eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
+[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.arg = (f.ATP * 1.5)  + f.rand"]
 [if exp="f.type==2"]
 [eval exp="tf.arg = tf.arg / 2 " cond="f.type==2"]
@@ -144,8 +144,8 @@
 
 *PL_attack_03
 [getrand min="1" max="20" var="f.rand"]
-[eval exp="f.ATP = f.STR + f.arms_atp + f.acce_atp"]
-[eval exp="f.MGP = f.POW + f.arms_pow + f.acce_pow"]
+[eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
+[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.arg = (f.ATP * 1.5) + f.rand"]
 [if exp="f.type==2"]
 [eval exp="tf.arg = tf.arg / 2 " cond="f.type==2"]
@@ -161,8 +161,8 @@
 
 *PL_attack_04
 [getrand min="1" max="20" var="f.rand"]
-[eval exp="f.ATP = f.STR + f.arms_atp + f.acce_atp"]
-[eval exp="f.MGP = f.POW + f.arms_pow + f.acce_pow"]
+[eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
+[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.arg = (f.ATP * 2.75)  + f.rand"]
 [if exp="f.type==2"]
 [eval exp="tf.arg = tf.arg / 2 " cond="f.type==2"]
@@ -180,8 +180,8 @@
 
 *PL_attack_05
 [getrand min="1" max="20" var="f.rand"]
-[eval exp="f.ATP = f.STR + f.arms_atp + f.acce_atp"]
-[eval exp="f.MGP = f.POW + f.arms_pow + f.acce_pow"]
+[eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
+[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.arg = (f.ATP * 5.5) + f.rand"]
 [if exp="f.type==2"]
 [eval exp="tf.arg = tf.arg / 2 " cond="f.type==2"]
@@ -200,7 +200,7 @@
 
 *PL_magic_01
 [getrand min="10" max="20" var="f.rand"]
-[eval exp="f.MGP = f.POW + f.arms_pow + f.acce_pow"]
+[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.arg = (f.MGP * 2 * 2) + f.rand"]
 [eval exp="tf.arg = tf.arg / 2 " cond="f.type==1"]
 [getMathRound var="tf.DMG"]
@@ -213,7 +213,7 @@
 
 *PL_magic_02
 [getrand min="1" max="20" var="f.rand"]
-[eval exp="f.MGP = f.POW + f.arms_pow + f.acce_pow"]
+[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.arg = (f.MGP * 5 * 2) + f.rand"]
 [eval exp="tf.arg = tf.arg / 2" cond="f.type==1"]
 [getMathRound var="tf.DMG"]
@@ -236,7 +236,7 @@
 
 *PL_magic_04
 [getrand min="10" max="20" var="f.rand"]
-[eval exp="f.MGP = f.POW + f.arms_pow + f.acce_pow"]
+[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.arg = (f.MGP * 3 * 2) + f.rand"]
 [getMathRound var="tf.DMG"]
 鈴耶の真空波(魔法中)[r]
@@ -254,7 +254,7 @@
 [eval exp="f.RATE = 5" cond="f.HP <= 1000 && f.HP > 600"]
 [eval exp="f.RATE = 6" cond="f.HP <= 600 && f.HP > 300"]
 [eval exp="f.RATE = 9" cond="f.HP <= 300 && f.HP > 0"]
-[eval exp="f.MGP = f.POW + f.arms_pow + f.acce_pow"]
+[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.arg = (f.MGP * f.RATE * 2) + f.rand"]
 [getMathRound var="tf.DMG"]
 餓狼の舞(魔法強)体力が少ないほど威力アップ[r]
@@ -271,7 +271,7 @@
 [eval exp="f.RATE = 7" cond="f.CURSE >= 200"]
 [eval exp="f.RATE = 11" cond="f.CURSE >= 300"]
 [eval exp="f.RATE = 16" cond="f.CURSE >= 400"]
-[eval exp="f.MGP = f.POW + f.arms_pow + f.acce_pow"]
+[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.arg = (f.MGP * f.RATE * 2) + f.rand"]
 [getMathRound var="tf.DMG"]
 天鼠の舞(魔法強)穢れが多いほど威力アップ[r]
@@ -288,7 +288,33 @@
 ;-------------------------------------------------------------------------------
 *PL_escape_select
 #
+[eval exp="f.escape = 0"]
+
+[if exp="f.unescape >= 100"]
+この状態から逃げることは出来ない（逃走不可能）[p]
+[jump target="*PL_battle_select"]
+[endif]
+
+[if exp="f.unescape >= 1"]
+今は逃走できない！！（逃走封印）[p]
+[jump target="*PL_comand_select"]
+[endif]
+
+鈴耶は敵から逃れようと試みた[p]
+[getrand min="0" max="100" var="f.rand"]
+[eval exp="f.rand += f.Lv"]
+[eval exp="f.hit = f.SPD * 3"]
+目標値：[emb exp="f.hit"]>判定値：[emb exp="f.rand"]？[p]
+・・・・・・・・・・・・・・・[p]
+[if exp="f.hit > f.rand"]
 [eval exp="f.escape = 1"]
+[return]
+[else]
+しかし、失敗した！！[p]
+[eval exp="f.Lv -= f.MOV"]
+[return]
+[endif]
+
 [return]
 ;-------------------------------------------------------------------------------
 ;-------------------------------------------------------------------------------

@@ -5,6 +5,7 @@
 @layopt layer=message0 visible=true
 @layopt layer=2 visible=true
 [WriteDate]
+
 #鈴耶
 ホーム画面よ[r]
 メニューを選択してね[p]
@@ -45,7 +46,7 @@ if(f.slowly > 0){tf.vital1 = tf.vital1 + "鈍足　";}
 if(f.excite > 0){tf.vital1 = tf.vital1 + "興奮　";}
 tf.vital2 = "状態2：";
 if(f.mazo > 0){tf.vital2 = tf.vital2 + "被虐";}
-if(f.boob > 0){tf.vital2 = tf.vital2 + "爆乳";}
+if(f.BOOB > 0){tf.vital2 = tf.vital2 + "爆乳";}
 if(f.bags > 0){tf.vital2 = tf.vital2 + "虫憑";}
 if(f.slave > 0){tf.vital2 = tf.vital2 + "隷属";}
 if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
