@@ -13,7 +13,7 @@
 ;メッセージウィンドウの設定
 [position layer="message0" left=390 top=540 width=800 height=170 page=fore visible=false]
 ;文字が表示される領域を調整
-[position layer=message0 page=fore margint="25" marginl="60" marginr="70" marginb="50"]
+[position layer=message0 page=fore margint="25" marginl="60" marginr="25" marginb="50"]
 
 ;メッセージウィンドウの表示
 @layopt layer=message0 visible=false

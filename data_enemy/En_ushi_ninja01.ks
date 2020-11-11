@@ -136,7 +136,9 @@
 [eval exp="tf.arg = tf.fack * f.BOOB / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"][SKEBE][WSs]
+[eval exp="f.ERO = f.ERO + tf.fack"]
+[eval exp="f.ERO = 999" cond="f.endure > 0"]
+[SKEBE][WSs]
 
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase1房中術絶頂"]
@@ -257,7 +259,9 @@
 [eval exp="tf.arg = tf.fack * f.ANAL / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"][SKEBE][WSs]
+[eval exp="f.ERO = f.ERO + tf.fack"]
+[eval exp="f.ERO = 999" cond="f.endure > 0"]
+[SKEBE][WSs]
 
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase2房中術絶頂"]
@@ -383,7 +387,9 @@
 [eval exp="tf.arg = tf.fack * f.VGNA / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"][SKEBE][WSs]
+[eval exp="f.ERO = f.ERO + tf.fack"]
+[eval exp="f.ERO = 999" cond="f.endure > 0"]
+[SKEBE][WSs]
 
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase3房中術絶頂"]
@@ -510,7 +516,9 @@
 [eval exp="tf.arg = tf.fack * f.VGNA / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"][SKEBE][WSs]
+[eval exp="f.ERO = f.ERO + tf.fack"
+[eval exp="f.ERO = 999" cond="f.endure > 0"]
+[SKEBE][WSs]
 
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase4房中術絶頂"]
@@ -706,8 +714,8 @@
 #
 [eval exp="f.bind = 0"]
 男の精を受けて鈴耶の気力が増加した[p]
-[eval exp="f.MP += 30 "][WSs]
-[eval exp="f.MP = 100" cond="f.MP > 100"]
+[eval exp="f.MP += 30 "]
+[eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 射精した敵は虚精状態になった（３ラウンド組付封印）[p]
 [eval exp="f.En_Wiseman = 1 , f.En_Wiseman_time = 4 "]
 [jump target="*start"]

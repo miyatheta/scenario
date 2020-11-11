@@ -114,7 +114,9 @@
 [eval exp="tf.arg = tf.fack * f.BOOB / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"][SKEBE][WSs]
+[eval exp="f.ERO = f.ERO + tf.fack"]
+[eval exp="f.ERO = 999" cond="f.endure > 0"]
+[SKEBE][WSs]
 
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase1房中術絶頂"]
@@ -154,6 +156,7 @@
 何食えばこんなにデカくなるんだ？[p]
 #鈴耶
 んっ！！き、汚い手で触んじゃないわよ！！[p]
+[eval exp="f.endure = 0"]
 [jump target="*fase2"]
 [s]
 ;-----------------------------------------
@@ -239,7 +242,9 @@
 [eval exp="tf.arg = tf.fack * f.ANAL / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"][SKEBE][WSs]
+[eval exp="f.ERO = f.ERO + tf.fack"]
+[eval exp="f.ERO = 999" cond="f.endure > 0"]
+[SKEBE][WSs]
 
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase2房中術絶頂"]
@@ -365,7 +370,9 @@
 [eval exp="tf.arg = tf.fack * f.VGNA / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"][SKEBE][WSs]
+[eval exp="f.ERO = f.ERO + tf.fack"]
+[eval exp="f.ERO = 999" cond="f.endure > 0"]
+[SKEBE][WSs]
 
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase3房中術絶頂"]
@@ -492,7 +499,9 @@
 [eval exp="tf.arg = tf.fack * f.VGNA / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"][MND0][WSs]
+[eval exp="f.ERO = f.ERO + tf.fack"]
+[eval exp="f.ERO = 999" cond="f.endure > 0"]
+[MND0][WSs]
 
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase4房中術絶頂"]
