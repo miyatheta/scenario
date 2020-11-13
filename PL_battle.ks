@@ -28,14 +28,15 @@
 [s]
 
 *PL_attack_select
-[glink color="black" target="*PL_battle_select" x="450" y="100" width="" height="" text="戻　る" ]
-[glink color="black" target="*PL_attack_00" x="450" y="500" width="" height="" text="防　御" cond="f.MND <= 2"]
-[glink color="black" target="*PL_attack_01" x="450" y="200" width="" height="" text="牽　制" cond="f.MND <= 4"]
-[glink color="black" target="*PL_attack_02" x="450" y="300" width="" height="" text="打　撃" cond="f.MND < 3"]
-[glink color="black" target="*PL_attack_06" x="450" y="400" width="" height="" text="強　打" cond="f.MND > 0 & f.MND < 3"]
-[glink color="black" target="*PL_attack_03" x="450" y="300" width="" height="" text="斬　撃" cond="f.MND >= 3"]
-[glink color="black" target="*PL_attack_04" x="450" y="400" width="" height="" text="強　斬" cond="f.MND >= 3"]
-[glink color="black" target="*PL_attack_05" x="450" y="500" width="" height="" text="渾　身" cond="f.MND >= 5"]
+[glink color="black" target="*PL_battle_select" x="750" y="500" width="" height="" text="戻　る" ]
+[glink color="blue"  target="*PL_attack_00" x="750" y="200" width="" height="" text="防　御" cond="f.MND <= 1"]
+[glink color="green" target="*PL_attack_01" x="450" y="200" width="" height="" text="牽　制" cond="f.MND <= 2"]
+[glink color="rosy"  target="*PL_attack_02" x="450" y="300" width="" height="" text="打　撃" cond="f.MND <= 2"]
+[glink color="rosy"  target="*PL_attack_03" x="450" y="400" width="" height="" text="強　打" cond="f.MND > 0 & f.MND <= 2"]
+[glink color="green" target="*PL_attack_04" x="450" y="200" width="" height="" text="牽　制" cond="f.MND >= 3 & f.MND < 5"]
+[glink color="rosy"  target="*PL_attack_05" x="450" y="300" width="" height="" text="斬　撃" cond="f.MND >= 3"]
+[glink color="blue"  target="*PL_attack_06" x="450" y="400" width="" height="" text="居　合" cond="f.MND >= 3"]
+[glink color="red"   target="*PL_attack_07" x="450" y="500" width="" height="" text="必　殺" cond="f.MND >= 5"]
 [s]
 
 *PL_magic_select
@@ -83,8 +84,8 @@
 ;-------------------------------------------------------------------------------
 
 *PL_attack_00
-鈴耶は守りを固めた(防御上昇)[p]
-[eval exp="f.GRD = 0.5 , f.AVD = -100"][WSs]
+鈴耶は守りを固めた(防御上昇、集中＋２)[p]
+[eval exp="f.GRD = 0.5 , f.AVD = -100 , f.MND + 2"][WSs]
 [return]
 
 *PL_attack_01
@@ -123,7 +124,7 @@
 [WSs]
 [return]
 
-*PL_attack_06
+*PL_attack_03
 [getrand min="1" max="20" var="f.rand"]
 [eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
@@ -142,7 +143,26 @@
 [WSs]
 [return]
 
-*PL_attack_03
+*PL_attack_04
+[eval exp="f.AVD = 50"]
+[eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
+[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
+[getrand min="1" max="10" var="f.rand"]
+[eval exp="tf.arg = f.ATP + f.rand "]
+[if exp="f.type==2"]
+[eval exp="tf.arg = tf.arg / 2 " cond="f.type==2"]
+[eval exp="tf.arg = tf.arg + (f.MGP / 2) " cond="f.enchant > 0"]
+[eval exp="tf.arg = tf.arg * 3 " cond="f.arms_type==2"]
+[endif]
+[getMathRound var="tf.DMG"]
+鈴耶は牽制に手裏剣を投じた(回避上昇)[r]
+回避の成功確率が上昇[p]
+[emb exp="tf.DMG"]のダメージ[p]
+[eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
+[WSs]
+[return]
+
+*PL_attack_05
 [getrand min="1" max="20" var="f.rand"]
 [eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
@@ -159,7 +179,7 @@
 [WSs]
 [return]
 
-*PL_attack_04
+*PL_attack_06
 [getrand min="1" max="20" var="f.rand"]
 [eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
@@ -170,15 +190,14 @@
 [eval exp="tf.arg = tf.arg * 3 " cond="f.arms_type==2"]
 [endif]
 [getMathRound var="tf.DMG"]
-鈴耶の兜割り(回避減少)[r]
+鈴耶の居合(集中減少)[r]
 [emb exp="tf.DMG"]のダメージ[p]
-回避の成功確率が低下[p]
-[eval exp="f.AVD = -40"]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
+[eval exp="f.MND -= 2"]
 [WSs]
 [return]
 
-*PL_attack_05
+*PL_attack_07
 [getrand min="1" max="20" var="f.rand"]
 [eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
