@@ -85,7 +85,6 @@
 [eval exp="f.Lv = 10 + (f.security * 10), f.en_HP = 110 + (f.security * 10) , f.GRB = 70 + (f.security * 10)"]
 [eval exp="f.EN_STR = 9 + f.security, f.en_DEX = 31 + f.security"]
 [eval exp="f.type = 1, f.Round = 0"]
-
 [call storage="data_enemy/EN_comon_yaken.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]

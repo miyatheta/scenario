@@ -8,13 +8,31 @@
 [eval exp="f.MND -= 1" cond="f.MND > 0"][WSs]
 [endmacro]
 
+[macro name="STRIKE"]
+;攻撃威力の算出
+[eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
+[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
+[eval exp="tf.arg = (f.ATP * f.DTR) + f.rand"]
+;退魔力の算出
+[if exp="f.type==2"]
+[eval exp="tf.arg = tf.arg / 2 "]
+[eval exp="tf.arg = tf.arg + (f.MGP * f.DTR) " cond="f.enchant > 0"]
+[eval exp="tf.arg = tf.arg * 3 "]
+[endif]
+[endmacro]
+
+[macro name="AVOIDANCE"]
+[eval exp="f.target = (f.SPD - f.en_DEX) * 5 + (f.MND*10) + f.AVD - f.Hitrate "]
+[eval exp="f.target = f.target + (f.En_Raptured * 5)"]
+[endmacro]
+
 ;攻撃成功時
 [macro name="ATKED"]
 ;[eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
 [endmacro]
 ;回避時
 [macro name="AVOID"]
-[eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
+;[eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
 [endmacro]
 ;セクハラ時
 [macro name="SKEBE"]
@@ -23,7 +41,7 @@
 [endmacro]
 ;被弾時
 [macro name="DAMED"]
-[eval exp="f.MND -= 1" cond="f.MND > 0"][WSs]
+;[eval exp="f.MND -= 1" cond="f.MND > 0"][WSs]
 [eval exp="f.MP += 10" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [endmacro]
 
@@ -36,11 +54,17 @@
 [endmacro]
 
 [macro name="SetStatus"]
-[eval exp="f.MP = f.POW , f.MND = 1 , f.ERO = 0"]
+[eval exp="f.MP = f.POW , f.MND = 3 , f.ERO = 0"]
 [eval exp="f.AVD = 0 , f.type = 1"]
 [eval exp="f.poison=0, f.slowly=0, f.excite=0, f.unescape=0"]
 [eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
 [endmacro]
+
+[macro name="BattleFinsish"]
+;戦闘終了時に解消するべきこと
+[eval exp="f.unescape = 0"]
+[WSs]
+[endmacoro]
 
 [macro name="progressbar"]
 [eval exp="f.progress = f.goal" cond="f.progress > f.goal"]
@@ -112,7 +136,7 @@ if(f.unescape > 0){tf.vital = tf.vital + "逃走封印";}
 [if exp="f.bind > 0"]
 拘束値：[emb exp="f.bind"]>判定値：[emb exp="f.rand"][p]
 [else]
-目標値：[emb exp="f.hit"]>判定値：[emb exp="f.rand"][p]
+目標値：[emb exp="f.target"]>判定値：[emb exp="f.rand"][p]
 [endif]
 [endmacro]
 

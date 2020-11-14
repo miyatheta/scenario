@@ -1,7 +1,6 @@
 *youkai
 ;ラウンド開始時処理--------------------------------------------------------------
-[eval exp="f.Round += 1"]
-[eval exp="f.GRD = 1 , f.AVD =  0" ]
+[call storage="asset_battle.ks" target="*battle_round_start"]
 
 [if exp="f.ambush > 0"]
 #
@@ -35,9 +34,9 @@
 #
 すらいむの「粘液」[p]
 [getrand min="1" max="100" var="f.rand"]
-[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50"]
+[eval exp="f.target = (f.SPD - f.en_DEX) * 5 + 50"]
 [TESTER]
-[if exp="f.hit > f.rand"]
+[if exp="f.target > f.rand"]
 #
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
@@ -51,9 +50,9 @@
 #
 すらいむの「まとわりつく」[p]
 [getrand min="1" max="100" var="f.rand"]
-[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 20"]
+[eval exp="f.target = (f.SPD - f.en_DEX) * 5 + 20"]
 [TESTER]
-[if exp="f.hit > f.rand"]
+[if exp="f.target > f.rand"]
 #
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]

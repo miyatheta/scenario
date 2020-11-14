@@ -1,7 +1,6 @@
 *start
 ;ラウンド開始時処理--------------------------------------------------------------
-[eval exp="f.Round += 1"]
-[eval exp="f.GRD = 1 , f.AVD = 0" ]
+[call storage="asset_battle.ks" target="*battle_round_start"]
 
 [if exp="f.En_Raptured_time == 1"]
 #
@@ -53,10 +52,10 @@
 #
 酔漢の「なぐりかかる」[p]
 [getrand min="1" max="100" var="f.rand"]
-[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 10 + f.AVD"]
-[eval exp="f.hit = f.hit + (f.En_Raptured * 5)"]
+[eval exp="f.Hitrate = 40"]
+[AVOIDANCE]
 [TESTER]
-[if exp="f.hit > f.rand"]
+[if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
 [eval exp="tf.arg = f.EN_STR * 10 * f.GRD"]
@@ -71,10 +70,10 @@
 #
 酔漢の「あばれる」[p]
 [getrand min="1" max="100" var="f.rand"]
-[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50 + f.AVD"]
-[eval exp="f.hit = f.hit + (f.En_Raptured * 5)"]
+[eval exp="f.Hitrate = 0"]
+[AVOIDANCE]
 [TESTER]
-[if exp="f.hit > f.rand"]
+[if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
 [eval exp="tf.arg = f.EN_STR * 20 * f.GRD"]
@@ -91,9 +90,10 @@
 [eval exp="f.charm = 0"]
 酔漢の組付き[p]
 [getrand min="1" max="100" var="f.rand"]
-[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 20 + f.AVD"]
+[eval exp="f.Hitrate = 30"]
+[AVOIDANCE]
 [TESTER]
-[if exp="f.hit > f.rand"]
+[if exp="f.target > f.rand"]
 鈴耶は敵の組付きを回避した[p][AVOID][WSs]
 [jump target="*start"][s]
 [endif]

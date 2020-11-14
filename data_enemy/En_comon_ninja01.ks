@@ -1,7 +1,6 @@
 *start
 ;ラウンド開始時処理--------------------------------------------------------------
-[eval exp="f.Round += 1"]
-[eval exp="f.GRD = 1 , f.AVD =  0" ]
+[call storage="asset_battle.ks" target="*battle_round_start"]
 
 [if exp="f.ambush > 0"]
 #
@@ -55,11 +54,11 @@
 *enemy_attack1
 #
 忍者の「撒き菱」[p]
+[eval exp="f.Hitrate = 40"]
 [getrand min="1" max="100" var="f.rand"]
-[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 10 + f.AVD"]
-[eval exp="f.hit = f.hit + (f.En_Raptured * 5)"]
+[AVOIDANCE]
 [TESTER]
-[if exp="f.hit > f.rand"]
+[if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
 [eval exp="tf.arg = f.EN_STR * 5 * f.GRD"]
@@ -73,11 +72,11 @@
 *enemy_attack2
 #
 忍者の「忍者刀」[p]
+[eval exp="f.Hitrate = 0"]
 [getrand min="1" max="100" var="f.rand"]
-[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 50 + f.AVD"]
-[eval exp="f.hit = f.hit + (f.En_Raptured * 5)"]
+[AVOIDANCE]
 [TESTER]
-[if exp="f.hit > f.rand"]
+[if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
 [eval exp="tf.arg = f.EN_STR * 15 * f.GRD"]
@@ -101,10 +100,11 @@
 #
 [eval exp="f.charm = 0"]
 忍者の組付き[p]
+[eval exp="f.Hitrate = 30"]
 [getrand min="1" max="100" var="f.rand"]
-[eval exp="f.hit = (f.SPD - f.en_DEX) * 5 + 20 + f.AVD"]
+[AVOIDANCE]
 [TESTER]
-[if exp="f.hit > f.rand"]
+[if exp="f.target > f.rand"]
 鈴耶は敵の組付きを回避した[p][AVOID][WSs]
 [jump target="*start"][s]
 [endif]

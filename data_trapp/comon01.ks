@@ -12,7 +12,7 @@
 [jump target="*trapped_01"]
 [endif]
 ;------------------------------------------------------------------------------
-[eval exp="f.MP -= 10"]
+[eval exp="f.MP -= 10"][WSs]
 [getrand min="1" max="100" var="f.rand"]
 
 [if exp="f.rand > 50"]
