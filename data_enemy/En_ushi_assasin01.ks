@@ -2,24 +2,6 @@
 ;ラウンド開始時処理--------------------------------------------------------------
 [call storage="routin_battle_round.ks" target="*battle_round_start"]
 
-[if exp="f.ambush > 0"]
-#
-鈴耶の不意打ち[r]
-鈴耶の集中力が上昇[p]
-[eval exp="f.MND += 1 , f.ambush = 0"][WSs]
-[endif]
-
-[if exp="f.En_Raptured_time == 1"]
-#
-敵は房中術の影響から脱した
-[endif]
-[eval exp="f.En_Raptured_time -= 1 " cond="f.En_Raptured > 0"]
-
-[if exp="f.En_Wiseman_time == 1"]
-#
-敵は虚脱状態から回復した
-[endif]
-[eval exp="f.En_Wiseman_time -= 1 " cond="f.En_Wiseman > 0"]
 
 ;PLの行動------------------------------------------------------------------------
 #
@@ -77,9 +59,9 @@
 [eval exp="tf.arg = tf.arg * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
-[endif]
 鈴耶の敏捷さが低下[p]
 [eval exp="f.En_SPD -= 1"][WSs]
+[endif]
 [jump target="*Round_end"][s]
 
 *enemy_attack3
@@ -96,9 +78,9 @@
 [eval exp="tf.arg = tf.arg * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
-[endif]
 鈴耶は欲情状態になった[p]
 [eval exp="f.aphrodisy += 10"][WSs]
+[endif]
 [jump target="*Round_end"][s]
 
 ;------------------------------------------------------------------------------

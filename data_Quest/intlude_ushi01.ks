@@ -454,10 +454,10 @@
 #鈴耶
 くっ！！押し通る！！[p]
 ;特殊演出--------
-;牛王
+;牛鬼
 ;[iscript]
-;tf.subtitle = "丑の国・筆頭牛王";
-;tf.title = "「剛力無敵」牛王" ;
+;tf.subtitle = "丑の国・筆頭牛鬼";
+;tf.title = "「剛力無敵」牛鬼" ;
 ;[endscript]
 ;[ptext layer="3" x="400" y="200" text=&tf.subtitle size="30" color="red" bold="bold" align="left"]
 ;[ptext layer="3" x="450" y="300" text=&tf.title size="60" color="red" bold="bold" align="left"]
@@ -465,7 +465,7 @@
 ;[freeimage layer=3]
 ;---------------
 [call storage="process_initialize_enemy.ks"]
-[eval exp="f.en_Name = '牛王'"][WriteEnemy]
+[eval exp="f.en_Name = '牛鬼'"][WriteEnemy]
 [eval exp="f.Lv = 100, f.en_HP = 10000 "]
 [eval exp="f.EN_STR = 20, f.EN_POW = 20, f.en_DEX=30 "]
 [eval exp="f.GRB=200, f.SEX=200 "]

@@ -123,7 +123,7 @@
 
 ;---------------
 [call storage="process_initialize_enemy.ks"]
-[eval exp="f.en_Name = '牛王'"][WriteEnemy]
+[eval exp="f.en_Name = '牛鬼'"][WriteEnemy]
 [eval exp="f.Lv = 100, f.en_HP = 1000 "]
 [eval exp="f.EN_STR = 20, f.EN_POW = 20, f.en_DEX=30 "]
 [eval exp="f.GRB=200, f.SEX=200 "]

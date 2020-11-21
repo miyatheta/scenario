@@ -1,7 +1,7 @@
 鈴耶は逃走した（20後退）[p]
 [BattleFinsish]
 [eval exp="f.escape = 0"]
-[eval exp="f.progress -= 20"]
+[eval exp="f.progress -= 20" cond="f.Quest_type!=3"]
 [eval exp="f.progress = 0" cond="f.progress < 0"]
 [progressbar]
 [return]

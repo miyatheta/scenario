@@ -2,17 +2,6 @@
 ;ラウンド開始時処理--------------------------------------------------------------
 [call storage="routin_battle_round.ks" target="*battle_round_start"]
 
-[if exp="f.En_Raptured_time == 1"]
-#
-敵は房中術の影響から脱した
-[endif]
-[eval exp="f.En_Raptured_time -= 1 " cond="f.En_Raptured > 0"]
-
-[if exp="f.En_Wiseman_time == 1"]
-#
-敵は虚脱状態から回復した
-[endif]
-[eval exp="f.En_Wiseman_time -= 1 " cond="f.En_Wiseman > 0"]
 
 ;開幕特殊行動------------------------------------------------------------------------
 [if exp="f.Round == 1"]

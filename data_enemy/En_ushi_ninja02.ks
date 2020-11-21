@@ -2,30 +2,6 @@
 ;ラウンド開始時処理--------------------------------------------------------------
 [call storage="routin_battle_round.ks" target="*battle_round_start"]
 
-[if exp="f.ambush > 0"]
-#
-鈴耶の不意打ち[r]
-鈴耶の集中力が上昇[p]
-[eval exp="f.MND += 1 , f.ambush = 0"][WSs]
-[endif]
-
-[if exp="f.unescape == 1"]
-#
-逃走封印状態が解消した[p]
-[endif]
-[eval exp="f.unescape -= 1 " cond="f.unescape > 0"]
-
-[if exp="f.En_Raptured_time == 1"]
-#
-敵は房中術の影響から脱した[p]
-[endif]
-[eval exp="f.En_Raptured_time -= 1 " cond="f.En_Raptured > 0"]
-
-[if exp="f.En_Wiseman_time == 1"]
-#
-敵は虚脱状態から回復した[p]
-[endif]
-[eval exp="f.En_Wiseman_time -= 1 " cond="f.En_Wiseman > 0"]
 
 ;敵のスキル------------------------------------------------------------------------
 

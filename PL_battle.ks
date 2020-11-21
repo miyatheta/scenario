@@ -260,7 +260,7 @@
 
 [if exp="f.unescape >= 1"]
 今は逃走できない！！（逃走封印）[p]
-[jump target="*PL_comand_select"]
+[jump target="*PL_battle_select"]
 [endif]
 
 鈴耶は敵から逃れようと試みた[p]
