@@ -154,10 +154,10 @@
 #
 中忍は鈴耶の胸を揉みしだいた[p]
 ;快感ダメージ
+[eval exp="tf.fack = f.SEX "]
 [call storage="routin_kaikan.ks" target="*BOOB"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 [call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
-[call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase1房中術絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase1我慢絶頂"]

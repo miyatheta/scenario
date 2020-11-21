@@ -68,7 +68,6 @@
 [eval exp="f.ERO = f.ERO + tf.tmp"][SKEBE][WSs]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 [call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
-[call storage="asset_extra_reaction.ks" target="*orgasm"]
 [endif]
 [if exp="f.ERO >= 1000 "]
 ;鈴耶は絶頂した[p]
