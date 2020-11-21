@@ -9,15 +9,17 @@
 [freeimage layer="base" ]
 
 [wait time=1000]
+
+;ステージ情報
 [bg storage="mori_yoru.jpg" time="500"]
-[chara_show name="suzune" left="-100" top="-20"]
-[eval exp="f.goal=150 , f.progress=0 , f.Achievement=0"]
-[eval exp="f.security=1 , f.security_MAX=1 , f.warning=0"]
+[eval exp="f.Quest_name='express_ushi01.ks' , f.Quest_type=1"]
+[eval exp="f.goal=150 , f.progress=0 , f.Cleared=0 , f.Achievement=0"]
+[eval exp="f.security=1 , f.security_MAX=1 , f.warning=0 , f.turn=1"]
 
 ;暫定ステータス
 [SetStatus]
 [WSs]
-
+[chara_show name="suzune" left="-100" top="-20"]
 ;-------------------------------------------------------------------------------
 
 *ready
@@ -34,19 +36,15 @@
 [current layer="message0"]
 [call storage="showmenu.ks"]
 [jump target="*ready"]
+[s]
 ;-------------------------------------------------------------------------------
 
 *goahead
 [cm]
 @layopt layer=message0 visible=true
 [current layer="message0"]
-[eval exp="f.MOVE = f.MOVE_MAX"]
-[eval exp="f.MOVE -= 3 " cond="f.slowly > 0"]
-[WSs]
-[eval exp="f.progress += f.MOVE"]
-[if exp="f.progress > f.goal"][eval exp="f.progress = f.goal"]
-[endif]
-[progressbar]
+[call storage="routin_progress.ks"]
+
 [if exp="f.progress >= f.goal"]
 [jump target=*goal]
 
@@ -59,21 +57,22 @@
 *select_event
 [getrand min="1" max="60" var="f.event"]
 [if exp="f.event<=20 && f.Pre_event != 1"]
-[eval exp="f.Pre_event = 1"][jump target=*event_enemy]
+[eval exp="f.Pre_event = 1"][jump target=*select_enemy]
 
 [elsif exp="f.event<=40 && f.Pre_event != 2"]
 [eval exp="f.Pre_event = 2"][jump target=*event_youkai]
 
 [elsif exp="f.event<=60 && f.Pre_event != 3"]
-[eval exp="f.Pre_event = 3"][jump target=*event_trouble]
+[eval exp="f.Pre_event = 3"][jump target=*select_incident]
 
-[else][jump target=*event_trouble]
+[else][jump target=*select_incident]
 [endif]
 
 [s]
+
 ;-------------------------------------------------------------------------------
 
-*event_enemy
+*select_enemy
 #
 [eval exp="f.En_Raptured = 0 , f.En_Wiseman_time = 0"]
 
@@ -147,7 +146,6 @@
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
 [jump target="*no_goal"]
-[s]
 
 [elsif exp="f.event<70"]
 ひとだまが現れた[p]
@@ -160,7 +158,6 @@
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
 [jump target="*no_goal"]
-[s]
 
 [else]
 触手塊が現れた[p]
@@ -173,108 +170,136 @@
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
 [jump target="*no_goal"]
-[s]
 
 [endif]
+[s]
 ;-------------------------------------------------------------------------------
+*select_incident
+[getrand min="1" max="100" var="f.incident"]
+[if exp="f.incident<30"]
+[jump target=*select_fortune]
+[else]
+[jump target=*select_accident]
+[endif]
+[s]
 ;-------------------------------------------------------------------------------
-*event_trouble
-[getrand min="1" max="100" var="f.trouble"]
-[if exp="f.trouble<30"]
-[jump target=*trouble_good]
+*select_fortune
+[getrand min="1" max="100" var="f.fortune"]
+[if exp="f.fortune <= 25 && f.Pre_fortune != 1"]
+[eval exp="f.Pre_fortune = 1"]
+[jump target=*fortune_01]
+[elsif exp="f.fortune <= 50 && f.Pre_fortune != 2"]
+[eval exp="f.Pre_fortune = 2"]
+[jump target=*fortune_02]
+[elsif exp="f.fortune <= 75 && f.Pre_fortune != 3"]
+[eval exp="f.Pre_fortune = 3"]
+[jump target=*fortune_03]
+[elsif exp="f.fortune <= 100 && f.Pre_fortune != 4"]
+[eval exp="f.Pre_fortune = 4"]
+[jump target=*fortune_04]
 [else]
-[jump target=*trouble_bad]
+[eval exp="f.Pre_fortune = 0"]
+[jump target=*select_fortune]
 [endif]
 [s]
+;-------------------------------------------------------------------------------
 
-*trouble_good
-[getrand min="1" max="100" var="f.trouble"]
-[if exp="f.trouble <= 25 && f.Pre_trouble_g != 1"]
-[eval exp="f.Pre_trouble_g = 1"]
-[jump target=*trouble_good_01]
-[elsif exp="f.trouble <= 50 && f.Pre_trouble_g != 2"]
-[eval exp="f.Pre_trouble_g = 2"]
-[jump target=*trouble_good_02]
-[elsif exp="f.trouble <= 75 && f.Pre_trouble_g != 3"]
-[eval exp="f.Pre_trouble_g = 3"]
-[jump target=*trouble_good_03]
-[elsif exp="f.trouble <= 100 && f.Pre_trouble_g != 4"]
-[eval exp="f.Pre_trouble_g = 4"]
-[jump target=*trouble_good_04]
-[else]
-[eval exp="f.Pre_trouble_g = 0"]
-[jump target=*trouble_good]
-[endif]
+*fortune_01
+;薬草
+[call storage="data_comon_event.ks" target="*healing_herbs"]
+[jump target="*no_goal"]
 [s]
 
-*trouble_bad
-[getrand min="1" max="70" var="f.trouble"]
-[if exp="f.trouble <= 10 && f.Pre_trouble_b != 1"]
-[eval exp="f.Pre_trouble_b = 1"]
-[jump target=*trouble_bad_01]
-[elsif exp="f.trouble <= 20 && f.Pre_trouble_b != 2"]
-[eval exp="f.Pre_trouble_b = 2"]
-[jump target=*trouble_bad_02]
-[elsif exp="f.trouble <= 30 && f.Pre_trouble_b != 3"]
-[eval exp="f.Pre_trouble_b = 3"]
-[jump target=*trouble_bad_03]
-[elsif exp="f.trouble <= 40 && f.Pre_trouble_b != 4"]
-[eval exp="f.Pre_trouble_b = 4"]
-[jump target=*trouble_bad_04]
-[elsif exp="f.trouble <= 50 && f.Pre_trouble_b != 5"]
-[eval exp="f.Pre_trouble_b = 5"]
-[jump target=*trouble_bad_05]
-[elsif exp="f.trouble <= 60 && f.Pre_trouble_b != 6"]
-[eval exp="f.Pre_trouble_b = 6"]
-[jump target=*trouble_bad_06]
-[elsif exp="f.trouble <= 70 && f.Pre_trouble_b != 7"]
-[eval exp="f.Pre_trouble_b = 7"]
-[jump target=*trouble_bad_07]
-[else]
-[eval exp="f.Pre_trouble_b = 0"]
-[jump target=*trouble_bad]
-[endif]
+*fortune_02
+;お地蔵様（気力＋）
+[call storage="data_comon_event.ks" target="*stone_statue"]
+[jump target="*no_goal"]
 [s]
 
-*trouble_good_01
-#
-薬草を見つけた[r]
-鈴耶の体力が回復した[p]
-[eval exp="f.HP += 100" ][eval exp="f.HP = 1000" cond="f.HP > 1000"]
-[jump target="*no_goal"][s]
+*fortune_03
+;湧き水（集中力＋）
+[call storage="data_comon_event.ks" target="*spring_water"]
+[jump target="*no_goal"]
+[s]
 
-*trouble_good_02
-#
-狐を見つけた[r]
-鈴耶の集中力が増加した[p]
-[eval exp="f.MND += 1" ][eval exp="f.MND = 5" cond="f.MND > 5"]
-[jump target="*no_goal"][s]
-
-*trouble_good_03
-#
-湧き水を見つけた[r]
-鈴耶の気力が増加した[p]
-[eval exp="f.MP += 10"][eval exp="f.MP = 100" cond="f.MP > 100"]
-[jump target="*no_goal"][s]
-
-*trouble_good_04
-#
-抜け道を発見した[r]
-進行度が上昇した[p]
-[eval exp="f.progress += 10"][eval exp="f.progress = f.goal" cond="f.progress > f.goal"]
+*fortune_04
+;抜け道
+[call storage="data_comon_event.ks" target="*forest_shortcut"]
 [jump target="*goal" cond="f.progress >= f.goal"]
-[jump target="*no_goal"][s]
+[jump target="*no_goal"]
+[s]
+;-------------------------------------------------------------------------------
 
+*select_accident
+[getrand min="1" max="70" var="f.accident"]
+[if exp="f.accident <= 10 && f.Pre_accident != 1"]
+[eval exp="f.Pre_accident = 1"]
+[jump target=*accident_01]
+[elsif exp="f.accident <= 20 && f.Pre_accident != 2"]
+[eval exp="f.Pre_accident = 2"]
+[jump target=*accident_02]
+[elsif exp="f.accident <= 30 && f.Pre_accident != 3"]
+[eval exp="f.Pre_accident = 3"]
+[jump target=*accident_03]
+[elsif exp="f.accident <= 40 && f.Pre_accident != 4"]
+[eval exp="f.Pre_accident = 4"]
+[jump target=*accident_04]
+[elsif exp="f.accident <= 50 && f.Pre_accident != 5"]
+[eval exp="f.Pre_accident = 5"]
+[jump target=*accident_05]
+[elsif exp="f.accident <= 60 && f.Pre_accident != 6"]
+[eval exp="f.Pre_accident = 6"]
+[jump target=*accident_06]
+[elsif exp="f.accident <= 70 && f.Pre_accident != 7"]
+[eval exp="f.Pre_accident = 7"]
+[jump target=*accident_07]
+[else]
+[eval exp="f.Pre_accident = 0"]
+[jump target=*select_accident]
+[endif]
+[s]
+;-------------------------------------------------------------------------------
 
-*trouble_bad_01
+*accident_03
+;幽霊を目撃する(気力-)
+[call storage="data_comon_event.ks" target="*watch_ghost"]
+[jump target="*no_goal"]
+[s]
+
+*accident_04
+;地すべり迂回（後退）
+[call storage="data_comon_event.ks" target="*landslide_roundabout"]
+[jump target="*no_goal"]
+[s]
+
+*accident_05
+;ぬかるみ（＋鈍足）
+[call storage="data_comon_event.ks" target="*muddy_swanp"]
+[jump target="*no_goal"]
+[s]
+
+*accident_06
+;毒蜘蛛（＋毒）
+[call storage="data_comon_event.ks" target="*poison_spider"]
+[jump target="*no_goal"]
+[s]
+
+*accident_07
+;怪しげな花粉（＋興奮）
+[call storage="data_comon_event.ks" target="*strange_flower"]
+[jump target="*no_goal"]
+[s]
+
+;不意打ち（人間）--------------------------------------------------------------------
+*accident_01
 #
 動く影を見つけた[r]
 こちらの気配には気づいていないようだ[p]
 どうする？[p]
-[glink color="black" target="*trouble_bad_01-A" x="450" y="100" width="" height="" text="隠れてやり過ごす" ]
-[glink color="black" target="*trouble_bad_01-B" x="450" y="200" width="" height="" text="不意打ちする" ]
+[glink color="black" target="*try_hinding01" x="450" y="100" width="" height="" text="隠れてやり過ごす" ]
+[glink color="black" target="*try_ambush01" x="450" y="200" width="" height="" text="不意打ちする" ]
 [s]
-*trouble_bad_01-A
+*try_hinding01
 #
 [getrand min="1" max="100" var="tf.rand"]
 [eval exp="tf.tag = f.MND * 10 + 49"]
@@ -291,15 +316,15 @@
 #
 見つかってしまった！[p]
 [endif]
-[jump target="*event_enemy"]
+[jump target="*select_enemy"]
 [s]
 
-*trouble_bad_01-B
+*try_ambush01
 #
 [getrand min="1" max="100" var="tf.rand"]
 [eval exp="tf.tag = f.MND * 10 + 70"]
 [if exp="tf.rand <= tf.tag "]
-不意打ち成功!!(１ターン目の攻撃力アップ)[p]
+不意打ち成功!![p]
 [eval exp="f.ambush = 1"]
 [else]
 #敵
@@ -307,18 +332,18 @@
 #
 不意打ちに失敗した[p]
 [endif]
-[jump target="*event_enemy"]
+[jump target="*select_enemy"]
 [s]
 
-*trouble_bad_02
+;不意打ち（妖怪）-------------------------------------------------------------------
+*accident_02
 #
 妖怪を見つけた[r]
 こちらの気配には気づいていないようだ[p]
-
-[glink color="black" target="*trouble_bad_02-A" x="450" y="100" width="" height="" text="隠れてやり過ごす" ]
-[glink color="black" target="*trouble_bad_02-B" x="450" y="200" width="" height="" text="不意打ちする" ]
+[glink color="black" target="*try_hinding02" x="450" y="100" width="" height="" text="隠れてやり過ごす" ]
+[glink color="black" target="*try_ambush02" x="450" y="200" width="" height="" text="不意打ちする" ]
 [s]
-*trouble_bad_02-A
+*try_hinding02
 #
 [getrand min="1" max="100" var="tf.rand"]
 [eval exp="tf.tag = f.MND * 10 + 49"]
@@ -337,12 +362,12 @@
 [jump target="*event_youkai"]
 [s]
 
-*trouble_bad_02-B
+*try_ambush02
 #
 [getrand min="1" max="100" var="tf.rand"]
 [eval exp="tf.tag = f.MND * 10 + 70"]
 [if exp="tf.rand <= tf.tag "]
-不意打ち成功!!(１ターン目の攻撃力アップ)[p]
+不意打ち成功!![p]
 [eval exp="f.ambush = 1"]
 [else]
 #敵
@@ -353,96 +378,23 @@
 [jump target="*event_youkai"]
 [s]
 
-
-*trouble_bad_03
-#
-鈴耶の気力が減少した[p]
-[eval exp="f.MP -= 10" ][eval exp="f.MP = 0" cond="f.MP < 0"]
-[jump target="*no_goal"][s]
-
-*trouble_bad_04
-#
-足場が崩れている[l]仕方ないので回り道をした[p]進行度が減少した[p]
-[eval exp="f.progress -= 10"][eval exp="f.progress = 0" cond="f.progress < 0"]
-[jump target="*no_goal"][s]
-
-*trouble_bad_05
-#
-ぬかるみに足を取られた[p]
-鈍足状態になった[p]一時的に移動力が低下した[p]
-[eval exp="f.slowly = 5" ][eval exp="f.slowly = 5" cond="f.slowly > 5"]
-[jump target="*no_goal"][s]
-
-*trouble_bad_06
-#
-毒蜘蛛に噛まれた[p]
-毒状態になった[p]一時的に行動のたびにダメージを受ける[p]
-[eval exp="f.poison = 5" ][eval exp="f.poison = 5" cond="f.poison > 5"]
-[jump target="*no_goal"][s]
-
-*trouble_bad_07
-#
-あやしげな花の花粉を吸った[p]
-興奮状態になった[p]一時的に快感が減少しなくなった[p]
-[eval exp="f.excite = 5" ][eval exp="f.excite = 5" cond="f.excite > 5"]
-[jump target="*no_goal"][s]
-
-
 ;-------------------------------------------------------------------------------
 *escape
-鈴耶は逃走した（20後退）[p]
-[eval exp="f.escape = 0"]
-[eval exp="f.progress -= 20"][eval exp="f.progress = 0" cond="f.progress < 0"]
+[call storage="process_escape.ks"]
 [jump target="*no_goal"]
 [s]
 
 ;-------------------------------------------------------------------------------
 *battle_end
-[eval exp="f.Round = 0, f.ambush=0"]
+[BattleFinsish]
 
-[if exp="f.enchant > 0 "]
-退魔の術の効力が切れた
-[eval exp="f.enchant = 0 "]
-[endif]
-
-[if exp="f.invincible > 0 "]
-退魔の術の効力が切れた
-[eval exp="f.invincible = 0 "]
-[endif]
-;no_goalで加算される分を相殺
-[eval exp="f.MP -= 5"]
 [jump target="*no_goal"]
 [s]
-
 
 ;-------------------------------------------------------------------------------
 *no_goal
 #
-;[chara_mod name="suzune" face="default" cross="true" ]
-[eval exp="f.ERO = f.ERO - f.SAN" cond="f.excite == 0"]
-[eval exp="f.ERO = 0" cond="f.ERO < 0"]
-[MP1][WSs]
-
-[if exp="f.poison > 0"]
-毒により鈴耶の体力が減少[p]
-[eval exp="f.HP -= 20"][eval exp="f.HP = 0" cond="f.HP < 0"][WSs]
-[jump target="*defeat" cond="f.HP <= 0"]
-[endif]
-
-[if exp="f.poison == 1"]
-鈴耶は毒状態から回復した[p]
-[endif]
-[if exp="f.excite  == 1"]
-鈴耶は興奮状態から回復した[p]
-[endif]
-[if exp="f.slowly== 1"]
-鈴耶は鈍足状態から回復した[p]
-[endif]
-
-[eval exp="f.poison -= 1" cond="f.poison > 0"]
-[eval exp="f.excite -= 1" cond="f.excite > 0"]
-[eval exp="f.slowly -= 1" cond="f.slowly > 0"]
-[WSs]
+[call storage="routin_nogoal.ks"]
 
 [jump target="*ready"]
 [s]
@@ -454,7 +406,9 @@
 #
 鈴耶は気を失った[p]
 [SetStatus]
-[jump　target="*result"]
+[BattleFinsish]
+[call storage="asset_result.ks"]
+[jump storage="data_prison/comon_torture01.ks"]
 [s]
 
 ;-------------------------------------------------------------------------------
@@ -466,9 +420,7 @@
 [WSs]
 
 *result
-[cm][clearfix][freeimage layer=1]
-#
-Homeに戻ります[p]
-[eval exp="f.date += 1"]
+[freeimage layer="0" ]
+[call storage="asset_result.ks"]
 [jump storage="home.ks" target="*home_start"]
 [s]

@@ -9,8 +9,9 @@ f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp;
 tf.atp = "攻撃力" + f.ATP;
 f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow;
 tf.pow = "精神力" + f.MGP;
-tf.spd = "すばやさ" + f.SPD;
-tf.mov = "移動力：" + f.MOVE ;
+tf.spd = "敏　捷" + f.SPD;
+tf.mov = f.MOVE + f.arms_mov;
+tf.movtxt = "移動力：" + tf.mov ;
 tf.san = "理性" + f.SAN;
 tf.vital1 = "状態：";
 if(f.poison > 0){tf.vital1 = tf.vital1 + "毒　";}
@@ -32,7 +33,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [ptext layer="2" x="700" y="220" text=&tf.pow size="30" color="0x333631" edge="white" bold="bold" align="left" name="sspow" overwrite="true" ]
 
 [ptext layer="2" x="700" y="250" text=&tf.spd size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssspd" overwrite="true" ]
-[ptext layer="2" x="700" y="280" text=&tf.mov size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssmov" overwrite="true" ]
+[ptext layer="2" x="700" y="280" text=&tf.movtxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssmov" overwrite="true" ]
 
 [ptext layer="2" x="700" y="310" text=&tf.ero size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssero" overwrite="true" ]
 [ptext layer="2" x="700" y="340" text=&tf.curse size="30" color="0x333631" edge="white" bold="bold" align="left" name="sscures" overwrite="true" ]

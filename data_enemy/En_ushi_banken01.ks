@@ -1,6 +1,6 @@
 *start
 ;ラウンド開始時処理--------------------------------------------------------------
-[call storage="asset_battle.ks" target="*battle_round_start"]
+[call storage="routin_battle_round.ks" target="*battle_round_start"]
 
 [if exp="f.ambush > 0"]
 #
@@ -24,7 +24,7 @@
 ;PLの行動------------------------------------------------------------------------
 #
 鈴耶の攻撃[r]
-[call storage="PL_battle.ks" target="*start"]
+[call storage="PL_battle.ks"]
 [if exp="f.escape > 0"][return][endif]
 
 [if exp="f.en_HP < 1"]
@@ -56,12 +56,20 @@
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [endif]
-[if exp="f.HP < 1"][return][endif]
-[jump target="*start"][s]
+[jump target="*Round_end"][s]
 
 *enemy_attack2
 #
 番犬の「遠吠え」[p]
 周囲の警戒度が上昇した[p]
 [eval exp="f.warning += 20"]
-[jump target="*start"][s]
+[jump target="*Round_end"][s]
+
+;------------------------------------------------------------------------------
+
+*Round_end
+#
+[if exp="f.HP < 1"][return][endif]
+[if exp="f.Quest_type == 3"][call storage="routin_progress.ks" target="*guard"][endif]
+[jump target="*start"]
+[s]

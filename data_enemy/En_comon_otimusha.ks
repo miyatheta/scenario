@@ -1,6 +1,6 @@
 *start
 ;ラウンド開始時処理--------------------------------------------------------------
-[call storage="asset_battle.ks" target="*battle_round_start"]
+[call storage="routin_battle_round.ks" target="*battle_round_start"]
 
 [if exp="f.ambush > 0"]
 #
@@ -24,7 +24,7 @@
 ;PLの行動------------------------------------------------------------------------
 #
 鈴耶の攻撃[r]
-[call storage="PL_battle.ks" target="*start"]
+[call storage="PL_battle.ks"]
 [if exp="f.escape > 0"][return][endif]
 
 [if exp="f.en_HP < 1"]
@@ -61,8 +61,7 @@
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [endif]
-[if exp="f.HP < 1"][return][endif]
-[jump target="*start"][s]
+[jump target="*Round_end"][s]
 
 *enemy_attack2
 #
@@ -80,8 +79,7 @@
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [endif]
-[if exp="f.HP < 1"][return][endif]
-[jump target="*start"][s]
+[jump target="*Round_end"][s]
 
 ;------------------------------------------------------------------------------
 *enemy_sexhara
@@ -94,17 +92,26 @@
 [TESTER]
 [if exp="f.target > f.rand"]
 鈴耶は敵の組付きを回避した[p][AVOID][WSs]
-[jump target="*start"][s]
+[jump target="*Round_end"][s]
 [endif]
 鈴耶は落ち武者に組み付かれた[p]
 [eval exp="f.bind = f.GRB"]
+[jump target="*fase1"]
+[s]
+;------------------------------------------------------------------------------
+
+*Round_end
+#
+[if exp="f.HP < 1"][return][endif]
+[if exp="f.Quest_type == 3"][call storage="routin_progress.ks" target="*guard"][endif]
+[jump target="*start"][s]
 
 ;------------------------------------------------------------------------------
 *fase1
 ;抵抗１
 [call storage="PL_bind.ks"]
 ;抵抗成功
-[jump target="*start" cond="f.bind <= 0"]
+[jump target="*Round_end" cond="f.bind <= 0"]
 ;段階１
 #
 落ち武者は鈴耶の胸を揉みしだいた[p]
@@ -115,9 +122,10 @@
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.fack"]
-[eval exp="f.ERO = 999" cond="f.endure > 0"]
 [SKEBE][WSs]
-
+[call storage="asset_extra_reaction.ks" target="*orgasm"]
+[call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
+[call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase1房中術絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase1我慢絶頂"]
@@ -166,7 +174,7 @@
 (駄目ぇ…感じちゃうーーーーーッ！！)[p]
 #
 胸からの快感に鈴耶は体を震わせた[r]
-鈴耶は絶頂した[p]
+;鈴耶は絶頂した[p]
 [orgasm]
 [if exp="f.HP <= 0"][call target="*fase1気絶"][endif]
 #落ち武者
@@ -234,7 +242,7 @@
 *fase2
 ;抵抗２
 [call storage="PL_bind.ks"]
-[jump target="*start" cond="f.bind <= 0"]
+[jump target="*Round_end" cond="f.bind <= 0"]
 ;段階２
 #
 落ち武者は魔羅を鈴耶の尻に擦りつけてきた[p]
@@ -245,7 +253,7 @@
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.fack"]
-[eval exp="f.ERO = 999" cond="f.endure > 0"]
+[call storage="asset_extra_reaction.ks" target="*orgasm"]
 [SKEBE][WSs]
 
 ;リアクション
@@ -304,7 +312,7 @@
 (ダメッ！！イクぅーーーーーッ！！)[p]
 #
 びくびくと鈴耶の体が痙攣する[p]
-鈴耶は絶頂した[p]
+;鈴耶は絶頂した[p]
 [orgasm]
 [if exp="f.HP <= 0"][call target="*fase2気絶"][endif]
 #落ち武者
@@ -366,7 +374,7 @@
 *fase3
 ;抵抗3
 [call storage="PL_bind.ks"]
-[jump target="*start" cond="f.bind <= 0"]
+[jump target="*Round_end" cond="f.bind <= 0"]
 ;段階３
 #
 落ち武者は魔羅を鈴耶の秘裂に挿入した[p]
@@ -377,9 +385,8 @@
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.fack"]
-[eval exp="f.ERO = 999" cond="f.endure > 0"]
 [SKEBE][WSs]
-
+[call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase3房中術絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase3我慢絶頂"]
@@ -435,7 +442,7 @@
 #鈴耶
 いやあああっ！！らめぇぇぇぇっ！！[p]
 #
-鈴耶は絶頂した[p]
+;鈴耶は絶頂した[p]
 [orgasm]
 [if exp="f.HP <= 0"][call target="*fase3気絶"][endif]
 #落ち武者
@@ -499,7 +506,7 @@
 *fase4
 ;抵抗4
 [call storage="PL_bind.ks"]
-[jump target="*start" cond="f.bind <= 0"]
+[jump target="*Round_end" cond="f.bind <= 0"]
 ;段階４
 #
 落ち武者はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
@@ -509,7 +516,7 @@
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.fack"]
-[eval exp="f.ERO = 999" cond="f.endure > 0"]
+[call storage="asset_extra_reaction.ks" target="*orgasm"]
 [SKEBE][WSs]
 
 ;リアクション
@@ -537,7 +544,7 @@
 あああああっ！！！イクイクイクーーーーーー！！[p]
 #
 鈴耶は精の迸りを子宮に感じながら嬌声を上げた[r]
-鈴耶は絶頂した[p]
+;鈴耶は絶頂した[p]
 [orgasm]
 [if exp="f.HP <= 0"][call target="*fase4気絶"][endif]
 #落ち武者
@@ -601,7 +608,7 @@
 あああああっ！！！イクイクイクーーーーーー！！[p]
 #
 鈴耶は精の迸りを子宮に感じながら嬌声を上げた[r]
-鈴耶は絶頂した[p]
+;鈴耶は絶頂した[p]
 [orgasm]
 [if exp="f.HP <= 0"][call target="*fase4気絶"][endif]
 #落ち武者
@@ -710,4 +717,4 @@
 [eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 射精した敵は虚精状態になった（３ラウンド組付封印）[p]
 [eval exp="f.En_Wiseman = 1 , f.En_Wiseman_time = 4 "]
-[jump target="*start"]
+[jump target="*Round_end"]

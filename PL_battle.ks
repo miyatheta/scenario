@@ -88,7 +88,7 @@
 [return]
 
 *PL_attack_01
-[eval exp="f.DTR = 0.5 , f.AVD = 10 , f.MND += 1"]
+[eval exp="f.DTR = 0.5 , f.AVD = 30 , f.MND += 1"]
 [getrand min="1" max="10" var="f.rand"]
 [STRIKE]
 [getMathRound var="tf.DMG"]

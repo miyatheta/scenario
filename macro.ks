@@ -17,7 +17,7 @@
 [if exp="f.type==2"]
 [eval exp="tf.arg = tf.arg / 2 "]
 [eval exp="tf.arg = tf.arg + (f.MGP * f.DTR) " cond="f.enchant > 0"]
-[eval exp="tf.arg = tf.arg * 3 "]
+[eval exp="tf.arg = tf.arg * 3 " cond="f.arms_type == 2 "]
 [endif]
 [endmacro]
 
@@ -41,7 +41,8 @@
 [endmacro]
 ;被弾時
 [macro name="DAMED"]
-;[eval exp="f.MND -= 1" cond="f.MND > 0"][WSs]
+;[eval exp="f.MND -= 1" cond="f.MND > 0"]
+[eval exp="f.HP = 0" cond="f.HP < 0"][WSs]
 [eval exp="f.MP += 10" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [endmacro]
 
@@ -62,12 +63,13 @@
 
 [macro name="BattleFinsish"]
 ;戦闘終了時に解消するべきこと
+[eval exp="f.Round = 0, f.ambush=0"]
+[eval exp="f.enchant = 0 , f.invincible = 0 "]
 [eval exp="f.unescape = 0"]
-[WSs]
-[endmacoro]
+[endmacro]
 
 [macro name="progressbar"]
-[eval exp="f.progress = f.goal" cond="f.progress > f.goal"]
+;[eval exp="f.progress = f.goal" cond="f.progress > f.goal"]
 [iscript]
 f.progressbar = "進行度：" + f.progress + "/" + f.goal;
 [endscript]
@@ -98,12 +100,22 @@ tf.txt = f.date + "/60日" ;
 [ptext layer="0" x="0" y="0" width="1270" text=&tf.txt size="30" color="black" edge="white" bold="bold" align="right" name="calender" overwrite="true" ]
 [endmacro]
 
+[macro name="Milk"]
+[iscript]
+tf.milktxt = "";
+if(f.milk > 0){tf.milktxt = "乳：" + f.milkpoint;}
+[endscript]
+[ptext layer="0" x="10" y="300" text=&tf.milktxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="milkpoint" overwrite="true" ]
+[endmacro]
+
 [macro name="WSs"]
 ;WriteStatus
+[Milk]
 [iscript]
-tf.move = "移動力：" + f.MOVE ;
+tf.mov = f.MOVE + f.arms_mov ;
+tf.movtxt = "移動力：" + tf.mov ;
 tf.noztmp = f.NOZ + f.arms_noz + f.acceA_noz + f.acceB_noz;
-tf.noztxt = "騒　音：" + tf.noztmp ;
+tf.turntxt = "手番数：" + f.turn ;
 
 tf.hp = "体力：" + f.HP ;
 tf.mp = "気力：" + f.MP ;
@@ -114,9 +126,9 @@ tf.vital = "状態：";
 if(f.poison > 0){tf.vital = tf.vital + "毒　";}
 if(f.slowly > 0){tf.vital = tf.vital + "鈍足　";}
 if(f.excite > 0){tf.vital = tf.vital + "興奮　";}
-if(f.mazo > 0){tf.vital = tf.vital + "被虐";}
-if(f.milk > 0){tf.vital = tf.vital + "爆乳";}
-if(f.bags > 0){tf.vital = tf.vital + "虫憑";}
+if(f.mazo > 0){tf.vital = tf.vital + "被虐性癖";}
+if(f.milk > 0){tf.vital = tf.vital + "乳牛化";}
+if(f.bags > 0){tf.vital = tf.vital + "虫憑き";}
 if(f.slave > 0){tf.vital = tf.vital + "隷属";}
 if(f.tatoo > 0){tf.vital = tf.vital + "淫紋";}
 if(f.unescape > 0){tf.vital = tf.vital + "逃走封印";}
@@ -128,8 +140,8 @@ if(f.unescape > 0){tf.vital = tf.vital + "逃走封印";}
 [ptext layer="0" x="10" y="660" text=&tf.curse size="20" color="0x9400d3" edge="white" bold="bold" align="left" name="curse" overwrite="true" ]
 [ptext layer="0" x="10" y="680" text=&tf.vital size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="health" overwrite="true" ]
 
-[ptext layer="0" x="150" y="580" text=&tf.move size="20" color="0x000000" edge="white" bold="bold" align="left" name="movepower" overwrite="true" ]
-[ptext layer="0" x="150" y="620" text=&tf.noztxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="noisevolume" overwrite="true" ]
+[ptext layer="0" x="150" y="580" text=&tf.movtxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="movepower" overwrite="true" ]
+[ptext layer="0" x="150" y="620" text=&tf.turntxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="noisevolume" overwrite="true" ]
 [endmacro]
 
 [macro name="TESTER"]
