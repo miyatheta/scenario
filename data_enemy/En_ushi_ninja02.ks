@@ -63,7 +63,7 @@
 ;敵の行動------------------------------------------------------------------------
 [jump target="*enemy_sexhara" cond="f.charm > 0"]
 [getrand min="1" max="100" var="f.rand"]
-[if exp=" 0 == f.Round % 3"]
+[if exp=" 0 == f.Round % 4"]
 [jump target="*enemy_magic"]
 [elsif exp="f.rand <= 30"]
 [jump target="*enemy_attack1"]
@@ -95,7 +95,7 @@
 *enemy_attack2
 #
 中忍の攻撃[r]
-「中忍刀」[p]
+「忍者刀」[p]
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.Hitrate = 0"]
 [AVOIDANCE]
@@ -141,6 +141,7 @@
 #
 [if exp="f.HP < 1"][return][endif]
 [if exp="f.Quest_type == 3"][call storage="routin_progress.ks" target="*guard"][endif]
+[call storage="routin_battle_round.ks" target="*battle_round_end"]
 [jump target="*start"][s]
 
 ;------------------------------------------------------------------------------
@@ -446,7 +447,7 @@
 #鈴耶
 （ーーーーーーーッ！！）[p]
 #
-鈴耶は挿入の衝撃に歯を食いしばった[r]
+鈴耶は挿入の衝撃に歯を食いしばった[p]
 跳ね回りそうな体を押さえつけ、快感を拒絶する[p]
 鈴耶は絶頂を堪えた！[p]
 #中忍
@@ -497,7 +498,7 @@
 #鈴耶
 （ーーーーーーーッ！！）[p]
 #
-鈴耶は挿入の衝撃に歯を食いしばった[r]
+鈴耶は挿入の衝撃に歯を食いしばった[p]
 #中忍
 どうだ！俺のマラの感触は！！[p]
 #鈴耶

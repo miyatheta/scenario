@@ -11,11 +11,12 @@
 [wait time=1000]
 
 ;ステージ情報
-[bg storage="japanese04_night_dark.jpg" time="500"]
+[bg storage="japanese02_evening.jpg" time="500"]
+[bg storage="japanese02_night_dark.jpg" time="500"]
 [eval exp="f.Quest_name='guard_ushi01.ks' , f.Quest_type=3"]
-[eval exp="f.goal=200 , f.progress=0 , f.Cleared=0 , f.Achievement=0"]
+[eval exp="f.goal=100 , f.progress=0 , f.Cleared=0 , f.Achievement=0"]
 [eval exp="f.security=1 , f.security_MAX=6 , f.warning=0 , f.turn=1"]
-[eval exp="f.trap_04 = 0 , f.trap_02 = 0 , f.trap_03 = 0 , f.trapper = 0 "]
+[eval exp="f.cantescape=1 "]
 ;護衛対象のスペック
 [eval exp="f.Gd_MOVE=5 , f.Gd_MOVE_MAX=5 , f.Gd_slowly=0"]
 
@@ -24,6 +25,7 @@
 [WSs]
 [chara_show name="suzune" left="-100" top="-20"]
 ;-------------------------------------------------------------------------------
+@layopt layer=message0 visible=true
 シナリオが入ります[p]
 敵の襲撃だ！[p]
 護衛対象が逃げる時間を稼げ[p]
@@ -32,8 +34,8 @@
 
 *ready
 ;[securitybar]
-;[progressbar]
-[glink color="black" target="*goahead" x="400" y="250" width="" height="" text="先へ進む" ]
+[progressbar_guard]
+[glink color="black" target="*goahead" x="400" y="250" width="" height="" text="迎え撃つ" ]
 [glink color="black" target="*menu" x="400" y="350" width="" height="" text="メニュー" ]
 ;[glink color="black" target="*menu" x="400" y="450" width="" height="" text="撤退する" ]
 [s]
@@ -48,15 +50,34 @@
 [jump target="*ready"]
 
 ;-------------------------------------------------------------------------------
-
+*goahead
+;護衛任務用
+[cm]
+@layopt layer=message0 visible=true
+[current layer="message0"]
+[if exp="f.progress >= f.goal"]
+[jump target=*goal]
+[else]
+[jump target=*select_enemy]
+[endif]
+[s]
+;-------------------------------------------------------------------------------
 *select_enemy
 #
+[if exp="f.turn >= 15 || f.progress >= 75"][jump target="*enemy_ex"]
+[elsif exp="f.enemy == 1"][jump target="*enemy02"]
+[elsif exp="f.enemy == 2"][jump target="*enemy03"]
+[elsif exp="f.enemy == 3"][jump target="*enemy01"]
+[else][jump target="*enemy01"]
+？
+[endif]
 
 *enemy01
-[call storage="process_initialize_enemy.ks"]
+[eval exp="f.enemy = 1"]
 下忍（丑）が現れた[p]
+[call storage="process_initialize_enemy.ks"]
 [eval exp="f.en_Name = '下忍（丑）'"][WriteEnemy]
-[eval exp="f.Lv = 30 + (f.security * 10) , f.en_HP = 190 + (f.security * 10)"]
+[eval exp="f.Lv = 27 + (f.security * 10) , f.en_HP = 190 + (f.security * 10)"]
 [eval exp="f.GRB = 100 + (f.security * 10), f.SEX = 140 + (f.security * 10) "]
 [eval exp="f.EN_STR = 8 + f.security, f.EN_POW = 8 + f.security, f.en_DEX = 27 + f.security"]
 [eval exp="f.type = 1, f.Round = 0"]
@@ -67,23 +88,26 @@
 [s]
 
 *enemy02
+[eval exp="f.enemy = 2"]
+暗殺者（丑）が現れた[p]
 [call storage="process_initialize_enemy.ks"]
-侍（丑）が現れた[p]
-[eval exp="f.en_Name = '侍（丑）'"][WriteEnemy]
-[eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 400 + (f.security * 10)"]
-[eval exp="f.GRB = 110 + (f.security * 10) , f.SEX = 110 + (f.security * 10) "]
-[eval exp="f.EN_STR = 13 + f.security, f.EN_POW = 8 + f.security, f.en_DEX = 27 + f.security"]
+[eval exp="f.en_Name = '暗殺者（丑）'"][WriteEnemy]
+[eval exp="f.Lv = 27 + (f.security * 10) , f.en_HP = 170 + (f.security * 10)"]
+[eval exp="f.GRB = 90 + (f.security * 10), f.SEX = 90 + (f.security * 10) "]
+[eval exp="f.EN_STR = 8 + f.security, f.EN_POW = 8 + f.security, f.en_DEX = 22 + f.security"]
 [eval exp="f.type = 1, f.Round = 0"]
-[call storage="data_enemy/En_ushi_samurai01.ks"]
+[call storage="data_enemy/En_ushi_heishi01.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
-;[jump target="*escape" cond="f.escape > 0"]
+[jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
 [s]
 
 *enemy03
+[eval exp="f.enemy = 3"]
 中忍（丑）が現れた[p]
+[call storage="process_initialize_enemy.ks"]
 [eval exp="f.en_Name = '中忍（丑）'"][WriteEnemy]
-[eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 180 + (f.security * 10)"]
+[eval exp="f.Lv = 36 + (f.security * 10) , f.en_HP = 180 + (f.security * 10)"]
 [eval exp="f.GRB = 100 + (f.security * 10), f.SEX = 140 + (f.security * 10) "]
 [eval exp="f.EN_STR = 8 + f.security, f.EN_POW = 8 + f.security, f.en_DEX = 29 + f.security"]
 [eval exp="f.type = 1, f.Round = 0"]
@@ -91,45 +115,75 @@
 [jump target="*defeat" cond="f.HP < 1"]
 ;[jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
-[endif]
+[s]
+
+
+*enemy_ex
+;特殊演出--------
+
+;---------------
+[call storage="process_initialize_enemy.ks"]
+[eval exp="f.en_Name = '牛王'"][WriteEnemy]
+[eval exp="f.Lv = 100, f.en_HP = 1000 "]
+[eval exp="f.EN_STR = 20, f.EN_POW = 20, f.en_DEX=30 "]
+[eval exp="f.GRB=200, f.SEX=200 "]
+[eval exp="f.type = 1, f.Round = 0"]
+[call storage="data_enemy/EN_ushi_Executioner.ks"]
+
+[jump target="*defeat" cond="f.HP < 1"]
+[jump target="*escape" cond="f.escape > 0"]
+[jump target="*battle_end" cond="f.en_HP < 1"]
+[s]
+;-------------------------------------------------------------------------------
+*escape
+[call storage="process_escape.ks"]
+[jump target="*no_goal"]
 [s]
 
 ;-------------------------------------------------------------------------------
+*battle_end
+[BattleFinsish]
 
-*goahead
-[cm]
-@layopt layer=message0 visible=true
-[current layer="message0"]
-[call storage="routin_progress.ks" target="*guard"]
-
-[if exp="f.progress >= f.goal"]
-[jump target=*goal]
-
-[else]
-[endif]
-
-;-------------------------------------------------------------------------------
-
-*select_event
-[eval exp="f.Pre_event = 0"]
-[getrand min="1" max="90" var="f.event"]
-
-[if exp="f.event<=50 && f.Pre_event != 1"]
-[eval exp="f.Pre_event = 1"][return]
-
-[elsif exp="f.event<=20 && f.Pre_event != 2"]
-[eval exp="f.Pre_event = 2"][return]
-
-[elsif exp="f.event<=20 && f.Pre_event != 3"]
-[eval exp="f.Pre_event = 3"][return]
-
-[else]
-[jump target=*select_incident]
-[endif]
+[jump target="*no_goal"]
 [s]
 
 ;-------------------------------------------------------------------------------
+*no_goal
+#
+[call storage="routin_nogoal.ks"]
 
-*select_normal
+;[call storage="routin_warning.ks"]
+;[if exp="f.security >= f.security_MAX"]
+;[jump target="*event_executioner"]
+;[endif]
 
-[return]
+[jump target="*ready"]
+[s]
+
+;-------------------------------------------------------------------------------
+*defeat
+#鈴耶
+そ、そんな・・・[p]
+#
+鈴耶は気を失った[p]
+[BattleFinsish]
+[SetStatus]
+[call storage="asset_result.ks"]
+[jump storage="data_prison/ushi_torture01.ks"]
+[s]
+
+;-------------------------------------------------------------------------------
+*goal
+#鈴耶
+[chara_mod name="suzune" face="happy" ]
+無事到着っと[p]
+[SetStatus]
+[WSs]
+
+*result
+[freeimage layer="0" ]
+[call storage="asset_result.ks"]
+[jump storage="home.ks" target="*home_start"]
+[s]
+
+;-------------------------------------------------------------------------------

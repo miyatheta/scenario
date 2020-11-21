@@ -16,7 +16,7 @@
 [glink color="black" target="*PL_attack_select" x="450" y="100" width="" height="" text="攻撃" ]
 [glink color="black" target="*PL_magic_select" x="450" y="200" width="" height="" text="忍術" ]
 ;[glink color="black" target="*PL_skill_select" x="450" y="300" width="" height="" text="スキル" ]
-[glink color="black" target="*PL_item_select" x="450" y="300" width="" height="" text="道具" ]
+;[glink color="black" target="*PL_item_select" x="450" y="300" width="" height="" text="道具" ]
 [glink color="black" target="*PL_escape_select" x="450" y="400" width="" height="" text="逃走" ]
 [s]
 
@@ -208,7 +208,7 @@
 [WSs]
 [return]
 
-*PL_magic_5
+*PL_magic_05
 [getrand min="1" max="20" var="f.rand"]
 [eval exp="f.RATE = 4"]
 [eval exp="f.RATE = 4.5" cond="f.HP <= 1500 && f.HP > 1000"]
@@ -225,7 +225,7 @@
 [WSs]
 [return]
 
-*PL_magic_6
+*PL_magic_06
 [getrand min="1" max="20" var="f.rand"]
 [eval exp="f.RATE = 3"]
 [eval exp="f.RATE = 4" cond="f.CURSE >= 100"]
@@ -246,13 +246,15 @@
 #
 未実装機能です[p]
 [jump target="*PL_battle_select"]
+;ここでジャンプすると戻れない
+[s]
 ;-------------------------------------------------------------------------------
 *PL_escape_select
 #
 [eval exp="f.escape = 0"]
 
-[if exp="f.unescape >= 100"]
-この状態から逃げることは出来ない（逃走不可能）[p]
+[if exp="f.cantescape >= 1"]
+この状態から逃げることは出来ない（逃走不能）[p]
 [jump target="*PL_battle_select"]
 [endif]
 

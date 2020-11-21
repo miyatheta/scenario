@@ -91,5 +91,6 @@
 *Round_end
 #
 [if exp="f.HP < 1"][return][endif]
+[call storage="routin_battle_round.ks" target="*battle_round_end"]
 [jump target="*start"]
 [s]

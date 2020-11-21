@@ -76,6 +76,13 @@ f.progressbar = "進行度：" + f.progress + "/" + f.goal;
 [ptext layer="0" x="150" y="600" text=&f.progressbar size="20" color="black" edge="white" bold="bold" align="left" name="progressbar" overwrite="true" ]
 [endmacro]
 
+[macro name="progressbar_guard"]
+[iscript]
+f.progressbar = "逃走距離：" + f.progress + "/" + f.goal;
+[endscript]
+[ptext layer="0" x="150" y="600" text=&f.progressbar size="20" color="black" edge="white" bold="bold" align="left" name="progressbar" overwrite="true" ]
+[endmacro]
+
 [macro name="securitybar"]
 [eval exp="f.warning = 100" cond="f.warning > 100"]
 [iscript]
@@ -126,12 +133,14 @@ tf.vital = "状態：";
 if(f.poison > 0){tf.vital = tf.vital + "毒　";}
 if(f.slowly > 0){tf.vital = tf.vital + "鈍足　";}
 if(f.excite > 0){tf.vital = tf.vital + "興奮　";}
-if(f.mazo > 0){tf.vital = tf.vital + "被虐性癖";}
-if(f.milk > 0){tf.vital = tf.vital + "乳牛化";}
-if(f.bags > 0){tf.vital = tf.vital + "虫憑き";}
-if(f.slave > 0){tf.vital = tf.vital + "隷属";}
-if(f.tatoo > 0){tf.vital = tf.vital + "淫紋";}
-if(f.unescape > 0){tf.vital = tf.vital + "逃走封印";}
+if(f.mazo > 0){tf.vital = tf.vital + "被虐性癖　";}
+if(f.milk > 0){tf.vital = tf.vital + "乳牛化　";}
+if(f.bags > 0){tf.vital = tf.vital + "虫憑き　";}
+if(f.slave > 0){tf.vital = tf.vital + "隷属　";}
+if(f.tatoo > 0){tf.vital = tf.vital + "淫紋　";}
+if(f.unescape > 0){tf.vital = tf.vital + "逃走封印　";}
+if(f.cantescape > 0){tf.vital = tf.vital + "逃走不能　";}
+if(f.f.aphrodisy > 0){tf.vital = tf.vital + "欲情　";}
 [endscript]
 [ptext layer="0" x="10" y="580" text=&tf.hp size="20" color="0x000000" edge="white" bold="bold" align="left" name="hitpoint" overwrite="true" ]
 [ptext layer="0" x="10" y="600" text=&tf.mp size="20" color="0x000000" edge="white" bold="bold" align="left" name="magicpoint" overwrite="true" ]

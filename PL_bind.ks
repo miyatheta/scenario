@@ -1,4 +1,5 @@
 *start
+[if exp="f.Quest_type == 3"][call storage="routin_progress.ks" target="*guard"][endif]
 [eval exp="f.endure = 0 , f.rapture = 0"]
 ;-------------------------------------------------------------------------------
 

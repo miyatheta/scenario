@@ -11,21 +11,21 @@
 
 [if exp="f.unescape == 1"]
 #
-逃走封印状態が解消した[p]
+逃走封印状態が解消した[p][WSs]
 [endif]
-[eval exp="f.unescape -= 1 " cond="f.unescape > 0"]
+[eval exp="f.unescape -= 1 " cond="f.unescape > 0"][WSs]
 
 [if exp="f.En_Raptured_time == 1"]
 #
-敵は房中術の影響から脱した
+敵は房中術の影響から脱した[p]
 [endif]
-[eval exp="f.En_Raptured_time -= 1 " cond="f.En_Raptured > 0"]
+[eval exp="f.En_Raptured_time -= 1 " cond="f.En_Raptured > 0"][WSs]
 
 [if exp="f.En_Wiseman_time == 1"]
 #
-敵は虚脱状態から回復した
+敵は虚脱状態から回復した[p]
 [endif]
-[eval exp="f.En_Wiseman_time -= 1 " cond="f.En_Wiseman > 0"]
+[eval exp="f.En_Wiseman_time -= 1 " cond="f.En_Wiseman > 0"][WSs]
 
 [if exp=" 0 == f.Round % 3"]
 忍者は印を結んだ[p]
@@ -74,7 +74,7 @@
 [endif]
 逃走封印状態（次ラウンド中）が発生[p]
 [eval exp="f.unescape = 2"][WSs]
-[jump target="*Round_end"][s]
+[jump target="*"][s]
 
 *enemy_attack2
 #
@@ -125,6 +125,7 @@
 #
 [if exp="f.HP < 1"][return][endif]
 [if exp="f.Quest_type == 3"][call storage="routin_progress.ks" target="*guard"][endif]
+[call storage="routin_battle_round.ks" target="*battle_round_end"]
 [jump target="*start"][s]
 
 ;------------------------------------------------------------------------------
@@ -430,7 +431,7 @@
 #鈴耶
 （ーーーーーーーッ！！）[p]
 #
-鈴耶は挿入の衝撃に歯を食いしばった[r]
+鈴耶は挿入の衝撃に歯を食いしばった[p]
 跳ね回りそうな体を押さえつけ、快感を拒絶する[p]
 鈴耶は絶頂を堪えた！[p]
 #忍者
@@ -481,7 +482,7 @@
 #鈴耶
 （ーーーーーーーッ！！）[p]
 #
-鈴耶は挿入の衝撃に歯を食いしばった[r]
+鈴耶は挿入の衝撃に歯を食いしばった[p]
 #忍者
 どうだ！俺のマラの感触は！！[p]
 #鈴耶

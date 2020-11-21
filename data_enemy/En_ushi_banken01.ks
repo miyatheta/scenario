@@ -71,5 +71,6 @@
 #
 [if exp="f.HP < 1"][return][endif]
 [if exp="f.Quest_type == 3"][call storage="routin_progress.ks" target="*guard"][endif]
+[call storage="routin_battle_round.ks" target="*battle_round_end"]
 [jump target="*start"]
 [s]

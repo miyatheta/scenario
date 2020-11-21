@@ -79,6 +79,7 @@
 
 [if exp="f.event<=30"]
 番犬が現れた[p]
+[call storage="process_initialize_enemy.ks"]
 [eval exp="f.en_Name = '番犬'"][WriteEnemy]
 [eval exp="f.Lv = 30 + (f.security * 10) , f.en_HP = 130 + (f.security * 10)"]
 [eval exp="f.GRB = 70 + (f.security * 10), f.SEX = 100 + (f.security * 10) "]
@@ -92,6 +93,7 @@
 
 [elsif exp="f.event<=60"]
 見廻り兵卒（丑）が現れた[p]
+[call storage="process_initialize_enemy.ks"]
 [eval exp="f.en_Name = '見廻り兵卒（丑）'"][WriteEnemy]
 [eval exp="f.Lv = 30 + (f.security * 10) , f.en_HP = 170 + (f.security * 10)"]
 [eval exp="f.GRB = 90 + (f.security * 10), f.SEX = 90 + (f.security * 10) "]
@@ -105,6 +107,7 @@
 
 [elsif exp="f.event<=80"]
 武士（丑）が現れた[p]
+[call storage="process_initialize_enemy.ks"]
 [eval exp="f.en_Name = '武士（丑）'"][WriteEnemy]
 [eval exp="f.Lv = 30 + (f.security * 10) , f.en_HP = 290 + (f.security * 10)"]
 [eval exp="f.GRB = 110 + (f.security * 10), f.SEX = 110 + (f.security * 10) "]
@@ -118,6 +121,7 @@
 
 [elsif exp="f.event<=100"]
 下忍（丑）が現れた[p]
+[call storage="process_initialize_enemy.ks"]
 [eval exp="f.en_Name = '下忍（丑）'"][WriteEnemy]
 [eval exp="f.Lv = 30 + (f.security * 10) , f.en_HP = 190 + (f.security * 10)"]
 [eval exp="f.GRB = 100 + (f.security * 10), f.SEX = 140 + (f.security * 10) "]
@@ -131,6 +135,7 @@
 
 [elsif exp="f.event<=110"]
 侍（丑）が現れた[p]
+[call storage="process_initialize_enemy.ks"]
 [eval exp="f.en_Name = '侍（丑）'"][WriteEnemy]
 [eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 400 + (f.security * 10)"]
 [eval exp="f.GRB = 110 + (f.security * 10), f.SEX = 110 + (f.security * 10) "]
@@ -144,6 +149,7 @@
 
 [else]
 中忍（丑）が現れた[p]
+[call storage="process_initialize_enemy.ks"]
 [eval exp="f.en_Name = '中忍（丑）'"][WriteEnemy]
 [eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 180 + (f.security * 10)"]
 [eval exp="f.GRB = 100 + (f.security * 10), f.SEX = 140 + (f.security * 10) "]
@@ -158,6 +164,7 @@
 ;--------------------------------------------
 *trapper
 酔漢が現れた[p]
+[call storage="process_initialize_enemy.ks"]
 [eval exp="f.en_Name = '酔漢'"][WriteEnemy]
 [eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 100 + (f.security * 10)"]
 [eval exp="f.GRB = 120 + (f.security * 10), f.SEX = 120 + (f.security * 10) "]
@@ -447,16 +454,17 @@
 #鈴耶
 くっ！！押し通る！！[p]
 ;特殊演出--------
-牛王
-[iscript]
-tf.subtitle = "丑の国・筆頭牛王";
-tf.title = "「剛力無敵」牛王" ;
-[endscript]
-[ptext layer="3" x="400" y="200" text=&tf.subtitle size="30" color="red" bold="bold" align="left"]
-[ptext layer="3" x="450" y="300" text=&tf.title size="60" color="red" bold="bold" align="left"]
-[wait time=1000]
-[freeimage layer=3]
+;牛王
+;[iscript]
+;tf.subtitle = "丑の国・筆頭牛王";
+;tf.title = "「剛力無敵」牛王" ;
+;[endscript]
+;[ptext layer="3" x="400" y="200" text=&tf.subtitle size="30" color="red" bold="bold" align="left"]
+;[ptext layer="3" x="450" y="300" text=&tf.title size="60" color="red" bold="bold" align="left"]
+;[wait time=1000]
+;[freeimage layer=3]
 ;---------------
+[call storage="process_initialize_enemy.ks"]
 [eval exp="f.en_Name = '牛王'"][WriteEnemy]
 [eval exp="f.Lv = 100, f.en_HP = 10000 "]
 [eval exp="f.EN_STR = 20, f.EN_POW = 20, f.en_DEX=30 "]

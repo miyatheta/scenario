@@ -341,7 +341,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 
 *mission_region_ushi
 [glink  color="black"  target="*mission_express_ushi01"  x="450"  y="150"  width=""  height=""  text="密書配達（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_express_ushi02"  x="450"  y="250"  width=""  height=""  text="密書配達（丑ノ国・破）" ]
+[glink  color="black"  target="*mission_guard_ushi01"  x="450"  y="250"  width=""  height=""  text="護衛任務（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_intlude_ushi01"  x="450"  y="350"  width=""  height=""  text="潜入工作（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_bodyguard_ushi01"  x="450"  y="450"  width=""  height=""  text="密使護衛（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_undercover_ushi01"  x="450"  y="550"  width=""  height=""  text="破壊工作（丑ノ国・序）" ]
@@ -365,8 +365,8 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
 [s]
 
-*mission_express_ushi02
-[glink  color="black"  storage="data_Quest/express_ushi01.ks"  target="*mission_start"  x="450"  y="150"  width=""  height=""  text="はい" ]
+*mission_guard_ushi01
+[glink  color="black"  storage="data_Quest/guard_ushi01.ks"  target="*mission_start"  x="450"  y="150"  width=""  height=""  text="はい" ]
 [glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
 [s]
 
