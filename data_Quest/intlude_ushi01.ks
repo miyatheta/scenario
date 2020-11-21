@@ -470,7 +470,7 @@
 [eval exp="f.EN_STR = 20, f.EN_POW = 20, f.en_DEX=30 "]
 [eval exp="f.GRB=200, f.SEX=200 "]
 [eval exp="f.type = 1, f.Round = 0"]
-[call storage="data_enemy/EN_ushi_Executioner.ks"]
+[call storage="data_enemy/EN_ushi_Executioner01.ks"]
 
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]

@@ -29,9 +29,8 @@
 護衛対象は無事逃げおおせた！！[p]
 [eval exp="f.Cleared = 1"]
 ;逃走完了のアイコン表示
-[eval exp="f.unescape = 0"]
+[eval exp="f.cantescape = 0"]
 逃走が可能になった！！[p]
-[jump target="*PL_battle_select"]
 [endif]
 
 [iscript]
