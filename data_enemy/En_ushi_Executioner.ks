@@ -176,12 +176,7 @@
 牛王は鈴耶の胸を揉みしだいた[p]
 ;快感ダメージ
 [eval exp="tf.fack = f.SEX "]
-[eval exp="tf.fack = tf.fack * f.CURSE / 100 + tf.fack"]
-[eval exp="tf.arg = tf.fack * f.BOOB / 100 "]
-[getMathRound var="tf.fack"]
-鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"]
-[SKEBE][WSs]
+[call storage="routin_kaikan.ks" target="*BOOB"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 [call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
@@ -301,14 +296,8 @@
 牛王はマラを鈴耶の尻に擦りつけてきた[p]
 ;快感ダメージ
 [eval exp="tf.fack = f.SEX "]
-[eval exp="tf.fack = tf.fack * f.CURSE / 100 + tf.fack"]
-[eval exp="tf.arg = tf.fack * f.ANAL / 100 "]
-[getMathRound var="tf.fack"]
-鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"]
+[call storage="routin_kaikan.ks" target="*ANAL"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
-[SKEBE][WSs]
-
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase2房中術絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase2我慢絶頂"]
@@ -430,14 +419,8 @@
 牛王はマラを鈴耶の秘裂に挿入した[p]
 ;快感ダメージ
 [eval exp="tf.fack = f.SEX "]
-[eval exp="tf.fack = tf.fack * f.CURSE / 100 + tf.fack"]
-[eval exp="tf.arg = tf.fack * f.VGNA / 100 "]
-[getMathRound var="tf.fack"]
-鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"]
-[SKEBE][WSs]
+[call storage="routin_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
-
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase3房中術絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase3我慢絶頂"]
@@ -560,14 +543,8 @@
 #
 牛王はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
 [eval exp="tf.fack = f.SEX "]
-[eval exp="tf.fack = tf.fack * f.CURSE / 100 + tf.fack"]
-[eval exp="tf.arg = tf.fack * f.VGNA / 100 "]
-[getMathRound var="tf.fack"]
-鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"]
+[call storage="routin_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
-[SKEBE][WSs]
-
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase4房中術絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase4我慢絶頂"]

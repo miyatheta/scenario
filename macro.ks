@@ -57,7 +57,7 @@
 [macro name="SetStatus"]
 [eval exp="f.MP = f.POW , f.MND = 3 , f.ERO = 0"]
 [eval exp="f.AVD = 0 , f.type = 1"]
-[eval exp="f.poison=0, f.slowly=0, f.excite=0, f.unescape=0"]
+[eval exp="f.poison=0, f.slowly=0, f.excite=0, f.unescape=0 , f.aphrodisy=0 "]
 [eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
 [endmacro]
 
@@ -140,7 +140,7 @@ if(f.slave > 0){tf.vital = tf.vital + "隷属　";}
 if(f.tatoo > 0){tf.vital = tf.vital + "淫紋　";}
 if(f.unescape > 0){tf.vital = tf.vital + "逃走封印　";}
 if(f.cantescape > 0){tf.vital = tf.vital + "逃走不能　";}
-if(f.f.aphrodisy > 0){tf.vital = tf.vital + "欲情　";}
+if(f.aphrodisy > 0){tf.vital = tf.vital + "欲情　";}
 [endscript]
 [ptext layer="0" x="10" y="580" text=&tf.hp size="20" color="0x000000" edge="white" bold="bold" align="left" name="hitpoint" overwrite="true" ]
 [ptext layer="0" x="10" y="600" text=&tf.mp size="20" color="0x000000" edge="white" bold="bold" align="left" name="magicpoint" overwrite="true" ]

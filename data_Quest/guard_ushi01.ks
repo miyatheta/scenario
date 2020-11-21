@@ -96,7 +96,7 @@
 [eval exp="f.GRB = 90 + (f.security * 10), f.SEX = 90 + (f.security * 10) "]
 [eval exp="f.EN_STR = 8 + f.security, f.EN_POW = 8 + f.security, f.en_DEX = 22 + f.security"]
 [eval exp="f.type = 1, f.Round = 0"]
-[call storage="data_enemy/En_ushi_heishi01.ks"]
+[call storage="data_enemy/En_ushi_assasin01.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
