@@ -22,7 +22,7 @@
 [endmacro]
 
 [macro name="AVOIDANCE"]
-[eval exp="f.target = (f.SPD - f.en_DEX) * 5 + (f.MND*10) + f.AVD - f.Hitrate "]
+[eval exp="tf.arg = (f.SPD - f.en_DEX) * 5 + (f.MND*10) + f.AVD - f.Hitrate"]
 [eval exp="f.target = f.target + (f.En_Raptured * 5)"]
 [endmacro]
 
