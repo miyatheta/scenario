@@ -83,6 +83,13 @@ f.progressbar = "逃走距離：" + f.progress + "/" + f.goal;
 [ptext layer="0" x="150" y="600" text=&f.progressbar size="20" color="black" edge="white" bold="bold" align="left" name="progressbar" overwrite="true" ]
 [endmacro]
 
+[macro name="progressbar_trace"]
+[iscript]
+f.progressbar = "現在地：" + f.progress + "敵所在：" + f.En_progress + "追跡限界：" + f.goal;
+[endscript]
+[ptext layer="0" x="150" y="600" text=&f.progressbar size="20" color="black" edge="white" bold="bold" align="left" name="progressbar" overwrite="true" ]
+[endmacro]
+
 [macro name="securitybar"]
 [eval exp="f.warning = 100" cond="f.warning > 100"]
 [iscript]
