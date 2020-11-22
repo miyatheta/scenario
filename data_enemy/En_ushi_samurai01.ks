@@ -17,6 +17,7 @@
 [endif]
 
 ;敵の行動------------------------------------------------------------------------
+*enemy_comand_select
 [jump target="*enemy_sexhara" cond="f.charm > 0"]
 [getrand min="1" max="100" var="f.rand"]
 [if exp=" 0 == f.Round % 4"]

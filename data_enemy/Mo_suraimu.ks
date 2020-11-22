@@ -16,6 +16,8 @@
 [return][s]
 [endif]
 
+;敵の行動------------------------------------------------------------------------
+*enemy_comand_select
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.rand < 50"]
 [jump target="*youkai_attack"]
