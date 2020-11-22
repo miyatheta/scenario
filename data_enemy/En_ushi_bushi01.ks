@@ -69,6 +69,7 @@
 *enemy_sexhara
 #
 [eval exp="f.charm = 0"]
+[jump target="*enemy_comand_select" cond="f.En_Wiseman > 0"]
 武士の組付き[p]
 [getrand min="1" max="100" var="f.rand"]
 [eval exp="f.Hitrate = 0"]
