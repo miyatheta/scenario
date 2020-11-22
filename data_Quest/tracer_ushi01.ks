@@ -13,7 +13,7 @@
 ;ステージ情報
 [bg storage="mori_yoru.jpg" time="500"]
 [eval exp="f.Quest_name='express_ushi01.ks' , f.Quest_type=4"]
-[eval exp="f.goal=200 , f.progress=0 , f.Cleared=0 , f.Achievement=0"]
+[eval exp="f.goal=200 , f.progress=0 , f.Capture=0 , f.Achievement=0"]
 [eval exp="f.security=1 , f.security_MAX=1 , f.warning=0 , f.turn=1"]
 [eval exp="f.cantescape=1 "]
 ;逃亡対象のスペック
@@ -62,6 +62,8 @@
 ;-------------------------------------------------------------------------------
 
 *select_event
+
+
 [getrand min="1" max="60" var="f.event"]
 [if exp="f.event<=20 && f.Pre_event != 1"]
 [eval exp="f.Pre_event = 1"][jump target=*select_enemy]

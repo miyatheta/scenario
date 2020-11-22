@@ -7,6 +7,12 @@
 [if exp="f.progress > f.goal"]
 [eval exp="f.progress = f.goal"]
 [endif]
+
+[if exp="f.Quest_type == 4 && f.progress >= f.En_progress"]
+[eval exp="f.progress = f.En_progress"]
+[eval exp="f.Capture = 1"]
+[endif]
+
 [progressbar]
 [return]
 [s]

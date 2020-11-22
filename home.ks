@@ -340,11 +340,11 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [s]
 
 *mission_region_ushi
-[glink  color="black"  target="*mission_express_ushi01"  x="450"  y="150"  width=""  height=""  text="密書配達（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_guard_ushi01"  x="450"  y="250"  width=""  height=""  text="護衛任務（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_intlude_ushi01"  x="450"  y="350"  width=""  height=""  text="潜入工作（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_bodyguard_ushi01"  x="450"  y="450"  width=""  height=""  text="密使護衛（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_undercover_ushi01"  x="450"  y="550"  width=""  height=""  text="破壊工作（丑ノ国・序）" ]
+[glink  color="black"  target="*mission_express_ushi01"  x="450"  y="150"  width=""  height=""  text="密書（丑ノ国・序）" ]
+[glink  color="black"  target="*mission_guard_ushi01"  x="450"  y="250"  width=""  height=""  text="護衛（丑ノ国・序）" ]
+[glink  color="black"  target="*mission_intlude_ushi01"  x="450"  y="350"  width=""  height=""  text="潜入（丑ノ国・序）" ]
+[glink  color="black"  target="*mission_trace_ushi01"  x="450"  y="450"  width=""  height=""  text="追跡（丑ノ国・序）" ]
+[glink  color="black"  target="*mission_undercover_ushi01"  x="450"  y="550"  width=""  height=""  text="破壊（丑ノ国・序）" ]
 [s]
 
 *mission_region_saru
