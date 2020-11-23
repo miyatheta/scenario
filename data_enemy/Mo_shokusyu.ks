@@ -1,6 +1,6 @@
 *youkai
 ;ラウンド開始時処理--------------------------------------------------------------
-[call storage="routin_battle_round.ks" target="*battle_round_start"]
+[call storage="routin/Rt_battle_round.ks" target="*battle_round_start"]
 
 
 ;PLの行動------------------------------------------------------------------------
@@ -58,7 +58,7 @@
 ひっ！！[p]
 [eval exp="tf.tmp = 200 "]
 [eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
-[eval exp="tf.arg = tf.tmp * f.BOOB / 100 "]
+[eval exp="tf.argment = tf.tmp * f.BOOB / 100 "]
 [getMathRound var="tf.tmp"]
 #
 鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
@@ -87,6 +87,6 @@
 *Round_end
 #
 [if exp="f.HP < 1"][return][endif]
-[call storage="routin_battle_round.ks" target="*battle_round_end"]
+[call storage="routin/Rt_battle_round.ks" target="*battle_round_end"]
 [jump target="*start"]
 [s]

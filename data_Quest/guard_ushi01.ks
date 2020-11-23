@@ -150,9 +150,9 @@
 ;-------------------------------------------------------------------------------
 *no_goal
 #
-[call storage="routin_nogoal.ks"]
+[call storage="routin/Rt_nogoal.ks"]
 
-;[call storage="routin_warning.ks"]
+;[call storage="routin/Rt_warning.ks"]
 ;[if exp="f.security >= f.security_MAX"]
 ;[jump target="*event_executioner"]
 ;[endif]

@@ -1,6 +1,6 @@
 *start
 ;ラウンド開始時処理--------------------------------------------------------------
-[call storage="routin_battle_round.ks" target="*battle_round_start"]
+[call storage="routin/Rt_battle_round.ks" target="*battle_round_start"]
 
 
 ;PLの行動------------------------------------------------------------------------
@@ -36,7 +36,7 @@
 [if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
-[eval exp="tf.arg = f.EN_STR * 5 * f.GRD"][getMathRound var="tf.ATP"]
+[eval exp="tf.argment = f.EN_STR * 5 * f.GRD"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [endif]
@@ -54,8 +54,8 @@
 *Round_end
 #
 [if exp="f.HP < 1"][return][endif]
-[if exp="f.Quest_type == 3"][call storage="routin_progress.ks" target="*guard"][endif]
-[if exp="f.Quest_type == 4"][call storage="routin_progress.ks" target="*trace"][endif]
-[call storage="routin_battle_round.ks" target="*battle_round_end"]
+[if exp="f.Quest_type == 3"][call storage="routin/Rt_progress.ks" target="*guard"][endif]
+[if exp="f.Quest_type == 4"][call storage="routin/Rt_progress.ks" target="*trace"][endif]
+[call storage="routin/Rt_battle_round.ks" target="*battle_round_end"]
 [jump target="*start"]
 [s]

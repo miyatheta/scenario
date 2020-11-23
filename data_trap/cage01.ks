@@ -91,7 +91,7 @@
 ;快感ダメージ
 [eval exp="tf.fack = 100 "]
 [eval exp="tf.fack = tf.fack * f.CURSE / 100 + tf.fack"]
-[eval exp="tf.arg = tf.fack * f.BOOB / 100 "]
+[eval exp="tf.argment = tf.fack * f.BOOB / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.fack"]
@@ -131,7 +131,7 @@
 ;快感ダメージ
 [eval exp="tf.fack = 100 "]
 [eval exp="tf.fack = tf.fack * f.CURSE / 100 + tf.fack"]
-[eval exp="tf.arg = tf.fack * f.VGNA / 100 "]
+[eval exp="tf.argment = tf.fack * f.VGNA / 100 "]
 [getMathRound var="tf.fack"]
 鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.fack"]

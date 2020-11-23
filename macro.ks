@@ -1,4 +1,5 @@
 *macros
+マクロ読み込み
 
 [macro name="MND1"]
 [eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
@@ -12,17 +13,18 @@
 ;攻撃威力の算出
 [eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
-[eval exp="tf.arg = (f.ATP * f.DTR) + f.rand"]
+[eval exp="tf.argment = (f.ATP * f.DTR) + f.rand"]
+
 ;退魔力の算出
 [if exp="f.type==2"]
-[eval exp="tf.arg = tf.arg / 2 "]
-[eval exp="tf.arg = tf.arg + (f.MGP * f.DTR) " cond="f.enchant > 0"]
-[eval exp="tf.arg = tf.arg * 3 " cond="f.arms_type == 2 "]
+[eval exp="tf.argment = tf.argment / 2 "]
+[eval exp="tf.argment = tf.argment + (f.MGP * f.DTR) " cond="f.enchant > 0"]
+[eval exp="tf.argment = tf.argment * 3 " cond="f.arms_type == 2 "]
 [endif]
 [endmacro]
 
 [macro name="AVOIDANCE"]
-[eval exp="tf.arg = (f.SPD - f.en_DEX) * 5 + (f.MND*10) + f.AVD - f.Hitrate"]
+[eval exp="f.target = (f.SPD - f.en_DEX) * 5 + (f.MND*10) + f.AVD - f.Hitrate"]
 [eval exp="f.target = f.target + (f.En_Raptured * 5)"]
 [endmacro]
 
@@ -30,15 +32,18 @@
 [macro name="ATKED"]
 ;[eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
 [endmacro]
+
 ;回避時
 [macro name="AVOID"]
 ;[eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
 [endmacro]
+
 ;セクハラ時
 [macro name="SKEBE"]
 [eval exp="f.MND -= 1" cond="f.MND > 0"][WSs]
 [eval exp="f.MP += 10" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [endmacro]
+
 ;被弾時
 [macro name="DAMED"]
 ;[eval exp="f.MND -= 1" cond="f.MND > 0"]
@@ -54,6 +59,13 @@
 [eval exp="f.MP += 10" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [endmacro]
 
+[macro name="BattleFinsish"]
+;戦闘終了時に解消するべきこと
+[eval exp="f.Round = 0, f.ambush=0"]
+[eval exp="f.enchant = 0 , f.invincible = 0 "]
+[eval exp="f.unescape = 0"]
+[endmacro]
+
 [macro name="SetStatus"]
 [eval exp="f.MP = f.POW , f.MND = 3 , f.ERO = 0"]
 [eval exp="f.AVD = 0 , f.type = 1"]
@@ -61,11 +73,8 @@
 [eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
 [endmacro]
 
-[macro name="BattleFinsish"]
-;戦闘終了時に解消するべきこと
-[eval exp="f.Round = 0, f.ambush=0"]
-[eval exp="f.enchant = 0 , f.invincible = 0 "]
-[eval exp="f.unescape = 0"]
+[macro name="WSs"]
+[call storage="macro_WriteStatus.ks"]
 [endmacro]
 
 [macro name="progressbar"]
@@ -116,48 +125,11 @@ tf.txt = f.date + "/60日" ;
 
 [macro name="Milk"]
 [iscript]
-tf.milktxt = "";
-if(f.milk > 0){tf.milktxt = "乳：" + f.milkpoint;}
+tf.milktxt = "乳：" + f.milkpoint ;
 [endscript]
+[if exp="f.milk > 0"]
 [ptext layer="0" x="10" y="300" text=&tf.milktxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="milkpoint" overwrite="true" ]
-[endmacro]
-
-[macro name="WSs"]
-;WriteStatus
-[Milk]
-[iscript]
-tf.mov = f.MOVE + f.arms_mov ;
-tf.movtxt = "移動力：" + tf.mov ;
-tf.noztmp = f.NOZ + f.arms_noz + f.acceA_noz + f.acceB_noz;
-tf.turntxt = "手番数：" + f.turn ;
-
-tf.hp = "体力：" + f.HP ;
-tf.mp = "気力：" + f.MP ;
-tf.mnd = "集中：" + f.MND ;
-tf.ero = "欲情：" + f.ERO ;
-tf.curse = "淫気：" + f.CURSE ;
-tf.vital = "状態：";
-if(f.poison > 0){tf.vital = tf.vital + "毒　";}
-if(f.slowly > 0){tf.vital = tf.vital + "鈍足　";}
-if(f.excite > 0){tf.vital = tf.vital + "興奮　";}
-if(f.mazo > 0){tf.vital = tf.vital + "被虐性癖　";}
-if(f.milk > 0){tf.vital = tf.vital + "乳牛化　";}
-if(f.bags > 0){tf.vital = tf.vital + "虫憑き　";}
-if(f.slave > 0){tf.vital = tf.vital + "隷属　";}
-if(f.tatoo > 0){tf.vital = tf.vital + "淫紋　";}
-if(f.unescape > 0){tf.vital = tf.vital + "逃走封印　";}
-if(f.cantescape > 0){tf.vital = tf.vital + "逃走不能　";}
-if(f.aphrodisy > 0){tf.vital = tf.vital + "欲情　";}
-[endscript]
-[ptext layer="0" x="10" y="580" text=&tf.hp size="20" color="0x000000" edge="white" bold="bold" align="left" name="hitpoint" overwrite="true" ]
-[ptext layer="0" x="10" y="600" text=&tf.mp size="20" color="0x000000" edge="white" bold="bold" align="left" name="magicpoint" overwrite="true" ]
-[ptext layer="0" x="10" y="620" text=&tf.mnd size="20" color="0x000000" edge="white" bold="bold" align="left" name="concentration" overwrite="true" ]
-[ptext layer="0" x="10" y="640" text=&tf.ero size="20" color="0xff00ff" edge="white" bold="bold" align="left" name="ero" overwrite="true" ]
-[ptext layer="0" x="10" y="660" text=&tf.curse size="20" color="0x9400d3" edge="white" bold="bold" align="left" name="curse" overwrite="true" ]
-[ptext layer="0" x="10" y="680" text=&tf.vital size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="health" overwrite="true" ]
-
-[ptext layer="0" x="150" y="580" text=&tf.movtxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="movepower" overwrite="true" ]
-[ptext layer="0" x="150" y="620" text=&tf.turntxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="noisevolume" overwrite="true" ]
+[endif]
 [endmacro]
 
 [macro name="TESTER"]
@@ -172,19 +144,19 @@ if(f.aphrodisy > 0){tf.vital = tf.vital + "欲情　";}
 鈴耶の理性が１減少した[p]
 [eval exp="f.ERO = 0 , f.SAN -= 1 , f.MND = 0"]
 [eval exp="f.SAN = 0" cond="f.SAN < 0"]
-[eval exp=" tf.arg = tf.fack / 10"][getMathRound var="f.damage"]
+[eval exp=" tf.argment = tf.fack / 10"][getMathRound var="f.damage"]
 [eval exp="f.HP -= f.damage"][eval exp="f.HP = 0" cond="f.HP < 0"]
 鈴耶の体力が[emb exp="f.damage"]減少した[p]
 [WSs]
 [endmacro]
 ; [getMathRound var="XXX"]
-; 一時変数 tf.arg に小数点以下を四捨五入した整数をセットするマクロです。
+; 一時変数 tf.argment に小数点以下を四捨五入した整数をセットするマクロです。
 ; var には変数の名前を指定できます（var="f.a"のように）。
-; 指定すると、tf.arg の内容をその変数にコピーします。
+; 指定すると、tf.argment の内容をその変数にコピーします。
 [macro name="getMathRound"]
  [iscript]
- tf.arg = Math.round(tf.arg)
- if (mp['var']) eval(mp['var'] + ' = ' + tf.arg)
+ tf.argment = Math.round(tf.argment)
+ if (mp['var']) eval(mp['var'] + ' = ' + tf.argment)
  [endscript]
 [endmacro]
 
@@ -586,17 +558,17 @@ if(f.aphrodisy > 0){tf.vital = tf.vital + "欲情　";}
 
 
 ; [getrand var="XXX" min="XXX" max="XXX"]
-; 一時変数 tf.rand に min 以上 max 以下の乱数(整数)をセットするマクロです。
+; 一時変数 f.rand に min 以上 max 以下の乱数(整数)をセットするマクロです。
 ; var には変数の名前を指定できます（var="f.a"のように）。
-; 指定すると、tf.rand の内容をその変数にコピーします。
+; 指定すると、f.rand の内容をその変数にコピーします。
 [macro name="getrand"]
  [iscript]
  var max = mp.max || '10'
  var min = mp.min || '1'
  max = Number(max)
  min = Number(min)
- tf.rand = min + Math.floor(Math.random() * (max - min + 1))
- if (mp['var']) eval(mp['var'] + ' = ' + tf.rand)
+ f.rand = min + Math.floor(Math.random() * (max - min + 1))
+ if (mp['var']) eval(mp['var'] + ' = ' + f.rand)
  [endscript]
 [endmacro]
 
@@ -604,9 +576,9 @@ if(f.aphrodisy > 0){tf.vital = tf.vital + "欲情　";}
 
 ; [getrandname var="XXX" name="XXX" min="XXX" max="XXX"]
 ; 文字列 name の{R}部分を「min 以上 max 以下のランダムな整数」で置き換えた文字列を生成し、
-; 一時変数 tf.randname にセットします。
+; 一時変数 f.randname にセットします。
 ; var には変数の名前を指定できます（var="f.a"のように）。
-; 指定すると、tf.randname の内容をその変数にコピーします。
+; 指定すると、f.randname の内容をその変数にコピーします。
 [macro name="getrandname"]
  [iscript]
  var name = mp.name || '*Label{R}'
@@ -615,8 +587,8 @@ if(f.aphrodisy > 0){tf.vital = tf.vital + "欲情　";}
  max = Number(max)
  min = Number(min)
  var rand  = min + Math.floor(Math.random() * (max - min + 1))
- tf.randname = name.replace('{R}', rand)
- if (mp['var']) eval(mp['var'] + ' = "' + tf.randname + '"')
+ f.randname = name.replace('{R}', rand)
+ if (mp['var']) eval(mp['var'] + ' = "' + f.randname + '"')
  [endscript]
 [endmacro]
 

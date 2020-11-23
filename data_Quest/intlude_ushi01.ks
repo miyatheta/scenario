@@ -45,7 +45,7 @@
 [cm]
 @layopt layer=message0 visible=true
 [current layer="message0"]
-[call storage="routin_progress.ks"]
+[call storage="routin/Rt_progress.ks"]
 
 [if exp="f.progress >= f.goal"]
 [jump target=*goal]
@@ -258,22 +258,22 @@
 ;-------------------------------------------------------------------------------
 *fortune_01
 ;回復薬
-[call storage="data_comon_event.ks" target="*heal_potion"]
+[call storage="data_Quest/comon_event.ks" target="*heal_potion"]
 [jump target="*no_goal"]
 [s]
 *fortune_02
 ;密会を目撃（集中＋）
-[call storage="data_comon_event.ks" target="*Witness_meating"]
+[call storage="data_Quest/comon_event.ks" target="*Witness_meating"]
 [jump target="*no_goal"]
 [s]
 *fortune_03
 ;果物を発見(気力＋)
-[call storage="data_comon_event.ks" target="*get_fruits"]
+[call storage="data_Quest/comon_event.ks" target="*get_fruits"]
 [jump target="*no_goal"]
 [s]
 *fortune_04
 ;見回りが居眠り
-[call storage="data_comon_event.ks" target="*sleeping_guard"]
+[call storage="data_Quest/comon_event.ks" target="*sleeping_guard"]
 [jump target="*goal" cond="f.progress >= f.goal"]
 [jump target="*no_goal"][s]
 
@@ -318,9 +318,9 @@
 [s]
 *try_hinding01
 #
-[getrand min="1" max="100" var="tf.rand"]
+[getrand min="1" max="100" var="f.rand"]
 [eval exp="tf.tag = f.MND * 10 + 49"]
-[if exp="tf.rand <= tf.tag && f.MND >= 1"]
+[if exp="f.rand <= tf.tag && f.MND >= 1"]
 ・・・・・・[p]
 やりすごすことができたようだ[p]
 集中力を１消費した[p]
@@ -338,9 +338,9 @@
 
 *try_ambush01
 #
-[getrand min="1" max="100" var="tf.rand"]
+[getrand min="1" max="100" var="f.rand"]
 [eval exp="tf.tag = f.MND * 10 + 70"]
-[if exp="tf.rand <= tf.tag "]
+[if exp="f.rand <= tf.tag "]
 不意打ち成功!![p]
 [eval exp="f.ambush = 1"]
 [else]
@@ -355,31 +355,31 @@
 
 *accident_03
 ;幽霊部屋（気力ー）
-[call storage="data_comon_event.ks" target="*ghost_room"]
+[call storage="data_Quest/comon_event.ks" target="*ghost_room"]
 [jump target="*no_goal"]
 [s]
 
 *accident_04
 ;見回りが立っている(後退)
-[call storage="data_comon_event.ks" target="*standing_guard"]
+[call storage="data_Quest/comon_event.ks" target="*standing_guard"]
 [jump target="*no_goal"]
 [s]
 
 *accident_05
 ;トリモチ（＋鈍足）
-[call storage="data_comon_event.ks" target="*torimochi"]
+[call storage="data_Quest/comon_event.ks" target="*torimochi"]
 [jump target="*no_goal"]
 [s]
 
 *accident_06
 ;猫の悲鳴（警戒＋）
-[call storage="data_comon_event.ks" target="*torimochi"]
+[call storage="data_Quest/comon_event.ks" target="*torimochi"]
 [jump target="*no_goal"]
 [s]
 
 *accident_07
 ;逢い引きを目撃（興奮＋）
-[call storage="data_comon_event.ks" target="*romance_room"]
+[call storage="data_Quest/comon_event.ks" target="*romance_room"]
 [jump target="*no_goal"]
 [s]
 
@@ -399,9 +399,9 @@
 ;-------------------------------------------------------------------------------
 *no_goal
 #
-[call storage="routin_nogoal.ks"]
+[call storage="routin/Rt_nogoal.ks"]
 
-[call storage="routin_warning.ks"]
+[call storage="routin/Rt_warning.ks"]
 [if exp="f.security >= f.security_MAX"]
 [jump target="*event_executioner"]
 [endif]

@@ -1,6 +1,6 @@
 *start
 ;ラウンド開始時処理--------------------------------------------------------------
-[call storage="routin_battle_round.ks" target="*battle_round_start"]
+[call storage="routin/Rt_battle_round.ks" target="*battle_round_start"]
 
 
 ;PLの行動------------------------------------------------------------------------
@@ -40,8 +40,8 @@
 [if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
-[eval exp="tf.arg = f.EN_STR * 10 * f.GRD"]
-[eval exp="tf.arg = tf.arg * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
+[eval exp="tf.argment = f.EN_STR * 10 * f.GRD"]
+[eval exp="tf.argment = tf.argment * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [endif]
@@ -58,8 +58,8 @@
 [if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [else]
-[eval exp="tf.arg = f.EN_STR * 20 * f.GRD"]
-[eval exp="tf.arg = tf.arg * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
+[eval exp="tf.argment = f.EN_STR * 20 * f.GRD"]
+[eval exp="tf.argment = tf.argment * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [endif]
@@ -88,9 +88,9 @@
 *Round_end
 #
 [if exp="f.HP < 1"][return][endif]
-[if exp="f.Quest_type == 3"][call storage="routin_progress.ks" target="*guard"][endif]
-[if exp="f.Quest_type == 4"][call storage="routin_progress.ks" target="*trace"][endif]
-[call storage="routin_battle_round.ks" target="*battle_round_end"]
+[if exp="f.Quest_type == 3"][call storage="routin/Rt_progress.ks" target="*guard"][endif]
+[if exp="f.Quest_type == 4"][call storage="routin/Rt_progress.ks" target="*trace"][endif]
+[call storage="routin/Rt_battle_round.ks" target="*battle_round_end"]
 [jump target="*start"][s]
 
 ;------------------------------------------------------------------------------
@@ -104,7 +104,7 @@
 落ち武者は鈴耶の胸を揉みしだいた[p]
 ;快感ダメージ
 [eval exp="tf.fack = f.SEX "]
-[call storage="routin_kaikan.ks" target="*BOOB"]
+[call storage="routin/Rt_kaikan.ks" target="*BOOB"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 [call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
 ;リアクション
@@ -229,7 +229,7 @@
 落ち武者は魔羅を鈴耶の尻に擦りつけてきた[p]
 ;快感ダメージ
 [eval exp="tf.fack = f.SEX "]
-[call storage="routin_kaikan.ks" target="*ANAL"]
+[call storage="routin/Rt_kaikan.ks" target="*ANAL"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase2房中術絶頂"]
@@ -355,7 +355,7 @@
 落ち武者は魔羅を鈴耶の秘裂に挿入した[p]
 ;快感ダメージ
 [eval exp="tf.fack = f.SEX "]
-[call storage="routin_kaikan.ks" target="*VGNA"]
+[call storage="routin/Rt_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase3房中術絶頂"]
@@ -481,7 +481,7 @@
 #
 落ち武者はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
 [eval exp="tf.fack = f.SEX "]
-[call storage="routin_kaikan.ks" target="*ANAL"]
+[call storage="routin/Rt_kaikan.ks" target="*ANAL"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
 [if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase4房中術絶頂"]

@@ -4,14 +4,15 @@
 
 [stop_keyconfig]
 
-
 ;ティラノスクリプトが標準で用意している便利なライブラリ群
 ;コンフィグ、CG、回想モードを使う場合は必須
 @call storage="tyrano.ks"
 
+;変数宣言
+@call storage="process_declare.ks"
+
 ;ゲームで必ず必要な初期化処理はこのファイルに記述するのがオススメ
 @call storage="macro.ks"
-
 
 ;メッセージボックスは非表示
 @layopt layer="message" visible=false

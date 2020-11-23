@@ -15,12 +15,12 @@
 
 *milk
 #
-『乳牛化』していた鈴耶の胸からは母乳が迸った[p]
+『爆乳化』していた鈴耶の胸からは母乳が迸った[p]
 #鈴耶
 いやあああああああああっ！！[r]おっぱいでちゃううううっ！！[p]
 [eval exp="tf.fack_milk = f.milkpoint + 50"]
 [eval exp="tf.fack_milk = tf.fack_milk * f.CURSE / 100 + tf.fack_milk"]
-[eval exp="tf.arg = tf.fack_milk * f.BOOB / 100 "]
+[eval exp="tf.argment = tf.fack_milk * f.BOOB / 100 "]
 [getMathRound var="tf.fack_milk"]
 射乳により追加で[emb exp="tf.fack_milk"]の快感を受けた[p]
 [eval exp="f.ERO = f.ERO + tf.fack_milk"][WSs]

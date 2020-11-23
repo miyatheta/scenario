@@ -375,8 +375,8 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
 [s]
 
-*mission_undercover_ushi01
-[glink  color="black"  storage="data_Quest/express_ushi01.ks"  target="*mission_start"  x="450"  y="150"  width=""  height=""  text="はい" ]
+*mission_trace_ushi01
+[glink  color="black"  storage="data_Quest/tracer_ushi01.ks"  target="*mission_start"  x="450"  y="150"  width=""  height=""  text="はい" ]
 [glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
 [s]
 

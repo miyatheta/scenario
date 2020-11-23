@@ -43,7 +43,7 @@
 [cm]
 @layopt layer=message0 visible=true
 [current layer="message0"]
-[call storage="routin_progress.ks"]
+[call storage="routin/Rt_progress.ks"]
 
 [if exp="f.progress >= f.goal"]
 [jump target=*goal]
@@ -210,25 +210,25 @@
 
 *fortune_01
 ;薬草
-[call storage="data_comon_event.ks" target="*healing_herbs"]
+[call storage="data_Quest/comon_event.ks" target="*healing_herbs"]
 [jump target="*no_goal"]
 [s]
 
 *fortune_02
 ;お地蔵様（気力＋）
-[call storage="data_comon_event.ks" target="*stone_statue"]
+[call storage="data_Quest/comon_event.ks" target="*stone_statue"]
 [jump target="*no_goal"]
 [s]
 
 *fortune_03
 ;湧き水（集中力＋）
-[call storage="data_comon_event.ks" target="*spring_water"]
+[call storage="data_Quest/comon_event.ks" target="*spring_water"]
 [jump target="*no_goal"]
 [s]
 
 *fortune_04
 ;抜け道
-[call storage="data_comon_event.ks" target="*forest_shortcut"]
+[call storage="data_Quest/comon_event.ks" target="*forest_shortcut"]
 [jump target="*goal" cond="f.progress >= f.goal"]
 [jump target="*no_goal"]
 [s]
@@ -266,31 +266,31 @@
 
 *accident_03
 ;幽霊を目撃する(気力-)
-[call storage="data_comon_event.ks" target="*watch_ghost"]
+[call storage="data_Quest/comon_event.ks" target="*watch_ghost"]
 [jump target="*no_goal"]
 [s]
 
 *accident_04
 ;地すべり迂回（後退）
-[call storage="data_comon_event.ks" target="*landslide_roundabout"]
+[call storage="data_Quest/comon_event.ks" target="*landslide_roundabout"]
 [jump target="*no_goal"]
 [s]
 
 *accident_05
 ;ぬかるみ（＋鈍足）
-[call storage="data_comon_event.ks" target="*muddy_swanp"]
+[call storage="data_Quest/comon_event.ks" target="*muddy_swanp"]
 [jump target="*no_goal"]
 [s]
 
 *accident_06
 ;毒蜘蛛（＋毒）
-[call storage="data_comon_event.ks" target="*poison_spider"]
+[call storage="data_Quest/comon_event.ks" target="*poison_spider"]
 [jump target="*no_goal"]
 [s]
 
 *accident_07
 ;怪しげな花粉（＋興奮）
-[call storage="data_comon_event.ks" target="*strange_flower"]
+[call storage="data_Quest/comon_event.ks" target="*strange_flower"]
 [jump target="*no_goal"]
 [s]
 
@@ -305,9 +305,9 @@
 [s]
 *try_hinding01
 #
-[getrand min="1" max="100" var="tf.rand"]
+[getrand min="1" max="100" var="f.rand"]
 [eval exp="tf.tag = f.MND * 10 + 49"]
-[if exp="tf.rand <= tf.tag && f.MND >= 1"]
+[if exp="f.rand <= tf.tag && f.MND >= 1"]
 ・・・・・・[p]
 やりすごすことができたようだ[p]
 集中力を１消費した[p]
@@ -325,9 +325,9 @@
 
 *try_ambush01
 #
-[getrand min="1" max="100" var="tf.rand"]
+[getrand min="1" max="100" var="f.rand"]
 [eval exp="tf.tag = f.MND * 10 + 70"]
-[if exp="tf.rand <= tf.tag "]
+[if exp="f.rand <= tf.tag "]
 不意打ち成功!![p]
 [eval exp="f.ambush = 1"]
 [else]
@@ -349,9 +349,9 @@
 [s]
 *try_hinding02
 #
-[getrand min="1" max="100" var="tf.rand"]
+[getrand min="1" max="100" var="f.rand"]
 [eval exp="tf.tag = f.MND * 10 + 49"]
-[if exp="tf.rand <= tf.tag && f.MND >= 1"]
+[if exp="f.rand <= tf.tag && f.MND >= 1"]
 ・・・・・・[p]
 やりすごすことができたようだ[p]
 [eval exp="f.MND -= 1"]
@@ -368,9 +368,9 @@
 
 *try_ambush02
 #
-[getrand min="1" max="100" var="tf.rand"]
+[getrand min="1" max="100" var="f.rand"]
 [eval exp="tf.tag = f.MND * 10 + 70"]
-[if exp="tf.rand <= tf.tag "]
+[if exp="f.rand <= tf.tag "]
 不意打ち成功!![p]
 [eval exp="f.ambush = 1"]
 [else]
@@ -398,7 +398,7 @@
 ;-------------------------------------------------------------------------------
 *no_goal
 #
-[call storage="routin_nogoal.ks"]
+[call storage="routin/Rt_nogoal.ks"]
 
 [jump target="*ready"]
 [s]
