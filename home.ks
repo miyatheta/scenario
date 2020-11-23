@@ -1,5 +1,6 @@
 *home_start
 [cm]
+[clearstack  stack="call"  ]
 [freeimage layer="0" ]
 [bg storage="syosai1-1080.jpg" time="100"]
 [chara_show  name="suzune"  left="-100" top="-20"]

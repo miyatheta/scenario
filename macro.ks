@@ -1,6 +1,4 @@
 *macros
-マクロ読み込み
-
 [macro name="MND1"]
 [eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
 [endmacro]

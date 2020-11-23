@@ -455,14 +455,7 @@
 くっ！！押し通る！！[p]
 ;特殊演出--------
 ;牛鬼
-;[iscript]
-;tf.subtitle = "丑の国・筆頭牛鬼";
-;tf.title = "「剛力無敵」牛鬼" ;
-;[endscript]
-;[ptext layer="3" x="400" y="200" text=&tf.subtitle size="30" color="red" bold="bold" align="left"]
-;[ptext layer="3" x="450" y="300" text=&tf.title size="60" color="red" bold="bold" align="left"]
-;[wait time=1000]
-;[freeimage layer=3]
+
 ;---------------
 [call storage="process_initialize_enemy.ks"]
 [eval exp="f.en_Name = '牛鬼'"][WriteEnemy]
