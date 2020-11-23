@@ -36,6 +36,7 @@
 [if exp="f.target > f.rand"]
 #
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
+[elsif exp="f.invincible > 0"][call storage="macro_invincible.ks"]
 [else]
 鈴耶の精神力が2減少[p]
 [eval exp="f.POW = f.POW - 2"][DAMED]
@@ -51,6 +52,7 @@
 [if exp="f.target > f.rand"]
 #
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
+[elsif exp="f.invincible > 0"][call storage="macro_invincible.ks"]
 [else]
 ひとだまは鈴耶に取りついた[p]
 ひとだまは鈴耶の胸に吸い付いた[p]

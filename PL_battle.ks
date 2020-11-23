@@ -15,7 +15,7 @@
 *PL_battle_select
 [glink color="black" target="*PL_attack_select" x="450" y="100" width="" height="" text="攻撃" ]
 [glink color="black" target="*PL_magic_select" x="450" y="200" width="" height="" text="忍術" ]
-;[glink color="black" target="*PL_skill_select" x="450" y="300" width="" height="" text="スキル" ]
+[glink color="black" target="*PL_skill_select" x="450" y="300" width="" height="" text="スキル" ]
 ;[glink color="black" target="*PL_item_select" x="450" y="300" width="" height="" text="道具" ]
 [glink color="black" target="*PL_escape_select" x="450" y="400" width="" height="" text="逃走" ]
 [s]
@@ -53,7 +53,7 @@
 *PL_skill_01
 鈴耶の魅了(魔法弱)[r]
 敵はムラムラした[p]
-;敵に拘束を誘発させる
+
 [eval exp="f.charm = 1 , f.AVD = -100"]
 [eval exp="f.MND -= 1"][eval exp="f.MND = 0" cond="f.MND < 0"]
 [WSs]
@@ -63,19 +63,18 @@
 *PL_skill_02
 鈴耶の退魔の術[r]
 妖怪へのダメージが増加（３ターン、50%）[p]
-;敵に拘束を誘発させる
+腕力が低下（クエスト中）[p]
 [eval exp="f.enchant = 3 "]
-[eval exp="f.MND -= 3"][eval exp="f.MND = 0" cond="f.MND < 0"]
+[eval exp="f.STR -= 3"][eval exp="f.STR = 0" cond="f.STR < 0"]
 [WSs]
 [jump target="*PL_battle_select"]
 [s]
 
 *PL_skill_03
-鈴耶の空蝉の術[r]
+鈴耶の代わり身の術[r]
 ダメージ、拘束を１回だけ無効化（２ターン）[p]
-;敵に拘束を誘発させる
+発動時衣服を１枚失う[p]
 [eval exp="f.invincible = 2 "]
-[eval exp="f.MND -= 4"][eval exp="f.MND = 0" cond="f.MND < 0"]
 [WSs]
 [jump target="*PL_battle_select"]
 [s]
