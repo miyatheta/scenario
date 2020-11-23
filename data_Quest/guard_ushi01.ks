@@ -75,7 +75,7 @@
 *enemy01
 [eval exp="f.enemy = 1"]
 下忍（丑）が現れた[p]
-[call storage="process_initialize_enemy.ks"]
+[call storage="initialize_enemy.ks"]
 [eval exp="f.en_Name = '下忍（丑）'"][WriteEnemy]
 [eval exp="f.Lv = 27 + (f.security * 10) , f.en_HP = 190 + (f.security * 10)"]
 [eval exp="f.GRB = 100 + (f.security * 10), f.SEX = 140 + (f.security * 10) "]
@@ -90,7 +90,7 @@
 *enemy02
 [eval exp="f.enemy = 2"]
 暗殺者（丑）が現れた[p]
-[call storage="process_initialize_enemy.ks"]
+[call storage="initialize_enemy.ks"]
 [eval exp="f.en_Name = '暗殺者（丑）'"][WriteEnemy]
 [eval exp="f.Lv = 27 + (f.security * 10) , f.en_HP = 170 + (f.security * 10)"]
 [eval exp="f.GRB = 90 + (f.security * 10), f.SEX = 90 + (f.security * 10) "]
@@ -105,7 +105,7 @@
 *enemy03
 [eval exp="f.enemy = 3"]
 中忍（丑）が現れた[p]
-[call storage="process_initialize_enemy.ks"]
+[call storage="initialize_enemy.ks"]
 [eval exp="f.en_Name = '中忍（丑）'"][WriteEnemy]
 [eval exp="f.Lv = 36 + (f.security * 10) , f.en_HP = 180 + (f.security * 10)"]
 [eval exp="f.GRB = 100 + (f.security * 10), f.SEX = 140 + (f.security * 10) "]
@@ -122,7 +122,7 @@
 ;特殊演出--------
 
 ;---------------
-[call storage="process_initialize_enemy.ks"]
+[call storage="initialize_enemy.ks"]
 [eval exp="f.en_Name = '牛鬼'"][WriteEnemy]
 [eval exp="f.Lv = 100, f.en_HP = 1000 "]
 [eval exp="f.EN_STR = 20, f.EN_POW = 20, f.en_DEX=30 "]
@@ -136,7 +136,7 @@
 [s]
 ;-------------------------------------------------------------------------------
 *escape
-[call storage="process_escape.ks"]
+[call storage="macro_escape.ks"]
 [jump target="*no_goal"]
 [s]
 

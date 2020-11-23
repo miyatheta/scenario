@@ -13,7 +13,12 @@
 [eval exp="f.Capture = 1"]
 [endif]
 
+[if exp="f.Quest_type == 4"]
+[progressbar_trace]
+[else]
 [progressbar]
+[endif]
+
 [return]
 [s]
 
@@ -50,29 +55,25 @@ f.progressbar = "逃走距離：" + f.progress + "/" + f.goal;
 
 ;-------------------------------------------------------------------------------
 *trace
-[if exp="f.Cleared != 1"]
+[if exp="f.Capture != 1"]
 [eval exp="f.En_MOVE = f.En_MOVE_MAX "]
 [eval exp="f.En_MOVE -= 3 " cond="f.En_slowly > 0"]
 [eval exp="f.En_progress += f.En_MOVE"]
 追跡対象が[emb exp="f.En_MOVE"]逃走[p]
 [WSs]
-[call target="*select_event"]
 [endif]
 
 [if exp="f.En_progress > f.goal"]
 [eval exp="f.En_progress = f.goal"]
 [endif]
 
-[if exp="f.En_progress >= f.goal && f.Cleared != 1"]
+[if exp="f.En_progress >= f.goal && f.Capture != 1"]
 追跡対象が追跡限界を越えました[p]
-[eval exp="f.Cleared = 1"]
 [endif]
 
 [progressbar_trace]
-
 [return]
 [s]
-
 
 ;-------------------------------------------------------------------------------
 
@@ -97,7 +98,7 @@ f.progressbar = "逃走距離：" + f.progress + "/" + f.goal;
 [else]
 ;普通に前進
 [return]
-
 [endif]
+
 [return]
 [s]

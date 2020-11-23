@@ -17,7 +17,7 @@
 [eval exp="f.security=1 , f.security_MAX=1 , f.warning=0 , f.turn=1"]
 [eval exp="f.cantescape=1 "]
 ;逃亡対象のスペック
-[eval exp="f.En_MOVE=5 , f.En_MOVE_MAX=5 , f.En_slowly=0 ,  f.En_progress=20 "]
+[eval exp="f.En_MOVE=5 , f.En_MOVE_MAX=5 , f.En_slowly=0 ,  f.En_progress=50 "]
 
 ;暫定ステータス
 [SetStatus]
@@ -54,15 +54,17 @@
 
 [if exp="f.progress >= f.goal"]
 [jump target=*goal]
-
-[else]
-[jump target=*select_event]
 [endif]
+
+[if exp="f.Capture > 0"]
+[jump target=*capture]
+[endif]
+
+[jump target=*select_event]
 
 ;-------------------------------------------------------------------------------
 
 *select_event
-
 
 [getrand min="1" max="60" var="f.event"]
 [if exp="f.event<=20 && f.Pre_event != 1"]
@@ -89,7 +91,7 @@
 
 [if exp="f.event<=30"]
 野犬が現れた[p]
-[call storage="process_initialize_enemy.ks"]
+[call storage="initialize_enemy.ks"]
 [eval exp="f.en_Name = '野犬'"][WriteEnemy]
 [eval exp="f.Lv = 10 + (f.security * 10), f.en_HP = 110 + (f.security * 10) , f.GRB = 70 + (f.security * 10)"]
 [eval exp="f.EN_STR = 9 + f.security, f.en_DEX = 31 + f.security"]
@@ -102,7 +104,7 @@
 
 [elsif exp="f.event<=60"]
 野盗が現れた[p]
-[call storage="process_initialize_enemy.ks"]
+[call storage="initialize_enemy.ks"]
 [eval exp="f.en_Name = '野盗'"][WriteEnemy]
 [eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 150 + (f.security * 10)"]
 [eval exp="f.GRB = 90 + (f.security * 10), f.SEX = 90 + (f.security * 10) "]
@@ -116,7 +118,7 @@
 
 [elsif exp="f.event<=80"]
 落ち武者が現れた[p]
-[call storage="process_initialize_enemy.ks"]
+[call storage="initialize_enemy.ks"]
 [eval exp="f.en_Name = '落ち武者'"][WriteEnemy]
 [eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 240 + (f.security * 10)"]
 [eval exp="f.GRB = 100 + (f.security * 10), f.SEX = 110 + (f.security * 10) "]
@@ -130,7 +132,7 @@
 
 [else]
 忍者が現れた[p]
-[call storage="process_initialize_enemy.ks"]
+[call storage="initialize_enemy.ks"]
 [eval exp="f.en_Name = '忍者'"][WriteEnemy]
 [eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 180 + (f.security * 10)"]
 [eval exp="f.GRB = 90 + (f.security * 10), f.SEX = 140 + (f.security * 10) "]
@@ -393,7 +395,7 @@
 
 ;-------------------------------------------------------------------------------
 *escape
-[call storage="process_escape.ks"]
+[call storage="macro_escape.ks"]
 [jump target="*no_goal"]
 [s]
 
@@ -433,10 +435,31 @@
 [s]
 
 ;-------------------------------------------------------------------------------
+*capture
+
+#鈴耶
+捕まえた！[p]
+#賊
+ちっ！！[p]
+#
+忍者が現れた！！[p]
+[call storage="initialize_enemy.ks"]
+[eval exp="f.en_Name = '忍者'"][WriteEnemy]
+[eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 180 + (f.security * 10)"]
+[eval exp="f.GRB = 90 + (f.security * 10), f.SEX = 140 + (f.security * 10) "]
+[eval exp="f.EN_STR = 11 + f.security, f.EN_POW = 11 + f.security, f.en_DEX = 28 + f.security"]
+[eval exp="f.type = 1, f.Round = 0"]
+[call storage="data_enemy/EN_comon_ninja01.ks"]
+[jump target="*defeat" cond="f.HP < 1"]
+;[jump target="*escape" cond="f.escape > 0"]
+[jump target="*goal"]
+[s]
+
+;-------------------------------------------------------------------------------
 *goal
 #鈴耶
 [chara_mod name="suzune" face="happy" ]
-無事到着っと[p]
+無事確保っと！[p]
 [SetStatus]
 [WSs]
 
@@ -444,5 +467,6 @@
 *result
 [freeimage layer="0" ]
 [call storage="asset_result.ks"]
+Homeに戻ります[p]
 [jump storage="home.ks" target="*home_start"]
 [s]

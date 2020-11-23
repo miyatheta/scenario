@@ -80,7 +80,7 @@
 
 [if exp="f.event<=30"]
 野犬が現れた[p]
-[call storage="process_initialize_enemy.ks"]
+[call storage="initialize_enemy.ks"]
 [eval exp="f.en_Name = '野犬'"][WriteEnemy]
 [eval exp="f.Lv = 10 + (f.security * 10), f.en_HP = 110 + (f.security * 10) , f.GRB = 70 + (f.security * 10)"]
 [eval exp="f.EN_STR = 9 + f.security, f.en_DEX = 31 + f.security"]
@@ -93,7 +93,7 @@
 
 [elsif exp="f.event<=60"]
 野盗が現れた[p]
-[call storage="process_initialize_enemy.ks"]
+[call storage="initialize_enemy.ks"]
 [eval exp="f.en_Name = '野盗'"][WriteEnemy]
 [eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 150 + (f.security * 10)"]
 [eval exp="f.GRB = 90 + (f.security * 10), f.SEX = 90 + (f.security * 10) "]
@@ -107,7 +107,7 @@
 
 [elsif exp="f.event<=80"]
 落ち武者が現れた[p]
-[call storage="process_initialize_enemy.ks"]
+[call storage="initialize_enemy.ks"]
 [eval exp="f.en_Name = '落ち武者'"][WriteEnemy]
 [eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 240 + (f.security * 10)"]
 [eval exp="f.GRB = 100 + (f.security * 10), f.SEX = 110 + (f.security * 10) "]
@@ -121,7 +121,7 @@
 
 [else]
 忍者が現れた[p]
-[call storage="process_initialize_enemy.ks"]
+[call storage="initialize_enemy.ks"]
 [eval exp="f.en_Name = '忍者'"][WriteEnemy]
 [eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 180 + (f.security * 10)"]
 [eval exp="f.GRB = 90 + (f.security * 10), f.SEX = 140 + (f.security * 10) "]
@@ -384,7 +384,7 @@
 
 ;-------------------------------------------------------------------------------
 *escape
-[call storage="process_escape.ks"]
+[call storage="macro_escape.ks"]
 [jump target="*no_goal"]
 [s]
 
@@ -423,6 +423,7 @@
 [SetStatus]
 [WSs]
 
+;-------------------------------------------------------------------------------
 *result
 [freeimage layer="0" ]
 [call storage="asset_result.ks"]

@@ -9,7 +9,7 @@
 @call storage="tyrano.ks"
 
 ;変数宣言
-@call storage="process_declare.ks"
+@call storage="initialize_declare.ks"
 
 ;ゲームで必ず必要な初期化処理はこのファイルに記述するのがオススメ
 @call storage="macro.ks"

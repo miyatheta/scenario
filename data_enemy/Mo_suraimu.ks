@@ -1,7 +1,6 @@
-*youkai
+*start
 ;ラウンド開始時処理--------------------------------------------------------------
 [call storage="routin/Rt_battle_round.ks" target="*battle_round_start"]
-
 
 ;PLの行動------------------------------------------------------------------------
 #
@@ -40,7 +39,7 @@
 鈴耶の敏捷が3減少[p]
 [eval exp="f.SPD = f.SPD - 2"][DAMED]
 [endif]
-[jump target="*youkai"][s]
+[jump target="*Round_end"][s]
 
 *youkai_sexhara
 #
@@ -57,12 +56,7 @@
 #鈴耶
 ひっ！！[p]
 [eval exp="tf.tmp = 100 "]
-[eval exp="tf.tmp = tf.tmp * f.CURSE / 100 + tf.tmp"]
-[eval exp="tf.argment = tf.tmp * f.ANAL / 100 "]
-[getMathRound var="tf.tmp"]
-#
-鈴耶は[emb exp="tf.tmp"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.tmp"][SKEBE][WSs]
+[call storage="routin/Rt_kaikan.ks" target="*ANAL"]
 [endif]
 [if exp="f.ERO >= 1000 "]
 ;鈴耶は絶頂した[p]
@@ -72,7 +66,7 @@
 [eval exp="f.en_Name = ''"][WriteEnemy]
 [return][s]
 [endif]
-[jump target="*youkai"][s]
+[jump target="*Round_end"][s]
 
 *youkai_escape
 #
@@ -84,7 +78,10 @@
 
 *Round_end
 #
+ラウンド終了[p]
 [if exp="f.HP < 1"][return][endif]
 [call storage="routin/Rt_battle_round.ks" target="*battle_round_end"]
+[if exp="f.Quest_type == 4"][call storage="routin/Rt_progress.ks" target="*trace"][endif]
+
 [jump target="*start"]
 [s]
