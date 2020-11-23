@@ -24,15 +24,6 @@
 ;上記で定義した領域がキャラクターの名前表示であることを宣言（これがないと#の部分でエラーになります）
 [chara_config ptext="chara_name_area" ]
 
-;このゲームで登場するキャラクターを宣言
-;suzune
-[chara_new  name="suzune" storage="chara/suzune/normal.png" jname="鈴耶" width=660]
-;キャラクターの表情登録
-[chara_face name="suzune" face="angry" storage="chara/suzune/angry.png"]
-[chara_face name="suzune" face="surprise" storage="chara/suzune/doki.png"]
-[chara_face name="suzune" face="happy" storage="chara/suzune/happy.png"]
-[chara_face name="suzune" face="sad" storage="chara/suzune/sad.png"]
-
 [jump storage="home.ks" target="**home_start"]
 
 #
@@ -64,7 +55,7 @@
 [s  ]
 *selectinterest
 
-[chara_mod  name="akane" face="happy"  ]
+[chara_mod  name="akane" face="柔らか"  ]
 #あかね
 わー。興味あるなんて、嬉しいなー。[p]
 #
@@ -94,7 +85,7 @@
 #
 へぇー。それはちょっと興味あるね。[p]
 
-[chara_mod  name="akane" face="happy"  ]
+[chara_mod  name="akane" face="柔らか"  ]
 #あかね
 ほ、ほんと！？[p]
 このゲームをプレイするだけで、ティラノスクリプトの機能を確認することができるから[p]

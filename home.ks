@@ -3,7 +3,8 @@
 [clearstack  stack="call"  ]
 [freeimage layer="0" ]
 [bg storage="syosai1-1080.jpg" time="100"]
-[chara_show  name="suzune"  left="-100" top="-20"]
+[eval exp="f.dress=1"][call storage="asset_face.ks"]
+[chara_show name="suzune" fase="普通" left="-100" top="-20"]
 @layopt layer=message0 visible=true
 @layopt layer=2 visible=true
 [WriteDate][WSs]
@@ -20,6 +21,7 @@
 
 *select_menu
 [call target="*show_status"]
+[chara_show name="suzune" fase="普通" left="-100" top="-20"]
 [glink  color="black"  target="*mission_select1"  x="450"  y="100"  width=""  height=""  text="忍務" ]
 [glink  color="black"  target="*select_preparation"  x="450"  y="200"  width=""  height=""  text="装備" ]
 [glink  color="black"  target="*select_holiday"  x="450"  y="300"  width=""  height=""  text="休息" ]

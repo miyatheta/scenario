@@ -80,7 +80,8 @@
 [TESTER]
 [if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
-[elsif exp="f.invincible > 0"][call storage="macro_invincible.ks"]
+[elsif exp="f.invincible > 0"]
+[call storage="macro_invincible.ks"]
 [else]
 [eval exp="tf.argment = f.EN_STR * 5 * f.GRD"]
 [eval exp="tf.argment = tf.argment * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
@@ -100,7 +101,8 @@
 [TESTER]
 [if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
-[elsif exp="f.invincible > 0"][call storage="macro_invincible.ks"]
+[elsif exp="f.invincible > 0"]
+[call storage="macro_invincible.ks"]
 [else]
 [eval exp="tf.argment = (f.EN_STR + f.EN_STR_BUFF) * 15 * f.GRD"]
 [eval exp="tf.argment = tf.argment * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
@@ -138,7 +140,9 @@
 [if exp="f.target > f.rand"]
 鈴耶は敵の組付きを回避した[p][AVOID][WSs]
 [jump target="*Round_end"][s]
-[elsif exp="f.invincible > 0"][call storage="macro_invincible.ks"]
+[elsif exp="f.invincible > 0"]
+[call storage="macro_invincible.ks"]
+[jump target="*Round_end"][s]
 [endif]
 鈴耶は牛鬼に組み付かれた[p]
 [eval exp="f.bind = f.GRB"]
@@ -171,7 +175,7 @@
 #
 牛鬼は鈴耶の胸を揉みしだいた[p]
 ;快感ダメージ
-[eval exp="tf.fack = f.SEX "]
+[eval exp="tf.fuck = f.SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*BOOB"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 [call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
@@ -188,7 +192,7 @@
 ああんっ！！イクっ！！イクイクイクーーーーッ！！[p]
 #
 胸を弄ばれ鈴耶は大きな嬌声を上げながら絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase1気絶"][endif]
 #牛鬼
 なんと他愛ない！！[p]
@@ -227,7 +231,7 @@
 #
 胸からの快感に鈴耶は体を震わせた[r]
 ;鈴耶は絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase1気絶"][endif]
 #牛鬼
 なんと他愛ない！！[p]
@@ -290,7 +294,7 @@
 #
 牛鬼はマラを鈴耶の尻に擦りつけてきた[p]
 ;快感ダメージ
-[eval exp="tf.fack = f.SEX "]
+[eval exp="tf.fuck = f.SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*ANAL"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
@@ -307,7 +311,7 @@
 ああんっ！！イクっ！！イクイクイクーーーーッ！！[p]
 #
 鈴耶は大きな嬌声を上げながら絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase2気絶"][endif]
 #牛鬼
 何とどんだけ欲求不満なんだよ！！[p]
@@ -349,7 +353,7 @@
 #
 びくびくと鈴耶の体が痙攣する[p]
 ;鈴耶は絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase2気絶"][endif]
 #牛鬼
 おいおい、まだ前戯だってのにどんだけ欲求不満なんだ？[p]
@@ -413,7 +417,7 @@
 #
 牛鬼はマラを鈴耶の秘裂に挿入した[p]
 ;快感ダメージ
-[eval exp="tf.fack = f.SEX "]
+[eval exp="tf.fuck = f.SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
@@ -431,7 +435,7 @@
 イクっ！！イクイクイクーーーーっ！！[p]
 #
 鈴耶は挿入と同時に大きな嬌声を上げながら絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase3気絶"][endif]
 #牛鬼
 へっ！まだ入れただけだぜ！！こっからが本番だ！！[p]
@@ -471,7 +475,7 @@
 いやあああっ！！らめぇぇぇぇっ！！[p]
 #
 ;鈴耶は絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase3気絶"][endif]
 #牛鬼
 へっ！まだ入れただけだぜ？こっからが本番だ！！[p]
@@ -537,7 +541,7 @@
 ;段階４
 #
 牛鬼はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
-[eval exp="tf.fack = f.SEX "]
+[eval exp="tf.fuck = f.SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
@@ -566,7 +570,7 @@
 #
 鈴耶は精の迸りを子宮に感じながら嬌声を上げた[r]
 ;鈴耶は絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase4気絶"][endif]
 #牛鬼
 へ、へへ、腰が抜けちまいそうだぜ[p]
@@ -630,7 +634,7 @@
 #
 鈴耶は精の迸りを子宮に感じながら嬌声を上げた[r]
 ;鈴耶は絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase4気絶"][endif]
 #牛鬼
 へへへ、なかなか良かったぜ[p]

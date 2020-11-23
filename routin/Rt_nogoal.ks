@@ -6,9 +6,9 @@
 [endif]
 
 [if exp="f.aphrodisy > 0"]
-[eval exp="tf.fack = f.aphrodisy "]
-[eval exp="tf.fack = tf.fack * f.CURSE / 100 + tf.fack"]
-欲情効果により鈴耶の快感[emb exp="tf.fack"]が上昇[p]
+[eval exp="tf.fuck = f.aphrodisy "]
+[eval exp="tf.fuck = tf.fuck * f.CURSE / 100 + tf.fuck"]
+欲情効果により鈴耶の快感[emb exp="tf.fuck"]が上昇[p]
 [eval exp="f.ERO = tf.fuck + f.aphrodisy"][eval exp="f.ERO = 999" cond="f.ERO < 1000"][WSs]
 [endif]
 

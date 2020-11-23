@@ -45,7 +45,8 @@
 [TESTER]
 [if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
-[elsif exp="f.invincible > 0"][call storage="macro_invincible.ks"]
+[elsif exp="f.invincible > 0"]
+[call storage="macro_invincible.ks"]
 [else]
 [eval exp="tf.argment = f.EN_STR * 5 * f.GRD"]
 [eval exp="tf.argment = tf.argment * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
@@ -63,7 +64,8 @@
 [TESTER]
 [if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
-[elsif exp="f.invincible > 0"][call storage="macro_invincible.ks"]
+[elsif exp="f.invincible > 0"]
+[call storage="macro_invincible.ks"]
 [else]
 [eval exp="tf.argment = f.EN_STR * 15 * f.GRD"]
 [eval exp="tf.argment = tf.argment * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
@@ -92,7 +94,9 @@
 [if exp="f.target > f.rand"]
 鈴耶は敵の組付きを回避した[p][AVOID][WSs]
 [jump target="*Round_end"][s]
-[elsif exp="f.invincible > 0"][call storage="macro_invincible.ks"]
+[elsif exp="f.invincible > 0"]
+[call storage="macro_invincible.ks"]
+[jump target="*Round_end"][s]
 [endif]
 鈴耶は忍者に組み付かれた[p]
 [eval exp="f.bind = f.GRB"]
@@ -119,7 +123,7 @@
 #
 忍者は鈴耶の胸を揉みしだいた[p]
 ;快感ダメージ
-[eval exp="tf.fack = f.SEX "]
+[eval exp="tf.fuck = f.SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*BOOB"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 [call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
@@ -132,11 +136,13 @@
 [endif]
 ;-----------------------------------------
 *fase1房中術絶頂
+[chara_mod name="suzune" face="絶頂" ]
 #鈴耶
 ああんっ！！イクっ！！イクイクイクーーーーッ！！[p]
 #
 胸を弄ばれ鈴耶は大きな嬌声を上げながら絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
+[chara_mod name="suzune" face="喘ぎ"]
 [if exp="f.HP <= 0"][call target="*fase1気絶"][endif]
 #忍者
 なんと他愛ない！！[p]
@@ -155,6 +161,7 @@
 [s]
 ;-----------------------------------------
 *fase1我慢絶頂
+[chara_mod name="suzune" face="泣き" ]
 #鈴耶
 (駄目ぇ…感じちゃうーーーーーッ！！)[p]
 #
@@ -170,16 +177,18 @@
 ;-----------------------------------------
 
 *fase1通常絶頂
+[chara_mod name="suzune" face="絶頂" ]
 #鈴耶
 (駄目ぇ…感じちゃうーーーーーッ！！)[p]
 #
 胸からの快感に鈴耶は体を震わせた[r]
 ;鈴耶は絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase1気絶"][endif]
 #忍者
 なんと他愛ない！！[p]
 これでくノ一を名乗るとは片腹痛いわ！[p]
+[chara_mod name="suzune" face="苦しみ"]
 #鈴耶
 くっ・・・言わせておけばぁ！！[p]
 [jump target="*fase2"]
@@ -187,6 +196,7 @@
 ;-----------------------------------------
 
 *fase1房中術
+[chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 あんっ！！もっと、してぇ…[p]
 #
@@ -203,6 +213,7 @@
 ;-----------------------------------------
 
 *fase1通常
+[chara_mod name="suzune" face="苦しみ"]
 #鈴耶
 んうっ！揉むなぁ！！[p]
 #忍者
@@ -215,6 +226,7 @@
 
 ;-----------------------------------------
 *fase1気絶
+[chara_mod name="suzune" face="レイプ目"]
 鈴耶は気絶した！[p]
 #忍者
 まさか！？もう気をやるとは！！[p]
@@ -237,7 +249,7 @@
 #
 忍者はマラを鈴耶の尻に擦りつけてきた[p]
 ;快感ダメージ
-[eval exp="tf.fack = f.SEX "]
+[eval exp="tf.fuck = f.SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*ANAL"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
@@ -250,14 +262,16 @@
 ;-----------------------------------------
 
 *fase2房中術絶頂
+[chara_mod name="suzune" face="絶頂"]
 #鈴耶
 ああんっ！！イクっ！！イクイクイクーーーーッ！！[p]
 #
 鈴耶は大きな嬌声を上げながら絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase2気絶"][endif]
 #忍者
 何とどんだけ欲求不満なんだよ！！[p]
+[chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 あぁ！焦らさないでぇ…[p]
 #
@@ -273,6 +287,7 @@
 ;-----------------------------------------
 
 *fase2我慢絶頂
+[chara_mod name="suzune" face="泣き"]
 #
 快感でびくびくと鈴耶の体が痙攣する[p]
 #鈴耶
@@ -291,12 +306,13 @@
 ;-----------------------------------------
 
 *fase2通常絶頂
+[chara_mod name="suzune" face="絶頂"]
 #鈴耶
 (ダメッ！！イクぅーーーーーッ！！)[p]
 #
 びくびくと鈴耶の体が痙攣する[p]
 ;鈴耶は絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase2気絶"][endif]
 #忍者
 おいおい、まだ前戯だってのにどんだけ欲求不満なんだ？[p]
@@ -309,6 +325,7 @@
 ;-----------------------------------------
 
 *fase2房中術
+[chara_mod name="suzune" face="喘ぎ"]
 #忍者
 ぷりっぷりっのいいケツしてやがるぜ！！[p]
 #鈴耶
@@ -323,6 +340,7 @@
 ;-----------------------------------------
 
 *fase2通常
+[chara_mod name="suzune" face="苦しみ"]
 #忍者
 ぷりっぷりっのいいケツしてやがるぜ！！[p]
 #鈴耶
@@ -335,6 +353,7 @@
 ;-----------------------------------------
 
 *fase2気絶
+[chara_mod name="suzune" face="レイプ目"]
 #
 鈴耶は気絶した！[p]
 #忍者
@@ -359,7 +378,7 @@
 #
 忍者はマラを鈴耶の秘裂に挿入した[p]
 ;快感ダメージ
-[eval exp="tf.fack = f.SEX "]
+[eval exp="tf.fuck = f.SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
@@ -372,12 +391,13 @@
 ;-----------------------------------------
 
 *fase3房中術絶頂
+[chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！！これぇ！これが欲しかったのぉ！！[r]
 イクっ！！イクイクイクーーーーっ！！[p]
 #
 鈴耶は挿入と同時に大きな嬌声を上げながら絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase3気絶"][endif]
 #忍者
 へっ！まだ入れただけだぜ！！こっからが本番だ！！[p]
@@ -392,6 +412,7 @@
 ;-----------------------------------------
 
 *fase3我慢絶頂
+[chara_mod name="suzune" face="泣き"]
 #鈴耶
 （ーーーーーーーッ！！）[p]
 #
@@ -400,6 +421,7 @@
 鈴耶は絶頂を堪えた！[p]
 #忍者
 へっ！イクのをこらえやがったな？だが本番はここからだぜ！！[p]
+[chara_mod name="suzune" face="苦しみ"]
 #鈴耶
 ふんっ！調子にのんじゃないわよ！！この下手くそ！！[p]
 [jump target="*fase4"]
@@ -407,17 +429,19 @@
 ;-----------------------------------------
 
 *fase3通常絶頂
+[chara_mod name="suzune" face="泣き"]
 #鈴耶
 （ーーーーーーーッ！！）[p]
 #
 鈴耶は挿入の衝撃に目を見開いた[p]
 備えていたつもりだったが体は意思の手綱を離れ痙攣を始める[r]
 そして[p]
+[chara_mod name="suzune" face="絶頂"]
 #鈴耶
 いやあああっ！！らめぇぇぇぇっ！！[p]
 #
 ;鈴耶は絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase3気絶"][endif]
 #忍者
 へっ！まだ入れただけだぜ？こっからが本番だ！！[p]
@@ -428,6 +452,7 @@
 ;-----------------------------------------
 
 *fase3房中術
+[chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！！これぇ！これが欲しかったのぉ！！[r]
 #
@@ -443,6 +468,7 @@
 ;-----------------------------------------
 
 *fase3通常
+[chara_mod name="suzune" face="泣き"]
 #鈴耶
 （ーーーーーーーッ！！）[p]
 #
@@ -458,6 +484,7 @@
 ;-----------------------------------------
 
 *fase3気絶
+[chara_mod name="suzune" face="レイプ目"]
 #
 鈴耶は気絶した！[p]
 #忍者
@@ -482,7 +509,7 @@
 ;段階４
 #
 忍者はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
-[eval exp="tf.fack = f.SEX "]
+[eval exp="tf.fuck = f.SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
@@ -495,6 +522,7 @@
 ;----------------------------------------
 
 *fase4房中術絶頂
+[chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いいっ！！早く！早く頂戴！！[p]
 #忍者
@@ -511,7 +539,7 @@
 #
 鈴耶は精の迸りを子宮に感じながら嬌声を上げた[r]
 ;鈴耶は絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase4気絶"][endif]
 #忍者
 へ、へへ、腰が抜けちまいそうだぜ[p]
@@ -519,6 +547,7 @@
 忍者は鈴耶からマラを引き抜くとヨタヨタと後退りした。
 房中術の効果で忍者のステータスが低下した[p]
 [eval exp="f.En_Raptured += 1"]
+[chara_mod name="suzune" face="厳しい"]
 #鈴耶
 ふう、なかなか良かったわね。でも楽しんだ分は返してもらうわよ！！！[p]
 #
@@ -528,6 +557,7 @@
 ;----------------------------------------
 
 *fase4我慢絶頂
+[chara_mod name="suzune" face="泣き"]
 #忍者
 イけぇ！！イっちまええええ！！[p]
 #鈴耶
@@ -551,6 +581,7 @@
 んっ！！[p]
 #
 その場にくずおれた鈴耶の秘裂からごぽりと精液が溢れた[p]
+[chara_mod name="suzune" face="厳しい"]
 #鈴耶
 くっ！絶対許さないんだから！！[p]
 #
@@ -560,6 +591,7 @@
 ;----------------------------------------
 
 *fase4通常絶頂
+[chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いやあっ！！イクぅ！！[p]
 #忍者
@@ -570,12 +602,13 @@
 うおおお！出すぞ！！[p]
 #
 忍者は鈴耶の中で射精した[p]
+[chara_mod name="suzune" face="絶頂"]
 #鈴耶
 あああああっ！！！イクイクイクーーーーーー！！[p]
 #
 鈴耶は精の迸りを子宮に感じながら嬌声を上げた[r]
 ;鈴耶は絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase4気絶"][endif]
 #忍者
 へへへ、なかなか良かったぜ[p]
@@ -585,6 +618,7 @@
 ああんっ！！[p]
 #
 その場にくずおれた鈴耶の秘裂からごぽりと精液が溢れた[p]
+[chara_mod name="suzune" face="厳しい"]
 #鈴耶
 くっ！絶対許さないんだから！！[p]
 #
@@ -594,6 +628,7 @@
 ;----------------------------------------
 
 *fase4房中術
+[chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いいっ！！早く！早く頂戴！！[p]
 #忍者
@@ -616,6 +651,7 @@
 忍者は鈴耶からマラを引き抜くとヨタヨタと後退りした。
 房中術の効果で忍者のステータスが低下した[p]
 [eval exp="f.En_Raptured += 1"]
+[chara_mod name="suzune" face="厳しい"]
 #鈴耶
 さて、楽しんだ分は返してもらうわよ！！！[p]
 #
@@ -625,6 +661,7 @@
 ;----------------------------------------
 
 *fase4通常
+[chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 あんっ！あんっ！ひぃん！！[p]
 #忍者
@@ -645,6 +682,7 @@
 あんっ！[p]
 #
 どろりと鈴耶の秘裂から精液がこぼれた[p]
+[chara_mod name="suzune" face="厳しい"]
 #鈴耶
 くっ！絶対許さないんだから！！[p]
 #
@@ -654,6 +692,7 @@
 ;-----------------------------------------
 
 *fase4気絶
+[chara_mod name="suzune" face="レイプ目"]
 [eval exp="f.bind = 0"]
 #
 鈴耶は気絶した！[p]

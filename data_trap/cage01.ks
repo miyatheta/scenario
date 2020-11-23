@@ -89,12 +89,12 @@
 あんっ！あうっ！おっぱい取れちゃううう！！いやあああっ！！[p]
 #
 ;快感ダメージ
-[eval exp="tf.fack = 100 "]
-[eval exp="tf.fack = tf.fack * f.CURSE / 100 + tf.fack"]
-[eval exp="tf.argment = tf.fack * f.BOOB / 100 "]
-[getMathRound var="tf.fack"]
-鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"]
+[eval exp="tf.fuck = 100 "]
+[eval exp="tf.fuck = tf.fuck * f.CURSE / 100 + tf.fuck"]
+[eval exp="tf.argment = tf.fuck * f.BOOB / 100 "]
+[getMathRound var="tf.fuck"]
+鈴耶は[emb exp="tf.fuck"]の快感を受けた[p]
+[eval exp="f.ERO = f.ERO + tf.fuck"]
 [eval exp="f.ERO = 999" cond="f.endure > 0"]
 [SKEBE][WSs]
 ;パターンB-------------------------------------------------------------------------
@@ -129,12 +129,12 @@
 #
 密着した太股の中でぶちまけられた精液は出口を求め、圧力に押される形で股座の前後から飛沫となって噴出した[p]
 ;快感ダメージ
-[eval exp="tf.fack = 100 "]
-[eval exp="tf.fack = tf.fack * f.CURSE / 100 + tf.fack"]
-[eval exp="tf.argment = tf.fack * f.VGNA / 100 "]
-[getMathRound var="tf.fack"]
-鈴耶は[emb exp="tf.fack"]の快感を受けた[p]
-[eval exp="f.ERO = f.ERO + tf.fack"]
+[eval exp="tf.fuck = 100 "]
+[eval exp="tf.fuck = tf.fuck * f.CURSE / 100 + tf.fuck"]
+[eval exp="tf.argment = tf.fuck * f.VGNA / 100 "]
+[getMathRound var="tf.fuck"]
+鈴耶は[emb exp="tf.fuck"]の快感を受けた[p]
+[eval exp="f.ERO = f.ERO + tf.fuck"]
 [eval exp="f.ERO = 999" cond="f.endure > 0"]
 [SKEBE][WSs]
 [endif]
@@ -146,7 +146,7 @@
 だめぇ！！！イクっイクイクイクーーーーーーーっ！！！[p]
 #
 ;鈴耶は絶頂した[p]
-[orgasm]
+[call storage="macro_orgasm.ks"]
 [endif]
 
 ;------------------------------------------------------------------------------

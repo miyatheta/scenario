@@ -23,7 +23,7 @@
 ;暫定ステータス
 [SetStatus]
 [WSs]
-[chara_show name="suzune" left="-100" top="-20"]
+[chara_show name="suzune" face="普通" left="-100" top="-20"]
 ;-------------------------------------------------------------------------------
 @layopt layer=message0 visible=true
 シナリオが入ります[p]
@@ -175,9 +175,9 @@
 ;-------------------------------------------------------------------------------
 *goal
 #鈴耶
-[chara_mod name="suzune" face="happy" ]
+[chara_mod name="suzune" face="柔らか" ]
 無事到着っと[p]
-[SetStatus]
+[SetStatus][eval exp="f.dress=1"]
 [WSs]
 
 *result

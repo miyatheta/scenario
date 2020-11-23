@@ -1,0 +1,7 @@
+鈴耶の理性が１減少した[p]
+[eval exp="f.ERO = 0 , f.SAN -= 1 , f.MND = 0"]
+[eval exp="f.SAN = 0" cond="f.SAN < 0"]
+[eval exp=" tf.argment = tf.fuck / 10"][getMathRound var="f.damage"]
+[eval exp="f.HP -= f.damage"][eval exp="f.HP = 0" cond="f.HP < 0"]
+鈴耶の体力が[emb exp="f.damage"]減少した[p]
+[WSs]
