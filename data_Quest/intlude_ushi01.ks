@@ -179,7 +179,7 @@
 ;-------------------------------------------------------------------------------
 *select_trap
 #
-[getrand min="1" max="100" var="f.trap"]
+[getrand min="1" max="125" var="f.trap"]
 [if exp="f.trap <= 25 && f.Pre_trap != 1"]
 [eval exp="f.Pre_trap = 1"]
 [jump target=*trap_01]
@@ -192,6 +192,9 @@
 [elsif exp="f.trap <= 100 && f.Pre_trap != 4"]
 [eval exp="f.Pre_trap = 4"]
 [jump target=*trap_04]
+[elsif exp="f.trap <= 125 && f.Pre_trap != 4"]
+[eval exp="f.Pre_trap = 5"]
+[jump target=*trap_05]
 [else]
 [eval exp="f.Pre_trap = 0"]
 [jump target=*select_trap]
@@ -200,6 +203,7 @@
 
 ;--------------------------------------------
 *trap_01
+#
 [call storage="data_trap/comon01.ks"]
 [jump target="*no_goal"]
 [s]
@@ -224,7 +228,12 @@
 [jump target="*trapper" cond="f.trapper > 0"]
 [jump target="*no_goal"]
 [s]
-
+;--------------------------------------------
+*trap_05
+#
+[call storage="data_trap/comon02.ks"]
+[jump target="*no_goal"]
+[s]
 ;-------------------------------------------------------------------------------
 *select_incident
 [getrand min="1" max="100" var="f.incident"]

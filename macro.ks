@@ -12,13 +12,14 @@
 [eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.argment = (f.ATP * f.DTR) + f.rand"]
-
 ;退魔力の算出
 [if exp="f.type==2"]
 [eval exp="tf.argment = tf.argment / 2 "]
 [eval exp="tf.argment = tf.argment + (f.MGP * f.DTR) " cond="f.enchant > 0"]
 [eval exp="tf.argment = tf.argment * 3 " cond="f.arms_type == 2 "]
 [endif]
+;絶頂時の攻撃ダウン
+;[eval exp="tf.argment = tf.argment * 0.5 " cond="f.acme > 0"]
 [endmacro]
 
 [macro name="AVOIDANCE"]
@@ -68,6 +69,7 @@
 [eval exp="f.MP = f.POW , f.MND = 3 , f.ERO = 0 "]
 [eval exp="f.AVD = 0 , f.type = 1"]
 [eval exp="f.poison=0, f.slowly=0, f.excite=0, f.unescape=0, f.cantescape=0 , f.aphrodisy=0 "]
+[eval exp="f.acme = 0"]
 [eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
 [endmacro]
 

@@ -3,6 +3,7 @@
 #鈴耶
 それじゃあ、鈴耶[r]
 忍務行ってまいりまーす！[p]
+#
 [cm]
 @layopt layer=message0 visible=false
 [chara_hide name="suzune" time=500]

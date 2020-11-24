@@ -13,6 +13,12 @@
 [eval exp="f.MND += 1 , f.ambush = 0"][WSs]
 [endif]
 
+[if exp="f.acme == 1"]
+#
+絶頂状態が解消した[p]
+[endif]
+[eval exp="f.acme -= 1 " cond="f.acme > 0"]
+
 [if exp="f.unescape == 1"]
 #
 逃走封印状態が解消した[p]
@@ -46,6 +52,11 @@
 欲情効果により鈴耶の快感[emb exp="tf.fuck"]が上昇[p]
 [eval exp="f.ERO = tf.fuck + f.aphrodisy"][eval exp="f.ERO = 999" cond="f.ERO < 1000"][WSs]
 [endif]
+
+;スキルCT減少
+[eval exp="f.skill_01CT -= 1" cond="f.skill_01CT > 0"]
+[eval exp="f.skill_02CT -= 1" cond="f.skill_02CT > 0"]
+[eval exp="f.skill_03CT -= 1" cond="f.skill_03CT > 0"]
 
 [return]
 [s]

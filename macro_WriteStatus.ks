@@ -21,6 +21,7 @@ if(f.tatoo > 0){tf.vital = tf.vital + "淫紋　";}
 if(f.unescape > 0){tf.vital = tf.vital + "逃走封印　";}
 if(f.cantescape > 0){tf.vital = tf.vital + "逃走不能　";}
 if(f.aphrodisy > 0){tf.vital = tf.vital + "欲情　";}
+if(f.acme > 0){tf.vital = tf.vital + "絶頂　";}
 [endscript]
 [ptext layer="0" x="10" y="580" text=&tf.hptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="hitpoint" overwrite="true" ]
 [ptext layer="0" x="10" y="600" text=&tf.mptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="magicpoint" overwrite="true" ]

@@ -8,6 +8,7 @@
 ;コンフィグ、CG、回想モードを使う場合は必須
 @call storage="tyrano.ks"
 
+@call storage="make.ks"
 ;変数宣言
 @call storage="initialize_declare.ks"
 

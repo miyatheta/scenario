@@ -64,11 +64,11 @@
 [s]
 
 *PL_endure
-[if exp="f.MP < 20"]
+[if exp="f.MP < 30"]
 気力が足りない[p]
 [jump target="*PL_comand_select"]
 [endif]
 鈴耶は快感に備えて気を引き締めた[p]
-[eval exp="f.endure = 1 , f.MP -= 20"][WSs]
+[eval exp="f.endure = 1 , f.MP -= 30"][WSs]
 [return]
 [s]

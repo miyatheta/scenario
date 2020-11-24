@@ -6,7 +6,7 @@
 [eval exp="f.enchant -= 1 " cond="f.enchant > 0"]
 
 [if exp="f.invincible == 1 "]
-空蝉の術の効力が切れた
+変わり身の術の効力が切れた
 [endif]
 [eval exp="f.invincible -= 1 " cond="f.invincible > 0"]
 
@@ -21,10 +21,15 @@
 [s]
 
 *PL_skill_select
+[iscript]
+f.skill_01CTtxt = "魅了の瞳術：" + f.skill_01CT;
+f.skill_02CTtxt = "集気法：" + f.skill_02CT;
+f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
+[endscript]
 [glink color="black" target="*PL_battle_select" x="450" y="100" width="" height="" text="戻　る" ]
-[glink color="blue" target="*PL_skill_01" x="450" y="300" width="" height="" text="誘惑の術" cond="f.MP >= 10"]
-[glink color="blue" target="*PL_skill_02" x="450" y="400" width="" height="" text="退魔の術" cond="f.MP >= 10"]
-[glink color="blue" target="*PL_skill_03" x="450" y="500" width="" height="" text="代わり身の術" cond="f.MP >= 10"]
+[glink color="blue" target="*PL_skill_01" x="450" y="300" width="" height="" text="&f.skill_01CTtxt " ]
+[glink color="blue" target="*PL_skill_02" x="450" y="400" width="" height="" text="&f.skill_02CTtxt" ]
+[glink color="blue" target="*PL_skill_03" x="450" y="500" width="" height="" text="&f.skill_03CTtxt" ]
 [s]
 
 *PL_attack_select
@@ -42,42 +47,75 @@
 [glink color="black" target="*PL_battle_select" x="450" y="100" width="" height="" text="戻　る" ]
 [glink color="blue" target="*PL_magic_01" x="450" y="200" width="" height="" text="退魔攻撃弱" cond="f.MP >= 20"]
 [glink color="blue" target="*PL_magic_02" x="750" y="200" width="" height="" text="退魔攻撃強" cond="f.MP >= 50"]
-[glink color="blue" target="*PL_magic_03" x="450" y="400" width="" height="" text="魔法弱" cond="f.MP >= 10"]
-[glink color="blue" target="*PL_magic_04" x="750" y="400" width="" height="" text="魔法中" cond="f.MP >= 40"]
+;[glink color="blue" target="*PL_magic_03" x="450" y="400" width="" height="" text="魔法弱" cond="f.MP >= 10"]
+[glink color="blue" target="*PL_magic_04" x="750" y="400" width="" height="" text="真空波" cond="f.MP >= 40"]
 [glink color="blue" target="*PL_magic_05" x="450" y="500" width="" height="" text="魔法強" cond="f.MP >= 70"]
 [glink color="blue" target="*PL_magic_06" x="750" y="500" width="" height="" text="魔法強" cond="f.MP >= 100"]
 
 [s]
 
-;PLのスキル（未実装）----------------------------------------------------------------------
+;PLのスキル----------------------------------------------------------------------
 *PL_skill_01
-鈴耶の魅了[r]
+[if exp="f.skill_01CT > 0"]
+再使用には[emb exp="f.skill_01CT"]ターン必要です[p]
+[jump target="*PL_battle_select"]
+[endif]
+
+鈴耶の誘惑[r]
+[if exp="f.En_Wiseman > 0"]
+射精したばかりの敵には効果がなかった[p]
+[else]
 敵はムラムラした[p]
 鈴耶の穢れが上昇[p]
 [eval exp="f.charm = 1 , f.AVD = -100"]
 [eval exp="f.CURSE += 20"]
-[eval exp="f.MP -= 10"][eval exp="f.MP = 0" cond="f.MP < 0"]
+[eval exp="f.skill_01CT = 10"]
 [WSs]
+[endif]
 [jump target="*PL_battle_select"]
 [s]
+
+;------------------------------------------------
 
 *PL_skill_02
-鈴耶の退魔の術[r]
-妖怪へのダメージが増加（３ターン、50%）[p]
-鈴耶の腕力が低下（クエスト中）[p]
-[eval exp="f.enchant = 3 "]
-[eval exp="f.MP -=10"][eval exp="f.MP = 0" cond="f.MP < 0"]
-[eval exp="f.STR -= 3"][eval exp="f.STR = 0" cond="f.STR < 0"]
+[if exp="f.MND < 2"]
+使用には集中力が２以上必要です[p]
+[jump target="*PL_battle_select"]
+[endif]
+
+[if exp="f.skill_02CT > 0"]
+再使用には[emb exp="f.skill_02CT"]ターン必要です[p]
+[jump target="*PL_battle_select"]
+[endif]
+
+鈴耶の集気法[r]
+集中力を気力に変換[p]
+[eval exp="f.MP += 15 "][eval exp="f.MP = 100" cond="f.MP > 100"]
+[eval exp="f.MND -= 2"][eval exp="f.MND = 0" cond="f.MND < 0"]
+[eval exp="f.skill_02CT = 10"]
 [WSs]
 [jump target="*PL_battle_select"]
 [s]
 
+;------------------------------------------------
+
 *PL_skill_03
-鈴耶の代わり身の術[r]
+[if exp="f.dress != 1"]
+脱衣状態では使うことが出来ない！！[p]
+[jump target="*PL_battle_select"]
+[endif]
+
+[if exp="f.skill_03CT > 0"]
+再使用には[emb exp="f.skill_03CT"]ターン必要です[p]
+[jump target="*PL_battle_select"]
+[endif]
+
+鈴耶の変わり身の術[r]
 ダメージ、拘束を１回だけ無効化（２ターン）[p]
 発動時、鈴耶は衣服を１枚失う[p]
 [eval exp="f.MP -= 10"][eval exp="f.MP = 0" cond="f.MP < 0"]
 [eval exp="f.invincible = 2 "]
+[eval exp="f.skill_03CT = 10"]
 [WSs]
 [jump target="*PL_battle_select"]
 [s]
@@ -105,7 +143,7 @@
 [getrand min="1" max="20" var="f.rand"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
-鈴耶の蹴り[r]
+鈴耶の格闘術[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
 [WSs]
@@ -124,11 +162,12 @@
 [return]
 
 *PL_attack_04
+;スタン
 [eval exp="f.DTR = 3"]
 [getrand min="1" max="20" var="f.rand"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
-鈴耶のスタン攻撃[r]
+鈴耶の疾風切り[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
 [eval exp="f.MND -= 2"]
@@ -136,11 +175,12 @@
 [return]
 
 *PL_attack_05
+;貫通
 [eval exp="f.DTR = 3"]
 [getrand min="1" max="20" var="f.rand"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
-鈴耶の貫通攻撃[r]
+鈴耶のもがり笛[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
 [eval exp="f.MND -= 2"]
@@ -152,7 +192,7 @@
 [getrand min="1" max="20" var="f.rand"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
-鈴耶の雷電掌[r]
+鈴耶の神鳴り[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
 [eval exp="f.MND = 0"][eval exp="f.MND = 0" cond="f.MND < 0"]
@@ -167,7 +207,7 @@
 [eval exp="tf.argment = (f.MGP * 2 * 2) + f.rand"]
 [eval exp="tf.argment = tf.argment / 2 " cond="f.type==1"]
 [getMathRound var="tf.DMG"]
-鈴耶の九字斬り(退魔攻撃弱)[r]
+鈴耶の破魔の拳(退魔攻撃弱)[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"]
 [eval exp="f.MP -= 20"][eval exp="f.MP = 0" cond="f.MP < 0"]
@@ -180,7 +220,7 @@
 [eval exp="tf.argment = (f.MGP * 5 * 2) + f.rand"]
 [eval exp="tf.argment = tf.argment / 2" cond="f.type==1"]
 [getMathRound var="tf.DMG"]
-鈴耶の大凶祓い(退魔攻撃強)[r]
+鈴耶の凶祓いの太刀(退魔攻撃強)[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"]
 [eval exp="f.MP -= 50"]
@@ -206,7 +246,7 @@
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.argment = (f.MGP * 3 * 2) + f.rand"]
 [getMathRound var="tf.DMG"]
-鈴耶の真空波(魔法中)[r]
+鈴耶の鎌鼬(魔法中)[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"]
 [eval exp="f.MP -= 40"]
@@ -224,7 +264,7 @@
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.argment = (f.MGP * f.RATE * 2) + f.rand"]
 [getMathRound var="tf.DMG"]
-餓狼の舞(魔法強)体力が少ないほど威力アップ[r]
+返魂の術(魔法強)体力が少ないほど威力アップ[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"]
 [eval exp="f.MP -= 70"][eval exp="f.MP = 0" cond="f.MP < 0"]

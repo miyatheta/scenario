@@ -35,6 +35,11 @@
 [eval exp="f.slowly -= 1" cond="f.slowly > 0"]
 [WSs]
 
+;スキルCTターン減少-----------------------------------------------------------------
+[eval exp="f.skill_01CT -= 1" cond="f.skill_01CT > 0"]
+[eval exp="f.skill_02CT -= 1" cond="f.skill_02CT > 0"]
+[eval exp="f.skill_03CT -= 1" cond="f.skill_03CT > 0"]
+
 ;移動終了処理---------------------------------------------------------------------
 [eval exp="f.turn += 1"]
 [eval exp="f.ERO = f.ERO - f.SAN" cond="f.excite == 0"]

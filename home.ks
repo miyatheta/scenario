@@ -4,7 +4,7 @@
 [freeimage layer="0" ]
 [bg storage="syosai1-1080.jpg" time="100"]
 [eval exp="f.dress=1"][call storage="asset_face.ks"]
-[chara_show name="suzune" fase="普通" left="-100" top="-20"]
+[chara_show name="suzune" fase="default" left="-100" top="-20"]
 @layopt layer=message0 visible=true
 @layopt layer=2 visible=true
 [WriteDate][WSs]

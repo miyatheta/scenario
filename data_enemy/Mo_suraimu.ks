@@ -59,7 +59,7 @@
 すらいむは鈴耶の尻穴に潜り込んだ[p]
 #鈴耶
 ひっ！！[p]
-[eval exp="tf.tmp = 100 "]
+[eval exp="tf.fuck = 100 "]
 [call storage="routin/Rt_kaikan.ks" target="*ANAL"]
 [endif]
 [if exp="f.ERO >= 1000 "]
@@ -82,7 +82,7 @@
 
 *Round_end
 #
-ラウンド終了[p]
+;ラウンド終了[p]
 [if exp="f.HP < 1"][return][endif]
 [call storage="routin/Rt_battle_round.ks" target="*battle_round_end"]
 [if exp="f.Quest_type == 4"][call storage="routin/Rt_progress.ks" target="*trace"][endif]
