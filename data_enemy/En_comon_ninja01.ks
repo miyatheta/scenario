@@ -128,14 +128,14 @@
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 [call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase1房中術絶頂"]
+[if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase1淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase1我慢絶頂"]
 [elsif exp="f.ERO >= 1000"][jump target="*fase1通常絶頂"]
-[elsif exp="f.rapture > 0"][jump target="*fase1房中術"]
+[elsif exp="f.rapture > 0"][jump target="*fase1淫乱"]
 [else][jump target="*fase1通常"]
 [endif]
 ;-----------------------------------------
-*fase1房中術絶頂
+*fase1淫乱絶頂
 [chara_mod name="suzune" face="絶頂" ]
 #鈴耶
 ああんっ！！イクっ！！イクイクイクーーーーッ！！[p]
@@ -195,7 +195,7 @@
 [s]
 ;-----------------------------------------
 
-*fase1房中術
+*fase1淫乱
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 あんっ！！もっと、してぇ…[p]
@@ -253,15 +253,15 @@
 [call storage="routin/Rt_kaikan.ks" target="*ANAL"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase2房中術絶頂"]
+[if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase2淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase2我慢絶頂"]
 [elsif exp="f.ERO >= 1000"][jump target="*fase2通常絶頂"]
-[elsif exp="f.rapture > 0"][jump target="*fase2房中術"]
+[elsif exp="f.rapture > 0"][jump target="*fase2淫乱"]
 [else][jump target="*fase2通常"]
 [endif]
 ;-----------------------------------------
 
-*fase2房中術絶頂
+*fase2淫乱絶頂
 [chara_mod name="suzune" face="絶頂"]
 #鈴耶
 ああんっ！！イクっ！！イクイクイクーーーーッ！！[p]
@@ -324,7 +324,7 @@
 [s]
 ;-----------------------------------------
 
-*fase2房中術
+*fase2淫乱
 [chara_mod name="suzune" face="喘ぎ"]
 #忍者
 ぷりっぷりっのいいケツしてやがるぜ！！[p]
@@ -382,15 +382,15 @@
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase3房中術絶頂"]
+[if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase3淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase3我慢絶頂"]
 [elsif exp="f.ERO >= 1000"][jump target="*fase3通常絶頂"]
-[elsif exp="f.rapture > 0"][jump target="*fase3房中術"]
+[elsif exp="f.rapture > 0"][jump target="*fase3淫乱"]
 [else][jump target="*fase3通常"]
 [endif]
 ;-----------------------------------------
 
-*fase3房中術絶頂
+*fase3淫乱絶頂
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！！これぇ！これが欲しかったのぉ！！[r]
@@ -451,7 +451,7 @@
 [s]
 ;-----------------------------------------
 
-*fase3房中術
+*fase3淫乱
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！！これぇ！これが欲しかったのぉ！！[r]
@@ -513,15 +513,15 @@
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase4房中術絶頂"]
+[if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase4淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase4我慢絶頂"]
 [elsif exp="f.ERO >= 1000"][jump target="*fase4通常絶頂"]
-[elsif exp="f.rapture > 0"][jump target="*fase4房中術"]
+[elsif exp="f.rapture > 0"][jump target="*fase4淫乱"]
 [else][jump target="*fase4通常"]
 [endif]
 ;----------------------------------------
 
-*fase4房中術絶頂
+*fase4淫乱絶頂
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いいっ！！早く！早く頂戴！！[p]
@@ -627,7 +627,7 @@
 [s]
 ;----------------------------------------
 
-*fase4房中術
+*fase4淫乱
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いいっ！！早く！早く頂戴！！[p]
