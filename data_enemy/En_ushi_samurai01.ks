@@ -137,10 +137,10 @@
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 [call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase1淫乱絶頂"]
+[if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase1淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase1我慢絶頂"]
 [elsif exp="f.ERO >= 1000"][jump target="*fase1通常絶頂"]
-[elsif exp="f.rapture > 0"][jump target="*fase1淫乱"]
+[elsif exp="f.nasty > 0"][jump target="*fase1淫乱"]
 [else][jump target="*fase1通常"]
 [endif]
 ;-----------------------------------------
@@ -164,7 +164,7 @@
 #
 侍は鈴耶の痴態に相好を崩した[p]
 房中術の効果で侍のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1 "]
+
 
 [jump target="*fase2"]
 [s]
@@ -262,7 +262,7 @@
 [call storage="routin/Rt_kaikan.ks" target="*ANAL"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase2淫乱絶頂"]
+[if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase2淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase2我慢絶頂"]
 [elsif exp="f.ERO >= 1000"][jump target="*fase2通常絶頂"]
 [elsif exp="f.rapture > 0"][jump target="*fase2淫乱"]
@@ -391,7 +391,7 @@
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase3淫乱絶頂"]
+[if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase3淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase3我慢絶頂"]
 [elsif exp="f.ERO >= 1000"][jump target="*fase3通常絶頂"]
 [elsif exp="f.rapture > 0"][jump target="*fase3淫乱"]
@@ -522,7 +522,7 @@
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.rapture > 0"][jump target="*fase4淫乱絶頂"]
+[if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase4淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase4我慢絶頂"]
 [elsif exp="f.ERO >= 1000"][jump target="*fase4通常絶頂"]
 [elsif exp="f.rapture > 0"][jump target="*fase4淫乱"]
