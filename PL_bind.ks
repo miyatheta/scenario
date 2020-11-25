@@ -8,7 +8,8 @@
 [glink color="black" target="*PL_resist1" x="450" y="100" width="" height="" text="もがく" ]
 [glink color="black" target="*PL_resist2" x="450" y="200" width="" height="" text="暴れる" ]
 [glink color="black" target="*PL_bochu" x="450" y="300" width="" height="" text="房中術" ]
-[glink color="black" target="*PL_endure" x="450" y="400" width="" height="" text="耐える" ]
+[glink color="black" target="*PL_endure" x="450" y="400" width="" height="" text="耐え忍ぶ" ]
+[glink color="black" target="*PL_onanie" x="450" y="500" width="" height="" text="慰める" ]
 [s]
 
 *PL_resist1
@@ -70,5 +71,10 @@
 [endif]
 鈴耶は快感に備えて気を引き締めた[p]
 [eval exp="f.endure = 1 , f.MP -= 30"][WSs]
+[return]
+[s]
+
+*PL_onanie
+[eval exp="f.onanie=1"]
 [return]
 [s]

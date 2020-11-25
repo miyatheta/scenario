@@ -8,6 +8,7 @@
 [eval exp="f.milk=0, f.milkpoint=0 , f.mazo=0, f.bags=0, f.slave=0, f.tatoo=0"]
 [eval exp="f.date = 1"]
 [eval exp="f.escape = 0 , f.charm = 0"]
+[eval exp="f.rapture = 0 , f.onanie = 0"]
 [eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
 [eval exp="f.HP = f.HP_MAX, f.SAN = f.SAN_MAX"]
 [eval exp="f.MP = f.POW , f.MND=2"]
