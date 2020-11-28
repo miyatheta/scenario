@@ -127,7 +127,7 @@
 #
 下忍は鈴耶の胸を揉みしだいた[p]
 ;快感ダメージ
-[eval exp="tf.fuck = f.SEX "]
+[eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*BOOB"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 [call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
@@ -253,14 +253,14 @@
 #
 下忍はマラを鈴耶の尻に擦りつけてきた[p]
 ;快感ダメージ
-[eval exp="tf.fuck = f.SEX "]
+[eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*ANAL"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
 [if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase2淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase2我慢絶頂"]
 [elsif exp="f.ERO >= 1000"][jump target="*fase2通常絶頂"]
-[elsif exp="f.rapture > 0"][jump target="*fase2淫乱"]
+[elsif exp="f.nasty > 0"][jump target="*fase2淫乱"]
 [else][jump target="*fase2通常"]
 [endif]
 ;-----------------------------------------
@@ -382,14 +382,14 @@
 #
 下忍はマラを鈴耶の秘裂に挿入した[p]
 ;快感ダメージ
-[eval exp="tf.fuck = f.SEX "]
+[eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
 [if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase3淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase3我慢絶頂"]
 [elsif exp="f.ERO >= 1000"][jump target="*fase3通常絶頂"]
-[elsif exp="f.rapture > 0"][jump target="*fase3淫乱"]
+[elsif exp="f.nasty > 0"][jump target="*fase3淫乱"]
 [else][jump target="*fase3通常"]
 [endif]
 ;-----------------------------------------
@@ -513,14 +513,14 @@
 ;段階４
 #
 下忍はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
-[eval exp="tf.fuck = f.SEX "]
+[eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
 ;リアクション
 [if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase4淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase4我慢絶頂"]
 [elsif exp="f.ERO >= 1000"][jump target="*fase4通常絶頂"]
-[elsif exp="f.rapture > 0"][jump target="*fase4淫乱"]
+[elsif exp="f.nasty > 0"][jump target="*fase4淫乱"]
 [else][jump target="*fase4通常"]
 [endif]
 ;----------------------------------------

@@ -1,5 +1,5 @@
 ;変数宣言
-[eval exp="f.HP_MAX = 1000, f.SAN_MAX = 60, f.NOZ = 1"]
+[eval exp="f.HP_MAX = 1000, f.SAN_MAX = 60, f.SEX = 30"]
 [eval exp="f.STR_MAX = 30 , f.POW_MAX=30, f.SPD_MAX = 32, f.MOVE_MAX = 12"]
 [eval exp="f.dress = 1 , f.invincible = 0 "]
 [eval exp="f.CURSE=0, f.ERO=0 , f.orgasmpoint=0 , f.acme=0"]

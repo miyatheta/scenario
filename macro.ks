@@ -111,9 +111,11 @@ f.securityLv = "警戒態勢：" +  f.security + "/" + f.security_MAX;
 
 [macro name="WriteEnemy"]
 [iscript]
-tf.txt = "敵：" + f.en_Name ;
+tf.enNametxt = "敵：" + f.en_Name ;
+tf.enSANtxt = "理性：" + f.EN_SAN ;
 [endscript]
-[ptext layer="0" x="0" y="100" width="1270" text=&tf.txt size="30" color="red" bold="bold" align="right" name="enemyname" overwrite="true" ]
+[ptext layer="0" x="0" y="100" width="1270" text=&tf.enNAmetxt size="30" color="red" bold="bold" align="right" name="enemyname" overwrite="true" ]
+[ptext layer="0" x="0" y="150" width="1270" text=&tf.enSANtxt size="20" color="red" bold="bold" align="right" name="enemysan" overwrite="true" ]
 [endmacro]
 
 [macro name="WriteDate"]
