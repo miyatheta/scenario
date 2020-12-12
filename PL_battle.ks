@@ -178,6 +178,7 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 ;貫通
 [eval exp="f.DTR = 3"]
 [getrand min="1" max="20" var="f.rand"]
+[eval exp="f.EN_GRD=1"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
 鈴耶のもがり笛[r]
@@ -204,7 +205,7 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 *PL_magic_01
 [getrand min="10" max="20" var="f.rand"]
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
-[eval exp="tf.argment = (f.MGP * 2 * 2) + f.rand"]
+[eval exp="tf.argment = (f.MGP * 2 * 2 * f.EN_GRD) + f.rand"]
 [eval exp="tf.argment = tf.argment / 2 " cond="f.type==1"]
 [getMathRound var="tf.DMG"]
 鈴耶の破魔の拳(退魔攻撃弱)[r]
@@ -217,7 +218,7 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 *PL_magic_02
 [getrand min="1" max="20" var="f.rand"]
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
-[eval exp="tf.argment = (f.MGP * 5 * 2) + f.rand"]
+[eval exp="tf.argment = (f.MGP * 5 * 2 * f.EN_GRD) + f.rand"]
 [eval exp="tf.argment = tf.argment / 2" cond="f.type==1"]
 [getMathRound var="tf.DMG"]
 鈴耶の凶祓いの太刀(退魔攻撃強)[r]
@@ -244,7 +245,7 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 *PL_magic_04
 [getrand min="10" max="20" var="f.rand"]
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
-[eval exp="tf.argment = (f.MGP * 3 * 2) + f.rand"]
+[eval exp="tf.argment = (f.MGP * 3 * 2 * f.EN_GRD) + f.rand"]
 [getMathRound var="tf.DMG"]
 鈴耶の鎌鼬(魔法中)[r]
 [emb exp="tf.DMG"]のダメージ[p]
@@ -262,7 +263,7 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 [eval exp="f.RATE = 6" cond="f.HP <= 600 && f.HP > 300"]
 [eval exp="f.RATE = 9" cond="f.HP <= 300 && f.HP > 0"]
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
-[eval exp="tf.argment = (f.MGP * f.RATE * 2) + f.rand"]
+[eval exp="tf.argment = (f.MGP * f.RATE * 2 * f.EN_GRD) + f.rand"]
 [getMathRound var="tf.DMG"]
 返魂の術(魔法強)体力が少ないほど威力アップ[r]
 [emb exp="tf.DMG"]のダメージ[p]
@@ -279,7 +280,7 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 [eval exp="f.RATE = 11" cond="f.CURSE >= 300"]
 [eval exp="f.RATE = 16" cond="f.CURSE >= 400"]
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
-[eval exp="tf.argment = (f.MGP * f.RATE * 2) + f.rand"]
+[eval exp="tf.argment = (f.MGP * f.RATE * 2 * f.EN_GRD) + f.rand"]
 [getMathRound var="tf.DMG"]
 天鼠の舞(魔法強)穢れが多いほど威力アップ[r]
 [emb exp="tf.DMG"]のダメージ[p]

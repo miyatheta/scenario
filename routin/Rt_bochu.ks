@@ -1,4 +1,6 @@
-[getrand min="10" max="f.SEX" var="f.rand"][TESTER]
+[getrand min="10" max="&f.SEX" var="f.rand"]
 [eval exp="f.EN_SAN -= f.rand"]
+敵の理性が[emb exp="f.rand"]低下[p]
+[WriteEnemy]
 [return]
 [s]

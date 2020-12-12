@@ -1,3 +1,159 @@
+*start
+;牛鬼、護衛任務時
+;ラウンド開始時処理--------------------------------------------------------------
+[call storage="routin/Rt_battle_round.ks" target="*battle_round_start"]
+
+;敵のスキル------------------------------------------------------------------------
+
+[if exp=" 1 == f.Round "]
+#牛鬼
+「そこを退け！！小娘！！」[p]
+#
+丑忍・牛鬼がが現れた[p]
+[endif]
+
+[if exp=" 1 == f.Round % 2"]
+#
+牛鬼の「獣化の術」[p]
+「ぶもおおおおおおおおお！！！」[p]
+このターンの格闘攻撃力が上昇[p]
+[eval exp="f.EN_STR_BUFF = 4"]
+[endif]
+
+[if exp=" 0 == f.Round % 2"]
+#
+牛鬼の「剛体の術」[p]
+「ぼおおおおおおおおお！！！」[p]
+このターンの防御力が上昇[p]
+[eval exp="f.EN_GRD = 0.5"]
+[endif]
+
+[eval exp="f.Charge += 1"]
+[if exp=" f.Charge == 10"]
+#
+牛鬼に異様な気配が漂う[p]
+牛鬼は印を結んだ[p]
+[elsif exp=" 0 == f.Round % 5"]
+#
+牛鬼は印を結んだ[p]
+[endif]
+
+;PLの行動------------------------------------------------------------------------
+#
+鈴耶の攻撃[r]
+[call storage="PL_battle.ks"]
+[if exp="f.escape > 0"][return][endif]
+
+[if exp="f.en_HP < 1"]
+#
+牛鬼を撃退した[p]
+[eval exp="f.en_Name = ''"][WriteEnemy]
+[return][s]
+[endif]
+
+;敵の行動------------------------------------------------------------------------
+*enemy_attack1
+#
+牛鬼の「突進」[p]
+[getrand min="1" max="100" var="f.rand"]
+[eval exp="f.Hitrate = 40"]
+[AVOIDANCE]
+[TESTER]
+[if exp="f.target > f.rand"]
+鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
+[elsif exp="f.invincible > 0"]
+[call storage="macro_invincible.ks"]
+[else]
+[eval exp="tf.argment = f.EN_STR * 5 * f.GRD"]
+[eval exp="tf.argment = tf.argment * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
+[emb exp="tf.ATP"]のダメージ[p]
+[eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
+[endif]
+逃走封印状態（次ラウンド中）が発生[p]
+[eval exp="f.unescape = 2"]
+[jump target="*Round_end"][s]
+
+*enemy_attack2
+#
+牛鬼の「豪腕掌」[p]
+[getrand min="1" max="100" var="f.rand"]
+[eval exp="f.Hitrate = 0"]
+[AVOIDANCE]
+[TESTER]
+[if exp="f.target > f.rand"]
+鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
+[elsif exp="f.invincible > 0"]
+[call storage="macro_invincible.ks"]
+[else]
+[eval exp="tf.argment = (f.EN_STR + f.EN_STR_BUFF) * 15 * f.GRD"]
+[eval exp="tf.argment = tf.argment * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
+[emb exp="tf.ATP"]のダメージ[p]
+[eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
+[endif]
+[jump target="*Round_end"][s]
+
+*enemy_magic
+#
+牛鬼の「砂鉄嵐の術」[p]
+[if exp="f.invincible > 0"]
+[call storage="macro_invincible.ks"]
+[else]
+[eval exp="tf.argment = f.EN_POW * 15 * f.GRD"][getMathRound var="tf.ATP"]
+[emb exp="tf.ATP"]のダメージ[p]
+[eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
+[endif]
+[jump target="*Round_end"][s]
+
+*enemy_special
+#
+牛鬼の「抜山蓋世の術」[p]
+[if exp="f.invincible > 0"]
+[call storage="macro_invincible.ks"]
+[else]
+[eval exp="tf.argment = f.EN_POW * 30 * f.GRD"][getMathRound var="tf.ATP"]
+[emb exp="tf.ATP"]のダメージ[p]
+[eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
+[endif]
+[jump target="*Round_end"][s]
+
+;------------------------------------------------------------------------------
+*enemy_sexhara
+#
+[eval exp="f.charm = 0"]
+[jump target="*enemy_comand_select" cond="f.En_Wiseman > 0"]
+牛鬼の組付き[p]
+[getrand min="1" max="100" var="f.rand"]
+[eval exp="f.Hitrate = 30"]
+[AVOIDANCE]
+[TESTER]
+[if exp="f.target > f.rand"]
+鈴耶は敵の組付きを回避した[p][AVOID][WSs]
+[jump target="*Round_end"][s]
+[elsif exp="f.invincible > 0"]
+[call storage="macro_invincible.ks"]
+[jump target="*Round_end"][s]
+[endif]
+鈴耶は牛鬼に組み付かれた[p]
+[eval exp="f.bind = f.GRB"]
+[jump target="*fase1"]
+[s]
+;------------------------------------------------------------------------------
+*enemy_sexhara_roundset
+[eval exp="f.Round += 1"]
+[WSs]
+[return]
+
+;------------------------------------------------------------------------------
+
+*Round_end
+#
+[eval exp="f.EN_DEF_BUFF=0, f.EN_STR_BUFF=0"]
+[if exp="f.HP < 1"][return][endif]
+[if exp="f.Quest_type == 3"][call storage="routin/Rt_progress.ks" target="*guard"][endif]
+[if exp="f.Quest_type == 4"][call storage="routin/Rt_progress.ks" target="*trace"][endif]
+[call storage="routin/Rt_battle_round.ks" target="*battle_round_end"]
+[jump target="*start"][s]
+
 ;------------------------------------------------------------------------------
 
 *fase1
@@ -7,7 +163,7 @@
 [jump target="*Round_end" cond="f.bind <= 0"]
 ;段階１
 #
-落ち武者は鈴耶の胸を揉みしだいた[p]
+牛鬼は鈴耶の胸を揉みしだいた[p]
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*BOOB"]
@@ -39,8 +195,8 @@
 はっ！随分とだらしのない乳だな！！[p]
 よかろう！拙者がここで躾けてやろう！！[p]
 #
-落ち武者は鈴耶の痴態に相好を崩した[p]
-落ち武者のステータスが低下した[p]
+牛鬼は鈴耶の痴態に相好を崩した[p]
+牛鬼のステータスが低下した[p]
 [eval exp="f.En_Raptured += 1"]
 [jump target="*fase2"]
 [s]
@@ -85,13 +241,13 @@
 #鈴耶
 あんっ！！もっと、してぇ…[p]
 #
-鈴耶は甘い声で落ち武者にしなだれかかった[p]
+鈴耶は甘い声で牛鬼にしなだれかかった[p]
 #牛鬼
 まったくだらしのない乳だな！！[p]
 よかろう！拙者がここで躾けてやろう！！[p]
 #
-落ち武者は鈴耶の反応に相好を崩した[p]
-房中術の効果で落ち武者のステータスが低下した[p]
+牛鬼は鈴耶の反応に相好を崩した[p]
+房中術の効果で牛鬼のステータスが低下した[p]
 [eval exp="f.En_Raptured += 1"]
 [jump target="*fase2"]
 [s]
@@ -123,7 +279,7 @@
 #牛鬼
 おおおおおお！？[p]
 #
-酩酊した落ち武者の能力が低下した[p]
+酩酊した牛鬼の能力が低下した[p]
 [eval exp="f.En_Raptured += 1"]
 [eval exp="f.rapture = 0"]
 [jump target="*fase2"]
@@ -140,7 +296,7 @@
 #鈴耶
 かはっ！！[p]
 #
-落ち武者は気絶していた鈴耶に活を入れた[p]
+牛鬼は気絶していた鈴耶に活を入れた[p]
 [eval exp="f.HP = 1"][WSs]
 [return][s]
 
@@ -152,7 +308,7 @@
 [jump target="*Round_end" cond="f.bind <= 0"]
 ;段階２
 #
-落ち武者はマラを鈴耶の尻に擦りつけてきた[p]
+牛鬼はマラを鈴耶の尻に擦りつけてきた[p]
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*ANAL"]
@@ -184,8 +340,8 @@
 #牛鬼
 へへっ、がっつきやがって！ご期待通りねじ込んでやるぜ！！[p]
 #
-落ち武者は鈴耶の痴態に相好を崩した[p]
-房中術の効果で落ち武者のステータスが低下した[p]
+牛鬼は鈴耶の痴態に相好を崩した[p]
+房中術の効果で牛鬼のステータスが低下した[p]
 [eval exp="f.En_Raptured += 1"]
 [jump target="*fase3"]
 [s]
@@ -265,13 +421,13 @@
 鈴耶の房中術[p]
 「小股絞め」[p]
 鈴耶は男の魔羅を自ら股に挟み込むと、太股でしごき始めた[p]
-淫蜜が潤滑油となり得も言われぬ快感が落ち武者を襲う[p]
+淫蜜が潤滑油となり得も言われぬ快感が牛鬼を襲う[p]
 [call storage="routin/Rt_bochu.ks"]
 #牛鬼
 おおおおおお！？[p]
 #
-激しい快感が落ち武者を襲う[p]
-落ち武者の能力が低下した[p]
+激しい快感が牛鬼を襲う[p]
+牛鬼の能力が低下した[p]
 [eval exp="f.En_Raptured += 1"]
 [eval exp="f.rapture = 0"]
 [jump target="*fase3"]
@@ -291,7 +447,7 @@
 #鈴耶
 くふっ！！[p]
 #
-落ち武者は気絶していた鈴耶を叩き起こした[p]
+牛鬼は気絶していた鈴耶を叩き起こした[p]
 [eval exp="f.HP = 1"][WSs]
 [return][s]
 ;------------------------------------------------------------------------------
@@ -302,7 +458,7 @@
 [jump target="*Round_end" cond="f.bind <= 0"]
 ;段階３
 #
-落ち武者はマラを鈴耶の秘裂に挿入した[p]
+牛鬼はマラを鈴耶の秘裂に挿入した[p]
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
@@ -330,8 +486,8 @@
 #鈴耶
 あんっ！！もっとぉ！！めちゃくちゃにしてぇ！！[p]
 #
-落ち武者は鈴耶の痴態に鼻息を荒くした[p]
-房中術の効果で落ち武者のステータスが低下した[p]
+牛鬼は鈴耶の痴態に鼻息を荒くした[p]
+房中術の効果で牛鬼のステータスが低下した[p]
 [eval exp="f.En_Raptured += 1"]
 [jump target="*fase4"]
 [s]
@@ -386,8 +542,8 @@
 #牛鬼
 おおう！！こいつはすげぇ名器だ！！[p]
 #
-落ち武者は快感に鼻息を荒くした[p]
-房中術の効果で落ち武者のステータスが低下した[p]
+牛鬼は快感に鼻息を荒くした[p]
+房中術の効果で牛鬼のステータスが低下した[p]
 [eval exp="f.En_Raptured += 1"]
 [jump target="*fase4"]
 [s]
@@ -417,13 +573,13 @@
 鈴耶の房中術[p]
 「天女貝」[p]
 鈴耶の膣がうねり、陰唇が射精を催促するように魔羅を食む[p]
-電撃が走るような快感が落ち武者を襲う[p]
+電撃が走るような快感が牛鬼を襲う[p]
 [call storage="routin/Rt_bochu.ks"]
 #牛鬼
 おおおおおお！？[p]
 #
-強烈な快感が落ち武者を襲う[p]
-落ち武者の能力が低下した[p]
+強烈な快感が牛鬼を襲う[p]
+牛鬼の能力が低下した[p]
 [eval exp="f.En_Raptured += 1"]
 [eval exp="f.rapture = 0"]
 [jump target="*fase4"]
@@ -443,7 +599,7 @@
 #鈴耶
 かはっ！！[p]
 #
-落ち武者は気絶していた鈴耶を叩き起こした[p]
+牛鬼は気絶していた鈴耶を叩き起こした[p]
 [eval exp="f.HP = 1"][WSs]
 [return][s]
 
@@ -455,7 +611,7 @@
 [jump target="*Round_end" cond="f.bind <= 0"]
 ;段階４
 #
-落ち武者はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
+牛鬼はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
 [call storage="asset_extra_reaction.ks" target="*orgasm"]
@@ -475,12 +631,12 @@
 #牛鬼
 ああっ！！出してやる！！ぶちまけてやる！！[p]
 #
-落ち武者の目は血走り、吐息は獣のようだ[p]
+牛鬼の目は血走り、吐息は獣のようだ[p]
 完全に目の前の雌を犯すことしか考えていない獣と化していた[p]
 #牛鬼
 うおおおおおお！！出すぞ出すぞ！！ぐおーーーーーーっ！！[p]
 #
-咆哮とともに落ち武者のマラが爆発した[p]
+咆哮とともに牛鬼のマラが爆発した[p]
 #鈴耶
 あああああっ！！！イクイクイクーーーーーー！！[p]
 #
@@ -491,8 +647,8 @@
 #牛鬼
 へ、へへ、腰が抜けちまいそうだぜ[p]
 #
-落ち武者は鈴耶からマラを引き抜くとヨタヨタと後退りした。
-房中術の効果で落ち武者のステータスが低下した[p]
+牛鬼は鈴耶からマラを引き抜くとヨタヨタと後退りした。
+房中術の効果で牛鬼のステータスが低下した[p]
 [eval exp="f.En_Raptured += 1"]
 [chara_mod name="suzune" face="厳しい"]
 #鈴耶
@@ -514,7 +670,7 @@
 #鈴耶
 くううううううっ！！[p]
 #
-落ち武者は鈴耶の中で射精した[p]
+牛鬼は鈴耶の中で射精した[p]
 #鈴耶
 （ーーーーーー！！）[p]
 #
@@ -523,7 +679,7 @@
 #牛鬼
 ちっ、イクの我慢しやがったな…[p]
 #
-落ち武者はマラを引き抜くとつまらなそうに鈴耶の尻を叩いた[p]
+牛鬼はマラを引き抜くとつまらなそうに鈴耶の尻を叩いた[p]
 #鈴耶
 んっ！！[p]
 #
@@ -548,7 +704,7 @@
 #牛鬼
 うおおお！出すぞ！！[p]
 #
-落ち武者は鈴耶の中で射精した[p]
+牛鬼は鈴耶の中で射精した[p]
 [chara_mod name="suzune" face="絶頂"]
 #鈴耶
 あああああっ！！！イクイクイクーーーーーー！！[p]
@@ -560,7 +716,7 @@
 #牛鬼
 へへへ、なかなか良かったぜ[p]
 #
-落ち武者は嫌らしく笑いながらマラを引き抜くと鈴耶の尻を叩いた[p]
+牛鬼は嫌らしく笑いながらマラを引き抜くと鈴耶の尻を叩いた[p]
 #鈴耶
 ああんっ！！[p]
 #
@@ -581,12 +737,12 @@
 #牛鬼
 ああっ！！出してやる！！ぶちまけてやる！！[p]
 #
-落ち武者の目は血走り、吐息は獣のようだ[p]
+牛鬼の目は血走り、吐息は獣のようだ[p]
 完全に目の前の雌を犯すことしか考えていない獣と化していた[p]
 #牛鬼
 うおおおおおお！！出すぞ出すぞ！！ぐおーーーーーーっ！！[p]
 #
-咆哮とともに落ち武者のマラが爆発した[p]
+咆哮とともに牛鬼のマラが爆発した[p]
 #鈴耶
 あああああっ！！！[p]
 #
@@ -595,8 +751,8 @@
 #牛鬼
 へ、へへ、腰が抜けちまいそうだぜ[p]
 #
-落ち武者は鈴耶からマラを引き抜くとヨタヨタと後退りした。
-房中術の効果で落ち武者のステータスが低下した[p]
+牛鬼は鈴耶からマラを引き抜くとヨタヨタと後退りした。
+房中術の効果で牛鬼のステータスが低下した[p]
 [eval exp="f.En_Raptured += 1"]
 [chara_mod name="suzune" face="厳しい"]
 #鈴耶
@@ -618,14 +774,14 @@
 #牛鬼
 うおおおおおおっ！！[p]
 #
-落ち武者は鈴耶の中で射精した[p]
+牛鬼は鈴耶の中で射精した[p]
 [jump target="*fase4房中術" cond="f.rapture > 0"]
 #鈴耶
 あああああっ！！ダメェ・・・！！[p]
 #牛鬼
 へへへ、なかなか良かったぜ[p]
 #
-落ち武者は嫌らしく笑いながら鈴耶からマラを引き抜いた[p]
+牛鬼は嫌らしく笑いながら鈴耶からマラを引き抜いた[p]
 #鈴耶
 あんっ！[p]
 #
@@ -647,11 +803,11 @@
 #牛鬼
 う？おおおおおおおお！？[p]
 #
-さらなる雄汁を催促するような締め上げに落ち武者の肉棒が快感に悲鳴を上げる[p]
+さらなる雄汁を催促するような締め上げに牛鬼の肉棒が快感に悲鳴を上げる[p]
 #鈴耶
 「忍法・筒枯らし！！」
 #
-精どころか魂も魄も吸い上げるような壮絶な吸い上げに落ち武者は[p]
+精どころか魂も魄も吸い上げるような壮絶な吸い上げに牛鬼は[p]
 [call storage="routin/Rt_bochu.ks"]
 [if exp="f.EN_SAN <= 0"]
 #牛鬼
@@ -669,7 +825,7 @@
 #牛鬼
 ぐおおおおおおおおおっ！！！！[p]
 #
-絶叫とともに落ち武者は鈴耶を突き飛ばすようにして無理やり肉棒を引き抜いた[p]
+絶叫とともに牛鬼は鈴耶を突き飛ばすようにして無理やり肉棒を引き抜いた[p]
 #鈴耶
 あら、残念[p]
 #
@@ -689,7 +845,7 @@
 #牛鬼
 へへへ、なかなか良かったぜ[p]
 #
-落ち武者は白目を剥いて痙攣する鈴耶からマラを引き抜いた[p]
+牛鬼は白目を剥いて痙攣する鈴耶からマラを引き抜いた[p]
 #鈴耶
 あうぅ・・・[p]
 #
@@ -699,8 +855,8 @@
 このままヤリ捨てるのは勿体ねえ上玉だな[r]
 ねぐらまでお持ち帰りさせてもらおうか！！[p]
 #
-落ち武者はニヤリとほくそ笑むと鈴耶を担ぎ上げて意気揚々と闇の中へ消えていった[p]
-ゲームオーバー（実際には落ち武者の住処へ続きます）
+牛鬼はニヤリとほくそ笑むと鈴耶を担ぎ上げて意気揚々と闇の中へ消えていった[p]
+ゲームオーバー（実際には牛鬼の住処へ続きます）
 [s]
 
 ;フィニッシュ-----------------------------------------------------------------------

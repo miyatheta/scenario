@@ -77,9 +77,13 @@
 *enemy_magic
 #
 忍者の「火遁の術」[p]
+[if exp="f.invincible > 0"]
+[call storage="macro_invincible.ks"]
+[else]
 [eval exp="tf.argment = f.EN_POW * 15 * f.GRD"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
+[endif]
 [jump target="*Round_end"][s]
 ;------------------------------------------------------------------------------
 *enemy_sexhara

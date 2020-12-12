@@ -11,7 +11,7 @@
 ;攻撃威力の算出
 [eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
-[eval exp="tf.argment = (f.ATP * f.DTR) + f.rand"]
+[eval exp="tf.argment = (f.ATP * f.DTR) * f.EN_GRD  + f.rand"]
 ;退魔力の算出
 [if exp="f.type==2"]
 [eval exp="tf.argment = tf.argment / 2 "]

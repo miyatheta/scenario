@@ -80,11 +80,15 @@
 *enemy_magic
 #
 下忍の「火遁の術」[p]
+[if exp="f.invincible > 0"]
+[call storage="macro_invincible.ks"]
+[else]
 [eval exp="tf.argment = f.EN_POW * 15 * f.GRD"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
+[eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
+[endif]
 周囲の警戒度が上昇した[p]
 [eval exp="f.warning += 10"]
-[eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [jump target="*Round_end"][s]
 ;------------------------------------------------------------------------------
 *enemy_sexhara
