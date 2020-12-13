@@ -74,12 +74,12 @@
 ;-------------------------------------------------------------------------------
 *select_enemy
 #
-[call storage="routin/Rt_initialize_battle.ks"]
+[call storage="routin/Rt_battle_start.ks"]
 [getrand min="1" max="120" var="f.event"]
 
 [if exp="f.event<=30"]
 番犬が現れた[p]
-[call storage="routin/Rt_initialize_battle.ks"]
+[call storage="routin/Rt_battle_start.ks"]
 [eval exp="f.en_Name = '番犬'"]
 [eval exp="f.Lv = 30 + (f.security * 10) , f.en_HP = 130 + (f.security * 10)"]
 [eval exp="f.GRB = 70 + (f.security * 10), f.EN_SEX = 100 + (f.security * 10) "]
@@ -95,7 +95,7 @@
 
 [elsif exp="f.event<=60"]
 見廻り兵卒（丑）が現れた[p]
-[call storage="routin/Rt_initialize_battle.ks"]
+[call storage="routin/Rt_battle_start.ks"]
 [eval exp="f.en_Name = '見廻り兵卒（丑）'"]
 [eval exp="f.Lv = 30 + (f.security * 10) , f.en_HP = 170 + (f.security * 10)"]
 [eval exp="f.GRB = 90 + (f.security * 10), f.EN_SEX = 90 + (f.security * 10) "]
@@ -111,7 +111,7 @@
 
 [elsif exp="f.event<=80"]
 武士（丑）が現れた[p]
-[call storage="routin/Rt_initialize_battle.ks"]
+[call storage="routin/Rt_battle_start.ks"]
 [eval exp="f.en_Name = '武士（丑）'"]
 [eval exp="f.Lv = 30 + (f.security * 10) , f.en_HP = 290 + (f.security * 10)"]
 [eval exp="f.GRB = 110 + (f.security * 10), f.EN_SEX = 110 + (f.security * 10) "]
@@ -126,7 +126,7 @@
 
 [elsif exp="f.event<=100"]
 下忍（丑）が現れた[p]
-[call storage="routin/Rt_initialize_battle.ks"]
+[call storage="routin/Rt_battle_start.ks"]
 [eval exp="f.en_Name = '下忍（丑）'"]
 [eval exp="f.Lv = 30 + (f.security * 10) , f.en_HP = 190 + (f.security * 10)"]
 [eval exp="f.GRB = 100 + (f.security * 10), f.EN_SEX = 140 + (f.security * 10) "]
@@ -142,7 +142,7 @@
 
 [elsif exp="f.event<=110"]
 侍（丑）が現れた[p]
-[call storage="routin/Rt_initialize_battle.ks"]
+[call storage="routin/Rt_battle_start.ks"]
 [eval exp="f.en_Name = '侍（丑）'"]
 [eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 400 + (f.security * 10)"]
 [eval exp="f.GRB = 110 + (f.security * 10), f.EN_SEX = 110 + (f.security * 10) "]
@@ -158,7 +158,7 @@
 
 [else]
 中忍（丑）が現れた[p]
-[call storage="routin/Rt_initialize_battle.ks"]
+[call storage="routin/Rt_battle_start.ks"]
 [eval exp="f.en_Name = '中忍（丑）'"]
 [eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 180 + (f.security * 10)"]
 [eval exp="f.GRB = 100 + (f.security * 10), f.EN_SEX = 140 + (f.security * 10) "]
@@ -175,7 +175,7 @@
 ;--------------------------------------------
 *trapper
 酔漢が現れた[p]
-[call storage="routin/Rt_initialize_battle.ks"]
+[call storage="routin/Rt_battle_start.ks"]
 [eval exp="f.en_Name = '酔漢'"]
 [eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 100 + (f.security * 10)"]
 [eval exp="f.GRB = 120 + (f.security * 10), f.EN_SEX = 120 + (f.security * 10) "]
@@ -412,7 +412,7 @@
 
 ;-------------------------------------------------------------------------------
 *battle_end
-[BattleFinsish]
+[call storage="routin/Rt_battle_end.ks"]
 
 [jump target="*no_goal"]
 [s]
@@ -436,7 +436,7 @@
 そ、そんな・・・[p]
 #
 鈴耶は気を失った[p]
-[BattleFinsish]
+[call storage="routin/Rt_battle_end.ks"]
 [call storage="macro/Mc_setStatus.ks"]
 [call storage="asset/As_result.ks" target="*failed"]
 [jump storage="data_prison/ushi_torture01.ks"]
@@ -478,7 +478,7 @@
 ;牛鬼
 
 ;---------------
-[call storage="routin/Rt_initialize_battle.ks"]
+[call storage="routin/Rt_battle_start.ks"]
 [eval exp="f.en_Name = '牛鬼'"]
 [eval exp="f.Lv = 100, f.en_HP = 10000 "]
 [eval exp="f.EN_STR = 20, f.EN_POW = 20, f.en_DEX=30 "]

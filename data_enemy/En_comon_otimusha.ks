@@ -103,7 +103,7 @@
 ;------------------------------------------------------------------------------
 
 *fase1
-[call storage="routin/Rt_bind_fase.ks"]
+
 ;抵抗１
 [call storage="PL_bind.ks"]
 ;抵抗成功
@@ -115,7 +115,7 @@
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*BOOB"]
 ;状態異常による追加ダメージ
-[call storage="asset/As_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
+[call storage="asset/As_extra_reaction.ks" target="*milk" cond="f.milk > 0"]
 ;絶頂判定
 [call storage="macro/Mc_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
@@ -177,7 +177,6 @@
 #落ち武者
 なんと他愛ない！！[p]
 これでくノ一を名乗るとは片腹痛いわ！[p]
-[chara_mod name="suzune" face="苦しみ"]
 #鈴耶
 くっ・・・！！[p]
 [jump target="*fase2"]

@@ -2,6 +2,8 @@
 [if exp="f.Quest_type == 3"][call storage="routin/Rt_progress.ks" target="*guard"][endif]
 [if exp="f.Quest_type == 4"][call storage="routin/Rt_progress.ks" target="*trace"][endif]
 [eval exp="f.endure = 0 , f.rapture = 0"]
+[eval exp="f.orgasm = 0"]
+[call storage="asset/As_face.ks" target="*battle"]
 ;-------------------------------------------------------------------------------
 
 *PL_comand_select
@@ -36,7 +38,7 @@
 [s]
 
 *PL_resist2
-[if exp="f.orgasm > 0"]
+[if exp="f.acme > 0"]
 絶頂により力が出ない[p]
 [jump target="*PL_comand_select"]
 [endif]

@@ -58,13 +58,6 @@
 [eval exp="f.MP += 10" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [endmacro]
 
-[macro name="BattleFinsish"]
-;戦闘終了時に解消するべきこと
-[eval exp="f.Round = 0, f.ambush=0"]
-[eval exp="f.enchant = 0 , f.invincible = 0 "]
-[eval exp="f.unescape = 0"]
-[endmacro]
-
 [macro name="WSs"]
 [call storage="macro/Mc_WriteStatus.ks"]
 [endmacro]

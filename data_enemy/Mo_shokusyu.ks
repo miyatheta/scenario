@@ -62,7 +62,7 @@
 ひっ！！[p]
 [eval exp="tf.fuck = 200 "]
 [call storage="routin/Rt_kaikan.ks" target="*BOOB"]
-[call storage="asset/As_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
+[call storage="asset/As_extra_reaction.ks" target="*milk" cond="f.milk > 0"]
 ;絶頂判定
 [call storage="macro/Mc_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 [endif]

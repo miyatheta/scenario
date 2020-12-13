@@ -47,7 +47,6 @@
 [s]
 
 *battle
-;表情変更
 [if exp="f.nasty > 0"]
 [chara_mod name="suzune" face="レイプ目"]
 [elsif exp="f.acme > 0"]
