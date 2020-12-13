@@ -100,30 +100,33 @@
 [call storage="routin/Rt_battle_round.ks" target="*battle_round_end"]
 [jump target="*start"][s]
 
-;;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
 
 *fase1
+[call storage="routin/Rt_bind_fase.ks"]
 ;抵抗１
 [call storage="PL_bind.ks"]
 ;抵抗成功
 [jump target="*Round_end" cond="f.bind <= 0"]
 ;段階１
 #
-落ち武者は鈴耶の胸を揉みしだいた[p]
+武士は鈴耶の胸を揉みしだいた[p]
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*BOOB"]
-[call storage="macro/check_orgasm.ks" target="*orgasm"]
+;状態異常による追加ダメージ
 [call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
+;絶頂判定
+[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase1淫乱絶頂"]
-[elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase1我慢絶頂"]
-[elsif exp="f.ERO >= 1000"][jump target="*fase1通常絶頂"]
-[elsif exp="f.nasty > 0"][jump target="*fase1淫乱"]
-[else][jump target="*fase1通常"]
+[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase淫乱絶頂1"]
+[elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase我慢絶頂1"]
+[elsif exp="f.orgasm > 0"][jump target="*fase通常絶頂1"]
+[elsif exp="f.nasty > 0"][jump target="*fase淫乱1"]
+[else][jump target="*fase通常1"]
 [endif]
 ;-----------------------------------------
-*fase1淫乱絶頂
+*fase淫乱絶頂1
 [chara_mod name="suzune" face="絶頂" ]
 #鈴耶
 ああんっ！！イクっ！！イクイクイクーーーーッ！！[p]
@@ -131,7 +134,7 @@
 胸を弄ばれ鈴耶は大きな嬌声を上げながら絶頂した[p]
 [call storage="macro_orgasm.ks"]
 [chara_mod name="suzune" face="喘ぎ"]
-[if exp="f.HP <= 0"][call target="*fase1気絶"][endif]
+[if exp="f.HP <= 0"][call target="*fase気絶1"][endif]
 #武士
 なんと他愛ない！！[p]
 これでくノ一を名乗るとは片腹痛いわ！[p]
@@ -141,19 +144,18 @@
 はっ！随分とだらしのない乳だな！！[p]
 よかろう！拙者がここで躾けてやろう！！[p]
 #
-落ち武者は鈴耶の痴態に相好を崩した[p]
-落ち武者のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
+武士は鈴耶の痴態に相好を崩した[p]
 [jump target="*fase2"]
 [s]
 ;-----------------------------------------
-*fase1我慢絶頂
+*fase我慢絶頂1
 [chara_mod name="suzune" face="泣き" ]
 #鈴耶
 (駄目ぇ…感じちゃうーーーーーッ！！)[p]
 #
 胸から押し寄せる快感の波に鈴耶は必死に耐えた[r]
 鈴耶は絶頂を堪えた！[p]
+[call storage="macro_orgasm.ks" target="*endure"]
 #武士
 ほぉ堪えたか？[p]
 だが、随分とだらしのない乳だな[p]
@@ -163,7 +165,7 @@
 [s]
 ;-----------------------------------------
 
-*fase1通常絶頂
+*fase通常絶頂1
 [chara_mod name="suzune" face="絶頂" ]
 #鈴耶
 (駄目ぇ…感じちゃうーーーーーッ！！)[p]
@@ -171,7 +173,7 @@
 胸からの快感に鈴耶は体を震わせた[r]
 ;鈴耶は絶頂した[p]
 [call storage="macro_orgasm.ks"]
-[if exp="f.HP <= 0"][call target="*fase1気絶"][endif]
+[if exp="f.HP <= 0"][call target="*fase気絶1"][endif]
 #武士
 なんと他愛ない！！[p]
 これでくノ一を名乗るとは片腹痛いわ！[p]
@@ -182,24 +184,22 @@
 [s]
 ;-----------------------------------------
 
-*fase1淫乱
+*fase淫乱1
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 あんっ！！もっと、してぇ…[p]
 #
-鈴耶は甘い声で落ち武者にしなだれかかった[p]
+鈴耶は甘い声で武士にしなだれかかった[p]
 #武士
 まったくだらしのない乳だな！！[p]
 よかろう！拙者がここで躾けてやろう！！[p]
 #
-落ち武者は鈴耶の反応に相好を崩した[p]
-房中術の効果で落ち武者のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
+武士は鈴耶の反応に相好を崩した[p]
 [jump target="*fase2"]
 [s]
 ;-----------------------------------------
 
-*fase1通常
+*fase通常1
 [chara_mod name="suzune" face="苦しみ"]
 #鈴耶
 んうっ！揉むなぁ！！[p]
@@ -208,12 +208,12 @@
 #鈴耶
 だっ、だらしないて何よ！！[p]
 #
-[jump target="*fase1房中術" cond="f.rapture > 0"]
+[jump target="*fase房中術1" cond="f.rapture > 0"]
 [jump target="*fase2"]
 [s]
 
 ;-----------------------------------------
-*fase1房中術
+*fase房中術1
 [chara_mod name="suzune" face="厳しい"]
 #鈴耶
 （調子に乗るんじゃないわよ！！）[p]
@@ -225,14 +225,15 @@
 #武士
 おおおおおお！？[p]
 #
-酩酊した落ち武者の能力が低下した[p]
+酩酊した武士の能力が低下した[p]
+
 [eval exp="f.En_Raptured += 1"]
 [eval exp="f.rapture = 0"]
 [jump target="*fase2"]
 [s]
 
 ;-----------------------------------------
-*fase1気絶
+*fase気絶1
 [chara_mod name="suzune" face="レイプ目"]
 鈴耶は気絶した！[p]
 #武士
@@ -242,7 +243,7 @@
 #鈴耶
 かはっ！！[p]
 #
-落ち武者は気絶していた鈴耶に活を入れた[p]
+武士は気絶していた鈴耶に活を入れた[p]
 [eval exp="f.HP = 1"][WSs]
 [return][s]
 
@@ -254,21 +255,21 @@
 [jump target="*Round_end" cond="f.bind <= 0"]
 ;段階２
 #
-落ち武者はマラを鈴耶の尻に擦りつけてきた[p]
+武士はマラを鈴耶の尻に擦りつけてきた[p]
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*ANAL"]
-[call storage="macro/check_orgasm.ks" target="*orgasm"]
+[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase2淫乱絶頂"]
-[elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase2我慢絶頂"]
-[elsif exp="f.ERO >= 1000"][jump target="*fase2通常絶頂"]
-[elsif exp="f.nasty > 0"][jump target="*fase2淫乱"]
-[else][jump target="*fase2通常"]
+[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase淫乱絶頂2"]
+[elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase我慢絶頂2"]
+[elsif exp="f.orgasm > 0"][jump target="*fase通常絶頂2"]
+[elsif exp="f.nasty > 0"][jump target="*fase淫乱2"]
+[else][jump target="*fase通常2"]
 [endif]
 ;-----------------------------------------
 
-*fase2淫乱絶頂
+*fase淫乱絶頂2
 [chara_mod name="suzune" face="絶頂"]
 #鈴耶
 ああんっ！！イクっ！！イクイクイクーーーーッ！！[p]
@@ -286,14 +287,11 @@
 #武士
 へへっ、がっつきやがって！ご期待通りねじ込んでやるぜ！！[p]
 #
-落ち武者は鈴耶の痴態に相好を崩した[p]
-房中術の効果で落ち武者のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
 [jump target="*fase3"]
 [s]
 ;-----------------------------------------
 
-*fase2我慢絶頂
+*fase我慢絶頂2
 [chara_mod name="suzune" face="泣き"]
 #
 快感でびくびくと鈴耶の体が痙攣する[p]
@@ -302,6 +300,7 @@
 #
 鈴耶は眉根を寄せて気色悪い感触に耐えた[p]
 鈴耶は絶頂を堪えた！[p]
+[call storage="macro_orgasm.ks" target="*endure"]
 #武士
 ぷりっぷりっのいいケツしてやがるぜ！！[p]
 #鈴耶
@@ -312,7 +311,7 @@
 [s]
 ;-----------------------------------------
 
-*fase2通常絶頂
+*fase通常絶頂2
 [chara_mod name="suzune" face="絶頂"]
 #鈴耶
 (ダメッ！！イクぅーーーーーッ！！)[p]
@@ -331,7 +330,7 @@
 [s]
 ;-----------------------------------------
 
-*fase2淫乱
+*fase淫乱2
 [chara_mod name="suzune" face="喘ぎ"]
 #武士
 ぷりっぷりっのいいケツしてやがるぜ！！[p]
@@ -341,12 +340,11 @@
 鈴耶は自ら腰をマラに押し付けくねらせた[p]
 #武士
 へへっ、がっつきやがって！ご期待通りねじ込んでやるぜ！！[p]
-[eval exp="f.En_Raptured += 1"]
 [jump target="*fase3"]
 [s]
 ;-----------------------------------------
 
-*fase2通常
+*fase通常2
 [chara_mod name="suzune" face="苦しみ"]
 #武士
 ぷりっぷりっのいいケツしてやがるぜ！！[p]
@@ -354,12 +352,12 @@
 くっ！！汚いものをこすりつけるなぁっ！！[p]
 #武士
 へへっ、こいつをねじ込まれても同じ口がきけるかな！！[p]
-[jump target="*fase2房中術" cond="f.rapture > 0"]
+[jump target="*fase房中術2" cond="f.rapture > 0"]
 [jump target="*fase3"]
 [s]
 
 ;-----------------------------------------
-*fase2房中術
+*fase房中術2
 [chara_mod name="suzune" face="厳しい"]
 #鈴耶
 （調子に乗るんじゃないわよ！！）[p]
@@ -367,13 +365,14 @@
 鈴耶の房中術[p]
 「小股絞め」[p]
 鈴耶は男の魔羅を自ら股に挟み込むと、太股でしごき始めた[p]
-淫蜜が潤滑油となり得も言われぬ快感が落ち武者を襲う[p]
+淫蜜が潤滑油となり得も言われぬ快感が武士を襲う[p]
 [call storage="routin/Rt_bochu.ks"]
 #武士
 おおおおおお！？[p]
 #
-激しい快感が落ち武者を襲う[p]
-落ち武者の能力が低下した[p]
+激しい快感が武士を襲う[p]
+武士の能力が低下した[p]
+
 [eval exp="f.En_Raptured += 1"]
 [eval exp="f.rapture = 0"]
 [jump target="*fase3"]
@@ -393,7 +392,7 @@
 #鈴耶
 くふっ！！[p]
 #
-落ち武者は気絶していた鈴耶を叩き起こした[p]
+武士は気絶していた鈴耶を叩き起こした[p]
 [eval exp="f.HP = 1"][WSs]
 [return][s]
 ;------------------------------------------------------------------------------
@@ -404,21 +403,21 @@
 [jump target="*Round_end" cond="f.bind <= 0"]
 ;段階３
 #
-落ち武者はマラを鈴耶の秘裂に挿入した[p]
+武士はマラを鈴耶の秘裂に挿入した[p]
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
-[call storage="macro/check_orgasm.ks" target="*orgasm"]
+[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase3淫乱絶頂"]
-[elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase3我慢絶頂"]
-[elsif exp="f.ERO >= 1000"][jump target="*fase3通常絶頂"]
-[elsif exp="f.nasty > 0"][jump target="*fase3淫乱"]
-[else][jump target="*fase3通常"]
+[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase淫乱絶頂3"]
+[elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase我慢絶頂3"]
+[elsif exp="f.orgasm > 0"][jump target="*fase通常絶頂3"]
+[elsif exp="f.nasty > 0"][jump target="*fase淫乱3"]
+[else][jump target="*fase通常3"]
 [endif]
 ;-----------------------------------------
 
-*fase3淫乱絶頂
+*fase淫乱絶頂3
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！！これぇ！これが欲しかったのぉ！！[r]
@@ -432,14 +431,12 @@
 #鈴耶
 あんっ！！もっとぉ！！めちゃくちゃにしてぇ！！[p]
 #
-落ち武者は鈴耶の痴態に鼻息を荒くした[p]
-房中術の効果で落ち武者のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
+武士は鈴耶の痴態に鼻息を荒くした[p]
 [jump target="*fase4"]
 [s]
 ;-----------------------------------------
 
-*fase3我慢絶頂
+*fase我慢絶頂3
 [chara_mod name="suzune" face="泣き"]
 #鈴耶
 （ーーーーーーーッ！！）[p]
@@ -447,6 +444,7 @@
 鈴耶は挿入の衝撃に歯を食いしばった[p]
 跳ね回りそうな体を押さえつけ、快感を拒絶する[p]
 鈴耶は絶頂を堪えた！[p]
+[call storage="macro_orgasm.ks" target="*endure"]
 #武士
 へっ！イクのをこらえやがったな？だが本番はここからだぜ！！[p]
 [chara_mod name="suzune" face="苦しみ"]
@@ -456,7 +454,7 @@
 [s]
 ;-----------------------------------------
 
-*fase3通常絶頂
+*fase通常絶頂3
 [chara_mod name="suzune" face="泣き"]
 #鈴耶
 （ーーーーーーーッ！！）[p]
@@ -479,7 +477,7 @@
 [s]
 ;-----------------------------------------
 
-*fase3淫乱
+*fase淫乱3
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！！これぇ！これが欲しかったのぉ！！[r]
@@ -488,14 +486,12 @@
 #武士
 おおう！！こいつはすげぇ名器だ！！[p]
 #
-落ち武者は快感に鼻息を荒くした[p]
-房中術の効果で落ち武者のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
+武士は快感に鼻息を荒くした[p]
 [jump target="*fase4"]
 [s]
 ;-----------------------------------------
 
-*fase3通常
+*fase通常3
 [chara_mod name="suzune" face="泣き"]
 #鈴耶
 （ーーーーーーーッ！！）[p]
@@ -507,11 +503,11 @@
 はっ！！小さすぎて入ったのが分かんなかったわよっ！！[p]
 #武士
 ちっ！まだ入れただけだ！！こっからが本番だぜ！！[p]
-[jump target="*fase3房中術" cond="f.rapture > 0"]
+[jump target="*fase房中術3" cond="f.rapture > 0"]
 [jump target="*fase4"]
 [s]
 ;-----------------------------------------
-*fase3房中術
+*fase房中術3
 [chara_mod name="suzune" face="厳しい"]
 #鈴耶
 （負けるもんか！！）[p]
@@ -519,13 +515,13 @@
 鈴耶の房中術[p]
 「天女貝」[p]
 鈴耶の膣がうねり、陰唇が射精を催促するように魔羅を食む[p]
-電撃が走るような快感が落ち武者を襲う[p]
+電撃が走るような快感が武士を襲う[p]
 [call storage="routin/Rt_bochu.ks"]
 #武士
 おおおおおお！？[p]
 #
-強烈な快感が落ち武者を襲う[p]
-落ち武者の能力が低下した[p]
+強烈な快感が武士を襲う[p]
+武士の能力が低下した[p]
 [eval exp="f.En_Raptured += 1"]
 [eval exp="f.rapture = 0"]
 [jump target="*fase4"]
@@ -545,7 +541,7 @@
 #鈴耶
 かはっ！！[p]
 #
-落ち武者は気絶していた鈴耶を叩き起こした[p]
+武士は気絶していた鈴耶を叩き起こした[p]
 [eval exp="f.HP = 1"][WSs]
 [return][s]
 
@@ -557,32 +553,32 @@
 [jump target="*Round_end" cond="f.bind <= 0"]
 ;段階４
 #
-落ち武者はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
+武士はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
-[call storage="macro/check_orgasm.ks" target="*orgasm"]
+[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase4淫乱絶頂"]
-[elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase4我慢絶頂"]
-[elsif exp="f.ERO >= 1000"][jump target="*fase4通常絶頂"]
-[elsif exp="f.nasty > 0"][jump target="*fase4淫乱"]
-[else][jump target="*fase4通常"]
+[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase淫乱絶頂4"]
+[elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase我慢絶頂4"]
+[elsif exp="f.orgasm > 0"][jump target="*fase通常絶頂4"]
+[elsif exp="f.nasty > 0"][jump target="*fase淫乱4"]
+[else][jump target="*fase通常4"]
 [endif]
 ;----------------------------------------
 
-*fase4淫乱絶頂
+*fase淫乱絶頂4
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いいっ！！早く！早く頂戴！！[p]
 #武士
 ああっ！！出してやる！！ぶちまけてやる！！[p]
 #
-落ち武者の目は血走り、吐息は獣のようだ[p]
+武士の目は血走り、吐息は獣のようだ[p]
 完全に目の前の雌を犯すことしか考えていない獣と化していた[p]
 #武士
 うおおおおおお！！出すぞ出すぞ！！ぐおーーーーーーっ！！[p]
 #
-咆哮とともに落ち武者のマラが爆発した[p]
+咆哮とともに武士のマラが爆発した[p]
 #鈴耶
 あああああっ！！！イクイクイクーーーーーー！！[p]
 #
@@ -593,9 +589,7 @@
 #武士
 へ、へへ、腰が抜けちまいそうだぜ[p]
 #
-落ち武者は鈴耶からマラを引き抜くとヨタヨタと後退りした。
-房中術の効果で落ち武者のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
+武士は鈴耶からマラを引き抜くとヨタヨタと後退りした。
 [chara_mod name="suzune" face="厳しい"]
 #鈴耶
 ふう、なかなか良かったわね。でも楽しんだ分は返してもらうわよ！！！[p]
@@ -605,7 +599,7 @@
 [s]
 ;----------------------------------------
 
-*fase4我慢絶頂
+*fase我慢絶頂4
 [chara_mod name="suzune" face="泣き"]
 #武士
 イけぇ！！イっちまええええ！！[p]
@@ -616,16 +610,17 @@
 #鈴耶
 くううううううっ！！[p]
 #
-落ち武者は鈴耶の中で射精した[p]
+武士は鈴耶の中で射精した[p]
 #鈴耶
 （ーーーーーー！！）[p]
 #
 マラが膣内で爆ぜるのを感じながら鈴耶は快感を押し殺した[r]
 鈴耶は絶頂を堪えた！[p]
+[call storage="macro_orgasm.ks" target="*endure"]
 #武士
 ちっ、イクの我慢しやがったな…[p]
 #
-落ち武者はマラを引き抜くとつまらなそうに鈴耶の尻を叩いた[p]
+武士はマラを引き抜くとつまらなそうに鈴耶の尻を叩いた[p]
 #鈴耶
 んっ！！[p]
 #
@@ -639,7 +634,7 @@
 [s]
 ;----------------------------------------
 
-*fase4通常絶頂
+*fase通常絶頂4
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いやあっ！！イクぅ！！[p]
@@ -650,7 +645,7 @@
 #武士
 うおおお！出すぞ！！[p]
 #
-落ち武者は鈴耶の中で射精した[p]
+武士は鈴耶の中で射精した[p]
 [chara_mod name="suzune" face="絶頂"]
 #鈴耶
 あああああっ！！！イクイクイクーーーーーー！！[p]
@@ -662,7 +657,7 @@
 #武士
 へへへ、なかなか良かったぜ[p]
 #
-落ち武者は嫌らしく笑いながらマラを引き抜くと鈴耶の尻を叩いた[p]
+武士は嫌らしく笑いながらマラを引き抜くと鈴耶の尻を叩いた[p]
 #鈴耶
 ああんっ！！[p]
 #
@@ -676,19 +671,19 @@
 [s]
 ;----------------------------------------
 
-*fase4淫乱
+*fase淫乱4
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いいっ！！早く！早く頂戴！！[p]
 #武士
 ああっ！！出してやる！！ぶちまけてやる！！[p]
 #
-落ち武者の目は血走り、吐息は獣のようだ[p]
+武士の目は血走り、吐息は獣のようだ[p]
 完全に目の前の雌を犯すことしか考えていない獣と化していた[p]
 #武士
 うおおおおおお！！出すぞ出すぞ！！ぐおーーーーーーっ！！[p]
 #
-咆哮とともに落ち武者のマラが爆発した[p]
+咆哮とともに武士のマラが爆発した[p]
 #鈴耶
 あああああっ！！！[p]
 #
@@ -697,9 +692,7 @@
 #武士
 へ、へへ、腰が抜けちまいそうだぜ[p]
 #
-落ち武者は鈴耶からマラを引き抜くとヨタヨタと後退りした。
-房中術の効果で落ち武者のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
+武士は鈴耶からマラを引き抜くとヨタヨタと後退りした。
 [chara_mod name="suzune" face="厳しい"]
 #鈴耶
 さて、楽しんだ分は返してもらうわよ！！！[p]
@@ -709,7 +702,7 @@
 [s]
 ;----------------------------------------
 
-*fase4通常
+*fase通常4
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 あんっ！あんっ！ひぃん！！[p]
@@ -720,14 +713,14 @@
 #武士
 うおおおおおおっ！！[p]
 #
-落ち武者は鈴耶の中で射精した[p]
-[jump target="*fase4房中術" cond="f.rapture > 0"]
+武士は鈴耶の中で射精した[p]
+[jump target="*fase房中術4" cond="f.rapture > 0"]
 #鈴耶
 あああああっ！！ダメェ・・・！！[p]
 #武士
 へへへ、なかなか良かったぜ[p]
 #
-落ち武者は嫌らしく笑いながら鈴耶からマラを引き抜いた[p]
+武士は嫌らしく笑いながら鈴耶からマラを引き抜いた[p]
 #鈴耶
 あんっ！[p]
 #
@@ -740,7 +733,7 @@
 [jump target="*finish"]
 [s]
 ;-----------------------------------------
-*fase4房中術
+*fase房中術4
 #鈴耶
 [chara_mod name="suzune" face="厳しい"]
 (今よ！！)[p]
@@ -749,11 +742,11 @@
 #武士
 う？おおおおおおおお！？[p]
 #
-さらなる雄汁を催促するような締め上げに落ち武者の肉棒が快感に悲鳴を上げる[p]
+さらなる雄汁を催促するような締め上げに武士の肉棒が快感に悲鳴を上げる[p]
 #鈴耶
 「忍法・筒枯らし！！」
 #
-精どころか魂も魄も吸い上げるような壮絶な吸い上げに落ち武者は[p]
+精どころか魂も魄も吸い上げるような壮絶な吸い上げに武士は[p]
 [call storage="routin/Rt_bochu.ks"]
 [if exp="f.EN_SAN <= 0"]
 #武士
@@ -765,13 +758,12 @@
 隙あり！！[p]
 #
 敵は虚脱状態になった(3ターン)[p]
-[eval exp="f.En_Raptured += 1"]
 [eval exp="f.En_Wiseman=1 , f.En_Wiseman_time=3"]
 [else]
 #武士
 ぐおおおおおおおおおっ！！！！[p]
 #
-絶叫とともに落ち武者は鈴耶を突き飛ばすようにして無理やり肉棒を引き抜いた[p]
+絶叫とともに武士は鈴耶を突き飛ばすようにして無理やり肉棒を引き抜いた[p]
 #鈴耶
 あら、残念[p]
 #
@@ -791,7 +783,7 @@
 #武士
 へへへ、なかなか良かったぜ[p]
 #
-落ち武者は白目を剥いて痙攣する鈴耶からマラを引き抜いた[p]
+武士は白目を剥いて痙攣する鈴耶からマラを引き抜いた[p]
 #鈴耶
 あうぅ・・・[p]
 #
@@ -801,8 +793,8 @@
 このままヤリ捨てるのは勿体ねえ上玉だな[r]
 ねぐらまでお持ち帰りさせてもらおうか！！[p]
 #
-落ち武者はニヤリとほくそ笑むと鈴耶を担ぎ上げて意気揚々と闇の中へ消えていった[p]
-ゲームオーバー（実際には落ち武者の住処へ続きます）
+武士はニヤリとほくそ笑むと鈴耶を担ぎ上げて意気揚々と闇の中へ消えていった[p]
+ゲームオーバー（実際には武士の住処へ続きます）
 [s]
 
 ;フィニッシュ-----------------------------------------------------------------------

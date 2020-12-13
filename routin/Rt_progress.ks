@@ -1,6 +1,4 @@
 *start
-[eval exp="f.MOVE = f.MOVE_MAX + f.arms_mov"]
-[eval exp="f.MOVE -= 3 " cond="f.slowly > 0"]
 [WSs]
 [eval exp="f.progress += f.MOVE"]
 

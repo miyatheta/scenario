@@ -15,19 +15,40 @@
 ;状態異常終了メッセージ--------------------------------------------------------------
 [if exp="f.poison == 1"]
 鈴耶は毒状態から回復した[p]
+[eval exp="f.poison = 0"]
 [endif]
 
 [if exp="f.excite == 1"]
 鈴耶は興奮状態から回復した[p]
+[eval exp="f.excite = 0"]
 [endif]
 
 [if exp="f.slowly == 1"]
+[eval exp="f.MOVE += 3"][WSs]
 鈴耶は鈍足状態から回復した[p]
+[eval exp="f.slowly = 0"]
 [endif]
 
 ;[if exp="f.aphrodisy == 1"]
 ;鈴耶は欲情状態から回復した[p]
 ;[endif]
+
+;表情変更
+[if exp="f.nasty > 0"]
+[chara_mod name="suzune" face="レイプ目"]
+[elsif exp="f.acme > 0"]
+[chara_mod name="suzune" face="喘ぎ"]
+[elsif exp="f.ERO > 750"]
+[chara_mod name="suzune" face="苦しみ"]
+[elsif exp="f.ERO > 500"]
+[chara_mod name="suzune" face="厳しい"]
+[elsif exp="f.HP < 250"]
+[chara_mod name="suzune" face="苦しみ"]
+[elsif exp="f.HP < 500"]
+[chara_mod name="suzune" face="厳しい"]
+[else]
+[chara_mod name="suzune" face="普通"]
+[endif]
 
 ;状態異常ターン減少-----------------------------------------------------------------
 [eval exp="f.poison -= 1" cond="f.poison > 0"]

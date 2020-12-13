@@ -1,7 +1,7 @@
 ;WriteStatus
 ;[Milk]
 [iscript]
-tf.mov = f.MOVE + f.arms_mov ;
+tf.mov = f.MOVE;
 tf.movtxt = "移動力：" + tf.mov ;
 tf.turntxt = "手番数：" + f.turn ;
 tf.hptxt = "体力：" + f.HP ;

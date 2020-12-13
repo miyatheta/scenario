@@ -157,6 +157,7 @@
 ;------------------------------------------------------------------------------
 
 *fase1
+[call storage="routin/Rt_bind_fase.ks"]
 ;抵抗１
 [call storage="PL_bind.ks"]
 ;抵抗成功
@@ -167,17 +168,19 @@
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*BOOB"]
-[call storage="macro/check_orgasm.ks" target="*orgasm"]
+;状態異常による追加ダメージ
 [call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
+;絶頂判定
+[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase1淫乱絶頂"]
-[elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase1我慢絶頂"]
-[elsif exp="f.ERO >= 1000"][jump target="*fase1通常絶頂"]
-[elsif exp="f.nasty > 0"][jump target="*fase1淫乱"]
-[else][jump target="*fase1通常"]
+[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase淫乱絶頂1"]
+[elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase我慢絶頂1"]
+[elsif exp="f.orgasm > 0"][jump target="*fase通常絶頂1"]
+[elsif exp="f.nasty > 0"][jump target="*fase淫乱1"]
+[else][jump target="*fase通常1"]
 [endif]
 ;-----------------------------------------
-*fase1淫乱絶頂
+*fase淫乱絶頂1
 [chara_mod name="suzune" face="絶頂" ]
 #鈴耶
 ああんっ！！イクっ！！イクイクイクーーーーッ！！[p]
@@ -185,7 +188,7 @@
 胸を弄ばれ鈴耶は大きな嬌声を上げながら絶頂した[p]
 [call storage="macro_orgasm.ks"]
 [chara_mod name="suzune" face="喘ぎ"]
-[if exp="f.HP <= 0"][call target="*fase1気絶"][endif]
+[if exp="f.HP <= 0"][call target="*fase気絶1"][endif]
 #牛鬼
 なんと他愛ない！！[p]
 これでくノ一を名乗るとは片腹痛いわ！[p]
@@ -196,18 +199,17 @@
 よかろう！拙者がここで躾けてやろう！！[p]
 #
 牛鬼は鈴耶の痴態に相好を崩した[p]
-牛鬼のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
 [jump target="*fase2"]
 [s]
 ;-----------------------------------------
-*fase1我慢絶頂
+*fase我慢絶頂1
 [chara_mod name="suzune" face="泣き" ]
 #鈴耶
 (駄目ぇ…感じちゃうーーーーーッ！！)[p]
 #
 胸から押し寄せる快感の波に鈴耶は必死に耐えた[r]
 鈴耶は絶頂を堪えた！[p]
+[call storage="macro_orgasm.ks" target="*endure"]
 #牛鬼
 ほぉ堪えたか？[p]
 だが、随分とだらしのない乳だな[p]
@@ -217,7 +219,7 @@
 [s]
 ;-----------------------------------------
 
-*fase1通常絶頂
+*fase通常絶頂1
 [chara_mod name="suzune" face="絶頂" ]
 #鈴耶
 (駄目ぇ…感じちゃうーーーーーッ！！)[p]
@@ -225,7 +227,7 @@
 胸からの快感に鈴耶は体を震わせた[r]
 ;鈴耶は絶頂した[p]
 [call storage="macro_orgasm.ks"]
-[if exp="f.HP <= 0"][call target="*fase1気絶"][endif]
+[if exp="f.HP <= 0"][call target="*fase気絶1"][endif]
 #牛鬼
 なんと他愛ない！！[p]
 これでくノ一を名乗るとは片腹痛いわ！[p]
@@ -236,7 +238,7 @@
 [s]
 ;-----------------------------------------
 
-*fase1淫乱
+*fase淫乱1
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 あんっ！！もっと、してぇ…[p]
@@ -247,13 +249,11 @@
 よかろう！拙者がここで躾けてやろう！！[p]
 #
 牛鬼は鈴耶の反応に相好を崩した[p]
-房中術の効果で牛鬼のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
 [jump target="*fase2"]
 [s]
 ;-----------------------------------------
 
-*fase1通常
+*fase通常1
 [chara_mod name="suzune" face="苦しみ"]
 #鈴耶
 んうっ！揉むなぁ！！[p]
@@ -262,12 +262,12 @@
 #鈴耶
 だっ、だらしないて何よ！！[p]
 #
-[jump target="*fase1房中術" cond="f.rapture > 0"]
+[jump target="*fase房中術1" cond="f.rapture > 0"]
 [jump target="*fase2"]
 [s]
 
 ;-----------------------------------------
-*fase1房中術
+*fase房中術1
 [chara_mod name="suzune" face="厳しい"]
 #鈴耶
 （調子に乗るんじゃないわよ！！）[p]
@@ -280,13 +280,14 @@
 おおおおおお！？[p]
 #
 酩酊した牛鬼の能力が低下した[p]
+
 [eval exp="f.En_Raptured += 1"]
 [eval exp="f.rapture = 0"]
 [jump target="*fase2"]
 [s]
 
 ;-----------------------------------------
-*fase1気絶
+*fase気絶1
 [chara_mod name="suzune" face="レイプ目"]
 鈴耶は気絶した！[p]
 #牛鬼
@@ -312,17 +313,17 @@
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*ANAL"]
-[call storage="macro/check_orgasm.ks" target="*orgasm"]
+[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase2淫乱絶頂"]
-[elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase2我慢絶頂"]
-[elsif exp="f.ERO >= 1000"][jump target="*fase2通常絶頂"]
-[elsif exp="f.nasty > 0"][jump target="*fase2淫乱"]
-[else][jump target="*fase2通常"]
+[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase淫乱絶頂2"]
+[elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase我慢絶頂2"]
+[elsif exp="f.orgasm > 0"][jump target="*fase通常絶頂2"]
+[elsif exp="f.nasty > 0"][jump target="*fase淫乱2"]
+[else][jump target="*fase通常2"]
 [endif]
 ;-----------------------------------------
 
-*fase2淫乱絶頂
+*fase淫乱絶頂2
 [chara_mod name="suzune" face="絶頂"]
 #鈴耶
 ああんっ！！イクっ！！イクイクイクーーーーッ！！[p]
@@ -340,14 +341,11 @@
 #牛鬼
 へへっ、がっつきやがって！ご期待通りねじ込んでやるぜ！！[p]
 #
-牛鬼は鈴耶の痴態に相好を崩した[p]
-房中術の効果で牛鬼のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
 [jump target="*fase3"]
 [s]
 ;-----------------------------------------
 
-*fase2我慢絶頂
+*fase我慢絶頂2
 [chara_mod name="suzune" face="泣き"]
 #
 快感でびくびくと鈴耶の体が痙攣する[p]
@@ -356,6 +354,7 @@
 #
 鈴耶は眉根を寄せて気色悪い感触に耐えた[p]
 鈴耶は絶頂を堪えた！[p]
+[call storage="macro_orgasm.ks" target="*endure"]
 #牛鬼
 ぷりっぷりっのいいケツしてやがるぜ！！[p]
 #鈴耶
@@ -366,7 +365,7 @@
 [s]
 ;-----------------------------------------
 
-*fase2通常絶頂
+*fase通常絶頂2
 [chara_mod name="suzune" face="絶頂"]
 #鈴耶
 (ダメッ！！イクぅーーーーーッ！！)[p]
@@ -385,7 +384,7 @@
 [s]
 ;-----------------------------------------
 
-*fase2淫乱
+*fase淫乱2
 [chara_mod name="suzune" face="喘ぎ"]
 #牛鬼
 ぷりっぷりっのいいケツしてやがるぜ！！[p]
@@ -395,12 +394,11 @@
 鈴耶は自ら腰をマラに押し付けくねらせた[p]
 #牛鬼
 へへっ、がっつきやがって！ご期待通りねじ込んでやるぜ！！[p]
-[eval exp="f.En_Raptured += 1"]
 [jump target="*fase3"]
 [s]
 ;-----------------------------------------
 
-*fase2通常
+*fase通常2
 [chara_mod name="suzune" face="苦しみ"]
 #牛鬼
 ぷりっぷりっのいいケツしてやがるぜ！！[p]
@@ -408,12 +406,12 @@
 くっ！！汚いものをこすりつけるなぁっ！！[p]
 #牛鬼
 へへっ、こいつをねじ込まれても同じ口がきけるかな！！[p]
-[jump target="*fase2房中術" cond="f.rapture > 0"]
+[jump target="*fase房中術2" cond="f.rapture > 0"]
 [jump target="*fase3"]
 [s]
 
 ;-----------------------------------------
-*fase2房中術
+*fase房中術2
 [chara_mod name="suzune" face="厳しい"]
 #鈴耶
 （調子に乗るんじゃないわよ！！）[p]
@@ -428,6 +426,7 @@
 #
 激しい快感が牛鬼を襲う[p]
 牛鬼の能力が低下した[p]
+
 [eval exp="f.En_Raptured += 1"]
 [eval exp="f.rapture = 0"]
 [jump target="*fase3"]
@@ -462,17 +461,17 @@
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
-[call storage="macro/check_orgasm.ks" target="*orgasm"]
+[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase3淫乱絶頂"]
-[elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase3我慢絶頂"]
-[elsif exp="f.ERO >= 1000"][jump target="*fase3通常絶頂"]
-[elsif exp="f.nasty > 0"][jump target="*fase3淫乱"]
-[else][jump target="*fase3通常"]
+[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase淫乱絶頂3"]
+[elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase我慢絶頂3"]
+[elsif exp="f.orgasm > 0"][jump target="*fase通常絶頂3"]
+[elsif exp="f.nasty > 0"][jump target="*fase淫乱3"]
+[else][jump target="*fase通常3"]
 [endif]
 ;-----------------------------------------
 
-*fase3淫乱絶頂
+*fase淫乱絶頂3
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！！これぇ！これが欲しかったのぉ！！[r]
@@ -487,13 +486,11 @@
 あんっ！！もっとぉ！！めちゃくちゃにしてぇ！！[p]
 #
 牛鬼は鈴耶の痴態に鼻息を荒くした[p]
-房中術の効果で牛鬼のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
 [jump target="*fase4"]
 [s]
 ;-----------------------------------------
 
-*fase3我慢絶頂
+*fase我慢絶頂3
 [chara_mod name="suzune" face="泣き"]
 #鈴耶
 （ーーーーーーーッ！！）[p]
@@ -501,6 +498,7 @@
 鈴耶は挿入の衝撃に歯を食いしばった[p]
 跳ね回りそうな体を押さえつけ、快感を拒絶する[p]
 鈴耶は絶頂を堪えた！[p]
+[call storage="macro_orgasm.ks" target="*endure"]
 #牛鬼
 へっ！イクのをこらえやがったな？だが本番はここからだぜ！！[p]
 [chara_mod name="suzune" face="苦しみ"]
@@ -510,7 +508,7 @@
 [s]
 ;-----------------------------------------
 
-*fase3通常絶頂
+*fase通常絶頂3
 [chara_mod name="suzune" face="泣き"]
 #鈴耶
 （ーーーーーーーッ！！）[p]
@@ -533,7 +531,7 @@
 [s]
 ;-----------------------------------------
 
-*fase3淫乱
+*fase淫乱3
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！！これぇ！これが欲しかったのぉ！！[r]
@@ -543,13 +541,11 @@
 おおう！！こいつはすげぇ名器だ！！[p]
 #
 牛鬼は快感に鼻息を荒くした[p]
-房中術の効果で牛鬼のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
 [jump target="*fase4"]
 [s]
 ;-----------------------------------------
 
-*fase3通常
+*fase通常3
 [chara_mod name="suzune" face="泣き"]
 #鈴耶
 （ーーーーーーーッ！！）[p]
@@ -561,11 +557,11 @@
 はっ！！小さすぎて入ったのが分かんなかったわよっ！！[p]
 #牛鬼
 ちっ！まだ入れただけだ！！こっからが本番だぜ！！[p]
-[jump target="*fase3房中術" cond="f.rapture > 0"]
+[jump target="*fase房中術3" cond="f.rapture > 0"]
 [jump target="*fase4"]
 [s]
 ;-----------------------------------------
-*fase3房中術
+*fase房中術3
 [chara_mod name="suzune" face="厳しい"]
 #鈴耶
 （負けるもんか！！）[p]
@@ -614,17 +610,17 @@
 牛鬼はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
-[call storage="macro/check_orgasm.ks" target="*orgasm"]
+[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
-[if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase4淫乱絶頂"]
-[elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase4我慢絶頂"]
-[elsif exp="f.ERO >= 1000"][jump target="*fase4通常絶頂"]
-[elsif exp="f.nasty > 0"][jump target="*fase4淫乱"]
-[else][jump target="*fase4通常"]
+[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase淫乱絶頂4"]
+[elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase我慢絶頂4"]
+[elsif exp="f.orgasm > 0"][jump target="*fase通常絶頂4"]
+[elsif exp="f.nasty > 0"][jump target="*fase淫乱4"]
+[else][jump target="*fase通常4"]
 [endif]
 ;----------------------------------------
 
-*fase4淫乱絶頂
+*fase淫乱絶頂4
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いいっ！！早く！早く頂戴！！[p]
@@ -648,8 +644,6 @@
 へ、へへ、腰が抜けちまいそうだぜ[p]
 #
 牛鬼は鈴耶からマラを引き抜くとヨタヨタと後退りした。
-房中術の効果で牛鬼のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
 [chara_mod name="suzune" face="厳しい"]
 #鈴耶
 ふう、なかなか良かったわね。でも楽しんだ分は返してもらうわよ！！！[p]
@@ -659,7 +653,7 @@
 [s]
 ;----------------------------------------
 
-*fase4我慢絶頂
+*fase我慢絶頂4
 [chara_mod name="suzune" face="泣き"]
 #牛鬼
 イけぇ！！イっちまええええ！！[p]
@@ -676,6 +670,7 @@
 #
 マラが膣内で爆ぜるのを感じながら鈴耶は快感を押し殺した[r]
 鈴耶は絶頂を堪えた！[p]
+[call storage="macro_orgasm.ks" target="*endure"]
 #牛鬼
 ちっ、イクの我慢しやがったな…[p]
 #
@@ -693,7 +688,7 @@
 [s]
 ;----------------------------------------
 
-*fase4通常絶頂
+*fase通常絶頂4
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いやあっ！！イクぅ！！[p]
@@ -730,7 +725,7 @@
 [s]
 ;----------------------------------------
 
-*fase4淫乱
+*fase淫乱4
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いいっ！！早く！早く頂戴！！[p]
@@ -752,8 +747,6 @@
 へ、へへ、腰が抜けちまいそうだぜ[p]
 #
 牛鬼は鈴耶からマラを引き抜くとヨタヨタと後退りした。
-房中術の効果で牛鬼のステータスが低下した[p]
-[eval exp="f.En_Raptured += 1"]
 [chara_mod name="suzune" face="厳しい"]
 #鈴耶
 さて、楽しんだ分は返してもらうわよ！！！[p]
@@ -763,7 +756,7 @@
 [s]
 ;----------------------------------------
 
-*fase4通常
+*fase通常4
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 あんっ！あんっ！ひぃん！！[p]
@@ -775,7 +768,7 @@
 うおおおおおおっ！！[p]
 #
 牛鬼は鈴耶の中で射精した[p]
-[jump target="*fase4房中術" cond="f.rapture > 0"]
+[jump target="*fase房中術4" cond="f.rapture > 0"]
 #鈴耶
 あああああっ！！ダメェ・・・！！[p]
 #牛鬼
@@ -794,7 +787,7 @@
 [jump target="*finish"]
 [s]
 ;-----------------------------------------
-*fase4房中術
+*fase房中術4
 #鈴耶
 [chara_mod name="suzune" face="厳しい"]
 (今よ！！)[p]
@@ -819,7 +812,6 @@
 隙あり！！[p]
 #
 敵は虚脱状態になった(3ターン)[p]
-[eval exp="f.En_Raptured += 1"]
 [eval exp="f.En_Wiseman=1 , f.En_Wiseman_time=3"]
 [else]
 #牛鬼

@@ -574,15 +574,15 @@
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
 [call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
-[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase4淫乱絶頂"]
-[elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase4我慢絶頂"]
-[elsif exp="f.orgasm > 0"][jump target="*fase4通常絶頂"]
-[elsif exp="f.nasty > 0"][jump target="*fase4淫乱"]
-[else][jump target="*fase4通常"]
+[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase淫乱絶頂4"]
+[elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase我慢絶頂4"]
+[elsif exp="f.orgasm > 0"][jump target="*fase通常絶頂4"]
+[elsif exp="f.nasty > 0"][jump target="*fase淫乱4"]
+[else][jump target="*fase通常4"]
 [endif]
 ;----------------------------------------
 
-*fase4淫乱絶頂
+*fase淫乱絶頂4
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いいっ！！早く！早く頂戴！！[p]
@@ -615,7 +615,7 @@
 [s]
 ;----------------------------------------
 
-*fase4我慢絶頂
+*fase我慢絶頂4
 [chara_mod name="suzune" face="泣き"]
 #忍者
 イけぇ！！イっちまええええ！！[p]
@@ -650,7 +650,7 @@
 [s]
 ;----------------------------------------
 
-*fase4通常絶頂
+*fase通常絶頂4
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いやあっ！！イクぅ！！[p]
@@ -687,7 +687,7 @@
 [s]
 ;----------------------------------------
 
-*fase4淫乱
+*fase淫乱4
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 ああん！いいっ！！早く！早く頂戴！！[p]
@@ -718,7 +718,7 @@
 [s]
 ;----------------------------------------
 
-*fase4通常
+*fase通常4
 [chara_mod name="suzune" face="喘ぎ"]
 #鈴耶
 あんっ！あんっ！ひぃん！！[p]

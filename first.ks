@@ -8,12 +8,10 @@
 ;コンフィグ、CG、回想モードを使う場合は必須
 @call storage="tyrano.ks"
 
+;ゲームで必ず必要な初期化処理はこのファイルに記述するのがオススメ
 @call storage="make.ks"
 ;変数宣言
 @call storage="initialize_declare.ks"
-
-;ゲームで必ず必要な初期化処理はこのファイルに記述するのがオススメ
-@call storage="macro.ks"
 
 ;メッセージボックスは非表示
 @layopt layer="message" visible=false

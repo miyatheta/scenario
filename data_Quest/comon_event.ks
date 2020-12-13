@@ -98,6 +98,10 @@
 #
 トリモチに足を取られた[p]
 鈴耶は鈍足状態になった[r]一時的に移動力が低下した[p]
+[if exp="f.slowly == 0"]
+;効果は重複しないのでf.slowly == 0のときだけ減算する
+[eval exp="f.MOVE -= 3"][eval exp="f.MOVE = 1" cond="f.MOVE < 1"]
+[endif]
 [eval exp="f.slowly = 5" ][eval exp="f.slowly = 5" cond="f.slowly > 5"][WSs]
 [return]
 [s]
@@ -139,6 +143,10 @@
 #
 ぬかるみに足を取られた[p]
 鈍足状態になった[p]一時的に移動力が低下した[p]
+[if exp="f.slowly == 0"]
+;効果は重複しないのでf.slowly == 0のときだけ減算する
+[eval exp="f.MOVE -= 3"][eval exp="f.MOVE = 1" cond="f.MOVE < 1"]
+[endif]
 [eval exp="f.slowly = 5" ][eval exp="f.slowly = 5" cond="f.slowly > 5"][WSs]
 [return]
 [s]
