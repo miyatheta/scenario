@@ -62,8 +62,9 @@
 ひっ！！[p]
 [eval exp="tf.fuck = 200 "]
 [call storage="routin/Rt_kaikan.ks" target="*BOOB"]
-[call storage="routin/macro_check_orgasm.ks" target="*orgasm"]
 [call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
+;絶頂判定
+[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 [endif]
 [if exp="f.ERO >= 1000 "]
 ;鈴耶は絶頂した[p]

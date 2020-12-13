@@ -126,7 +126,7 @@
 ;------------------------------------------------------------------------------
 
 *fase1
-[call storage="routin/Rt"]
+[call storage="routin/Rt_bind_fase.ks"]
 ;抵抗１
 [call storage="PL_bind.ks"]
 ;抵抗成功
