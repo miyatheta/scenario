@@ -9,7 +9,7 @@
 [glink color="black" target="*PL_resist2" x="450" y="200" width="" height="" text="暴れる" ]
 [glink color="black" target="*PL_bochu" x="450" y="300" width="" height="" text="房中術" ]
 [glink color="black" target="*PL_endure" x="450" y="400" width="" height="" text="耐え忍ぶ" ]
-[glink color="black" target="*PL_onanie" x="450" y="500" width="" height="" text="慰める" ]
+[glink color="black" target="*PL_onanie" x="450" y="500" width="" height="" text="あえぐ" ]
 [s]
 
 *PL_resist1
@@ -36,6 +36,10 @@
 [s]
 
 *PL_resist2
+[if exp="f.orgasm > 0"]
+絶頂により力が出ない[p]
+[jump target="*PL_comand_select"]
+[endif]
 [if exp="f.HP <= 1"]
 体力が足りない！！[p]
 [jump target="*PL_comand_select"]

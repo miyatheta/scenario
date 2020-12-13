@@ -1,12 +1,10 @@
 *battle_round_start
 [eval exp="f.Round += 1"]
-[eval exp="f.GRD = 1 , f.AVD =  0 , f.EN_STR_BUFF=0 , f.EN_GRD=1" ]
+[eval exp="f.bind = 0, f.GRD = 1 , f.AVD =  0 , f.EN_STR_BUFF=0 , f.EN_GRD=1" ]
 
 [eval exp="f.warning += 1 , f.turn += 1" cond="f.Round >= 2"]
 [eval exp="f.warning = 100" cond="f.warning > 100"]
 [WSs]
-
-[chara_mod name="suzune" face="怒り"]
 
 [if exp="f.ambush > 0"]
 #
@@ -61,21 +59,7 @@
 [eval exp="f.skill_03CT -= 1" cond="f.skill_03CT > 0"]
 
 ;表情変更
-[if exp="f.nasty > 0"]
-[chara_mod name="suzune" face="レイプ目"]
-[elsif exp="f.acme > 0"]
-[chara_mod name="suzune" face="喘ぎ"]
-[elsif exp="f.ERO > 750"]
-[chara_mod name="suzune" face="苦しみ"]
-[elsif exp="f.ERO > 500"]
-[chara_mod name="suzune" face="厳しい"]
-[elsif exp="f.HP < 250"]
-[chara_mod name="suzune" face="苦しみ"]
-[elsif exp="f.HP < 500"]
-[chara_mod name="suzune" face="厳しい"]
-[else]
-[chara_mod name="suzune" face="怒り"]
-[endif]
+[call storage="asset_face.ks" target="*battle"]
 
 [return]
 [s]

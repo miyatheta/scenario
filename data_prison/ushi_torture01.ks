@@ -1,6 +1,7 @@
 *start
 [cm]
 [bg storage="nc172885.jpg" time="100"]
+[chara_mod  name="suzune"  face="レイプ目"  ]
 #
 丑忍の拷問により鈴耶の理性が減少した[p]
 [eval exp="f.SAN -= 3"][eval exp="f.SAN = 0" cond="f.SAN < 0"]

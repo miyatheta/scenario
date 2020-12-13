@@ -1,5 +1,6 @@
+*initialize
 [if exp="f.dress==2"]
-
+;脱衣状態
 [chara_face name="suzune" face="喘ぎ" storage="chara/suzune/2/喘ぎ.png"]
 [chara_face name="suzune" face="普通" storage="chara/suzune/2/普通.png"]
 [chara_face name="suzune" face="怒り" storage="chara/suzune/2/怒り.png"]
@@ -22,6 +23,45 @@
 [chara_face name="suzune" face="泣き" storage="chara/suzune/1/泣き.png"]
 [chara_face name="suzune" face="レイプ目" storage="chara/suzune/1/レイプ目.png"]
 
+[endif]
+[return]
+[s]
+
+*quest
+[if exp="f.nasty > 0"]
+[chara_mod name="suzune" face="レイプ目"]
+[elsif exp="f.acme > 0"]
+[chara_mod name="suzune" face="喘ぎ"]
+[elsif exp="f.ERO > 750"]
+[chara_mod name="suzune" face="苦しみ"]
+[elsif exp="f.ERO > 500"]
+[chara_mod name="suzune" face="厳しい"]
+[elsif exp="f.HP < 250"]
+[chara_mod name="suzune" face="苦しみ"]
+[elsif exp="f.HP < 500"]
+[chara_mod name="suzune" face="厳しい"]
+[else]
+[chara_mod name="suzune" face="普通"]
+[endif]
+[return]
+[s]
+
+*battle
+;表情変更
+[if exp="f.nasty > 0"]
+[chara_mod name="suzune" face="レイプ目"]
+[elsif exp="f.acme > 0"]
+[chara_mod name="suzune" face="喘ぎ"]
+[elsif exp="f.ERO > 750"]
+[chara_mod name="suzune" face="苦しみ"]
+[elsif exp="f.ERO > 500"]
+[chara_mod name="suzune" face="厳しい"]
+[elsif exp="f.HP < 250"]
+[chara_mod name="suzune" face="苦しみ"]
+[elsif exp="f.HP < 500"]
+[chara_mod name="suzune" face="厳しい"]
+[else]
+[chara_mod name="suzune" face="怒り"]
 [endif]
 [return]
 [s]

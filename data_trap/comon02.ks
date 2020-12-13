@@ -6,13 +6,13 @@
 [s]
 
 *trap_01try
-[if exp="f.MP < 10"]
+[if exp="f.MP < 20"]
 #
 気力が足りない！！[p]
 [jump target="*trapped_01"]
 [endif]
 ;------------------------------------------------------------------------------
-[eval exp="f.MP -= 10"][WSs]
+[eval exp="f.MP -= 20"][WSs]
 [getrand min="1" max="100" var="f.rand"]
 
 [if exp="f.rand > 50"]
@@ -27,7 +27,7 @@
 *trapped_01
 天井から謎の液体が降り注いだ[p]
 液体を浴びた服の繊維が崩れ落ちてゆく！！[r]
-[eval exp="f.dress = 1" ][call storage="asset_face.ks"]
+[eval exp="f.dress = 2" ][call storage="asset_face.ks"]
 [chara_mod  name="suzune"  face="苦しみ"  ]
 鈴耶は脱衣状態になった[p]
 [return]

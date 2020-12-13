@@ -1,4 +1,8 @@
 *fase_start
 [eval exp="f.orgasm = 0"]
-[chara_mod name="suzune" face="厳しい"]
+
+;表情変更
+[call storage="asset_face.ks" target="*battle"]
+
 [return]
+[s]

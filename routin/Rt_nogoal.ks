@@ -34,21 +34,7 @@
 ;[endif]
 
 ;表情変更
-[if exp="f.nasty > 0"]
-[chara_mod name="suzune" face="レイプ目"]
-[elsif exp="f.acme > 0"]
-[chara_mod name="suzune" face="喘ぎ"]
-[elsif exp="f.ERO > 750"]
-[chara_mod name="suzune" face="苦しみ"]
-[elsif exp="f.ERO > 500"]
-[chara_mod name="suzune" face="厳しい"]
-[elsif exp="f.HP < 250"]
-[chara_mod name="suzune" face="苦しみ"]
-[elsif exp="f.HP < 500"]
-[chara_mod name="suzune" face="厳しい"]
-[else]
-[chara_mod name="suzune" face="普通"]
-[endif]
+[call storage="asset_face.ks" target="*quest"]
 
 ;状態異常ターン減少-----------------------------------------------------------------
 [eval exp="f.poison -= 1" cond="f.poison > 0"]

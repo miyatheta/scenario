@@ -6,13 +6,13 @@
 [s]
 
 *trap_01try
-[if exp="f.MP < 10"]
+[if exp="f.MP < 20"]
 #
 気力が足りない！！[p]
 [jump target="*trapped_01"]
 [endif]
 ;------------------------------------------------------------------------------
-[eval exp="f.MP -= 10"][WSs]
+[eval exp="f.MP -= 20"][WSs]
 [getrand min="1" max="100" var="f.rand"]
 
 [if exp="f.rand > 50"]

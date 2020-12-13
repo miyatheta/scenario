@@ -4,8 +4,7 @@
 ;理性、快感総量、最後の快感ダメージ、淫気蓄積量から算出
 [getrand min="&tf.fuck" max="&f.TempERO" var="f.rand"]
 [eval exp="f.TAG = (f.SAN * 15 ) - f.CURSE"]
-[eval exp="f.TAG = f.SAN * 2" cond="f.endure > 0"]
-[eval exp="f.TAG = f.SAN / 2" cond="f.acme > 0"]
+[eval exp="f.TAG = f.TAG * 2" cond="f.endure > 0"]
 目標値[emb exp="f.TAG"](目標値以下で成功)[r]
 出目「[emb exp="f.rand"]」[p]
 

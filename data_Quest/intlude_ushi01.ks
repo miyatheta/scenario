@@ -438,7 +438,7 @@
 鈴耶は気を失った[p]
 [BattleFinsish]
 [SetStatus]
-[call storage="asset_result.ks"]
+[call storage="asset_result.ks" target="*failed"]
 [jump storage="data_prison/ushi_torture01.ks"]
 [s]
 
