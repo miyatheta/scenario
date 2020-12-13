@@ -741,7 +741,7 @@
 [jump target="*finish"]
 [s]
 ;-----------------------------------------
-*fase4房中術"
+*fase4房中術
 #鈴耶
 [chara_mod name="suzune" face="厳しい"]
 (今よ！！)[p]

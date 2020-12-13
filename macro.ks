@@ -43,6 +43,12 @@
 [eval exp="f.MP += 10" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [endmacro]
 
+[macro name="Bouchujutu"]
+[eval exp="f.Hmin = f.HLv - 10, f.Hmax = f.HLv"]
+[getrand min="&f.Hmin" max="&f.Hmax" var="f.damage"]
+[eval exp="f.EN_SAN -= f.damage"]
+[endmacro]
+
 ;被弾時
 [macro name="DAMED"]
 ;[eval exp="f.MND -= 1" cond="f.MND > 0"]

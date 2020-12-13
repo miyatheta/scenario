@@ -4,6 +4,7 @@
 [eval exp="f.dress = 1 , f.invincible = 0 "]
 [eval exp="f.CURSE=0, f.ERO=0 , f.orgasmpoint=0 , f.acme=0"]
 [eval exp="f.ANAL = 50, f.VGNA = 100, f.BOOB = 50"]
+[eval exp="f.HLv=30"]
 [eval exp="f.poison=0, f.slowly=0, f.excite=0, f.closed=0"]
 [eval exp="f.milk=0, f.milkpoint=0, f.mazo=0, f.bags=0, f.slave=0, f.tatoo=0, f.nasty=0"]
 [eval exp="f.date = 1"]

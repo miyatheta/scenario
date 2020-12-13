@@ -103,8 +103,10 @@
 [emb exp="tf.ATP"]のダメージ[p]
 [eval exp="f.HP = f.HP - tf.ATP"][DAMED][WSs]
 [endif]
+[if exp="f.Quest_type == 2"]
 周囲の警戒度が上昇した[p]
 [eval exp="f.warning += 10"]
+[endif]
 [jump target="*Round_end"][s]
 ;------------------------------------------------------------------------------
 *enemy_sexhara
@@ -777,7 +779,7 @@
 [jump target="*finish"]
 [s]
 ;-----------------------------------------
-*fase4房中術"
+*fase4房中術
 #鈴耶
 [chara_mod name="suzune" face="厳しい"]
 (今よ！！)[p]
