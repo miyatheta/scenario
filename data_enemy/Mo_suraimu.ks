@@ -36,7 +36,7 @@
 #
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [elsif exp="f.invincible > 0"]
-[call storage="macro_invincible.ks"]
+[call storage="macro/Mc_invincible.ks"]
 [else]
 鈴耶の敏捷が3減少[p]
 [eval exp="f.SPD = f.SPD - 2"][DAMED]
@@ -53,7 +53,7 @@
 #
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [elsif exp="f.invincible > 0"]
-[call storage="macro_invincible.ks"]
+[call storage="macro/Mc_invincible.ks"]
 [else]
 すらいむは鈴耶にまとわりついた[p]
 すらいむは鈴耶の尻穴に潜り込んだ[p]
@@ -62,11 +62,11 @@
 [eval exp="tf.fuck = 100 "]
 [call storage="routin/Rt_kaikan.ks" target="*ANAL"]
 ;絶頂判定
-[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
+[call storage="macro/Mc_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 [endif]
 [if exp="f.ERO >= 1000 "]
 ;鈴耶は絶頂した[p]
-[call storage="macro_orgasm.ks"]
+[call storage="macro/Mc_orgasm.ks"]
 すらいむは絶頂した鈴耶から離れると[r]
 地面に吸い込まれるように消えた[p]
 [eval exp="f.en_Name = ''"][WriteEnemy]

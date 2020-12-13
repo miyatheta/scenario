@@ -59,7 +59,7 @@
 [eval exp="f.skill_03CT -= 1" cond="f.skill_03CT > 0"]
 
 ;表情変更
-[call storage="asset_face.ks" target="*battle"]
+[call storage="asset/As_face.ks" target="*battle"]
 
 [return]
 [s]

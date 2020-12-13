@@ -40,7 +40,7 @@
 [if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [elsif exp="f.invincible > 0"]
-[call storage="macro_invincible.ks"]
+[call storage="macro/Mc_invincible.ks"]
 [else]
 [eval exp="tf.argment = f.EN_STR * 10 * f.GRD"]
 [eval exp="tf.argment = tf.argment * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
@@ -60,7 +60,7 @@
 [if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [elsif exp="f.invincible > 0"]
-[call storage="macro_invincible.ks"]
+[call storage="macro/Mc_invincible.ks"]
 [else]
 [eval exp="tf.argment = f.EN_STR * 20 * f.GRD"]
 [eval exp="tf.argment = tf.argment * (10 - f.En_Raptured ) / 10"][getMathRound var="tf.ATP"]
@@ -83,7 +83,7 @@
 鈴耶は敵の組付きを回避した[p][AVOID][WSs]
 [jump target="*Round_end"][s]
 [elsif exp="f.invincible > 0"]
-[call storage="macro_invincible.ks"]
+[call storage="macro/Mc_invincible.ks"]
 [jump target="*Round_end"][s]
 [endif]
 鈴耶は落ち武者に組み付かれた[p]
@@ -115,9 +115,9 @@
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*BOOB"]
 ;状態異常による追加ダメージ
-[call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
+[call storage="asset/As_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
 ;絶頂判定
-[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
+[call storage="macro/Mc_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
 [if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase淫乱絶頂1"]
 [elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase我慢絶頂1"]
@@ -132,7 +132,7 @@
 ああんっ！！イクっ！！イクイクイクーーーーッ！！[p]
 #
 胸を弄ばれ鈴耶は大きな嬌声を上げながら絶頂した[p]
-[call storage="macro_orgasm.ks"]
+[call storage="macro/Mc_orgasm.ks"]
 [chara_mod name="suzune" face="喘ぎ"]
 [if exp="f.HP <= 0"][call target="*fase気絶1"][endif]
 #落ち武者
@@ -155,7 +155,7 @@
 #
 胸から押し寄せる快感の波に鈴耶は必死に耐えた[r]
 鈴耶は絶頂を堪えた！[p]
-[call storage="macro_orgasm.ks" target="*endure"]
+[call storage="macro/Mc_orgasm.ks" target="*endure"]
 #落ち武者
 ほぉ堪えたか？[p]
 だが、随分とだらしのない乳だな[p]
@@ -172,7 +172,7 @@
 #
 胸からの快感に鈴耶は体を震わせた[r]
 ;鈴耶は絶頂した[p]
-[call storage="macro_orgasm.ks"]
+[call storage="macro/Mc_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase気絶1"][endif]
 #落ち武者
 なんと他愛ない！！[p]
@@ -259,7 +259,7 @@
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*ANAL"]
-[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
+[call storage="macro/Mc_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
 [if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase淫乱絶頂2"]
 [elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase我慢絶頂2"]
@@ -275,7 +275,7 @@
 ああんっ！！イクっ！！イクイクイクーーーーッ！！[p]
 #
 鈴耶は大きな嬌声を上げながら絶頂した[p]
-[call storage="macro_orgasm.ks"]
+[call storage="macro/Mc_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase2気絶"][endif]
 #落ち武者
 何とどんだけ欲求不満なんだよ！！[p]
@@ -300,7 +300,7 @@
 #
 鈴耶は眉根を寄せて気色悪い感触に耐えた[p]
 鈴耶は絶頂を堪えた！[p]
-[call storage="macro_orgasm.ks" target="*endure"]
+[call storage="macro/Mc_orgasm.ks" target="*endure"]
 #落ち武者
 ぷりっぷりっのいいケツしてやがるぜ！！[p]
 #鈴耶
@@ -318,7 +318,7 @@
 #
 びくびくと鈴耶の体が痙攣する[p]
 ;鈴耶は絶頂した[p]
-[call storage="macro_orgasm.ks"]
+[call storage="macro/Mc_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase2気絶"][endif]
 #落ち武者
 おいおい、まだ前戯だってのにどんだけ欲求不満なんだ？[p]
@@ -407,7 +407,7 @@
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
-[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
+[call storage="macro/Mc_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
 [if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase淫乱絶頂3"]
 [elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase我慢絶頂3"]
@@ -424,7 +424,7 @@
 イクっ！！イクイクイクーーーーっ！！[p]
 #
 鈴耶は挿入と同時に大きな嬌声を上げながら絶頂した[p]
-[call storage="macro_orgasm.ks"]
+[call storage="macro/Mc_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase3気絶"][endif]
 #落ち武者
 へっ！まだ入れただけだぜ！！こっからが本番だ！！[p]
@@ -444,7 +444,7 @@
 鈴耶は挿入の衝撃に歯を食いしばった[p]
 跳ね回りそうな体を押さえつけ、快感を拒絶する[p]
 鈴耶は絶頂を堪えた！[p]
-[call storage="macro_orgasm.ks" target="*endure"]
+[call storage="macro/Mc_orgasm.ks" target="*endure"]
 #落ち武者
 へっ！イクのをこらえやがったな？だが本番はここからだぜ！！[p]
 [chara_mod name="suzune" face="苦しみ"]
@@ -467,7 +467,7 @@
 いやあああっ！！らめぇぇぇぇっ！！[p]
 #
 ;鈴耶は絶頂した[p]
-[call storage="macro_orgasm.ks"]
+[call storage="macro/Mc_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase3気絶"][endif]
 #落ち武者
 へっ！まだ入れただけだぜ？こっからが本番だ！！[p]
@@ -556,7 +556,7 @@
 落ち武者はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
-[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
+[call storage="macro/Mc_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
 [if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fase淫乱絶頂4"]
 [elsif exp="f.ERO >= 1000 && f.orgasm == 0"][jump target="*fase我慢絶頂4"]
@@ -584,7 +584,7 @@
 #
 鈴耶は精の迸りを子宮に感じながら嬌声を上げた[r]
 ;鈴耶は絶頂した[p]
-[call storage="macro_orgasm.ks"]
+[call storage="macro/Mc_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase4気絶"][endif]
 #落ち武者
 へ、へへ、こいつは凄え名器だったぜ[p]
@@ -620,7 +620,7 @@
 #
 マラが膣内で爆ぜるのを感じながら鈴耶は快感を押し殺した[r]
 鈴耶は絶頂を堪えた！[p]
-[call storage="macro_orgasm.ks" target="*endure"]
+[call storage="macro/Mc_orgasm.ks" target="*endure"]
 #落ち武者
 ちっ、イクの我慢しやがったな…[p]
 #
@@ -656,7 +656,7 @@
 #
 鈴耶は精の迸りを子宮に感じながら嬌声を上げた[r]
 ;鈴耶は絶頂した[p]
-[call storage="macro_orgasm.ks"]
+[call storage="macro/Mc_orgasm.ks"]
 [if exp="f.HP <= 0"][call target="*fase4気絶"][endif]
 #落ち武者
 へへへ、なかなか良かったぜ[p]

@@ -37,7 +37,7 @@
 #
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [elsif exp="f.invincible > 0"]
-[call storage="macro_invincible.ks"]
+[call storage="macro/Mc_invincible.ks"]
 [else]
 鈴耶の精神力が2減少[p]
 [eval exp="f.POW = f.POW - 2"][DAMED]
@@ -54,7 +54,7 @@
 #
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [elsif exp="f.invincible > 0"]
-[call storage="macro_invincible.ks"]
+[call storage="macro/Mc_invincible.ks"]
 [else]
 ひとだまは鈴耶に取りついた[p]
 ひとだまは鈴耶の胸に吸い付いた[p]
@@ -62,9 +62,9 @@
 ひっ！！[p]
 [eval exp="tf.fuck = 50 "]
 [call storage="routin/Rt_kaikan.ks" target="*BOOB"]
-[call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
+[call storage="asset/As_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
 ;絶頂判定
-[call storage="macro/check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
+[call storage="macro/Mc_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 [endif]
 [if exp="f.ERO >= 1000 "]
 ひとだまは絶頂した鈴耶から離れると[r]

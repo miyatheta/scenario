@@ -65,7 +65,7 @@
 イクイクイク、イクーーーーーーー！！！[p]
 #
 ;鈴耶は絶頂した[p]
-[call storage="macro_orgasm.ks"]
+[call storage="macro/Mc_orgasm.ks"]
 [endif]
 ;------------------------------------------------------------------------------
 [getrand min="1" max="100" var="f.rand"]

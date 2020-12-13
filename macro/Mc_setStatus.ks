@@ -1,0 +1,12 @@
+*start
+[eval exp="f.MP = f.POW , f.MND = 3 , f.ERO = 0 "]
+[eval exp="f.AVD = 0 , f.type = 1"]
+[eval exp="f.poison=0, f.slowly=0, f.excite=0 "]
+[eval exp="f.unescape=0, f.cantescape=0 , f.aphrodisy=0 "]
+[eval exp="f.acme = 0 , f.orgasm = 0 ,f.nasty = 0"]
+[eval exp="f.En_Wiseman = 0 , f.En_Wiseman_time = 0"]
+[eval exp="f.En_Raptured = 0 , f.En_Raptured_time = 0"]
+[eval exp="f.SPD = f.SPD_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
+[eval exp="f.MOVE = f.MOVE_MAX + f.arms_mov"]
+[return]
+[s]

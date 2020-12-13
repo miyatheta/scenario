@@ -9,7 +9,7 @@
 [eval exp="f.HP -= f.damage"][eval exp="f.HP = 0" cond="f.HP < 0"]
 鈴耶の体力が[emb exp="f.damage"]減少した[p]
 
-[call storage="macro/check_nasty.ks" cond="f.TempSAN >= 5"]
+[call storage="macro/Mc_check_nasty.ks" cond="f.TempSAN >= 5"]
 
 [return]
 [s]

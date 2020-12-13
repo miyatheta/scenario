@@ -3,7 +3,7 @@
 [clearstack  stack="call"  ]
 [freeimage layer="0" ]
 [bg storage="syosai1-1080.jpg" time="100"]
-[eval exp="f.dress=1"][call storage="asset_face.ks"]
+[eval exp="f.dress=1"][call storage="asset/As_face.ks"]
 [chara_mod  name="suzune"  face="柔らか"  ]
 [chara_show name="suzune" left="-100" top="-20"]
 @layopt layer=message0 visible=true
@@ -16,7 +16,7 @@
 
 #
 [cm]
-[SetStatus]
+[call storage="macro/Mc_setStatus.ks"]
 [WSs]
 ;[progressbar]
 ;[securitybar]

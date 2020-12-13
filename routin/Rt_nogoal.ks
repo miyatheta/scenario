@@ -34,7 +34,7 @@
 ;[endif]
 
 ;表情変更
-[call storage="asset_face.ks" target="*quest"]
+[call storage="asset/As_face.ks" target="*quest"]
 
 ;状態異常ターン減少-----------------------------------------------------------------
 [eval exp="f.poison -= 1" cond="f.poison > 0"]
