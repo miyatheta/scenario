@@ -43,12 +43,6 @@
 [eval exp="f.MP += 10" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [endmacro]
 
-[macro name="Bouchujutu"]
-[eval exp="f.Hmin = f.HLv - 10, f.Hmax = f.HLv"]
-[getrand min="&f.Hmin" max="&f.Hmax" var="f.damage"]
-[eval exp="f.EN_SAN -= f.damage"]
-[endmacro]
-
 ;被弾時
 [macro name="DAMED"]
 ;[eval exp="f.MND -= 1" cond="f.MND > 0"]
@@ -75,7 +69,7 @@
 [eval exp="f.MP = f.POW , f.MND = 3 , f.ERO = 0 "]
 [eval exp="f.AVD = 0 , f.type = 1"]
 [eval exp="f.poison=0, f.slowly=0, f.excite=0, f.unescape=0, f.cantescape=0 , f.aphrodisy=0 "]
-[eval exp="f.acme = 0"]
+[eval exp="f.acme = 0 , f.orgasm = 0"]
 [eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]
 [endmacro]
 

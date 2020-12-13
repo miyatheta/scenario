@@ -113,7 +113,7 @@
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*BOOB"]
-[call storage="asset_extra_reaction.ks" target="*orgasm"]
+[call storage="routin/macro_check_orgasm.ks" target="*orgasm"]
 [call storage="asset_extra_reaction.ks" target="*milk" cond="f.Milk > 0"]
 ;リアクション
 [if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase1淫乱絶頂"]
@@ -258,7 +258,7 @@
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*ANAL"]
-[call storage="asset_extra_reaction.ks" target="*orgasm"]
+[call storage="routin/macro_check_orgasm.ks" target="*orgasm"]
 ;リアクション
 [if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase2淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase2我慢絶頂"]
@@ -408,7 +408,7 @@
 ;快感ダメージ
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
-[call storage="asset_extra_reaction.ks" target="*orgasm"]
+[call storage="routin/macro_check_orgasm.ks" target="*orgasm"]
 ;リアクション
 [if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase3淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase3我慢絶頂"]
@@ -560,7 +560,7 @@
 落ち武者はしっかりと鈴耶の腰を抱え込むと激しく腰を打ち付けた[p]
 [eval exp="tf.fuck = f.EN_SEX "]
 [call storage="routin/Rt_kaikan.ks" target="*VGNA"]
-[call storage="asset_extra_reaction.ks" target="*orgasm"]
+[call storage="routin/macro_check_orgasm.ks" target="*orgasm"]
 ;リアクション
 [if exp="f.ERO >= 1000 && f.nasty > 0"][jump target="*fase4淫乱絶頂"]
 [elsif exp="f.ERO >= 1000 && f.endure > 0"][jump target="*fase4我慢絶頂"]

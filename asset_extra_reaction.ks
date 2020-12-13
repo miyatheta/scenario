@@ -1,18 +1,3 @@
-*orgasm
-#
-[if exp="f.ERO >= 1000 && f.endure > 0"]
-『耐える』の効果により、鈴耶は絶頂をぎりぎりで堪えた[p]
-[eval exp="f.ERO = 999 , f.endure = 0"]
-[WSs]
-
-[elsif exp="f.ERO >= 1000"]
-「鈴耶の絶頂」[p]
-[eval exp="f.orgasmpoint += 1"]
-[endif]
-
-[return]
-[s]
-
 *milk
 #
 『爆乳化』していた鈴耶の胸からは母乳が迸った[p]
