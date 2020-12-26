@@ -1,12 +1,12 @@
 *start
 ;ラウンド開始時処理--------------------------------------------------------------
-[call storage="routin/Rt_battle_round.ks" target="*battle_round_start"]
+[call storage="battle/Rt_battle_round.ks" target="*battle_round_start"]
 
 
 ;PLの行動------------------------------------------------------------------------
 #
 鈴耶の攻撃[r]
-[call storage="PL_battle.ks"]
+[call storage="battle/PL_battle.ks"]
 [if exp="f.escape > 0"][return][endif]
 
 [if exp="f.en_HP < 1"]
@@ -37,7 +37,7 @@
 #
 鈴耶は敵の攻撃を回避した[p][AVOID]
 [elsif exp="f.invincible > 0"]
-[call storage="macro/Mc_invincible.ks"]
+[call storage="battle/Rt_invincible.ks"]
 [else]
 鈴耶の敏捷が１減少[p]
 [eval exp="f.SPD = f.SPD - 1"][DAMED]
@@ -54,21 +54,21 @@
 #
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [elsif exp="f.invincible > 0"]
-[call storage="macro/Mc_invincible.ks"]
+[call storage="battle/Rt_invincible.ks"]
 [else]
 触手塊は鈴耶に絡みついた[p]
 触手が鈴耶の胸に吸い付く[p]
 #鈴耶
 ひっ！！[p]
 [eval exp="tf.fuck = 200 "]
-[call storage="routin/Rt_kaikan.ks" target="*BOOB"]
+[call storage="bochu/Rt_kaikan.ks" target="*BOOB"]
 [call storage="asset/As_extra_reaction.ks" target="*milk" cond="f.milk > 0"]
 ;絶頂判定
-[call storage="macro/Mc_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
+[call storage="bochu/Rt_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 [endif]
 [if exp="f.ERO >= 1000 "]
 ;鈴耶は絶頂した[p]
-[call storage="macro/Mc_orgasm.ks"]
+[call storage="bochu/Rt_orgasm.ks"]
 触手塊は絶頂した鈴耶から離れると[r]
 茂みへと姿を消した[p]
 [eval exp="f.en_Name = ''"][WriteEnemy]
@@ -88,7 +88,7 @@
 #
 ;ラウンド終了[p]
 [if exp="f.HP < 1"][return][endif]
-[call storage="routin/Rt_battle_round.ks" target="*battle_round_end"]
+[call storage="battle/Rt_battle_round.ks" target="*battle_round_end"]
 [if exp="f.Quest_type == 4"][call storage="routin/Rt_progress.ks" target="*trace"][endif]
 
 [jump target="*start"]

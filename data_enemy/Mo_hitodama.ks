@@ -1,12 +1,12 @@
 *start
 ;ラウンド開始時処理--------------------------------------------------------------
-[call storage="routin/Rt_battle_round.ks" target="*battle_round_start"]
+[call storage="battle/Rt_battle_round.ks" target="*battle_round_start"]
 
 
 ;PLの行動------------------------------------------------------------------------
 #
 鈴耶の攻撃[r]
-[call storage="PL_battle.ks"]
+[call storage="battle/PL_battle.ks"]
 [if exp="f.escape > 0"][return][endif]
 
 [if exp="f.en_HP < 1"]
@@ -37,7 +37,7 @@
 #
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [elsif exp="f.invincible > 0"]
-[call storage="macro/Mc_invincible.ks"]
+[call storage="battle/Rt_invincible.ks"]
 [else]
 鈴耶の精神力が2減少[p]
 [eval exp="f.POW = f.POW - 2"][DAMED]
@@ -54,17 +54,17 @@
 #
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [elsif exp="f.invincible > 0"]
-[call storage="macro/Mc_invincible.ks"]
+[call storage="battle/Rt_invincible.ks"]
 [else]
 ひとだまは鈴耶に取りついた[p]
 ひとだまは鈴耶の胸に吸い付いた[p]
 #鈴耶
 ひっ！！[p]
 [eval exp="tf.fuck = 50 "]
-[call storage="routin/Rt_kaikan.ks" target="*BOOB"]
+[call storage="bochu/Rt_kaikan.ks" target="*BOOB"]
 [call storage="asset/As_extra_reaction.ks" target="*milk" cond="f.milk > 0"]
 ;絶頂判定
-[call storage="macro/Mc_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
+[call storage="bochu/Rt_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 [endif]
 [if exp="f.ERO >= 1000 "]
 ひとだまは絶頂した鈴耶から離れると[r]
@@ -86,7 +86,7 @@
 #
 ;ラウンド終了[p]
 [if exp="f.HP < 1"][return][endif]
-[call storage="routin/Rt_battle_round.ks" target="*battle_round_end"]
+[call storage="battle/Rt_battle_round.ks" target="*battle_round_end"]
 [if exp="f.Quest_type == 4"][call storage="routin/Rt_progress.ks" target="*trace"][endif]
 [jump target="*start"]
 [s]

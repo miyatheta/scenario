@@ -1,5 +1,5 @@
 鈴耶は逃走した（20後退）[p]
-[call storage="routin/Rt_battle_end.ks"]
+[call storage="battle/Rt_battle_end.ks"]
 [eval exp="f.escape = 0"]
 [eval exp="f.progress -= 20" cond="f.Quest_type!=3"]
 [eval exp="f.progress = 0" cond="f.progress < 0"]

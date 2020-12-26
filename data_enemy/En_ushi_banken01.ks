@@ -1,12 +1,12 @@
 *start
 ;ラウンド開始時処理--------------------------------------------------------------
-[call storage="routin/Rt_battle_round.ks" target="*battle_round_start"]
+[call storage="battle/Rt_battle_round.ks" target="*battle_round_start"]
 
 
 ;PLの行動------------------------------------------------------------------------
 #
 鈴耶の攻撃[r]
-[call storage="PL_battle.ks"]
+[call storage="battle/PL_battle.ks"]
 [if exp="f.escape > 0"][return][endif]
 
 [if exp="f.en_HP < 1"]
@@ -36,7 +36,7 @@
 [if exp="f.target > f.rand"]
 鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
 [elsif exp="f.invincible > 0"]
-[call storage="macro/Mc_invincible.ks"]
+[call storage="battle/Rt_invincible.ks"]
 [else]
 [eval exp="tf.argment = f.EN_STR * 5 * f.GRD"][getMathRound var="tf.ATP"]
 [emb exp="tf.ATP"]のダメージ[p]
@@ -58,6 +58,6 @@
 [if exp="f.HP < 1"][return][endif]
 [if exp="f.Quest_type == 3"][call storage="routin/Rt_progress.ks" target="*guard"][endif]
 [if exp="f.Quest_type == 4"][call storage="routin/Rt_progress.ks" target="*trace"][endif]
-[call storage="routin/Rt_battle_round.ks" target="*battle_round_end"]
+[call storage="battle/Rt_battle_round.ks" target="*battle_round_end"]
 [jump target="*start"]
 [s]

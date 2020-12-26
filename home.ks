@@ -16,7 +16,7 @@
 
 #
 [cm]
-[call storage="macro/Mc_setStatus.ks"]
+[call storage="routin/Rt_setStatus.ks"]
 [WSs]
 ;[progressbar]
 ;[securitybar]

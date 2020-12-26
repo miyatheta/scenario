@@ -59,7 +59,7 @@
 [endmacro]
 
 [macro name="WSs"]
-[call storage="macro/Mc_WriteStatus.ks"]
+[call storage="routin/Rt_WriteStatus.ks"]
 [endmacro]
 
 [macro name="progressbar"]

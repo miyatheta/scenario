@@ -20,7 +20,7 @@
 [eval exp="f.En_MOVE=5 , f.En_MOVE_MAX=5 , f.En_slowly=0 ,  f.En_progress=50 "]
 
 ;暫定ステータス
-[call storage="macro/Mc_setStatus.ks"]
+[call storage="routin/Rt_setStatus.ks"]
 [WSs]
 [chara_show name="suzune" face="普通" left="-100" top="-20"]
 ;-------------------------------------------------------------------------------
@@ -89,7 +89,7 @@
 
 [if exp="f.event<=30"]
 野犬が現れた[p]
-[call storage="routin/Rt_battle_start.ks"]
+[call storage="battle/Rt_battle_start.ks"]
 [eval exp="f.en_Name = '野犬'"]
 [eval exp="f.Lv = 10 + (f.security * 10), f.en_HP = 110 + (f.security * 10) , f.GRB = 70 + (f.security * 10)"]
 [eval exp="f.EN_STR = 9 + f.security, f.en_DEX = 31 + f.security"]
@@ -104,7 +104,7 @@
 
 [elsif exp="f.event<=60"]
 野盗が現れた[p]
-[call storage="routin/Rt_battle_start.ks"]
+[call storage="battle/Rt_battle_start.ks"]
 [eval exp="f.en_Name = '野盗'"]
 [eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 150 + (f.security * 10)"]
 [eval exp="f.GRB = 90 + (f.security * 10), f.EN_SEX = 90 + (f.security * 10) "]
@@ -120,7 +120,7 @@
 
 [elsif exp="f.event<=80"]
 落ち武者が現れた[p]
-[call storage="routin/Rt_battle_start.ks"]
+[call storage="battle/Rt_battle_start.ks"]
 [eval exp="f.en_Name = '落ち武者'"]
 [eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 240 + (f.security * 10)"]
 [eval exp="f.GRB = 100 + (f.security * 10), f.EN_SEX = 110 + (f.security * 10) "]
@@ -136,7 +136,7 @@
 
 [else]
 忍者が現れた[p]
-[call storage="routin/Rt_battle_start.ks"]
+[call storage="battle/Rt_battle_start.ks"]
 [eval exp="f.en_Name = '忍者'"]
 [eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 180 + (f.security * 10)"]
 [eval exp="f.GRB = 90 + (f.security * 10), f.EN_SEX = 140 + (f.security * 10) "]
@@ -404,13 +404,13 @@
 
 ;-------------------------------------------------------------------------------
 *escape
-[call storage="macro/Mc_escape.ks"]
+[call storage="battle/Rt_escape.ks"]
 [jump target="*no_goal"]
 [s]
 
 ;-------------------------------------------------------------------------------
 *battle_end
-[call storage="routin/Rt_battle_end.ks"]
+[call storage="battle/Rt_battle_end.ks"]
 
 [jump target="*no_goal"]
 [s]
@@ -429,8 +429,8 @@
 そ、そんな・・・[p]
 #
 鈴耶は気を失った[p]
-[call storage="macro/Mc_setStatus.ks"]
-[call storage="routin/Rt_battle_end.ks"]
+[call storage="routin/Rt_setStatus.ks"]
+[call storage="battle/Rt_battle_end.ks"]
 [call storage="asset/As_result.ks"]
 [jump storage="data_prison/comon_torture01.ks"]
 [s]
@@ -439,7 +439,7 @@
 *imcomplete
 #鈴耶
 しまった・・・。逃げられたわ[p]
-[call storage="macro/Mc_setStatus.ks"]
+[call storage="routin/Rt_setStatus.ks"]
 [jump target="*result"]
 [s]
 
@@ -452,7 +452,7 @@
 ちっ！！[p]
 #
 忍者が現れた！！[p]
-[call storage="routin/Rt_battle_start.ks"]
+[call storage="battle/Rt_battle_start.ks"]
 [eval exp="f.en_Name = '忍者'"]
 [eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 180 + (f.security * 10)"]
 [eval exp="f.GRB = 90 + (f.security * 10), f.EN_SEX = 140 + (f.security * 10) "]
@@ -470,7 +470,7 @@
 #鈴耶
 [chara_mod name="suzune" face="柔らか" ]
 無事確保っと！[p]
-[call storage="macro/Mc_setStatus.ks"][eval exp="f.dress=1"]
+[call storage="routin/Rt_setStatus.ks"][eval exp="f.dress=1"]
 [WSs]
 
 ;-------------------------------------------------------------------------------
