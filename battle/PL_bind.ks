@@ -8,10 +8,10 @@
 
 *PL_comand_select
 [glink color="black" target="*PL_resist1" x="450" y="100" width="" height="" text="もがく" ]
-[glink color="black" target="*PL_resist2" x="450" y="200" width="" height="" text="暴れる" ]
-[glink color="black" target="*PL_bochu" x="450" y="300" width="" height="" text="房中術" ]
-[glink color="black" target="*PL_endure" x="450" y="400" width="" height="" text="耐え忍ぶ" ]
-[glink color="black" target="*PL_onanie" x="450" y="500" width="" height="" text="あえぐ" ]
+[glink color="black" target="*PL_resist2" x="450" y="190" width="" height="" text="暴れる" ]
+[glink color="black" target="*PL_bochu" x="450" y="280" width="" height="" text="房中術" ]
+[glink color="black" target="*PL_endure" x="450" y="370" width="" height="" text="耐え忍ぶ" ]
+[glink color="black" target="*PL_onanie" x="450" y="460" width="" height="" text="あえぐ" ]
 [s]
 
 *PL_resist1

@@ -1,8 +1,26 @@
 *mission_start
 @layopt layer=message0 visible=true
+
+[if exp="f.quest_ui01 != 1"]
+[jump target="*first"]
+[else]
+[jump target="*repeat"]
+[endif]
+
+*first
+[call storage="data_story/St_north_interlude01.ks"]
+[jump target="*set"]
+[s]
+;-------------------------------------------------------------------------------
+*repeat
 #鈴耶
 それじゃあ、鈴耶[r]
-忍務行ってまいりまーす！[p]
+行ってまいります！[p]
+[jump target="*set"]
+[s]
+;-------------------------------------------------------------------------------
+*set
+#
 [cm]
 @layopt layer=message0 visible=false
 [chara_hide name="suzune" time=500]
@@ -11,26 +29,21 @@
 [wait time=1000]
 
 ;ステージ情報
-[bg storage="mori_yoru.jpg" time="500"]
-[eval exp="f.Quest_name='express_ushi01.ks' , f.Quest_type=4"]
-[eval exp="f.goal=200 , f.progress=0 , f.Capture=0 , f.Achievement=0"]
-[eval exp="f.security=1 , f.security_MAX=1 , f.warning=0 , f.turn=1"]
-[eval exp="f.cantescape=1 "]
-;逃亡対象のスペック
-[eval exp="f.En_MOVE=5 , f.En_MOVE_MAX=5 , f.En_slowly=0 ,  f.En_progress=50 "]
+[bg storage="japanese04_night_dark.jpg" time="500"]
+[eval exp="f.Quest_name='intlude_ushi01.ks' , f.Quest_type=2"]
+[eval exp="f.goal=200 , f.progress=0 , f.Cleared=0 , f.Achievement=0"]
+[eval exp="f.security=1 , f.security_MAX=6 , f.warning=0 , f.turn=1"]
+[eval exp="f.trap_04 = 0 , f.trap_02 = 0 , f.trap_03 = 0 , f.trapper = 0 "]
 
 ;暫定ステータス
 [call storage="routin/Rt_setStatus.ks"]
 [WSs]
 [chara_show name="suzune" face="普通" left="-100" top="-20"]
 ;-------------------------------------------------------------------------------
-@layopt layer=message0 visible=true
-シナリオが入ります[p]
-敵の侵入者を追撃して捕らえよ[p]
-侵入者が規定距離を移動する前に捉えることができれば忍務達成[p]
-;-------------------------------------------------------------------------------
+
 *ready
-[progressbar_trace]
+[securitybar]
+[progressbar]
 [glink color="black" target="*goahead" x="400" y="250" width="" height="" text="先へ進む" ]
 [glink color="black" target="*menu" x="400" y="350" width="" height="" text="メニュー" ]
 [glink color="black" target="*menu" x="400" y="450" width="" height="" text="撤退する" ]
@@ -43,7 +56,7 @@
 [current layer="message0"]
 [call storage="showmenu.ks"]
 [jump target="*ready"]
-[s]
+
 ;-------------------------------------------------------------------------------
 
 *goahead
@@ -54,148 +67,203 @@
 
 [if exp="f.progress >= f.goal"]
 [jump target=*goal]
-[endif]
 
-[if exp="f.Capture > 0"]
-[jump target=*capture]
+[else]
 [endif]
-
-[jump target=*select_event]
 
 ;-------------------------------------------------------------------------------
 
 *select_event
-
 [getrand min="1" max="60" var="f.event"]
 [if exp="f.event<=20 && f.Pre_event != 1"]
 [eval exp="f.Pre_event = 1"][jump target=*select_enemy]
 
 [elsif exp="f.event<=40 && f.Pre_event != 2"]
-[eval exp="f.Pre_event = 2"][jump target=*event_youkai]
+[eval exp="f.Pre_event = 2"][jump target=*select_trap]
 
 [elsif exp="f.event<=60 && f.Pre_event != 3"]
 [eval exp="f.Pre_event = 3"][jump target=*select_incident]
 
-[else][jump target=*select_incident]
+[else]
+[jump target=*select_incident]
 [endif]
-
 [s]
 
 ;-------------------------------------------------------------------------------
-
 *select_enemy
 #
-[getrand min="1" max="100" var="f.event"]
+[call storage="battle/Rt_battle_start.ks"]
+[getrand min="1" max="120" var="f.event"]
 
 [if exp="f.event<=30"]
-野犬が現れた[p]
+番犬が現れた[p]
 [call storage="battle/Rt_battle_start.ks"]
-[eval exp="f.en_Name = '野犬'"]
-[eval exp="f.Lv = 10 + (f.security * 10), f.en_HP = 110 + (f.security * 10) , f.GRB = 70 + (f.security * 10)"]
-[eval exp="f.EN_STR = 9 + f.security, f.en_DEX = 31 + f.security"]
+[eval exp="f.en_Name = '番犬'"]
+[eval exp="f.Lv = 30 + (f.security * 10) , f.en_HP = 130 + (f.security * 10)"]
+[eval exp="f.GRB = 70 + (f.security * 10), f.EN_SEX = 100 + (f.security * 10) "]
 [eval exp="f.EN_SAN= 50 + (f.security * 10) "]
+[eval exp="f.EN_STR = 9 + f.security, f.EN_POW = 9 + f.security, f.en_DEX = 31 + f.security"]
 [eval exp="f.type = 1, f.Round = 0"]
 [WriteEnemy]
-[call storage="data_enemy/EN_comon_yaken.ks"]
+[call storage="data_enemy/En_ushi_banken01.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
 [s]
 
 [elsif exp="f.event<=60"]
-野盗が現れた[p]
+見廻り兵卒（丑）が現れた[p]
 [call storage="battle/Rt_battle_start.ks"]
-[eval exp="f.en_Name = '野盗'"]
-[eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 150 + (f.security * 10)"]
+[eval exp="f.en_Name = '見廻り兵卒（丑）'"]
+[eval exp="f.Lv = 30 + (f.security * 10) , f.en_HP = 170 + (f.security * 10)"]
 [eval exp="f.GRB = 90 + (f.security * 10), f.EN_SEX = 90 + (f.security * 10) "]
 [eval exp="f.EN_SAN= 50 + (f.security * 10) "]
-[eval exp="f.EN_STR = 9 + f.security, f.en_DEX = 21 + f.security"]
+[eval exp="f.EN_STR = 9 + f.security, f.EN_POW = 9 + f.security, f.en_DEX = 22 + f.security"]
 [eval exp="f.type = 1, f.Round = 0"]
 [WriteEnemy]
-[call storage="data_enemy/EN_comon_yatou.ks"]
+[call storage="data_enemy/En_ushi_heishi01.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
 [s]
 
 [elsif exp="f.event<=80"]
-落ち武者が現れた[p]
+武士（丑）が現れた[p]
 [call storage="battle/Rt_battle_start.ks"]
-[eval exp="f.en_Name = '落ち武者'"]
-[eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 240 + (f.security * 10)"]
-[eval exp="f.GRB = 100 + (f.security * 10), f.EN_SEX = 110 + (f.security * 10) "]
+[eval exp="f.en_Name = '武士（丑）'"]
+[eval exp="f.Lv = 30 + (f.security * 10) , f.en_HP = 290 + (f.security * 10)"]
+[eval exp="f.GRB = 110 + (f.security * 10), f.EN_SEX = 110 + (f.security * 10) "]
 [eval exp="f.EN_SAN= 50 + (f.security * 10) "]
-[eval exp="f.EN_STR = 9 + f.security, f.en_DEX = 24 + f.security"]
+[eval exp="f.EN_STR = 9 + f.security, f.EN_POW = 9 + f.security, f.en_DEX = 24 + f.security"]
 [eval exp="f.type = 1, f.Round = 0"]
 [WriteEnemy]
-[call storage="data_enemy/EN_comon_otimusha.ks"]
+[call storage="data_enemy/En_ushi_bushi01.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
 [s]
 
-[else]
-忍者が現れた[p]
+[elsif exp="f.event<=100"]
+下忍（丑）が現れた[p]
 [call storage="battle/Rt_battle_start.ks"]
-[eval exp="f.en_Name = '忍者'"]
-[eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 180 + (f.security * 10)"]
-[eval exp="f.GRB = 90 + (f.security * 10), f.EN_SEX = 140 + (f.security * 10) "]
+[eval exp="f.en_Name = '下忍（丑）'"]
+[eval exp="f.Lv = 30 + (f.security * 10) , f.en_HP = 190 + (f.security * 10)"]
+[eval exp="f.GRB = 100 + (f.security * 10), f.EN_SEX = 140 + (f.security * 10) "]
 [eval exp="f.EN_SAN= 50 + (f.security * 10) "]
 [eval exp="f.EN_STR = 9 + f.security, f.EN_POW = 9 + f.security, f.en_DEX = 27 + f.security"]
 [eval exp="f.type = 1, f.Round = 0"]
 [WriteEnemy]
-[call storage="data_enemy/EN_comon_ninja01.ks"]
+[call storage="data_enemy/En_ushi_ninja01.ks"]
+[jump target="*defeat" cond="f.HP < 1"]
+[jump target="*escape" cond="f.escape > 0"]
+[jump target="*battle_end" cond="f.en_HP < 1"]
+[s]
+
+[elsif exp="f.event<=110"]
+侍（丑）が現れた[p]
+[call storage="battle/Rt_battle_start.ks"]
+[eval exp="f.en_Name = '侍（丑）'"]
+[eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 400 + (f.security * 10)"]
+[eval exp="f.GRB = 110 + (f.security * 10), f.EN_SEX = 110 + (f.security * 10) "]
+[eval exp="f.EN_SAN= 50 + (f.security * 10) "]
+[eval exp="f.EN_STR = 14 + f.security, f.EN_POW = 9 + f.security, f.en_DEX = 27 + f.security"]
+[eval exp="f.type = 1, f.Round = 0"]
+[WriteEnemy]
+[call storage="data_enemy/En_ushi_samurai01.ks"]
+[jump target="*defeat" cond="f.HP < 1"]
+[jump target="*escape" cond="f.escape > 0"]
+[jump target="*battle_end" cond="f.en_HP < 1"]
+[s]
+
+[else]
+中忍（丑）が現れた[p]
+[call storage="battle/Rt_battle_start.ks"]
+[eval exp="f.en_Name = '中忍（丑）'"]
+[eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 180 + (f.security * 10)"]
+[eval exp="f.GRB = 100 + (f.security * 10), f.EN_SEX = 140 + (f.security * 10) "]
+[eval exp="f.EN_SAN= 50 + (f.security * 10) "]
+[eval exp="f.EN_STR = 9 + f.security, f.EN_POW = 9 + f.security, f.en_DEX = 29 + f.security"]
+[eval exp="f.type = 1, f.Round = 0"]
+[WriteEnemy]
+[call storage="data_enemy/En_ushi_ninja02.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
 [jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
 [endif]
 [s]
-
+;--------------------------------------------
+*trapper
+酔漢が現れた[p]
+[call storage="battle/Rt_battle_start.ks"]
+[eval exp="f.en_Name = '酔漢'"]
+[eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 100 + (f.security * 10)"]
+[eval exp="f.GRB = 120 + (f.security * 10), f.EN_SEX = 120 + (f.security * 10) "]
+[eval exp="f.EN_SAN= 50 + (f.security * 10) "]
+[eval exp="f.EN_STR = 5 + f.security, f.en_DEX = 25 + f.security"]
+[eval exp="f.type = 1, f.Round = 0"]
+[WriteEnemy]
+[call storage="data_enemy/En_ushi_trapper.ks"]
+[jump target="*defeat" cond="f.HP < 1"]
+[jump target="*escape" cond="f.escape > 0"]
+[jump target="*battle_end" cond="f.en_HP < 1"]
+[s]
 ;-------------------------------------------------------------------------------
-*event_youkai
+*select_trap
 #
-[getrand min="1" max="90" var="f.event"]
-
-[if exp="f.event<40"]
-すらいむが現れた[p]
-[eval exp="f.en_Name = 'すらいむ'"]
-妖怪に遭遇したことで鈴耶の淫気が上昇[p]
-[eval exp="f.CURSE = f.CURSE + 20"][WSs]
-[eval exp="f.en_DEX = 30, f.en_HP = 135 , f.type = 2, f.Round = 0"]
-[WriteEnemy]
-[call storage="data_enemy/Mo_suraimu.ks"]
-[jump target="*defeat" cond="f.HP < 1"]
-[jump target="*escape" cond="f.escape > 0"]
-[jump target="*battle_end" cond="f.en_HP < 1"]
-[jump target="*no_goal"]
-
-[elsif exp="f.event<70"]
-ひとだまが現れた[p]
-[eval exp="f.en_Name = 'ひとだま'"]
-妖怪に遭遇したことで鈴耶の淫気が上昇[p]
-[eval exp="f.CURSE = f.CURSE + 30"][WSs]
-[eval exp="f.en_DEX = 30, f.en_HP = 105 , f.type = 2, f.Round = 0"]
-[WriteEnemy]
-[call storage="data_enemy/Mo_hitodama.ks"]
-[jump target="*defeat" cond="f.HP < 1"]
-[jump target="*escape" cond="f.escape > 0"]
-[jump target="*battle_end" cond="f.en_HP < 1"]
-[jump target="*no_goal"]
-
+[getrand min="1" max="125" var="f.trap"]
+[if exp="f.trap <= 25 && f.Pre_trap != 1"]
+[eval exp="f.Pre_trap = 1"]
+[jump target=*trap_01]
+[elsif exp="f.trap <= 50 && f.Pre_trap != 2"]
+[eval exp="f.Pre_trap = 2"]
+[jump target=*trap_02]
+[elsif exp="f.trap <= 75 && f.Pre_trap != 3"]
+[eval exp="f.Pre_trap = 3"]
+[jump target=*trap_03]
+[elsif exp="f.trap <= 100 && f.Pre_trap != 4"]
+[eval exp="f.Pre_trap = 4"]
+[jump target=*trap_04]
+[elsif exp="f.trap <= 125 && f.Pre_trap != 4"]
+[eval exp="f.Pre_trap = 5"]
+[jump target=*trap_05]
 [else]
-触手塊が現れた[p]
-[eval exp="f.en_Name = '触手塊'"]
-妖怪に遭遇したことで鈴耶の淫気が上昇[p]
-[eval exp="f.CURSE = f.CURSE + 50"][WSs]
-[eval exp="f.en_DEX = 30, f.en_HP = 200 , f.type = 2, f.Round = 0"]
-[WriteEnemy]
-[call storage="data_enemy/Mo_shokusyu.ks"]
-[jump target="*defeat" cond="f.HP < 1"]
-[jump target="*escape" cond="f.escape > 0"]
-[jump target="*battle_end" cond="f.en_HP < 1"]
-[jump target="*no_goal"]
-
+[eval exp="f.Pre_trap = 0"]
+[jump target=*select_trap]
 [endif]
+[s]
+
+;--------------------------------------------
+*trap_01
+#
+[call storage="data_trap/comon01.ks"]
+[jump target="*no_goal"]
+[s]
+;--------------------------------------------
+*trap_02
+#
+[call storage="data_trap/rope01.ks"]
+[jump target="*trapper" cond="f.trapper > 0"]
+[jump target="*no_goal"]
+[s]
+;--------------------------------------------
+*trap_03
+#
+[call storage="data_trap/cage01.ks"]
+[jump target="*trapper" cond="f.trapper > 0"]
+[jump target="*no_goal"]
+[s]
+;--------------------------------------------
+*trap_04
+#
+[call storage="data_trap/suraimu01.ks"]
+[jump target="*trapper" cond="f.trapper > 0"]
+[jump target="*no_goal"]
+[s]
+;--------------------------------------------
+*trap_05
+#
+[call storage="data_trap/comon02.ks"]
+[jump target="*no_goal"]
 [s]
 ;-------------------------------------------------------------------------------
 *select_incident
@@ -207,6 +275,7 @@
 [endif]
 [s]
 ;-------------------------------------------------------------------------------
+
 *select_fortune
 [getrand min="1" max="100" var="f.fortune"]
 [if exp="f.fortune <= 25 && f.Pre_fortune != 1"]
@@ -227,31 +296,27 @@
 [endif]
 [s]
 ;-------------------------------------------------------------------------------
-
 *fortune_01
-;薬草
-[call storage="data_Quest/comon_event.ks" target="*healing_herbs"]
+;回復薬
+[call storage="data_Quest/comon_event.ks" target="*heal_potion"]
 [jump target="*no_goal"]
 [s]
-
 *fortune_02
-;お地蔵様（気力＋）
-[call storage="data_Quest/comon_event.ks" target="*stone_statue"]
+;密会を目撃（集中＋）
+[call storage="data_Quest/comon_event.ks" target="*Witness_meating"]
 [jump target="*no_goal"]
 [s]
-
 *fortune_03
-;湧き水（集中力＋）
-[call storage="data_Quest/comon_event.ks" target="*spring_water"]
+;果物を発見(気力＋)
+[call storage="data_Quest/comon_event.ks" target="*get_fruits"]
 [jump target="*no_goal"]
 [s]
-
 *fortune_04
-;抜け道
-[call storage="data_Quest/comon_event.ks" target="*forest_shortcut"]
+;見回りが居眠り
+[call storage="data_Quest/comon_event.ks" target="*sleeping_guard"]
 [jump target="*goal" cond="f.progress >= f.goal"]
-[jump target="*no_goal"]
-[s]
+[jump target="*no_goal"][s]
+
 ;-------------------------------------------------------------------------------
 
 *select_accident
@@ -261,7 +326,7 @@
 [jump target=*accident_01]
 [elsif exp="f.accident <= 20 && f.Pre_accident != 2"]
 [eval exp="f.Pre_accident = 2"]
-[jump target=*accident_02]
+[jump target=*accident_01]
 [elsif exp="f.accident <= 30 && f.Pre_accident != 3"]
 [eval exp="f.Pre_accident = 3"]
 [jump target=*accident_03]
@@ -283,38 +348,6 @@
 [endif]
 [s]
 ;-------------------------------------------------------------------------------
-
-*accident_03
-;幽霊を目撃する(気力-)
-[call storage="data_Quest/comon_event.ks" target="*watch_ghost"]
-[jump target="*no_goal"]
-[s]
-
-*accident_04
-;地すべり迂回（後退）
-[call storage="data_Quest/comon_event.ks" target="*landslide_roundabout"]
-[jump target="*no_goal"]
-[s]
-
-*accident_05
-;ぬかるみ（＋鈍足）
-[call storage="data_Quest/comon_event.ks" target="*muddy_swanp"]
-[jump target="*no_goal"]
-[s]
-
-*accident_06
-;毒蜘蛛（＋毒）
-[call storage="data_Quest/comon_event.ks" target="*poison_spider"]
-[jump target="*no_goal"]
-[s]
-
-*accident_07
-;怪しげな花粉（＋興奮）
-[call storage="data_Quest/comon_event.ks" target="*strange_flower"]
-[jump target="*no_goal"]
-[s]
-
-;不意打ち（人間）--------------------------------------------------------------------
 *accident_01
 #
 動く影を見つけた[r]
@@ -358,48 +391,36 @@
 [endif]
 [jump target="*select_enemy"]
 [s]
+;-------------------------------------------------------------------------------
 
-;不意打ち（妖怪）-------------------------------------------------------------------
-*accident_02
-#
-妖怪を見つけた[r]
-こちらの気配には気づいていないようだ[p]
-[glink color="black" target="*try_hinding02" x="450" y="100" width="" height="" text="隠れてやり過ごす" ]
-[glink color="black" target="*try_ambush02" x="450" y="200" width="" height="" text="不意打ちする" ]
-[s]
-*try_hinding02
-#
-[getrand min="1" max="100" var="f.rand"]
-[eval exp="tf.tag = f.MND * 10 + 49"]
-[if exp="f.rand <= tf.tag && f.MND >= 1"]
-・・・・・・[p]
-やりすごすことができたようだ[p]
-[eval exp="f.MND -= 1"]
-[jump target="*no_goal"][s]
-[else]
-・・・・・・[p]
-#敵
-！！[p]
-#
-見つかってしまった！[p]
-[endif]
-[jump target="*event_youkai"]
+*accident_03
+;幽霊部屋（気力ー）
+[call storage="data_Quest/comon_event.ks" target="*ghost_room"]
+[jump target="*no_goal"]
 [s]
 
-*try_ambush02
-#
-[getrand min="1" max="100" var="f.rand"]
-[eval exp="tf.tag = f.MND * 10 + 70"]
-[if exp="f.rand <= tf.tag "]
-不意打ち成功!![p]
-[eval exp="f.ambush = 1"]
-[else]
-#敵
-！！[p]
-#
-不意打ちに失敗した[p]
-[endif]
-[jump target="*event_youkai"]
+*accident_04
+;見回りが立っている(後退)
+[call storage="data_Quest/comon_event.ks" target="*standing_guard"]
+[jump target="*no_goal"]
+[s]
+
+*accident_05
+;トリモチ（＋鈍足）
+[call storage="data_Quest/comon_event.ks" target="*torimochi"]
+[jump target="*no_goal"]
+[s]
+
+*accident_06
+;猫の悲鳴（警戒＋）
+[call storage="data_Quest/comon_event.ks" target="*torimochi"]
+[jump target="*no_goal"]
+[s]
+
+*accident_07
+;逢い引きを目撃（興奮＋）
+[call storage="data_Quest/comon_event.ks" target="*romance_room"]
+[jump target="*no_goal"]
 [s]
 
 ;-------------------------------------------------------------------------------
@@ -419,7 +440,12 @@
 *no_goal
 #
 [call storage="routin/Rt_nogoal.ks"]
-[call storage="routin/Rt_progress.ks" target="*trace"]
+
+[call storage="routin/Rt_warning.ks"]
+[if exp="f.security >= f.security_MAX"]
+[jump target="*event_executioner"]
+[endif]
+
 [jump target="*ready"]
 [s]
 
@@ -429,47 +455,17 @@
 そ、そんな・・・[p]
 #
 鈴耶は気を失った[p]
-[call storage="routin/Rt_setStatus.ks"]
 [call storage="battle/Rt_battle_end.ks"]
-[call storage="asset/As_result.ks"]
-[jump storage="data_prison/comon_torture01.ks"]
-[s]
-
-;-------------------------------------------------------------------------------
-*imcomplete
-#鈴耶
-しまった・・・。逃げられたわ[p]
 [call storage="routin/Rt_setStatus.ks"]
-[jump target="*result"]
-[s]
-
-;-------------------------------------------------------------------------------
-*capture
-
-#鈴耶
-捕まえた！[p]
-#賊
-ちっ！！[p]
-#
-忍者が現れた！！[p]
-[call storage="battle/Rt_battle_start.ks"]
-[eval exp="f.en_Name = '忍者'"]
-[eval exp="f.Lv = 40 + (f.security * 10) , f.en_HP = 180 + (f.security * 10)"]
-[eval exp="f.GRB = 90 + (f.security * 10), f.EN_SEX = 140 + (f.security * 10) "]
-[eval exp="f.EN_SAN= 50 + (f.security * 10) "]
-[eval exp="f.EN_STR = 11 + f.security, f.EN_POW = 11 + f.security, f.en_DEX = 28 + f.security"]
-[eval exp="f.type = 1, f.Round = 0"]
-[call storage="data_enemy/EN_comon_ninja01.ks"]
-[jump target="*defeat" cond="f.HP < 1"]
-;[jump target="*escape" cond="f.escape > 0"]
-[jump target="*goal"]
+[call storage="asset/As_result.ks" target="*failed"]
+[jump storage="data_prison/ushi_torture01.ks"]
 [s]
 
 ;-------------------------------------------------------------------------------
 *goal
 #鈴耶
 [chara_mod name="suzune" face="柔らか" ]
-無事確保っと！[p]
+無事到着っと[p]
 [call storage="routin/Rt_setStatus.ks"][eval exp="f.dress=1"]
 [WSs]
 
@@ -477,6 +473,44 @@
 *result
 [freeimage layer="0" ]
 [call storage="asset/As_result.ks"]
-Homeに戻ります[p]
+[eval exp="f.FP_north += f.Reward"]
+#
+無事、機密文書を盗むことが出来た[p]北條家との友好度が上昇した[p]
 [jump storage="home.ks" target="*home_start"]
+[s]
+
+;-------------------------------------------------------------------------------
+*event_executioner
+#
+警戒度が最高潮に到達した[p]
+「曲者だ！！！」[r]
+「であえー！！であえー！！」[p]
+#鈴耶
+しまった！気づかれたか！！[p]
+#？？
+ほほう？逃げる気か？[p]
+#鈴耶
+！！[p]
+#
+背後からの声に振り返ると一人の忍者が立っていた[p]
+#？？
+逃がすと思うてか？[p]
+#鈴耶
+くっ！！押し通る！！[p]
+;特殊演出--------
+;牛鬼
+
+;---------------
+[call storage="battle/Rt_battle_start.ks"]
+[eval exp="f.en_Name = '牛鬼'"]
+[eval exp="f.Lv = 100, f.en_HP = 10000 "]
+[eval exp="f.EN_STR = 20, f.EN_POW = 20, f.en_DEX=30 "]
+[eval exp="f.GRB=200, f.EN_SEX=200 "]
+[eval exp="f.EN_SAN= 100 + (f.security * 10) "]
+[eval exp="f.type = 1, f.Round = 0"]
+[WriteEnemy]
+[call storage="data_enemy/EN_ushi_Executioner01.ks"]
+[jump target="*defeat" cond="f.HP < 1"]
+[jump target="*escape" cond="f.escape > 0"]
+[jump target="*battle_end" cond="f.en_HP < 1"]
 [s]
