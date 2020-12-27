@@ -10,6 +10,6 @@
 [eval exp="f.mazo = 1" ]
 Homeに戻ります[p]
 [eval exp="f.turn = 0"]
-[eval exp="f.date += 1"]
+[call storage="routin/Rt_dairy.ks"]
 [eval exp="f.HP = 1"]
 [jump storage="home.ks" target="*home_start"]

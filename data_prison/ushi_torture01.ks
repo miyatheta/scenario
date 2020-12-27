@@ -16,6 +16,6 @@
 [eval exp="f.milk = 1 , f.milkpoint = 0 , f.BOOB = f.BOOB + 50" ]
 Homeに戻ります[p]
 [eval exp="f.turn = 0"]
-[eval exp="f.date += 1"]
+[call storage="routin/Rt_dairy.ks"]
 [eval exp="f.HP = 1"]
 [jump storage="home.ks" target="*home_start"]

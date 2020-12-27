@@ -77,7 +77,13 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 
 [return]
 
-;------休養-------------------------------------------------------------------------
+;------接待-------------------------------------------------------------------------
+*mission_sexparty
+[glink  color="black"  storage="sexparty.ks"  x="450"  y="150"  width=""  height=""  text="性接待" ]
+[glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
+[s]
+
+;------休息-------------------------------------------------------------------------
 *select_holiday
 [glink  color="black"  target="*rest"  x="450"  y="150"  width=""  height=""  text="休養" ]
 [glink  color="black"  target="*pray"  x="450"  y="250"  width=""  height=""  text="浄化" ]
@@ -89,7 +95,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [freeimage layer=2]
 体力を回復します[p]
 [eval exp="f.HP = f.HP_MAX"][WSs]
-[eval exp="f.date += 1"]
+[call storage="routin/Rt_dairy.ks"]
 [jump target="*home_start"]
 [s]
 
@@ -97,7 +103,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [freeimage layer=2]
 淫気を祓います[p]
 [eval exp="f.CURSE = 0"][WSs]
-[eval exp="f.date += 1"]
+[call storage="routin/Rt_dairy.ks"]
 [jump target="*home_start"]
 [s]
 
@@ -106,7 +112,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 理性を少し回復した[p]
 [eval exp="f.SAN += 5"]
 [eval exp="f.SAN = f.SAN_MAX" cond="f.SAN > f.SAN_MAX"][WSs]
-[eval exp="f.date += 1"]
+[call storage="routin/Rt_dairy.ks"]
 [jump target="*home_start"]
 [s]
 
@@ -357,9 +363,6 @@ if(f.keibi>75){
 [glink  color="black"  target="*select_menu"  x="450"  y="510"  width="300"  height="30"  text="戻る" ]
 [s]
 
-*mission_select_region
-[s]
-
 *mission_region_north
 [glink  color="black"  target="*mission_north_expr01"  x="450"  y="110"  width=""  height=""  text="密書（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_north_guard01"  x="450"  y="190"  width=""  height=""  text="護衛（丑ノ国・序）" ]
@@ -390,10 +393,6 @@ if(f.keibi>75){
 [glink  color="black"  target="*mission_intlude_ushi01"  x="450"  y="350"  width=""  height=""  text="潜入（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_trace_ushi01"  x="450"  y="450"  width=""  height=""  text="追跡（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_undercover_ushi01"  x="450"  y="550"  width=""  height=""  text="破壊（丑ノ国・序）" ]
-[s]
-
-*mission_sexparty
-[glink  color="black"  target="*mission_sexparty"  x="450"  y="150"  width=""  height=""  text="性接待" ]
 [s]
 
 ;-----丑ノ国
