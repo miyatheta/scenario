@@ -1,5 +1,9 @@
 *mission_start
-[eval exp="f.Quest_name='north_guard01.ks' , f.Quest_type=3"]
+
+
+*set
+;ステージ情報
+[eval exp="f.Quest_name='comon_guard01.ks' , f.Quest_type=3"]
 [eval exp="f.goal=100 , f.progress=0 , f.Cleared=0 , f.Achievement=0"]
 [eval exp="f.security=1 , f.security_MAX=6 , f.warning=0 , f.turn=1"]
 [eval exp="f.cantescape=1 "]
@@ -9,8 +13,11 @@
 ;暫定ステータス
 [call storage="routin/Rt_setStatus.ks"]
 [WSs]
-[chara_show name="suzune" face="厳しい" left="-100" top="-20"]
-
+[chara_show name="suzune" face="普通" left="-100" top="-20"]
+;-------------------------------------------------------------------------------
+@layopt layer=message0 visible=true
+護衛対象が逃げる時間を稼げ[p]
+護衛対象が規定距離を移動したら忍務達成[p]
 ;-------------------------------------------------------------------------------
 
 *ready
@@ -167,7 +174,7 @@
 無事到着っと[p]
 [call storage="routin/Rt_setStatus.ks"][eval exp="f.dress=1"]
 
-[if exp="f.Qt_n_guard01 != 1"]
+[if exp="f.Qt_n_expr01 != 1"]
 [eval exp="f.Reward = 100"]
 [else]
 [eval exp="f.Reward = 50"]
@@ -179,8 +186,7 @@
 *result
 [freeimage layer="0" ]
 [call storage="asset/As_result.ks"]
-[eval exp="f.FP_north += f.Reward"]
 #
-無事、要人を守ることが出来た[p]北條家との友好度が上昇した[p]
+暗殺者を退け、将軍を守ることに成功した[p]
 [jump storage="home.ks" target="*home_start"]
 [s]

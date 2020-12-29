@@ -1,4 +1,9 @@
 *home_start
+[getrand min="1" max="75" var="f.rand"]
+[if exp="f.keibi < f.rand"]
+[jump storage="data_story/St_comon_guard01.ks"]
+[endif]
+
 [cm]
 [clearstack  stack="call"  ]
 [freeimage layer="0" ]
@@ -366,7 +371,7 @@ if(f.keibi>75){
 *mission_region_north
 [glink  color="black"  target="*mission_north_expr01"  x="450"  y="110"  width=""  height=""  text="密書（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_north_guard01"  x="450"  y="190"  width=""  height=""  text="護衛（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_intlude_ushi01"  x="450"  y="270"  width=""  height=""  text="潜入（丑ノ国・序）" ]
+[glink  color="black"  target="*mission_intrude_ushi01"  x="450"  y="270"  width=""  height=""  text="潜入（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_trace_ushi01"  x="450"  y="350"  width=""  height=""  text="追跡（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_undercover_ushi01"  x="450"  y="430"  width=""  height=""  text="合戦（丑ノ国・序）" ]
 [s]
@@ -374,7 +379,7 @@ if(f.keibi>75){
 *mission_region_south
 [glink  color="black"  target="*mission_express_saru01"  x="450"  y="150"  width=""  height=""  text="密書配達（申ノ国・序）" ]
 [glink  color="black"  target="*mission_north_guard01"  x="450"  y="250"  width=""  height=""  text="護衛（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_intlude_ushi01"  x="450"  y="350"  width=""  height=""  text="潜入（丑ノ国・序）" ]
+[glink  color="black"  target="*mission_intrude_ushi01"  x="450"  y="350"  width=""  height=""  text="潜入（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_trace_ushi01"  x="450"  y="450"  width=""  height=""  text="追跡（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_undercover_ushi01"  x="450"  y="550"  width=""  height=""  text="破壊（丑ノ国・序）" ]
 [s]
@@ -382,7 +387,7 @@ if(f.keibi>75){
 *mission_region_east
 [glink  color="black"  target="*mission_express_hebi01"  x="450"  y="150"  width=""  height=""  text="密書配達（巳ノ国・序）" ]
 [glink  color="black"  target="*mission_north_guard01"  x="450"  y="250"  width=""  height=""  text="護衛（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_intlude_ushi01"  x="450"  y="350"  width=""  height=""  text="潜入（丑ノ国・序）" ]
+[glink  color="black"  target="*mission_intrude_ushi01"  x="450"  y="350"  width=""  height=""  text="潜入（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_trace_ushi01"  x="450"  y="450"  width=""  height=""  text="追跡（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_undercover_ushi01"  x="450"  y="550"  width=""  height=""  text="破壊（丑ノ国・序）" ]
 [s]
@@ -390,51 +395,51 @@ if(f.keibi>75){
 *mission_region_west
 [glink  color="black"  target="*mission_express_tori01"  x="450"  y="150"  width=""  height=""  text="密書配達（酉ノ国・序）" ]
 [glink  color="black"  target="*mission_north_guard01"  x="450"  y="250"  width=""  height=""  text="護衛（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_intlude_ushi01"  x="450"  y="350"  width=""  height=""  text="潜入（丑ノ国・序）" ]
+[glink  color="black"  target="*mission_intrude_ushi01"  x="450"  y="350"  width=""  height=""  text="潜入（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_trace_ushi01"  x="450"  y="450"  width=""  height=""  text="追跡（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_undercover_ushi01"  x="450"  y="550"  width=""  height=""  text="破壊（丑ノ国・序）" ]
 [s]
 
 ;-----丑ノ国
 *mission_north_expr01
-[glink  color="black"  storage="data_Quest/north_expr01.ks"  target="*mission_start"  x="450"  y="150"  width=""  height=""  text="はい" ]
+[glink  color="black"  storage="data_story/St_north_expr01.ks"   x="450"  y="150"  width=""  height=""  text="はい" ]
 [glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
 [s]
 
 *mission_north_guard01
-[glink  color="black"  storage="data_quest/north_guard01.ks"  target="*mission_start"  x="450"  y="150"  width=""  height=""  text="はい" ]
+[glink  color="black"  storage="data_story/St_north_guard01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
 [glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
 [s]
 
-*mission_intlude_ushi01
-[glink  color="black"  storage="data_Quest/north_intlude01.ks"  target="*mission_start"  x="450"  y="150"  width=""  height=""  text="はい" ]
+*mission_intrude_ushi01
+[glink  color="black"  storage="data_story/St_north_intrude01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
 [glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
 [s]
 
 *mission_trace_ushi01
-[glink  color="black"  storage="data_Quest/north_tracer01.ks"  target="*mission_start"  x="450"  y="150"  width=""  height=""  text="はい" ]
+[glink  color="black"  storage="data_story/St_north_trace01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
 [glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
 [s]
 
 *mission_assasin_ushi01
-[glink  color="black"  storage="data_Quest/north_expr01.ks"  target="*mission_start"  x="450"  y="150"  width=""  height=""  text="はい" ]
+[glink  color="black"  storage="data_story/St_north_expr01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
 [glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
 [s]
 
 ;-----申ノ国
 *mission_express_saru01
-[glink  color="black"  storage="data_Quest/north_expr01.ks"  target="*mission_start"  x="450"  y="150"  width=""  height=""  text="はい" ]
+[glink  color="black"  storage="data_Quest/north_expr01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
 [glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
 [s]
 
 ;-----巳ノ国
 *mission_express_hebi01
-[glink  color="black"  storage="data_Quest/north_expr01.ks"  target="*mission_start"  x="450"  y="150"  width=""  height=""  text="はい" ]
+[glink  color="black"  storage="data_Quest/north_expr01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
 [glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
 [s]
 
 ;-----酉ノ国
 *mission_express_tori01
-[glink  color="black"  storage="data_Quest/north_expr01.ks"  target="*mission_start"  x="450"  y="150"  width=""  height=""  text="はい" ]
+[glink  color="black"  storage="data_Quest/north_expr01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
 [glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
 [s]

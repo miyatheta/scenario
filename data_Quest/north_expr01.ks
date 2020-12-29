@@ -1,35 +1,5 @@
 *mission_start
-@layopt layer=message0 visible=true
-
-[if exp="f.Qt_n_expr01 != 1"]
-[jump target="*first"]
-[else]
-[jump target="*repeat"]
-[endif]
-
-*first
-[call storage="data_story/St_north_expr01.ks"]
-[jump target="*set"]
-[s]
-;-------------------------------------------------------------------------------
-*repeat
-#鈴耶
-それじゃあ、鈴耶[r]
-行ってまいります！[p]
-[jump target="*set"]
-[s]
-;-------------------------------------------------------------------------------
-*set
-#
-[cm]
-@layopt layer=message0 visible=false
-[chara_hide name="suzune" time=500]
-[freeimage layer="base" ]
-
-[wait time=1000]
-
 ;ステージ情報
-[bg storage="mori_yoru.jpg" time="500"]
 [eval exp="f.Quest_name='north_expr01.ks' , f.Quest_type=1"]
 [eval exp="f.goal=150 , f.progress=0 , f.Cleared=0 , f.Achievement=0"]
 [eval exp="f.security=1 , f.security_MAX=1 , f.warning=0 , f.turn=1"]

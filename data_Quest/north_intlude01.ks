@@ -1,36 +1,5 @@
 *mission_start
-@layopt layer=message0 visible=true
-
-[if exp="f.quest_ui01 != 1"]
-[jump target="*first"]
-[else]
-[jump target="*repeat"]
-[endif]
-
-*first
-[call storage="data_story/St_north_interlude01.ks"]
-[jump target="*set"]
-[s]
-;-------------------------------------------------------------------------------
-*repeat
-#鈴耶
-それじゃあ、鈴耶[r]
-行ってまいります！[p]
-[jump target="*set"]
-[s]
-;-------------------------------------------------------------------------------
-*set
-#
-[cm]
-@layopt layer=message0 visible=false
-[chara_hide name="suzune" time=500]
-[freeimage layer="base" ]
-
-[wait time=1000]
-
-;ステージ情報
-[bg storage="japanese04_night_dark.jpg" time="500"]
-[eval exp="f.Quest_name='intlude_ushi01.ks' , f.Quest_type=2"]
+[eval exp="f.Quest_name='intrude_ushi01.ks' , f.Quest_type=2"]
 [eval exp="f.goal=200 , f.progress=0 , f.Cleared=0 , f.Achievement=0"]
 [eval exp="f.security=1 , f.security_MAX=6 , f.warning=0 , f.turn=1"]
 [eval exp="f.trap_04 = 0 , f.trap_02 = 0 , f.trap_03 = 0 , f.trapper = 0 "]
@@ -467,6 +436,12 @@
 [chara_mod name="suzune" face="柔らか" ]
 無事到着っと[p]
 [call storage="routin/Rt_setStatus.ks"][eval exp="f.dress=1"]
+
+[if exp="f.Qt_n_intrude01 != 1"]
+[eval exp="f.Reward = 100"]
+[else]
+[eval exp="f.Reward = 50"]
+[endif]
 [WSs]
 
 ;-------------------------------------------------------------------------------
@@ -475,7 +450,7 @@
 [call storage="asset/As_result.ks"]
 [eval exp="f.FP_north += f.Reward"]
 #
-無事、機密文書を盗むことが出来た[p]北條家との友好度が上昇した[p]
+無事、玄部家から機密文書を盗むことが出来た[p]北條家との友好度が上昇した[p]
 [jump storage="home.ks" target="*home_start"]
 [s]
 
