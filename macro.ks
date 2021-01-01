@@ -106,8 +106,18 @@ tf.enSANtxt = "理性：" + f.EN_SAN ;
 [macro name="WriteDate"]
 [iscript]
 tf.txt = f.date + "/60日" ;
+if(f.keibi>75){
+  tf.homesecurity = "将軍警護：厳重 (" + f.keibi +")";
+}else if(f.keibi>50){
+  tf.homesecurity = "将軍警護：普通 (" + f.keibi +")";
+}else if(f.keibi>25){
+  tf.homesecurity = "将軍警護：緩い (" + f.keibi +")";
+}else {
+  tf.homesecurity = "将軍警護：ザル (" + f.keibi +")";
+}
 [endscript]
 [ptext layer="0" x="0" y="0" width="1270" text=&tf.txt size="30" color="black" edge="white" bold="bold" align="right" name="calender" overwrite="true" ]
+[ptext layer="0" x="0" y="35" width="1270" text=&tf.homesecurity size="10" color="black" edge="white" bold="bold" align="right" name="homesecurity" overwrite="true" ]
 [endmacro]
 
 [macro name="Milk"]

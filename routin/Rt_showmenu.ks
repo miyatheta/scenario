@@ -23,7 +23,6 @@ if(f.milk > 0){tf.vital2 = tf.vital2 + "爆乳";}
 if(f.bags > 0){tf.vital2 = tf.vital2 + "虫憑";}
 if(f.slave > 0){tf.vital2 = tf.vital2 + "隷属";}
 if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
-
 [endscript]
 [ptext layer="2" x="700" y="100" text=&tf.hp size="30" color="0x333631" edge="white" bold="bold" align="left" name="sshp" overwrite="true" ]
 [ptext layer="2" x="700" y="130" text=&tf.mp size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssmp" overwrite="true" ]

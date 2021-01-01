@@ -27,7 +27,7 @@
 [cm]
 @layopt layer=message0 visible=true
 [current layer="message0"]
-[call storage="showmenu.ks"]
+[call storage="routin/Rt_showmenu.ks"]
 [jump target="*ready"]
 
 ;-------------------------------------------------------------------------------
