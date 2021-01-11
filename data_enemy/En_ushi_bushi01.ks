@@ -207,27 +207,6 @@
 #鈴耶
 だっ、だらしないて何よ！！[p]
 #
-[jump target="*fase房中術1" cond="f.rapture > 0"]
-[jump target="*fase2"]
-[s]
-
-;-----------------------------------------
-*fase房中術1
-[chara_mod name="suzune" face="厳しい"]
-#鈴耶
-（調子に乗るんじゃないわよ！！）[p]
-#
-鈴耶の房中術[p]
-「乳麝香」[p]
-鈴耶の胸元から甘い香りが立ち昇る[p]
-[call storage="routin/Rt_bochu.ks"]
-#武士
-おおおおおお！？[p]
-#
-酩酊した武士の能力が低下した[p]
-
-[eval exp="f.En_Raptured += 1"]
-[eval exp="f.rapture = 0"]
 [jump target="*fase2"]
 [s]
 
@@ -351,31 +330,9 @@
 くっ！！汚いものをこすりつけるなぁっ！！[p]
 #武士
 へへっ、こいつをねじ込まれても同じ口がきけるかな！！[p]
-[jump target="*fase房中術2" cond="f.rapture > 0"]
 [jump target="*fase3"]
 [s]
 
-;-----------------------------------------
-*fase房中術2
-[chara_mod name="suzune" face="厳しい"]
-#鈴耶
-（調子に乗るんじゃないわよ！！）[p]
-#
-鈴耶の房中術[p]
-「小股絞め」[p]
-鈴耶は男の魔羅を自ら股に挟み込むと、太股でしごき始めた[p]
-淫蜜が潤滑油となり得も言われぬ快感が武士を襲う[p]
-[call storage="routin/Rt_bochu.ks"]
-#武士
-おおおおおお！？[p]
-#
-激しい快感が武士を襲う[p]
-武士の能力が低下した[p]
-
-[eval exp="f.En_Raptured += 1"]
-[eval exp="f.rapture = 0"]
-[jump target="*fase3"]
-[s]
 ;-----------------------------------------
 
 *fase2気絶
@@ -502,29 +459,9 @@
 はっ！！小さすぎて入ったのが分かんなかったわよっ！！[p]
 #武士
 ちっ！まだ入れただけだ！！こっからが本番だぜ！！[p]
-[jump target="*fase房中術3" cond="f.rapture > 0"]
 [jump target="*fase4"]
 [s]
-;-----------------------------------------
-*fase房中術3
-[chara_mod name="suzune" face="厳しい"]
-#鈴耶
-（負けるもんか！！）[p]
-#
-鈴耶の房中術[p]
-「天女貝」[p]
-鈴耶の膣がうねり、陰唇が射精を催促するように魔羅を食む[p]
-電撃が走るような快感が武士を襲う[p]
-[call storage="routin/Rt_bochu.ks"]
-#武士
-おおおおおお！？[p]
-#
-強烈な快感が武士を襲う[p]
-武士の能力が低下した[p]
-[eval exp="f.En_Raptured += 1"]
-[eval exp="f.rapture = 0"]
-[jump target="*fase4"]
-[s]
+
 ;-----------------------------------------
 
 *fase3気絶
@@ -548,7 +485,7 @@
 
 *fase4
 ;抵抗4
-[call storage="battle/PL_bind.ks"]
+[call storage="battle/PL_bind.ks" target="*fase4"]
 [jump target="*Round_end" cond="f.bind <= 0"]
 ;段階４
 #
@@ -744,17 +681,9 @@
 #鈴耶
 [chara_mod name="suzune" face="厳しい"]
 (今よ！！)[p]
+[call storage="routin/Rt_bochu.ks" target="*bochu_select"]
 #
 鈴耶の膣内が淫猥に蠢き、貪欲に精液を飲み干していく[p]
-#武士
-う？おおおおおおおお！？[p]
-#
-さらなる雄汁を催促するような締め上げに武士の肉棒が快感に悲鳴を上げる[p]
-#鈴耶
-「忍法・筒枯らし！！」
-#
-精どころか魂も魄も吸い上げるような壮絶な吸い上げに武士は[p]
-[call storage="routin/Rt_bochu.ks"]
 [if exp="f.EN_SAN <= 0"]
 #武士
 ぐおおおおおおおおおっ！！！！[p]
@@ -770,7 +699,7 @@
 #武士
 ぐおおおおおおおおおっ！！！！[p]
 #
-絶叫とともに武士は鈴耶を突き飛ばすようにして無理やり肉棒を引き抜いた[p]
+絶叫とともに酔漢は鈴耶を突き飛ばすようにして無理やり肉棒を引き抜いた[p]
 #鈴耶
 あら、残念[p]
 #
@@ -779,7 +708,6 @@
 [endif]
 [jump target="*finish"]
 [s]
-
 
 ;-----------------------------------------
 *fase4気絶
