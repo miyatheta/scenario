@@ -137,7 +137,7 @@ f.yPosition7 = 900 - (f.MND * 100);
 [return]
 
 *PL_attack_01
-[eval exp="f.DTR = 0.5 , f.AVD = 30"]
+[eval exp="f.DTR = 0.5 , f.AVD = 50"]
 [getrand min="1" max="10" var="f.rand"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
@@ -230,7 +230,7 @@ f.yPosition7 = 900 - (f.MND * 100);
 鈴耶の破魔の拳(退魔攻撃弱)[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"]
-[eval exp="f.MP -= 20"][eval exp="f.MP = 0" cond="f.MP < 0"]
+[eval exp="f.MP -= 30"][eval exp="f.MP = 0" cond="f.MP < 0"]
 [WSs]
 [return]
 
@@ -243,7 +243,7 @@ f.yPosition7 = 900 - (f.MND * 100);
 鈴耶の凶祓いの太刀(退魔攻撃強)[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"]
-[eval exp="f.MP -= 50"]
+[eval exp="f.MP -= 60"]
 [eval exp="f.MP = 0" cond="f.MP < 0"]
 [WSs]
 [return]
@@ -269,7 +269,7 @@ f.yPosition7 = 900 - (f.MND * 100);
 鈴耶の鎌鼬(魔法中)[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"]
-[eval exp="f.MP -= 40"]
+[eval exp="f.MP -= 50"]
 [eval exp="f.MND = 0" cond="f.MND < 0"][eval exp="f.MP = 0" cond="f.MP < 0"]
 [WSs]
 [return]
@@ -287,7 +287,7 @@ f.yPosition7 = 900 - (f.MND * 100);
 返魂の術(魔法強)体力が少ないほど威力アップ[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"]
-[eval exp="f.MP -= 70"][eval exp="f.MP = 0" cond="f.MP < 0"]
+[eval exp="f.MP -= 75"][eval exp="f.MP = 0" cond="f.MP < 0"]
 [WSs]
 [return]
 

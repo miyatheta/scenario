@@ -40,7 +40,7 @@
 ;セクハラ時
 [macro name="SKEBE"]
 [eval exp="f.MND -= 1" cond="f.MND > 0"][WSs]
-[eval exp="f.MP += 10" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
+;[eval exp="f.MP += 5" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [endmacro]
 
 ;被弾時

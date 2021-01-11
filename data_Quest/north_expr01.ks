@@ -14,7 +14,7 @@
 [progressbar]
 [glink color="black" target="*goahead" x="400" y="250" width="" height="" text="先へ進む" ]
 [glink color="black" target="*menu" x="400" y="350" width="" height="" text="メニュー" ]
-[glink color="black" target="*menu" x="400" y="450" width="" height="" text="撤退する" ]
+[glink color="black" target="*exit" x="400" y="450" width="" height="" text="撤退する" ]
 [s]
 ;-------------------------------------------------------------------------------
 
@@ -25,6 +25,16 @@
 [call storage="routin/Rt_showmenu.ks"]
 [jump target="*ready"]
 [s]
+;-------------------------------------------------------------------------------
+
+*exit
+[cm]
+#
+忍務から撤退しますか？[p]
+[glink color="black" target="*result" x="400" y="250" width="" height="" text="はい" ]
+[glink color="black" target="*ready" x="400" y="350" width="" height="" text="いいえ" ]
+[s]
+
 ;-------------------------------------------------------------------------------
 
 *goahead
@@ -431,14 +441,14 @@
 [eval exp="f.Reward = 50"]
 [endif]
 
+[eval exp="f.rootA += f.Reward"]
+#
+無事、密書を届けることが出来た[p]北條家との友好度が上昇した[p]
 [WSs]
 
 ;-------------------------------------------------------------------------------
 *result
 [freeimage layer="0" ]
 [call storage="asset/As_result.ks"]
-[eval exp="f.rootA += f.Reward"]
-#
-無事、密書を届けることが出来た[p]北條家との友好度が上昇した[p]
 [jump storage="home.ks" target="*home_start"]
 [s]

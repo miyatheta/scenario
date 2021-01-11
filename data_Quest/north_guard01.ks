@@ -14,11 +14,14 @@
 ;-------------------------------------------------------------------------------
 
 *ready
+[if exp="f.progress >= f.goal"]
+[jump target="*exit"]
+[endif]
 ;[securitybar]
 [progressbar_guard]
 [glink color="black" target="*goahead" x="400" y="250" width="" height="" text="迎え撃つ" ]
 [glink color="black" target="*menu" x="400" y="350" width="" height="" text="メニュー" ]
-;[glink color="black" target="*menu" x="400" y="450" width="" height="" text="撤退する" ]
+[glink color="black" target="*exit" x="400" y="450" width="" height="" text="撤退する" cond="f.progress >= f.goal"]
 [s]
 
 ;-------------------------------------------------------------------------------
@@ -29,6 +32,15 @@
 [current layer="message0"]
 [call storage="routin/Rt_showmenu.ks"]
 [jump target="*ready"]
+
+;-------------------------------------------------------------------------------
+
+*exit
+;護衛任務用
+[cm]
+#鈴耶
+時間稼ぎ達成！ここらでお暇させてもらうわ！！[p]
+[jump target="*goal"]
 
 ;-------------------------------------------------------------------------------
 *goahead
@@ -66,7 +78,7 @@
 [WriteEnemy]
 [call storage="data_enemy/En_ushi_ninja01.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
-;[jump target="*escape" cond="f.escape > 0"]
+[jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
 [s]
 
@@ -100,7 +112,7 @@
 [WriteEnemy]
 [call storage="data_enemy/En_ushi_ninja02.ks"]
 [jump target="*defeat" cond="f.HP < 1"]
-;[jump target="*escape" cond="f.escape > 0"]
+[jump target="*escape" cond="f.escape > 0"]
 [jump target="*battle_end" cond="f.en_HP < 1"]
 [s]
 
@@ -164,23 +176,22 @@
 *goal
 #鈴耶
 [chara_mod name="suzune" face="柔らか" ]
-無事到着っと[p]
 [call storage="routin/Rt_setStatus.ks"][eval exp="f.dress=1"]
-
 [if exp="f.Qt_n_guard01 != 1"]
 [eval exp="f.Reward = 100"]
 [else]
 [eval exp="f.Reward = 50"]
 [endif]
 
+[eval exp="f.rootA += f.Reward"]
+#
+無事、要人を守ることが出来た[p]北條家との友好度が上昇した[p]
 [WSs]
 
 ;-------------------------------------------------------------------------------
 *result
 [freeimage layer="0" ]
 [call storage="asset/As_result.ks"]
-[eval exp="f.rootA += f.Reward"]
-#
-無事、要人を守ることが出来た[p]北條家との友好度が上昇した[p]
+
 [jump storage="home.ks" target="*home_start"]
 [s]

@@ -21,7 +21,7 @@
 [progressbar_trace]
 [glink color="black" target="*goahead" x="400" y="250" width="" height="" text="先へ進む" ]
 [glink color="black" target="*menu" x="400" y="350" width="" height="" text="メニュー" ]
-[glink color="black" target="*menu" x="400" y="450" width="" height="" text="撤退する" ]
+[glink color="black" target="*exit" x="400" y="450" width="" height="" text="撤退する" cond="f.progress >= f.goal"]
 [s]
 ;-------------------------------------------------------------------------------
 
@@ -459,14 +459,15 @@
 [chara_mod name="suzune" face="柔らか" ]
 無事確保っと！[p]
 [call storage="routin/Rt_setStatus.ks"][eval exp="f.dress=1"]
+
+[eval exp="f.rootA += f.Reward"]
+#
+無事、密書を奪還することが出来た[p]北條家との友好度が上昇した[p]
+[jump storage="home.ks" target="*home_start"]
 [WSs]
 
 ;-------------------------------------------------------------------------------
 *result
 [freeimage layer="0" ]
 [call storage="asset/As_result.ks"]
-[eval exp="f.rootA += f.Reward"]
-#
-無事、密書を奪還することが出来た[p]北條家との友好度が上昇した[p]
-[jump storage="home.ks" target="*home_start"]
 [s]

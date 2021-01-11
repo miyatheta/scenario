@@ -82,7 +82,9 @@
 
 *PL_endure
 鈴耶は快感に備えて気を引き締めた[p]
-[eval exp="f.endure = 1"][WSs]
+[eval exp="f.endure = 1"]
+[eval exp="f.MP += 5" ][eval exp="f.MP = 100" cond="f.MP > 100"]
+[WSs]
 [return]
 [s]
 

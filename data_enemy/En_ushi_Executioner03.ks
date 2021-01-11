@@ -52,6 +52,22 @@
 [endif]
 
 ;敵の行動------------------------------------------------------------------------
+*enemy_comand_select
+[jump target="*enemy_sexhara" cond="f.charm > 0"]
+[getrand min="1" max="100" var="f.rand"]
+[if exp=" f.Charge == 10"]
+[jump target="*enemy_special"]
+[elsif exp=" 0 == f.Round % 5"]
+[jump target="*enemy_magic"]
+[elsif exp="f.rand <= 30"]
+[jump target="*enemy_attack1"]
+[elsif exp="f.rand <= 60"]
+[jump target="*enemy_attack2"]
+[else]
+[jump target="*enemy_sexhara"]
+[endif]
+
+;敵の攻撃------------------------------------------------------------------------
 *enemy_attack1
 #
 牛鬼の「突進」[p]
@@ -735,7 +751,7 @@
 #鈴耶
 [chara_mod name="suzune" face="厳しい"]
 (今よ！！)[p]
-[call storage="routin/Rt_bochu.ks" target="*bochu_select"]
+[call storage="bochu/Rt_bochu.ks" target="*bochu_select"]
 #
 鈴耶の膣内が淫猥に蠢き、貪欲に精液を飲み干していく[p]
 [if exp="f.EN_SAN <= 0"]

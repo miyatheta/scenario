@@ -703,7 +703,7 @@
 #鈴耶
 [chara_mod name="suzune" face="厳しい"]
 (今よ！！)[p]
-[call storage="routin/Rt_bochu.ks" target="*bochu_select"]
+[call storage="bochu/Rt_bochu.ks" target="*bochu_select"]
 #
 鈴耶の膣内が淫猥に蠢き、貪欲に精液を飲み干していく[p]
 [if exp="f.EN_SAN <= 0"]

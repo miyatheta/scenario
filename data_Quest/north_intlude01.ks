@@ -15,7 +15,7 @@
 [progressbar]
 [glink color="black" target="*goahead" x="400" y="250" width="" height="" text="先へ進む" ]
 [glink color="black" target="*menu" x="400" y="350" width="" height="" text="メニュー" ]
-[glink color="black" target="*menu" x="400" y="450" width="" height="" text="撤退する" ]
+[glink color="black" target="*exit" x="400" y="450" width="" height="" text="撤退する" ]
 [s]
 ;-------------------------------------------------------------------------------
 
@@ -28,6 +28,15 @@
 
 ;-------------------------------------------------------------------------------
 
+*exit
+[cm]
+#
+忍務から撤退しますか？[p]
+[glink color="black" target="*result" x="400" y="250" width="" height="" text="はい" ]
+[glink color="black" target="*ready" x="400" y="350" width="" height="" text="いいえ" ]
+[s]
+
+;-------------------------------------------------------------------------------
 *goahead
 [cm]
 @layopt layer=message0 visible=true
@@ -442,16 +451,19 @@
 [else]
 [eval exp="f.Reward = 50"]
 [endif]
+
+[eval exp="f.rootA += f.Reward"]
+#
+無事、玄部家から機密文書を盗むことが出来た[p]北條家との友好度が上昇した[p]
+[jump storage="home.ks" target="*home_start"]
+
 [WSs]
 
 ;-------------------------------------------------------------------------------
 *result
 [freeimage layer="0" ]
 [call storage="asset/As_result.ks"]
-[eval exp="f.rootA += f.Reward"]
-#
-無事、玄部家から機密文書を盗むことが出来た[p]北條家との友好度が上昇した[p]
-[jump storage="home.ks" target="*home_start"]
+
 [s]
 
 ;-------------------------------------------------------------------------------
