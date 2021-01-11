@@ -29,12 +29,12 @@
 
 ;攻撃成功時
 [macro name="ATKED"]
-;[eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
+[eval exp="f.MP += 3" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [endmacro]
 
 ;回避時
 [macro name="AVOID"]
-;[eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
+[eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
 [endmacro]
 
 ;セクハラ時
@@ -47,15 +47,7 @@
 [macro name="DAMED"]
 ;[eval exp="f.MND -= 1" cond="f.MND > 0"]
 [eval exp="f.HP = 0" cond="f.HP < 0"][WSs]
-[eval exp="f.MP += 10" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
-[endmacro]
-
-[macro name="MP1"]
 [eval exp="f.MP += 5" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
-[endmacro]
-
-[macro name="MP5"]
-[eval exp="f.MP += 10" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [endmacro]
 
 [macro name="WSs"]

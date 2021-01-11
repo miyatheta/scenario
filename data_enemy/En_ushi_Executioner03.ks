@@ -862,8 +862,8 @@
 *finish
 #
 [eval exp="f.bind = 0"]
-男の精を受けて鈴耶の気力が増加した[p]
-[eval exp="f.MP += 30 "]
+;男の精を受けて鈴耶の気力が増加した[p]
+;[eval exp="f.MP += 30 "]
 [eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 射精した敵は虚精状態になった（３ラウンド組付封印）[p]
 [eval exp="f.En_Wiseman = 1 , f.En_Wiseman_time = 4 "]

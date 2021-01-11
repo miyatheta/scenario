@@ -20,6 +20,8 @@
 [eval exp="f.acceB = 0 , f.acceB_name='なし' , f.acceB_atp=0 ,f.acceB_pow=0 ,f.acceB_noz=0"]
 [eval exp="f.goal=0 , f.progress=0 , f.Achievement=0"]
 [eval exp="f.security=0 , f.security_MAX=0 , f.warning=0 ,f.turn=0"]
-[eval exp="f.FP_north=0 , f.FP_south=0 , f.FP_east=0 , f.FP_west=0 , f.keibi=100"]
+[eval exp="f.keibi=100"]
 [eval exp="f.satisfy=0 , f.election=0 , f.handjob=1 , f.boobjob=1 , f.mouthjob=1"]
+[eval exp="f.rootA=0,f.rootB=0,f.rootC=0"]
+;rootA=牛寅、rootB=猿,rootC=蛇
 [return]

@@ -345,7 +345,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 *mission_select1
 [freeimage layer=2]
 [iscript]
-tf.north = "北條氏 友好度：" + f.FP_north;
+tf.north = "北條氏 友好度：" + f.rootA;
 tf.south = "南法氏 友好度：" + f.FP_south;
 tf.east = "西院氏 友好度：" + f.FP_west;
 tf.west = "東堂氏 友好度：" + f.FP_east;
@@ -370,8 +370,8 @@ if(f.keibi>75){
 
 *mission_region_north
 [glink  color="black"  target="*mission_north_expr01"  x="450"  y="110"  width=""  height=""  text="密書（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_north_guard01"  x="450"  y="190"  width=""  height=""  text="護衛（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_intrude_ushi01"  x="450"  y="270"  width=""  height=""  text="潜入（丑ノ国・序）" ]
+[glink  color="black"  target="*mission_north_guard01"  x="450"  y="190"  width=""  height=""  text="護衛（丑ノ国・序）" cond="f.Qt_n_expr01 >= 1"]
+[glink  color="black"  target="*mission_intrude_ushi01"  x="450"  y="270"  width=""  height=""  text="潜入（丑ノ国・序）" cond="f.Qt_n_guard01 >= 1"]
 [glink  color="black"  target="*mission_trace_ushi01"  x="450"  y="350"  width=""  height=""  text="追跡（丑ノ国・序）" ]
 [glink  color="black"  target="*mission_undercover_ushi01"  x="450"  y="430"  width=""  height=""  text="合戦（丑ノ国・序）" ]
 [s]

@@ -51,7 +51,7 @@
 [eval exp="f.turn += 1"]
 [eval exp="f.ERO = f.ERO - f.SAN" cond="f.excite == 0"]
 [eval exp="f.ERO = 0" cond="f.ERO < 0"]
-[MP1][WSs]
+[WSs]
 
 [return]
 [s]

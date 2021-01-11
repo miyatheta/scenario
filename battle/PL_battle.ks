@@ -17,7 +17,7 @@
 [glink color="black" target="*PL_magic_select" x="450" y="200" width="" height="" text="忍術" ]
 [glink color="black" target="*PL_skill_select" x="450" y="300" width="" height="" text="スキル" ]
 ;[glink color="black" target="*PL_item_select" x="450" y="300" width="" height="" text="道具" ]
-[glink color="black" target="*PL_escape_select" x="450" y="400" width="" height="" text="逃走" ]
+[glink color="black" target="*PL_escape_select" x="750" y="400" width="" height="" text="逃走" ]
 [s]
 
 *PL_skill_select
@@ -33,23 +33,32 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 [s]
 
 *PL_attack_select
+[iscript]
+f.yPosition1 = 300 - (f.MND * 100);
+f.yPosition2 = 400 - (f.MND * 100);
+f.yPosition3 = 500 - (f.MND * 100);
+f.yPosition4 = 600 - (f.MND * 100);
+f.yPosition5 = 700 - (f.MND * 100);
+f.yPosition6 = 800 - (f.MND * 100);
+f.yPosition7 = 900 - (f.MND * 100);
+[endscript]
 [glink color="black" target="*PL_battle_select" x="450" y="100" width="" height="" text="戻　る" ]
-[glink color="green" target="*PL_attack_00" x="450" y="200" width="" height="" text="防　御" cond="f.MND >= 0 && f.MND <= 1 "]
-[glink color="green" target="*PL_attack_01" x="450" y="300" width="" height="" text="牽　制" cond="f.MND >= 0 && f.MND <= 4 "]
-[glink color="blue"  target="*PL_attack_02" x="450" y="400" width="" height="" text="格　闘" cond="f.MND >= 0 "]
-[glink color="blue"  target="*PL_attack_03" x="750" y="200" width="" height="" text="斬　撃" cond="f.MND >= 2 "]
-[glink color="blue"  target="*PL_attack_04" x="750" y="300" width="" height="" text="スタン" cond="f.MND >= 3 "]
-[glink color="blue"  target="*PL_attack_05" x="750" y="400" width="" height="" text="貫　通" cond="f.MND >= 3 "]
-[glink color="red"   target="*PL_attack_06" x="750" y="500" width="" height="" text="必　殺" cond="f.MND >= 5 "]
+[glink color="green" target="*PL_attack_00" x="450" y="&f.yPosition1" width="" height="" text="防　御" cond="f.MND >= 0 && f.MND < 1 "]
+[glink color="green" target="*PL_attack_01" x="450" y="&f.yPosition2" width="" height="" text="牽　制" cond="f.MND >= 0 && f.MND <= 2 "]
+[glink color="green" target="*PL_attack_02" x="450" y="&f.yPosition3" width="" height="" text="格　闘" cond="f.MND >= 1 && f.MND <= 3 "]
+[glink color="blue"  target="*PL_attack_03" x="450" y="&f.yPosition4" width="" height="" text="抜　刀" cond="f.MND >= 2 && f.MND <= 4 "]
+[glink color="blue"  target="*PL_attack_04" x="450" y="&f.yPosition5" width="" height="" text="斬　撃" cond="f.MND >= 3 "]
+[glink color="blue"  target="*PL_attack_06" x="450" y="&f.yPosition6" width="" height="" text="刺　突" cond="f.MND >= 4 "]
+[glink color="red"   target="*PL_attack_07" x="450" y="&f.yPosition7" width="" height="" text="必　殺" cond="f.MND >= 5 "]
 [s]
 
 *PL_magic_select
 [glink color="black" target="*PL_battle_select" x="450" y="100" width="" height="" text="戻　る" ]
-[glink color="blue" target="*PL_magic_01" x="450" y="200" width="" height="" text="退魔攻撃弱" cond="f.MP >= 20"]
-[glink color="blue" target="*PL_magic_02" x="750" y="200" width="" height="" text="退魔攻撃強" cond="f.MP >= 50"]
+[glink color="blue" target="*PL_magic_01" x="450" y="200" width="" height="" text="退魔攻撃弱" cond="f.MP >= 30"]
+[glink color="blue" target="*PL_magic_02" x="750" y="200" width="" height="" text="退魔攻撃強" cond="f.MP >= 60"]
 ;[glink color="blue" target="*PL_magic_03" x="450" y="400" width="" height="" text="魔法弱" cond="f.MP >= 10"]
-[glink color="blue" target="*PL_magic_04" x="750" y="400" width="" height="" text="真空波" cond="f.MP >= 40"]
-[glink color="blue" target="*PL_magic_05" x="450" y="500" width="" height="" text="魔法強" cond="f.MP >= 70"]
+[glink color="blue" target="*PL_magic_04" x="750" y="400" width="" height="" text="真空波" cond="f.MP >= 50"]
+[glink color="blue" target="*PL_magic_05" x="450" y="500" width="" height="" text="魔法強" cond="f.MP >= 75"]
 [glink color="blue" target="*PL_magic_06" x="750" y="500" width="" height="" text="魔法強" cond="f.MP >= 100"]
 
 [s]
@@ -66,7 +75,7 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 射精したばかりの敵には効果がなかった[p]
 [else]
 敵はムラムラした[p]
-鈴耶の穢れが上昇[p]
+鈴耶の淫気が上昇[p]
 [eval exp="f.charm = 1 , f.AVD = -100"]
 [eval exp="f.CURSE += 20"]
 [eval exp="f.skill_01CT = 10"]
@@ -90,7 +99,7 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 
 鈴耶の集気法[r]
 集中力を気力に変換[p]
-[eval exp="f.MP += 15 "][eval exp="f.MP = 100" cond="f.MP > 100"]
+[eval exp="f.MP += 20 "][eval exp="f.MP = 100" cond="f.MP > 100"]
 [eval exp="f.MND -= 2"][eval exp="f.MND = 0" cond="f.MND < 0"]
 [eval exp="f.skill_02CT = 10"]
 [WSs]
@@ -128,7 +137,7 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 [return]
 
 *PL_attack_01
-[eval exp="f.DTR = 0.5 , f.AVD = 30 , f.MND += 1"]
+[eval exp="f.DTR = 0.5 , f.AVD = 30"]
 [getrand min="1" max="10" var="f.rand"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
@@ -157,7 +166,6 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 鈴耶の斬撃[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
-[eval exp="f.MND -= 1"]
 [WSs]
 [return]
 
@@ -167,7 +175,7 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 [getrand min="1" max="20" var="f.rand"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
-鈴耶の疾風切り[r]
+鈴耶の抜刀「霞」[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
 [eval exp="f.MND -= 2"]
@@ -181,10 +189,10 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 [eval exp="f.EN_GRD=1"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
-鈴耶のもがり笛[r]
+鈴耶の斬撃「朧」[r][r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
-[eval exp="f.MND -= 2"]
+[eval exp="f.MND -= 3"]
 [WSs]
 [return]
 
@@ -193,13 +201,24 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 [getrand min="1" max="20" var="f.rand"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
-鈴耶の神鳴り[r]
+鈴耶の突き「朔」[r]
+[emb exp="tf.DMG"]のダメージ[p]
+[eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
+[eval exp="f.MND -= 4"][eval exp="f.MND = 0" cond="f.MND < 0"]
+[WSs]
+[return]
+
+*PL_attack_07
+[eval exp="f.DTR = 5.5"]
+[getrand min="1" max="20" var="f.rand"]
+[STRIKE]
+[getMathRound var="tf.DMG"]
+鈴耶の必殺「絶影」[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
 [eval exp="f.MND = 0"][eval exp="f.MND = 0" cond="f.MND < 0"]
 [WSs]
 [return]
-
 ;-------------------------------------------------------------------------------
 
 *PL_magic_01
@@ -282,7 +301,7 @@ f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
 [eval exp="tf.argment = (f.MGP * f.RATE * 2 * f.EN_GRD) + f.rand"]
 [getMathRound var="tf.DMG"]
-天鼠の舞(魔法強)穢れが多いほど威力アップ[r]
+天鼠の舞(魔法強)淫気が多いほど威力アップ[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"]
 [eval exp="f.MP -= 100"][eval exp="f.MP = 0" cond="f.MP < 0"]
