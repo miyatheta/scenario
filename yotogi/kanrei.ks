@@ -174,10 +174,10 @@
 ;絶頂判定
 [call storage="bochu/Rt_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
-[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*thighjob淫乱絶頂"]
-[elsif exp="f.orgasm > 0"][jump target="*thighjob通常絶頂"]
-[elsif exp="f.nasty > 0"][jump target="*thighjob淫乱"]
-[else][jump target="*thighjob通常"]
+[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*fingerjob淫乱絶頂"]
+[elsif exp="f.orgasm > 0"][jump target="*fingerjob通常絶頂"]
+[elsif exp="f.nasty > 0"][jump target="*fingerjob淫乱"]
+[else][jump target="*fingerjob通常"]
 [endif]
 
 *fingerjob淫乱絶頂
@@ -234,10 +234,10 @@
 ;絶頂判定
 [call storage="bochu/Rt_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
-[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*thighjob淫乱絶頂"]
-[elsif exp="f.orgasm > 0"][jump target="*thighjob通常絶頂"]
-[elsif exp="f.nasty > 0"][jump target="*thighjob淫乱"]
-[else][jump target="*thighjob通常"]
+[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*boobrape淫乱絶頂"]
+[elsif exp="f.orgasm > 0"][jump target="*boobrape通常絶頂"]
+[elsif exp="f.nasty > 0"][jump target="*boobrape淫乱"]
+[else][jump target="*boobrape通常"]
 [endif]
 
 *boobrape淫乱絶頂
@@ -294,10 +294,10 @@
 ;絶頂判定
 [call storage="bochu/Rt_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 ;リアクション
-[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*thighjob淫乱絶頂"]
-[elsif exp="f.orgasm > 0"][jump target="*thighjob通常絶頂"]
-[elsif exp="f.nasty > 0"][jump target="*thighjob淫乱"]
-[else][jump target="*thighjob通常"]
+[if exp="f.orgasm > 0 && f.nasty > 0"][jump target="*analcunni淫乱絶頂"]
+[elsif exp="f.orgasm > 0"][jump target="*analcunni通常絶頂"]
+[elsif exp="f.nasty > 0"][jump target="*analcunni淫乱"]
+[else][jump target="*analcunni通常"]
 [endif]
 
 *analcunni淫乱絶頂

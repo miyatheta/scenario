@@ -430,6 +430,9 @@
 そ、そんな・・・[p]
 #
 鈴耶は気を失った[p]
+[chara_hide name="suzune" time=500]
+[freeimage layer="base" ]
+[wait time=1000]
 [call storage="routin/Rt_setStatus.ks"]
 [call storage="battle/Rt_battle_end.ks"]
 [call storage="asset/As_result.ks"]

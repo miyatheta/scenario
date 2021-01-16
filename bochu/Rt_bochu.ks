@@ -59,7 +59,7 @@
 終わることのない快楽に、敵は精魂を貪られていくような感覚に襲われた[p]
 鈴耶の気力が増加した[p]
 [eval exp="f.MP -= 50"]
-[eval exp="f.MP += 50" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
+[eval exp="f.MP += 100" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
 [jump target="*shasei"][s]
 
 *shasei

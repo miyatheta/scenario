@@ -28,15 +28,21 @@
 [if exp="f.En_Raptured_time == 1"]
 #
 敵は房中術の影響から脱した[p]
+[eval exp="f.En_Raptured = 0 "]
 [endif]
 [eval exp="f.En_Raptured_time -= 1 " cond="f.En_Raptured > 0"]
 
 [if exp="f.En_Wiseman_time == 1"]
 #
 敵は虚脱状態から回復した[p]
+[eval exp="f.En_Wiseman = 0 "]
 [endif]
 [eval exp="f.En_Wiseman_time -= 1 " cond="f.En_Wiseman > 0"]
 
+[if exp="f.En_Stan == 1"]
+敵は硬直状態から回復した[p]
+[eval exp="f.En_Stan = 0 "]
+[endif]
 [return]
 [s]
 ;-------------------------------------------------------------------------------

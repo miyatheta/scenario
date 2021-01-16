@@ -32,6 +32,7 @@
 [glink  color="black"  target="*mission_select1"  x="450"  y="100"  width=""  height=""  text="忍務" ]
 [glink  color="black"  target="*select_preparation"  x="450"  y="200"  width=""  height=""  text="装備" ]
 [glink  color="black"  target="*select_holiday"  x="450"  y="300"  width=""  height=""  text="休息" ]
+[glink  color="black"  target="*mission_sexparty"  x="450"  y="430"  width="300"  height="30"  text="夜伽" ]
 [s]
 
 ;------管理-------------------------------------------------------------------------
@@ -84,8 +85,11 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 
 ;------接待-------------------------------------------------------------------------
 *mission_sexparty
-[glink  color="black"  storage="sexparty.ks"  x="450"  y="150"  width=""  height=""  text="性接待" ]
-[glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
+#
+誰と夜伽を行いますか[p]
+[glink  color="black"  storage="yotogi/shogun.ks"  x="450"  y="150"  width=""  height=""  text="将軍" ]
+[glink  color="black"  storage="yotogi/kanrei.ks" x="450"  y="250"  width=""  height=""  text="管領" ]
+[glink  color="black"  target="*mission_select1"  x="450"  y="350"  width=""  height=""  text="もどる" ]
 [s]
 
 ;------休息-------------------------------------------------------------------------
@@ -364,7 +368,6 @@ if(f.keibi>75){
 [glink  color="black"  target="*mission_region_south"  x="450"  y="190"  width="300"  height="30"  text="&tf.south" ]
 [glink  color="black"  target="*mission_region_east"  x="450"  y="270"  width="300"  height="30"  text="&tf.east" ]
 [glink  color="black"  target="*mission_region_west"  x="450"  y="350"  width="300"  height="30"  text="&tf.west" ]
-[glink  color="black"  target="*mission_sexparty"  x="450"  y="430"  width="300"  height="30"  text="&tf.sexparty" ]
 [glink  color="black"  target="*select_menu"  x="450"  y="510"  width="300"  height="30"  text="戻る" ]
 [s]
 

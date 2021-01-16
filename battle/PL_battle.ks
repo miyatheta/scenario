@@ -24,7 +24,7 @@
 [iscript]
 f.skill_01CTtxt = "魅了の瞳術：" + f.skill_01CT;
 f.skill_02CTtxt = "集気法：" + f.skill_02CT;
-f.skill_03CTtxt = "身代わりの術" + f.skill_03CT;
+f.skill_03CTtxt = "変わり身の術" + f.skill_03CT;
 [endscript]
 [glink color="black" target="*PL_battle_select" x="450" y="100" width="" height="" text="戻　る" ]
 [glink color="blue" target="*PL_skill_01" x="450" y="300" width="" height="" text="&f.skill_01CTtxt " ]
@@ -46,10 +46,11 @@ f.yPosition7 = 900 - (f.MND * 100);
 [glink color="green" target="*PL_attack_00" x="450" y="&f.yPosition1" width="" height="" text="防　御" cond="f.MND >= 0 && f.MND < 1 "]
 [glink color="green" target="*PL_attack_01" x="450" y="&f.yPosition2" width="" height="" text="牽　制" cond="f.MND >= 0 && f.MND <= 2 "]
 [glink color="green" target="*PL_attack_02" x="450" y="&f.yPosition3" width="" height="" text="格　闘" cond="f.MND >= 1 && f.MND <= 3 "]
-[glink color="blue"  target="*PL_attack_03" x="450" y="&f.yPosition4" width="" height="" text="抜　刀" cond="f.MND >= 2 && f.MND <= 4 "]
-[glink color="blue"  target="*PL_attack_04" x="450" y="&f.yPosition5" width="" height="" text="斬　撃" cond="f.MND >= 3 "]
-[glink color="blue"  target="*PL_attack_06" x="450" y="&f.yPosition6" width="" height="" text="刺　突" cond="f.MND >= 4 "]
-[glink color="red"   target="*PL_attack_07" x="450" y="&f.yPosition7" width="" height="" text="必　殺" cond="f.MND >= 5 "]
+[glink color="blue"  target="*PL_attack_03" x="750" y="&f.yPosition4" width="" height="" text="抜　刀" cond="f.MND >= 2 && f.MND <= 4 "]
+[glink color="green" target="*PL_attack_04" x="450" y="&f.yPosition5" width="" height="" text="発　勁" cond="f.MND >= 3 "]
+[glink color="blue"  target="*PL_attack_05" x="750" y="&f.yPosition5" width="" height="" text="斬　撃" cond="f.MND >= 3 "]
+[glink color="blue"  target="*PL_attack_06" x="750" y="&f.yPosition6" width="" height="" text="刺　突" cond="f.MND >= 4 "]
+[glink color="blue"  target="*PL_attack_07" x="750" y="&f.yPosition7" width="" height="" text="必　殺" cond="f.MND >= 5 "]
 [s]
 
 *PL_magic_select
@@ -137,7 +138,7 @@ f.yPosition7 = 900 - (f.MND * 100);
 [return]
 
 *PL_attack_01
-[eval exp="f.DTR = 0.5 , f.AVD = 50"]
+[eval exp="f.DTR = 0.5 , f.AVD = 40"]
 [getrand min="1" max="10" var="f.rand"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
@@ -148,7 +149,7 @@ f.yPosition7 = 900 - (f.MND * 100);
 [return]
 
 *PL_attack_02
-[eval exp="f.DTR = 1"]
+[eval exp="f.DTR = 1 , f.AVD = 10"]
 [getrand min="1" max="20" var="f.rand"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
@@ -163,33 +164,37 @@ f.yPosition7 = 900 - (f.MND * 100);
 [getrand min="1" max="20" var="f.rand"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
-鈴耶の斬撃[r]
+鈴耶の抜刀「霞」[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
 [WSs]
 [return]
 
 *PL_attack_04
-;スタン
-[eval exp="f.DTR = 3"]
+[eval exp="f.DTR = 1.5"]
 [getrand min="1" max="20" var="f.rand"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
-鈴耶の抜刀「霞」[r]
+鈴耶の発勁「らせん」[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
 [eval exp="f.MND -= 2"]
+[getrand min="1" max="100" var="f.rand"]
+[if exp="f.rand >= 50"]
+[eval exp="f.En_Stan = 1"]
+敵は硬直状態になった[p]
+[endif]
 [WSs]
 [return]
 
 *PL_attack_05
-;貫通
+;斬撃
 [eval exp="f.DTR = 3"]
 [getrand min="1" max="20" var="f.rand"]
 [eval exp="f.EN_GRD=1"]
 [STRIKE]
 [getMathRound var="tf.DMG"]
-鈴耶の斬撃「朧」[r][r]
+鈴耶の斬撃「朧」[r]
 [emb exp="tf.DMG"]のダメージ[p]
 [eval exp="f.en_HP = f.en_HP - tf.DMG"][ATKED]
 [eval exp="f.MND -= 3"]
@@ -197,6 +202,7 @@ f.yPosition7 = 900 - (f.MND * 100);
 [return]
 
 *PL_attack_06
+;刺突
 [eval exp="f.DTR = 5.5"]
 [getrand min="1" max="20" var="f.rand"]
 [STRIKE]
@@ -209,6 +215,7 @@ f.yPosition7 = 900 - (f.MND * 100);
 [return]
 
 *PL_attack_07
+;必殺
 [eval exp="f.DTR = 5.5"]
 [getrand min="1" max="20" var="f.rand"]
 [STRIKE]

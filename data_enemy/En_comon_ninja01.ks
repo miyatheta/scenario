@@ -23,6 +23,7 @@
 
 ;敵の行動------------------------------------------------------------------------
 *enemy_comand_select
+[jump target="*enemy_stan" cond="f.En_Stan > 0"]
 [jump target="*enemy_sexhara" cond="f.charm > 0"]
 [getrand min="1" max="100" var="f.rand"]
 [if exp=" 0 == f.Round % 3"]
@@ -34,6 +35,13 @@
 [else]
 [jump target="*enemy_sexhara"]
 [endif]
+
+
+;敵の行動不能------------------------------------------------------------------------
+*enemy_stan
+#
+敵は硬直により行動できない[p]
+[jump target="*Round_end"][s]
 
 ;敵の攻撃------------------------------------------------------------------------
 *enemy_attack1
