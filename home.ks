@@ -4,6 +4,9 @@
 [jump storage="data_story/St_comon_guard01.ks"]
 [endif]
 
+;[jump storage="data_talk/talk.ks"]
+
+*home_start
 [cm]
 [clearstack  stack="call"  ]
 [freeimage layer="0" ]

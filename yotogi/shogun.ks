@@ -878,8 +878,8 @@
 ;フィニッシュ-----------------------------------------------------------------------
 *finish
 #
-将軍の警備体制が強化された[p]
-[eval exp="f.keibi = 100"]
+鈴耶の理性が回復した[p]
+[eval exp="f.SAN += 15"]
 [call storage="routin/Rt_dairy.ks"]
 [jump target="*home_start"]
 [s]
