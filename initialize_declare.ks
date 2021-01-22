@@ -7,7 +7,7 @@
 [eval exp="f.HLv=30"]
 [eval exp="f.poison=0, f.slowly=0, f.excite=0, f.closed=0"]
 [eval exp="f.milk=0, f.milkpoint=0, f.mazo=0, f.bags=0, f.slave=0, f.tatoo=0, f.nasty=0"]
-[eval exp="f.date = 1"]
+[eval exp="f.date = 0"]
 [eval exp="f.escape = 0 , f.charm = 0"]
 [eval exp="f.rapture = 0 , f.onanie = 0"]
 [eval exp="f.SPD = f.SPD_MAX, f.MOVE = f.MOVE_MAX, f.STR = f.STR_MAX, f.POW = f.POW_MAX "]

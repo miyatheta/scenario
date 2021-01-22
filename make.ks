@@ -4,6 +4,8 @@
 ;Fixレイヤーの初期化など、ロード時点で再構築したい処理をこちらに記述してください。
 ;
 ;-------------------------------------------------------------------------------
+[chara_config pos_mode="false" ]
+
 @call storage="macro.ks"
 ;このゲームで登場するキャラクターを宣言
 ;suzune
@@ -19,5 +21,7 @@
 [chara_face name="suzune" face="泣き" storage="chara/suzune/1/泣き.png"]
 [chara_face name="suzune" face="レイプ目" storage="chara/suzune/1/レイプ目.png"]
 
+[chara_new  name="shogun" storage="chara/shogun/shogun仮.png" jname="善照" ]
+;[chara_show  x="815" y="0" layer="0"]
 ;make.ks はロード時にcallとして呼ばれるため、return必須です。
 [return]

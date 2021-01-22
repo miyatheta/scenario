@@ -22,5 +22,5 @@
 ;上記で定義した領域がキャラクターの名前表示であることを宣言（これがないと#の部分でエラーになります）
 [chara_config ptext="chara_name_area" ]
 
-[jump storage="home.ks" target="**home_start"]
+[jump storage="intermission.ks"]
 [s]

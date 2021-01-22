@@ -1,13 +1,4 @@
 *home_start
-[getrand min="1" max="75" var="f.rand"]
-[if exp="f.keibi < f.rand"]
-[jump storage="data_story/St_comon_guard01.ks"]
-[endif]
-
-;[jump storage="data_talk/talk.ks"]
-
-*home_start
-[cm]
 [clearstack  stack="call"  ]
 [freeimage layer="0" ]
 [bg storage="syosai1-1080.jpg" time="100"]
