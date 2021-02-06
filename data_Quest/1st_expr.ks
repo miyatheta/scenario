@@ -9,38 +9,155 @@
 [WSs]
 
 ;-------------------------------------------------------------------------------
-*導入
-#
-
-
-;-------------------------------------------------------------------------------
-
+;チュートリアル
 *ready1
 [progressbar]
-[glink color="black" target="*goahead" x="400" y="250" width="" height="" text="先へ進む" ]
-;[glink color="black" target="*menu" x="400" y="350" width="" height="" text="メニュー" ]
-;[glink color="black" target="*exit" x="400" y="450" width="" height="" text="撤退する" ]
+右下に表示されているバーは忍務の進行度を表します[p]
+*ready1x
+「先へ進む」を選んで下さい[p]
+[glink color="black" target="*goahead1" x="400" y="250" width="" height="" text="先へ進む" ]
+[glink color="black" target="*ready1x" x="400" y="350" width="" height="" text="メニュー" ]
+[glink color="black" target="*ready1x" x="400" y="450" width="" height="" text="撤退する" ]
 [s]
 
-;-------------------------------------------------------------------------------
-
-*goahead
+*goahead1
 [cm]
+#
+「先へ進む」を選択すると移動力分だけ進行度が増えます[p]
+進行度が既定値（バー右端）に到達すると忍務クリアになります[p]
 @layopt layer=message0 visible=true
-[current layer="message0"]
+@current layer="message0"
 [call storage="routin/Rt_progress.ks"]
 [if exp="f.progress >= f.goal"]
 [jump target=*goal]
 [else]
-[jump target=*select_event]
+[jump target=*tutorial_event1]
 [endif]
 
+*tutorial_event1
+[cm]
+#
+進んだ先では必ず何かしらのイベントが発生します[p]
+;抜け道
+[call storage="data_Quest/comon_event.ks" target="*forest_shortcut"]
+
+*ready2
+[progressbar]
+「先へ進む」を選んで下さい[p]
+[glink color="black" target="*goahead2" x="400" y="250" width="" height="" text="先へ進む" ]
+[glink color="black" target="*ready2" x="400" y="350" width="" height="" text="メニュー" ]
+[glink color="black" target="*ready2" x="400" y="450" width="" height="" text="撤退する" ]
+[s]
+
+*goahead2
+[cm]
+#
+@layopt layer=message0 visible=true
+@current layer="message0"
+[call storage="routin/Rt_progress.ks"]
+[if exp="f.progress >= f.goal"]
+[jump target=*goal]
+[else]
+[jump target=*tutorial_event2]
+[endif]
+
+*tutorial_event2
+;ぬかるみ（＋鈍足）
+[call storage="data_Quest/comon_event.ks" target="*muddy_swanp"]
+イベントには良いものもあれば、状態異常などを招く悪いイベントもあります[p]
+状態異常は道具を使用すれば回復することができます[p]
+道具は画面下部の道具アイコンを押して下さい[p]
+
+*ready3
+[progressbar]
+[glink color="black" target="*goahead3" x="400" y="250" width="" height="" text="先へ進む" ]
+[glink color="black" target="*ready3" x="400" y="350" width="" height="" text="メニュー" ]
+[glink color="black" target="*ready3" x="400" y="450" width="" height="" text="撤退する" ]
+[s]
+
+*goahead3
+[cm]
+#
+@layopt layer=message0 visible=true
+@current layer="message0"
+[call storage="routin/Rt_progress.ks"]
+[if exp="f.progress >= f.goal"]
+[jump target=*goal]
+[else]
+[jump target=*tutorial_event3]
+[endif]
+
+*tutorial_event3
+;エネミー
+野盗が現れた[p]
+道中で敵と遭遇すると、戦闘になります[p]
+[call storage="battle/Rt_battle_start.ks"]
+[eval exp="f.en_Name = '野盗'"]
+[eval exp="f.Lv = 15 + (f.security * 10) , f.en_HP = 150 + (f.security * 10)"]
+[eval exp="f.GRB = 90 + (f.security * 10), f.EN_SEX = 90 + (f.security * 10) "]
+[eval exp="f.EN_SAN= 50 + (f.security * 10) "]
+[eval exp="f.EN_STR = 9 + f.security, f.en_DEX = 21 + f.security"]
+[eval exp="f.type = 1, f.Round = 0"]
+[WriteEnemy]
+[call storage="data_enemy/EN_comon_yatou.ks"]
+[jump target="*defeat" cond="f.HP < 1"]
+[jump target="*escape" cond="f.escape > 0"]
+[jump target="*tutorial_battle_end1" cond="f.en_HP < 1"]
+[s]
+
+*tutorial_battle_end1
+[call storage="battle/Rt_battle_end.ks"]
+
+*ready4
+[progressbar]
+[glink color="black" target="*goahead4" x="400" y="250" width="" height="" text="先へ進む" ]
+[glink color="black" target="*ready4" x="400" y="350" width="" height="" text="メニュー" ]
+[glink color="black" target="*ready4" x="400" y="450" width="" height="" text="撤退する" ]
+[s]
+
+*goahead4
+[cm]
+#
+@layopt layer=message0 visible=true
+@current layer="message0"
+[call storage="routin/Rt_progress.ks"]
+[if exp="f.progress >= f.goal"]
+[jump target=*goal]
+[else]
+[jump target=*tutorial_event4]
+[endif]
+
+*tutorial_event4
+すらいむ（水蛭子）が現れた[p]
+#鈴耶
+妖怪！？[p]
+[eval exp="f.en_Name = 'すらいむ'"]
+#
+妖怪系の敵に遭遇すると妖怪の瘴気に当てられた鈴耶の淫気が上昇します[p]
+淫気が上昇すると敵やイベントで受ける快感が増加します[p]
+[eval exp="f.CURSE = f.CURSE + 20"][WSs]
+[eval exp="f.en_DEX = 30, f.en_HP = 135 , f.type = 2, f.Round = 0"]
+[eval exp="f.EN_SAN= 0 "]
+[WriteEnemy]
+[call storage="data_enemy/Mo_suraimu.ks"]
+[jump target="*defeat" cond="f.HP < 1"]
+[jump target="*escape" cond="f.escape > 0"]
+[jump target="*battle_end" cond="f.en_HP < 1"]
+[jump target="*no_goal"]
+
+*tutorial_battle_end2
+[call storage="battle/Rt_battle_end.ks"]
+#鈴耶
+（山奥でも妖怪と出会うことなんてほとんどなかったのに・・・）[p]
+（世の乱れが、人々の負の心が妖怪たちを生み出しているのね・・・）[p]
+殿・・・。鈴耶は必ず忍務を果たしてみせます！[p]
+[cm]
 ;-------------------------------------------------------------------------------
 
 *ready
 [progressbar]
 [glink color="black" target="*goahead" x="400" y="250" width="" height="" text="先へ進む" ]
-;[glink color="black" target="*menu" x="400" y="350" width="" height="" text="メニュー" ]
+[glink color="black" target="*menu" x="400" y="350" width="" height="" text="メニュー" ]
 ;[glink color="black" target="*exit" x="400" y="450" width="" height="" text="撤退する" ]
 [s]
 ;-------------------------------------------------------------------------------
@@ -48,7 +165,7 @@
 *menu
 [cm]
 @layopt layer=message0 visible=true
-[current layer="message0"]
+@current layer="message0"
 [call storage="routin/Rt_showmenu.ks"]
 [jump target="*ready"]
 [s]
@@ -67,7 +184,7 @@
 *goahead
 [cm]
 @layopt layer=message0 visible=true
-[current layer="message0"]
+@current layer="message0"
 [call storage="routin/Rt_progress.ks"]
 
 [if exp="f.progress >= f.goal"]
@@ -133,9 +250,9 @@
 [s]
 
 [elsif exp="f.event<=80"]
-落ち武者が現れた[p]
+野武士が現れた[p]
 [call storage="battle/Rt_battle_start.ks"]
-[eval exp="f.en_Name = '落ち武者'"]
+[eval exp="f.en_Name = '野武士'"]
 [eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 240 + (f.security * 10)"]
 [eval exp="f.GRB = 100 + (f.security * 10), f.EN_SEX = 110 + (f.security * 10) "]
 [eval exp="f.EN_SAN= 50 + (f.security * 10) "]

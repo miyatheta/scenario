@@ -28,7 +28,7 @@
 *menu
 [cm]
 @layopt layer=message0 visible=true
-[current layer="message0"]
+@current layer="message0"
 [call storage="routin/Rt_showmenu.ks"]
 [jump target="*ready"]
 [s]
@@ -37,7 +37,7 @@
 *goahead
 [cm]
 @layopt layer=message0 visible=true
-[current layer="message0"]
+@current layer="message0"
 [call storage="routin/Rt_progress.ks"]
 
 [if exp="f.progress >= f.goal"]
@@ -107,9 +107,9 @@
 [s]
 
 [elsif exp="f.event<=80"]
-落ち武者が現れた[p]
+野武士が現れた[p]
 [call storage="battle/Rt_battle_start.ks"]
-[eval exp="f.en_Name = '落ち武者'"]
+[eval exp="f.en_Name = '野武士'"]
 [eval exp="f.Lv = 20 + (f.security * 10) , f.en_HP = 240 + (f.security * 10)"]
 [eval exp="f.GRB = 100 + (f.security * 10), f.EN_SEX = 110 + (f.security * 10) "]
 [eval exp="f.EN_SAN= 50 + (f.security * 10) "]

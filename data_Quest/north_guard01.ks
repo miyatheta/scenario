@@ -29,7 +29,7 @@
 *menu
 [cm]
 @layopt layer=message0 visible=true
-[current layer="message0"]
+@current layer="message0"
 [call storage="routin/Rt_showmenu.ks"]
 [jump target="*ready"]
 
@@ -47,7 +47,7 @@
 ;護衛任務用
 [cm]
 @layopt layer=message0 visible=true
-[current layer="message0"]
+@current layer="message0"
 [if exp="f.progress >= f.goal"]
 [jump target=*goal]
 [else]

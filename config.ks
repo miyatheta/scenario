@@ -268,7 +268,7 @@
 ;	テキスト表示速度のサンプルに使用するメッセージレイヤの設定
 	[position layer="message0" left="90" top="580" width="1100" height="100" margint="2" marginl="30" page="fore" visible="true" opacity="0"]
 	[layopt layer="message0" visible="true"]
-	[current layer="message0"]
+	@current layer="message0"
 
 ;	サンプルテキストを表示する
 	[emb exp="tf.text_sample"]

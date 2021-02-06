@@ -23,18 +23,24 @@
 
 [wait time=1000]
 [bg storage="mori_yoru.jpg" time="600"]
-[chara_show name="suzune" face="普通" left="-600" top="-20"]
+[chara_show name="suzune" face="怒り" left="-600" top="-20"]
 [chara_move name="suzune" time="600" left="-100"]
 
 [chara_mod name="suzune" face="怒り"]
 #??
 早く殿様からの文を届けないといけないのに・・・[p]
+#
 [chara_hide name="suzune" ]
-[image storage="chara/suzune/1/怒り.png" left="272" top="0" width="770" height="1034" layer="2"]
-[ptext layer="2"  x="100"  y="450"  size="36"  color="red"  bold="bold"  text="くのいち"  ]
-[ptext layer="2"  x="100"  y="500"  size="72"  color="white"  bold="bold"  text="鈴耶"  ]
+[image storage="chara/suzune/1/怒り.png" left="200" top="0" width="770" height="1034" layer="2"]
+[ptext layer="2"  x="800"  y="400"  size="36"  color="red"  bold="bold"  text="くのいち"  ]
+[ptext layer="2"  x="800"  y="450"  size="72"  color="white"  bold="bold"  text="鈴耶"  ]
 [wait time=900]
 [p]
+#鈴耶
+（長引く戦で追い剥ぎ目当ての野武士や野盗は増える一方・・・）[p]
+（こっちは戦を治めるために働いてるのに、邪魔しないでほしいわ！まったく！）[p]
+さあ、急がないと夜が明けちゃう！！[p]
 [freeimage layer="2" ]
+[chara_show name="suzune" face="普通" left="-100" top="-20"]
 [jump storage="data_Quest/1st_expr.ks"]
 [s]

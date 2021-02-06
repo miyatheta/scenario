@@ -22,6 +22,20 @@
 [chara_face name="suzune" face="レイプ目" storage="chara/suzune/1/レイプ目.png"]
 
 [chara_new  name="shogun" storage="chara/shogun/shogun仮.png" jname="善照" ]
+
+[iscript]
+f.item01={name:"治療薬",value:100,stock:1,used:0,cooltime:7};
+f.item02={name:"治療薬",value:100,stock:1,used:0,cooltime:7};
+f.item03={name:"治療薬",value:100,stock:1,used:0,cooltime:7};
+f.item04={name:"万能薬",value:100,stock:1,used:0,cooltime:7};
+f.item05={name:"鎮静薬",value:100,stock:1,used:0,cooltime:7};
+f.item06={name:"神気湯",value:100,stock:1,used:0,cooltime:7};
+f.item07={name:"煙玉",value:100,stock:1,used:0,cooltime:7};
+f.item08={name:"旅の御守",value:100,stock:1,used:0,cooltime:7};
+f.item09={name:"理力の御守",value:100,stock:1,used:0,cooltime:7};
+f.item10={name:"魔除の御守",value:100,stock:1,used:0,cooltime:7};
+[endscript]
+
 ;[chara_show  x="815" y="0" layer="0"]
 ;make.ks はロード時にcallとして呼ばれるため、return必須です。
 [return]

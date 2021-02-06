@@ -24,9 +24,9 @@
 [call target="*show_status"]
 [chara_show name="suzune" fase="普通" left="-100" top="-20"]
 [glink  color="black"  target="*mission_select1"  x="450"  y="100"  width=""  height=""  text="忍務" ]
-[glink  color="black"  target="*select_preparation"  x="450"  y="200"  width=""  height=""  text="装備" ]
+[glink  color="black"  target="*select_preparation"  x="450"  y="200"  width=""  height=""  text="準備" ]
 [glink  color="black"  target="*select_holiday"  x="450"  y="300"  width=""  height=""  text="休息" ]
-[glink  color="black"  target="*mission_sexparty"  x="450"  y="430"  width="300"  height="30"  text="夜伽" ]
+[glink  color="black"  target="*mission_sexparty"  x="450"  y="400"  width=""  height=""  text="夜伽" ]
 [s]
 
 ;------管理-------------------------------------------------------------------------
@@ -123,8 +123,6 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 *select_preparation
 [call target="*show_status"]
 [glink  color="black"  target="*select_arms"  x="450"  y="100"  width=""  height=""  text="武器" ]
-[glink  color="black"  target="*select_acceA"  x="450"  y="180"  width=""  height=""  text="具足1" ]
-[glink  color="black"  target="*select_acceB"  x="450"  y="260"  width=""  height=""  text="具足2" ]
 [glink  color="black"  target="*select_item"  x="450"  y="340"  width=""  height=""  text="道具" ]
 [glink  color="black"  target="*select_menu"  x="450"  y="420"  width=""  height=""  text="戻る" ]
 [s]
@@ -183,162 +181,201 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [jump target="*select_preparation"]
 [s]
 
-
-*select_acceA
-[freeimage layer=2]
-[glink  color="black"  target="*selected_acceA1"  x="450"  y="150"  width=""  height=""  text="理力の宝珠" cond="f.acceB != 1"]
-[glink  color="black"  target="*selected_acceA2"  x="450"  y="250"  width=""  height=""  text="魔除けの鈴" cond="f.acceB != 2"]
-[glink  color="black"  target="*selected_acceA3"  x="450"  y="350"  width=""  height=""  text="忍びの具足" cond="f.acceB != 3"]
-[glink  color="black"  target="*selected_acceA4"  x="450"  y="450"  width=""  height=""  text="革の小手" cond="f.acceB != 4"]
-[glink  color="black"  target="*selected_acceA5"  x="450"  y="550"  width=""  height=""  text="剛力の腕輪" cond="f.acceB != 5"]
-[glink  color="black"  target="*selected_acceA6"  x="750"  y="150"  width=""  height=""  text="法力の数珠" cond="f.acceB != 6"]
-[glink  color="black"  target="*selected_acceA7"  x="750"  y="250"  width=""  height=""  text="浄化の護符" cond="f.acceB != 7"]
-[glink  color="black"  target="*selected_acceA8"  x="750"  y="350"  width=""  height=""  text="夜天の首輪" cond="f.acceB != 8"]
-[glink  color="black"  target="*selected_acceA9"  x="750"  y="450"  width=""  height=""  text="貞淑の髪飾" cond="f.acceB != 9"]
-[glink  color="black"  target="*selected_acceA10"  x="750"  y="550"  width=""  height=""  text="木彫りの仏像" cond="f.acceB != 10"]
-[glink  color="black"  target="*selected_acceA11"  x="750"  y="650"  width=""  height=""  text="達人の証" cond="f.acceB != 11"]
-[s]
-
-*selected_acceA0
-[freeimage layer=2]
-[eval exp="f.acceA = 0 , f.acceA_name='なし' , f.acceA_atp=0 ,f.acceA_pow=0"]
-装飾を外した[p]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceA1
-[eval exp="f.acceA = 1 , f.acceA_name='理力の宝珠' , f.acceA_atp=0 ,f.acceA_pow=0"]
-[emb exp="f.acceA_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceA2
-[eval exp="f.acceA = 2 , f.acceA_name='魔除けの鈴' , f.acceA_atp=0 ,f.acceA_pow=0"]
-[emb exp="f.acceA_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceA3
-[eval exp="f.acceA = 3 , f.acceA_name='忍びの具足' , f.acceA_atp=0 ,f.acceA_pow=0"]
-[emb exp="f.acceA_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceA4
-[eval exp="f.acceA = 4 , f.acceA_name='革の小手' , f.acceA_atp=0 ,f.acceA_pow=0"]
-[emb exp="f.acceA_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceA5
-[eval exp="f.acceA = 5 , f.acceA_name='剛力の腕輪' , f.acceA_atp=0 ,f.acceA_pow=0"]
-[emb exp="f.acceA_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceA6
-[eval exp="f.acceA = 6 , f.acceA_name='法力の数珠' , f.acceA_atp=0 ,f.acceA_pow=0"]
-[emb exp="f.acceA_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceA7
-[eval exp="f.acceA = 7 , f.acceA_name='浄化の護符' , f.acceA_atp=0 ,f.acceA_pow=0"]
-[emb exp="f.acceA_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceA8
-[eval exp="f.acceA = 8 , f.acceA_name='夜天の首輪' , f.acceA_atp=0 ,f.acceA_pow=0"]
-[emb exp="f.acceA_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceA9
-[eval exp="f.acceA = 9 , f.acceA_name='貞淑の髪飾' , f.acceA_atp=0 ,f.acceA_pow=0"]
-[emb exp="f.acceA_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceA10
-[eval exp="f.acceA = 10 , f.acceA_name='木彫りの仏像' , f.acceA_atp=0 ,f.acceA_pow=0"]
-[emb exp="f.acceA_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceA11
-[eval exp="f.acceA = 11 , f.acceA_name='達人の証' , f.acceA_atp=0 ,f.acceA_pow=0"]
-[emb exp="f.acceA_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-
-
-*select_acceB
-[glink  color="black"  target="*selected_acceB1"  x="450"  y="150"  width=""  height=""  text="理力の宝珠" cond="f.acceA != 1"]
-[glink  color="black"  target="*selected_acceB2"  x="450"  y="250"  width=""  height=""  text="魔除けの鈴" cond="f.acceA != 2"]
-[glink  color="black"  target="*selected_acceB3"  x="450"  y="350"  width=""  height=""  text="忍びの具足" cond="f.acceA != 3"]
-[glink  color="black"  target="*selected_acceB4"  x="450"  y="450"  width=""  height=""  text="革の小手" cond="f.acceA != 4"]
-[glink  color="black"  target="*selected_acceB5"  x="450"  y="550"  width=""  height=""  text="剛力の腕輪" cond="f.acceA != 5"]
-[glink  color="black"  target="*selected_acceB6"  x="750"  y="150"  width=""  height=""  text="法力の数珠" cond="f.acceA != 6"]
-[glink  color="black"  target="*selected_acceB7"  x="750"  y="250"  width=""  height=""  text="浄化の護符" cond="f.acceA != 7"]
-[glink  color="black"  target="*selected_acceB8"  x="750"  y="350"  width=""  height=""  text="夜天の首輪" cond="f.acceA != 8"]
-[glink  color="black"  target="*selected_acceB9"  x="750"  y="450"  width=""  height=""  text="貞淑の髪飾" cond="f.acceA != 9"]
-[glink  color="black"  target="*selected_acceB20"  x="750"  y="550"  width=""  height=""  text="木彫りの仏像" cond="f.acceA != 10"]
-[glink  color="black"  target="*selected_acceB21"  x="750"  y="650"  width=""  height=""  text="達人の証" cond="f.acceA != 11"]
-[s]
-
-*selected_acceB0
-[eval exp="f.acceB = 0 , f.acceB_name='なし' , f.acceB_atp=0 ,f.acceB_pow=0 "]
-装飾を外した[p]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceB1
-[eval exp="f.acceB = 1 , f.acceB_name='理力の宝珠' , f.acceB_atp=0 ,f.acceB_pow=0 "]
-[emb exp="f.acceB_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceB2
-[eval exp="f.acceB = 2 , f.acceB_name='魔除けの鈴' , f.acceB_atp=0 ,f.acceB_pow=0 "]
-[emb exp="f.acceB_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceB3
-[eval exp="f.acceB = 3 , f.acceB_name='忍びの具足' , f.acceB_atp=0 ,f.acceB_pow=0 "]
-[emb exp="f.acceB_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceB4
-[eval exp="f.acceB = 4 , f.acceB_name='革の小手' , f.acceB_atp=0 ,f.acceB_pow=0 "]
-[emb exp="f.acceB_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceB5
-[eval exp="f.acceB = 5 , f.acceB_name='剛力の腕輪' , f.acceB_atp=0 ,f.acceB_pow=0 "]
-[emb exp="f.acceB_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceB6
-[eval exp="f.acceB = 6 , f.acceB_name='法力の数珠' , f.acceB_atp=0 ,f.acceB_pow=0 "]
-[emb exp="f.acceB_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceB7
-[eval exp="f.acceB = 7 , f.acceB_name='浄化の護符' , f.acceB_atp=0 ,f.acceB_pow=0 "]
-[emb exp="f.acceB_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceB8
-[eval exp="f.acceB = 8 , f.acceB_name='夜天の首輪' , f.acceB_atp=0 ,f.acceB_pow=0 "]
-[emb exp="f.acceB_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceB9
-[eval exp="f.acceB = 9 , f.acceB_name='貞淑の髪飾' , f.acceB_atp=0 ,f.acceB_pow=0 "]
-[emb exp="f.acceB_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceB20
-[eval exp="f.acceB = 10 , f.acceB_name='木彫りの仏像' , f.acceB_atp=0 ,f.acceB_pow=0 "]
-[emb exp="f.acceB_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-*selected_acceB21
-[eval exp="f.acceB = 11 , f.acceB_name='達人の証' , f.acceB_atp=0 ,f.acceB_pow=0 "]
-[emb exp="f.acceB_name"]を装備した[p][WSs]
-[jump target="*select_preparation"][s]
-[s]
-
 *select_item
+アイテムを売買できます[p]
+[glink color="black"  target="*buy_item"  x="450"  y="100"  width=""  height=""  text="買う"]
+[glink color="black"  target="*sell_item"  x="450"  y="180"  width=""  height=""  text="売る"]
+[glink color="black"  target="*select_menu"  x="450"  y="260"  width=""  height=""  text="買い物を終える"]
+[s]
 
+*sell_item
+アイテムを売却できます[p]
+[glink  color="red"  target="*sell_item"  x="450"  y="100"  width=""  height=""  text="空" cond="f.inventory1 == null"]
+[glink  color="blue"  target="*sell_inventory1"  x="450"  y="100"  width=""  height=""  text="&f.inventory1['name']" cond="f.inventory1 != null"]
+
+[glink  color="red"  target="*sell_item"  x="450"  y="180"  width=""  height=""  text="空" cond="f.inventory2　== null"]
+[glink  color="blue"  target="*sell_inventory2"  x="450"  y="180"  width=""  height=""  text="&f.inventory2['name']" cond="f.inventory2 != null"]
+
+[glink  color="red"  target="*sell_item"  x="450"  y="260"  width=""  height=""  text="空" cond="f.inventory3 == null"]
+[glink  color="blue"  target="*sell_inventory3"  x="450"  y="260"  width=""  height=""  text="&f.inventory3['name']" cond="f.inventory3 != null"]
+
+[glink  color="black"  target="*select_item"  x="450"  y="340"  width=""  height=""  text="戻る" ]
+[s]
+
+*sell_inventory1
+[emb exp="f.inventory1['name']"]を売却した[p]
+[eval exp="f.inventory1['stock']=1"]
+[eval exp="f.inventory1 = null"]
+[jump target="*sell_item"]
+[s]
+*sell_inventory2
+[emb exp="f.inventory2['name']"]を売却した[p]
+[eval exp="f.inventory2['stock']=1"]
+[eval exp="f.inventory2 = null"]
+[jump target="*sell_item"]
+[s]
+
+*sell_inventory3
+[emb exp="f.inventory3['name']"]を売却した[p]
+[eval exp="f.inventory3['stock']=1"]
+[eval exp="f.inventory3 = null"]
+[jump target="*sell_item"]
+[s]
+
+*buy_item
+アイテムを購入できます[p]
+[glink  color="blue"  target="*selected_item01"  x="450"  y="100"  width=""  height=""  text="&f.item01['name']" cond="f.item01['stock'] != 0"]
+[glink  color="red"  target="*soldout"  x="450"  y="100"  width=""  height=""  text="売り切れ" cond="f.item01['stock'] == 0"]
+
+[glink  color="blue"  target="*selected_item02"  x="450"  y="180"  width=""  height=""  text="&f.item02['name']" cond="f.item02['stock'] != 0"]
+[glink  color="red"  target="*soldout"  x="450"  y="180"  width=""  height=""  text="売り切れ" cond="f.item02['stock'] == 0"]
+
+[glink  color="blue"  target="*selected_item03"  x="450"  y="260"  width=""  height=""  text="&f.item03['name']" cond="f.item03['stock'] != 0"]
+[glink  color="red"  target="*soldout"  x="450"  y="260"  width=""  height=""  text="売り切れ" cond="f.item03['stock'] == 0"]
+
+[glink  color="blue"  target="*selected_item04"  x="450"  y="340"  width=""  height=""  text="&f.item04['name']" cond="f.item04['stock'] != 0"]
+[glink  color="red"  target="*soldout"  x="450"  y="340"  width=""  height=""  text="売り切れ" cond="f.item04['stock'] == 0"]
+
+[glink  color="blue"  target="*selected_item05"  x="450"  y="420"  width=""  height=""  text="&f.item05['name']" cond="f.item05['stock'] != 0"]
+[glink  color="red"  target="*soldout"  x="450"  y="420"  width=""  height=""  text="売り切れ" cond="f.item05['stock'] == 0"]
+
+[glink  color="blue"  target="*selected_item06"  x="750"  y="100"  width=""  height=""  text="&f.item06['name']" cond="f.item06['stock'] != 0"]
+[glink  color="red"  target="*soldout"  x="750"  y="100"  width=""  height=""  text="売り切れ" cond="f.item06['stock'] == 0"]
+
+[glink  color="blue"  target="*selected_item07"  x="750"  y="180"  width=""  height=""  text="&f.item07['name']" cond="f.item07['stock'] != 0"]
+[glink  color="red"  target="*soldout"  x="750"  y="180"  width=""  height=""  text="売り切れ" cond="f.item07['stock'] == 0"]
+
+[glink  color="blue"  target="*selected_item08"  x="750"  y="260"  width=""  height=""  text="&f.item08['name']" cond="f.item08['stock'] != 0"]
+[glink  color="red"  target="*soldout"  x="750"  y="260"  width=""  height=""  text="売り切れ" cond="f.item08['stock'] == 0"]
+
+[glink  color="blue"  target="*selected_item09"  x="750"  y="340"  width=""  height=""  text="&f.item09['name']" cond="f.item09['stock'] != 0"]
+[glink  color="red"  target="*soldout"  x="750"  y="340"  width=""  height=""  text="売り切れ" cond="f.item09['stock'] == 0"]
+
+[glink  color="blue"  target="*selected_item10"  x="750"  y="420"  width=""  height=""  text="&f.item10['name']" cond="f.item10['stock'] != 0"]
+[glink  color="red"  target="*soldout"  x="750"  y="420"  width=""  height=""  text="売り切れ" cond="f.item10['stock'] == 0"]
+
+[glink  color="black"  target="*select_item"  x="750"  y="500"  width=""  height=""  text="戻る" ]
+[s]
+
+*soldout
+その道具は入荷待ちなんだ。すまんな[p]
+[jump target="*select_item"][s]
+
+*inventory_full
+・・・って、持ち物がいっぱいじゃねえかよ[p]
+どうしても必要なら何かを売ってからにしな[p]
+[jump target="*select_item"][s]
+
+*selected_item01
+まいどあり![p]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item01"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item01"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item01"]
+[else][jump target="*inventory_full"]
+[endif]
+[eval exp="f.item01['stock'] = 0"]
+[jump target="*select_item"][s]
+
+*selected_item02
+まいどあり![p]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item02"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item02"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item02"]
+[else][jump target="*inventory_full"]
+[endif]
+[eval exp="f.item02['stock'] = 0"]
+[jump target="*select_item"][s]
+
+*selected_item03
+まいどあり![p]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item03"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item03"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item03"]
+[else][jump target="*inventory_full"]
+[endif]
+[eval exp="f.item03['stock'] = 0"]
+[jump target="*select_item"][s]
+
+*selected_item04
+まいどあり![p]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item04"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item04"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item04"]
+[else][jump target="*inventory_full"]
+[endif]
+[eval exp="f.item04['stock'] = 0"]
+[jump target="*select_item"][s]
+
+*selected_item05
+まいどあり![p]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item05"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item05"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item05"]
+[else][jump target="*inventory_full"]
+[endif]
+[eval exp="f.item05['stock'] = 0"]
+[jump target="*select_item"][s]
+
+*selected_item06
+まいどあり![p]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item06"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item06"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item06"]
+[else][jump target="*inventory_full"]
+[endif]
+[eval exp="f.item06['stock'] = 0"]
+[jump target="*select_item"][s]
+
+*selected_item07
+まいどあり![p]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item07"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item07"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item07"]
+[else][jump target="*inventory_full"]
+[endif]
+[eval exp="f.item07['stock'] = 0"]
+[jump target="*select_item"][s]
+
+*selected_item08
+まいどあり![p]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item08"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item08"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item08"]
+[else][jump target="*inventory_full"]
+[endif]
+[eval exp="f.item08['stock'] = 0"]
+[jump target="*select_item"][s]
+
+*selected_item09
+まいどあり![p]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item09"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item09"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item09"]
+[else][jump target="*inventory_full"]
+[endif]
+[eval exp="f.item09['stock'] = 0"]
+[jump target="*select_item"][s]
+
+*selected_item10
+まいどあり![p]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item10"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item10"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item10"]
+[else][jump target="*inventory_full"]
+[endif]
+[eval exp="f.item10['stock'] = 0"]
+[jump target="*select_item"][s]
+
+*selected_item11
+まいどあり![p]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item11"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item11"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item11"]
+[else][jump target="*inventory_full"]
+[endif]
+[eval exp="f.item11['stock'] = 0"]
+[jump target="*select_item"][s]
+[s]
 ;------忍務-------------------------------------------------------------------------
 *mission_select1
 [freeimage layer=2]
