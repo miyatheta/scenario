@@ -14,10 +14,10 @@
 [image layer=1 left=0 top=0 storage="config/label_cg.png" folder="image" ]
 
 [iscript]
-    
-    tf.page = 0;
-    tf.selected_cg_image = ""; //選択されたCGを一時的に保管
-    
+  
+  tf.page = 0;
+  tf.selected_cg_image = ""; //選択されたCGを一時的に保管
+  
 [endscript]
 
 
@@ -26,14 +26,14 @@
 [layopt layer=1 visible=true]
 
 [cm]
-[button graphic="config/menu_button_close.png" enterimg="config/menu_button_close2.png"  target="*backtitle" x=1150 y=40 ]
+[button graphic="config/menu_button_close.png" enterimg="config/menu_button_close2.png" target="*backtitle" x=1150 y=40 ]
 
 [iscript]
-    tf.tmp_index = 0;
-    tf.cg_index = 12 * tf.page;
-    tf.top = 100;
-    tf.left = 60;
-    
+  tf.tmp_index = 0;
+  tf.cg_index = 12 * tf.page;
+  tf.top = 100;
+  tf.left = 60;
+  
 [endscript]
 
 [iscript]
@@ -81,7 +81,7 @@
 
 *cg_next_image
 
-[image storage=&tf.selected_cg_image[tf.cg_index] folder="bgimage"  ]
+[image storage=&tf.selected_cg_image[tf.cg_index] folder="bgimage" ]
 [l]
 [bg storage="../../tyrano/images/system/bg_base.png" time=10]
 
@@ -90,12 +90,12 @@
 @jump target="cg_next_image" cond="tf.selected_cg_image.length > tf.cg_index"
 
 
-@jump  target=*cgpage
+@jump target=*cgpage
 [s]
 
 *no_image
 
-@jump  target=*cgpage
+@jump target=*cgpage
 
 
 

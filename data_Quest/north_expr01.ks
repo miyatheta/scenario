@@ -12,10 +12,19 @@
 
 *ready
 [progressbar]
-[glink color="black" target="*goahead" x="400" y="250" width="" height="" text="先へ進む" ]
-[glink color="black" target="*menu" x="400" y="350" width="" height="" text="メニュー" ]
+[glink color="black" target="*goahead" x="400" y="150" width="" height="" text="先へ進む" ]
+[glink color="black" target="*useitem" x="400" y="250" width="" height="" text="道具使用" ]
+[glink color="black" target="*menu" x="400" y="350" width="" height="" text="状態確認" ]
 [glink color="black" target="*exit" x="400" y="450" width="" height="" text="撤退する" ]
 [s]
+;-------------------------------------------------------------------------------
+
+*useitem
+[cm]
+[call storage="routin/Rt_useitem.ks"]
+[jump target="*ready"]
+[s]
+
 ;-------------------------------------------------------------------------------
 
 *menu

@@ -5,7 +5,7 @@
 [eval exp="f.security=1 , f.security_MAX=1 , f.warning=0 , f.turn=1"]
 [eval exp="f.cantescape=1 "]
 ;逃亡対象のスペック
-[eval exp="f.En_MOVE=5 , f.En_MOVE_MAX=5 , f.En_slowly=0 ,  f.En_progress=50 "]
+[eval exp="f.En_MOVE=5 , f.En_MOVE_MAX=5 , f.En_slowly=0 , f.En_progress=50 "]
 
 ;暫定ステータス
 [call storage="routin/Rt_setStatus.ks"]
@@ -19,10 +19,21 @@
 ;-------------------------------------------------------------------------------
 *ready
 [progressbar_trace]
-[glink color="black" target="*goahead" x="400" y="250" width="" height="" text="先へ進む" ]
-[glink color="black" target="*menu" x="400" y="350" width="" height="" text="メニュー" ]
+[glink color="black" target="*goahead" x="400" y="150" width="" height="" text="先へ進む" ]
+[glink color="black" target="*useitem" x="400" y="250" width="" height="" text="道具使用" ]
+[glink color="black" target="*menu" x="400" y="350" width="" height="" text="状態確認" ]
 [glink color="black" target="*exit" x="400" y="450" width="" height="" text="撤退する" cond="f.progress >= f.goal"]
 [s]
+;-------------------------------------------------------------------------------
+
+*useitem
+[cm]
+;@layopt layer=message0 visible=true
+;@current layer="message0"
+[call storage="routin/Rt_useitem.ks"]
+[jump target="*ready"]
+[s]
+
 ;-------------------------------------------------------------------------------
 
 *menu

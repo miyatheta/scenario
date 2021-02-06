@@ -5,7 +5,7 @@
 [eval exp="f.keibi -= 8"]
 [eval exp="f.turn = 0"]
 [eval exp="f.dress=1"][call storage="asset/As_face.ks"]
-[chara_mod  name="suzune"  face="柔らか"  ]
+[chara_mod name="suzune" face="柔らか" ]
 [return]
 
 *failed
@@ -15,5 +15,5 @@
 [eval exp="f.keibi -= 8"]
 [eval exp="f.turn = 0"]
 [eval exp="f.dress=2"][call storage="asset/As_face.ks"]
-[chara_mod  name="suzune"  face="泣き"  ]
+[chara_mod name="suzune" face="泣き" ]
 [return]

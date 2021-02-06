@@ -1,5 +1,5 @@
 *start
-[clearstack  stack="call"  ]
+[clearstack stack="call" ]
 ;初回か？
 [if exp="f.date==0" ]
 [jump storage="data_story/St_1st_mission.ks"]

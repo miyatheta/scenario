@@ -11,7 +11,7 @@
 ;攻撃威力の算出
 [eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
 [eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
-[eval exp="tf.argment = (f.ATP * f.DTR) * f.EN_GRD  + f.rand"]
+[eval exp="tf.argment = (f.ATP * f.DTR) * f.EN_GRD + f.rand"]
 ;退魔力の算出
 [if exp="f.type==2"]
 [eval exp="tf.argment = tf.argment / 2 "]
@@ -80,7 +80,7 @@ f.progressbar = "現在地：" + f.progress + "敵所在：" + f.En_progress + "
 [eval exp="f.warning = 100" cond="f.warning > 100"]
 [iscript]
 f.warningLv = "警戒度：" + f.warning ;
-f.securityLv = "警戒態勢：" +  f.security + "/" + f.security_MAX;
+f.securityLv = "警戒態勢：" + f.security + "/" + f.security_MAX;
 [endscript]
 [ptext layer="0" x="150" y="640" text=&f.warningLv size="20" color="black" edge="white" bold="bold" align="left" name="warningbar" overwrite="true" ]
 [ptext layer="0" x="150" y="660" text=&f.securityLv size="20" color="black" edge="white" bold="bold" align="left" name="securitybar" overwrite="true" ]
@@ -99,13 +99,13 @@ tf.enSANtxt = "理性：" + f.EN_SAN ;
 [iscript]
 tf.txt = f.date + "/60日" ;
 if(f.keibi>75){
-  tf.homesecurity = "将軍警護：厳重 (" + f.keibi +")";
+ tf.homesecurity = "将軍警護：厳重 (" + f.keibi +")";
 }else if(f.keibi>50){
-  tf.homesecurity = "将軍警護：普通 (" + f.keibi +")";
+ tf.homesecurity = "将軍警護：普通 (" + f.keibi +")";
 }else if(f.keibi>25){
-  tf.homesecurity = "将軍警護：緩い (" + f.keibi +")";
+ tf.homesecurity = "将軍警護：緩い (" + f.keibi +")";
 }else {
-  tf.homesecurity = "将軍警護：ザル (" + f.keibi +")";
+ tf.homesecurity = "将軍警護：ザル (" + f.keibi +")";
 }
 [endscript]
 [ptext layer="0" x="0" y="0" width="1270" text=&tf.txt size="30" color="black" edge="white" bold="bold" align="right" name="calender" overwrite="true" ]
@@ -245,7 +245,7 @@ tf.milktxt = "乳：" + f.milkpoint ;
 
 ; つまり、
 ;
-;   ああああ[<y]いいいい[>]うううう
+;  ああああ[<y]いいいい[>]うううう
 ;
 ; のように記述すると、「いいいい」だけが黄色くなります。
 
@@ -322,9 +322,9 @@ tf.milktxt = "乳：" + f.milkpoint ;
  [freeimage layer="1"]
  [freeimage layer="2"]
  [freeimage layer="base" page="back"]
- [freeimage layer="0"  page="back"]
- [freeimage layer="1"  page="back"]
- [freeimage layer="2"  page="back"]
+ [freeimage layer="0" page="back"]
+ [freeimage layer="1" page="back"]
+ [freeimage layer="2" page="back"]
  ; カメラの解放
  [reset_camera time="0" layer="0"]
  [reset_camera time="0" layer="1"]
@@ -348,7 +348,7 @@ tf.milktxt = "乳：" + f.milkpoint ;
  [iscript]
  ;「mp.属性名」のように書くことで、マクロに渡された属性値を
  ; JavaScript式で扱うことができます。
- tf.chara   = mp.chara   || 'yes'
+ tf.chara  = mp.chara  || 'yes'
  [endscript]
 
  ; [mask]～[mask_off]
@@ -412,9 +412,9 @@ tf.milktxt = "乳：" + f.milkpoint ;
  ; フォントのデフォルト設定を行います。
  ; サイズは40px、フォントはロゴたいぷゴシック、文字色は白、縁取り色は黒です。
  ; ※ロゴたいぷゴシックをティラノスクリプト上で使えるようにするために、
- ;  data/othersフォルダにフォントファイルを配置し、
- ;  data/others/font.cssファイルでそれを使うための設定を行い、
- ;  それを[loadcss]で読み込んでいます。
+ ; data/othersフォルダにフォントファイルを配置し、
+ ; data/others/font.cssファイルでそれを使うための設定を行い、
+ ; それを[loadcss]で読み込んでいます。
  [deffont size="40" face="ロゴたいぷゴシック,メイリオ,sans-serif" color="0xffffff" edge="0x000000"]
 
  ; [resetfont]
@@ -424,18 +424,18 @@ tf.milktxt = "乳：" + f.milkpoint ;
 
  ; [button]
  ; ロールボタンを出していきます。
- [button name="role_button" role="skip"    graphic="button/skip.png"  enterimg="button/skip2.png"  x="& 0 * 80" y="615"]
- [button name="role_button" role="auto"    graphic="button/auto.png"  enterimg="button/auto2.png"  x="& 1 * 80" y="615"]
- [button name="role_button" role="save"    graphic="button/save.png"  enterimg="button/save2.png"  x="& 2 * 80" y="615"]
- [button name="role_button" role="load"    graphic="button/load.png"  enterimg="button/load2.png"  x="& 3 * 80" y="615"]
+ [button name="role_button" role="skip"  graphic="button/skip.png" enterimg="button/skip2.png" x="& 0 * 80" y="615"]
+ [button name="role_button" role="auto"  graphic="button/auto.png" enterimg="button/auto2.png" x="& 1 * 80" y="615"]
+ [button name="role_button" role="save"  graphic="button/save.png" enterimg="button/save2.png" x="& 2 * 80" y="615"]
+ [button name="role_button" role="load"  graphic="button/load.png" enterimg="button/load2.png" x="& 3 * 80" y="615"]
  [button name="role_button" role="quicksave" graphic="button/qsave.png" enterimg="button/qsave2.png" x="& 4 * 80" y="615"]
  [button name="role_button" role="quickload" graphic="button/qload.png" enterimg="button/qload2.png" x="& 5 * 80" y="615"]
- [button name="role_button" role="backlog"  graphic="button/log.png"  enterimg="button/log2.png"  x="& 6 * 80" y="615"]
- [button name="role_button" role="window"   graphic="button/close.png" enterimg="button/close2.png" x="& 7 * 80" y="615"]
+ [button name="role_button" role="backlog" graphic="button/log.png" enterimg="button/log2.png" x="& 6 * 80" y="615"]
+ [button name="role_button" role="window"  graphic="button/close.png" enterimg="button/close2.png" x="& 7 * 80" y="615"]
  [button name="role_button" role="fullscreen" graphic="button/screen.png" enterimg="button/screen2.png" x="& 8 * 80" y="615"]
- [button name="role_button" role="menu"    graphic="button/menu.png"  enterimg="button/menu2.png"  x="& 9 * 80" y="615"]
+ [button name="role_button" role="menu"  graphic="button/menu.png" enterimg="button/menu2.png" x="& 9 * 80" y="615"]
  [button name="role_button" role="sleepgame" graphic="button/config.png" enterimg="button/config2.png" x="&10 * 80" y="615" storage="config.ks"]
- [button name="role_button" role="title"   graphic="button/title.png" enterimg="button/title2.png" x="&11 * 80" y="615"]
+ [button name="role_button" role="title"  graphic="button/title.png" enterimg="button/title2.png" x="&11 * 80" y="615"]
 
 [endmacro]
 
@@ -488,7 +488,7 @@ tf.milktxt = "乳：" + f.milkpoint ;
 
  ; [image]
  ; 選択肢の背景となる色付きの四角形を表示します。
- [image layer="0" storage="& tf.image"   x=" 0" y="& tf.index * 95 + 5 " width="810" height="90"]
+ [image layer="0" storage="& tf.image"  x=" 0" y="& tf.index * 95 + 5 " width="810" height="90"]
  ; storage 属性などの値の頭についている「&」は、
  ;「後に続く文字をJavaScriptの式として評価せよ」という合図です。
  ; storage 属性の場合で言えば、後に続く「tf.image」がJavaScriptの式として評価されますので、
@@ -497,28 +497,28 @@ tf.milktxt = "乳：" + f.milkpoint ;
 
  ; [ptext]
  ; 文字を表示します。
- [ptext layer="0" text="% text1"      x=" 20" y="& tf.index * 95 + 9 " bold="bold"  size="40"]
- [ptext layer="0" text="% text2"      x=" 20" y="& tf.index * 95 + 52 "        size="24"]
+ [ptext layer="0" text="% text1"   x=" 20" y="& tf.index * 95 + 9 " bold="bold" size="40"]
+ [ptext layer="0" text="% text2"   x=" 20" y="& tf.index * 95 + 52 "    size="24"]
  ; text 属性の頭についている「%」は、
  ;「マクロに渡された同じ属性名の値を渡してね」という合図です。
 
  ; [clickable]
  ; クリックすることができる透明ボタンを作成します。
- [clickable color="white" opacity="0"   x=" 0" y="& tf.index * 95 + 5 " width="810" height="90" mouseopacity="50" storage="& 'kaisetsu/' + mp.storage" target="%target"]
+ [clickable color="white" opacity="0"  x=" 0" y="& tf.index * 95 + 5 " width="810" height="90" mouseopacity="50" storage="& 'kaisetsu/' + mp.storage" target="%target"]
 
  ; 資料編についても同様の処理を行います。
- [image layer="0" storage="&tf.image"   x="815" y="& tf.index * 95 + 5 " width="145" height="90"]
- [ptext layer="0" text="資料編"      x="841" y="& tf.index * 95 + 27 " bold="bold"  size="30"]
- [clickable color="white" opacity="0"   x="815" y="& tf.index * 95 + 5 " width="145" height="90" mouseopacity="50" storage="& 'shiryou/' + mp.storage" target="%target"]
+ [image layer="0" storage="&tf.image"  x="815" y="& tf.index * 95 + 5 " width="145" height="90"]
+ [ptext layer="0" text="資料編"   x="841" y="& tf.index * 95 + 27 " bold="bold" size="30"]
+ [clickable color="white" opacity="0"  x="815" y="& tf.index * 95 + 5 " width="145" height="90" mouseopacity="50" storage="& 'shiryou/' + mp.storage" target="%target"]
 
  [else]
 
  ; 資料編がないなら資料編は描画しない。
- ;                                         !!!
- ;[image layer="0" storage="&tf.image"   x=" 0" y="& tf.index * 95 + 5 " width="960" height="90"]
- ;[ptext layer="0" text="%text1"      x=" 20" y="& tf.index * 95 + 9 " bold="bold"  size="40"]
- ;[ptext layer="0" text="%text2"      x=" 20" y="& tf.index * 95 + 52 "        size="24"]
- ;[clickable color="white" opacity="0"   x=" 0" y="& tf.index * 95 + 5 " width="960" height="90" mouseopacity="50" storage="& 'kaisetsu/' + mp.storage" target="%target"]
+ ;                     !!!
+ ;[image layer="0" storage="&tf.image"  x=" 0" y="& tf.index * 95 + 5 " width="960" height="90"]
+ ;[ptext layer="0" text="%text1"   x=" 20" y="& tf.index * 95 + 9 " bold="bold" size="40"]
+ ;[ptext layer="0" text="%text2"   x=" 20" y="& tf.index * 95 + 52 "    size="24"]
+ ;[clickable color="white" opacity="0"  x=" 0" y="& tf.index * 95 + 5 " width="960" height="90" mouseopacity="50" storage="& 'kaisetsu/' + mp.storage" target="%target"]
 
  [endif]
 
@@ -571,11 +571,11 @@ tf.milktxt = "乳：" + f.milkpoint ;
 [macro name="getrandname"]
  [iscript]
  var name = mp.name || '*Label{R}'
- var max  = mp.max || '10'
- var min  = mp.min || '1'
+ var max = mp.max || '10'
+ var min = mp.min || '1'
  max = Number(max)
  min = Number(min)
- var rand  = min + Math.floor(Math.random() * (max - min + 1))
+ var rand = min + Math.floor(Math.random() * (max - min + 1))
  f.randname = name.replace('{R}', rand)
  if (mp['var']) eval(mp['var'] + ' = "' + f.randname + '"')
  [endscript]
@@ -597,10 +597,10 @@ tf.milktxt = "乳：" + f.milkpoint ;
 ; name属性はコンマ区切りで複数指定可能。
 [macro name="kadomaru"]
  [iscript]
- var name  = mp.name  || ''
+ var name = mp.name || ''
  var radius = mp.radius || '5px'
  if (radius.indexOf('px') < 0 && radius.indexOf('%') < 0) radius = radius + 'px'
- var array  = name.split(',')
+ var array = name.split(',')
  var j_target = $()
  for (var i = 0; i < array.length; i++) j_target = j_target.add('.' + array[i])
  j_target.css('border-radius', radius)
@@ -617,24 +617,24 @@ tf.milktxt = "乳：" + f.milkpoint ;
  [iscript]
 
  var wrap_name = mp.wrap_name || ''
- var name   = mp.name   || ''
- var layer   = mp.layer   || '0'
- var page   = mp.page   || 'fore'
+ var name  = mp.name  || ''
+ var layer  = mp.layer  || '0'
+ var page  = mp.page  || 'fore'
  var overflow = mp.overflow || ''
- var zindex  = mp.zindex  || ''
- var x     = mp.x     || '0'
- var y     = mp.y     || '0'
- var w     = mp.width   || TYRANO.kag.config.scWidth
- var h     = mp.height  || TYRANO.kag.config.scHeight
+ var zindex = mp.zindex || ''
+ var x   = mp.x   || '0'
+ var y   = mp.y   || '0'
+ var w   = mp.width  || TYRANO.kag.config.scWidth
+ var h   = mp.height || TYRANO.kag.config.scHeight
 
- var j_wrap   = $('<div />')
+ var j_wrap  = $('<div />')
  $.setName(j_wrap, wrap_name)
  j_wrap.css('position', 'absolute')
  if (overflow != '') j_wrap.css('overflow', overflow)
- if (zindex  != '') j_wrap.css('z-index', zindex)
+ if (zindex != '') j_wrap.css('z-index', zindex)
 
  var j_target = $()
-     var array   = name.split(',')
+   var array  = name.split(',')
  for (var i = 0; i < array.length; i++) j_target = j_target.add('.' + array[i])
  var j_layer = TYRANO.kag.layer.getLayer(layer, page)
  if (layer == 'fix' || layer == 'fixlayer')j_layer = $('#tyrano_base').find('.fixlayer')
@@ -666,9 +666,9 @@ tf.milktxt = "乳：" + f.milkpoint ;
 ; time指定はムリ。
 [macro name="change_image"]
  [iscript]
- var name   = mp.name  || ''
+ var name  = mp.name || ''
  var storage = mp.storage || ''
- var array  = name.split(',')
+ var array = name.split(',')
  var j_target = $()
  for (var i = 0; i < array.length; i++) j_target = j_target.add('.' + array[i])
  j_target.attr("src", storage)

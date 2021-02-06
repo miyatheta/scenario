@@ -20,7 +20,7 @@
 ;[securitybar]
 [progressbar_guard]
 [glink color="black" target="*goahead" x="400" y="250" width="" height="" text="迎え撃つ" ]
-[glink color="black" target="*menu" x="400" y="350" width="" height="" text="メニュー" ]
+[glink color="black" target="*menu" x="400" y="350" width="" height="" text="状態確認" ]
 [glink color="black" target="*exit" x="400" y="450" width="" height="" text="撤退する" cond="f.progress >= f.goal"]
 [s]
 

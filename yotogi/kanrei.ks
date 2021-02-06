@@ -10,9 +10,9 @@
 #犬童綱久
 ほおれ。まずは挨拶代わりの前戯じゃ[p]
 儂の魔羅様に奉仕せい[p]
-[glink  color="rosy"  target="*handjob"  x="450"  y="150"  width=""  height=""  text="手で奉仕する" ]
-[glink  color="rosy"  target="*mouthjob"  x="450"  y="250"  width=""  height=""  text="口で奉仕する" ]
-[glink  color="rosy"  target="*boobjob"  x="450"  y="350"  width=""  height=""  text="胸で奉仕する" ]
+[glink color="rosy" target="*handjob" x="450" y="150" width="" height="" text="手で奉仕する" ]
+[glink color="rosy" target="*mouthjob" x="450" y="250" width="" height="" text="口で奉仕する" ]
+[glink color="rosy" target="*boobjob" x="450" y="350" width="" height="" text="胸で奉仕する" ]
 [s]
 ;------------------------------------------------------------------------------
 *handjob
@@ -96,10 +96,10 @@
 *forejob2
 #犬童綱久
 さて、どうしてくれようか？[p]
-[glink  color="rosy"  target="*thighjob"  x="450"  y="150"  width=""  height=""  text="素股" ]
-[glink  color="rosy"  target="*fingerjob"  x="450"  y="250"  width=""  height=""  text="指マン" ]
-[glink  color="rosy"  target="*boobrape"  x="450"  y="350"  width=""  height=""  text="乳揉" ]
-[glink  color="rosy"  target="*analcunni"  x="450"  y="450"  width=""  height=""  text="菊座責め" ]
+[glink color="rosy" target="*thighjob" x="450" y="150" width="" height="" text="素股" ]
+[glink color="rosy" target="*fingerjob" x="450" y="250" width="" height="" text="指マン" ]
+[glink color="rosy" target="*boobrape" x="450" y="350" width="" height="" text="乳揉" ]
+[glink color="rosy" target="*analcunni" x="450" y="450" width="" height="" text="菊座責め" ]
 [s]
 ;------------------------------------------------------------------------------
 *thighjob
@@ -345,8 +345,8 @@
 *sex1
 #犬童綱久
 さあて、いよいよ本番じゃ[p]
-[glink  color="rosy"  target="*normalsex"  x="450"  y="150"  width=""  height=""  text="通常" ]
-[glink  color="rosy"  target="*analsex"  x="450"  y="250"  width=""  height=""  text="肛姦" ]
+[glink color="rosy" target="*normalsex" x="450" y="150" width="" height="" text="通常" ]
+[glink color="rosy" target="*analsex" x="450" y="250" width="" height="" text="肛姦" ]
 [s]
 
 *normalsex

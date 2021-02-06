@@ -5,7 +5,7 @@
 [chara_hide name="suzune" time=500]
 [freeimage layer="base" ]
 
-[clearstack  stack="call"  ]
+[clearstack stack="call" ]
 [freeimage layer="0" ]
 @layopt layer=message0 visible=true
 [wait time=1000]

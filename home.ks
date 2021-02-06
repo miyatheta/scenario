@@ -1,9 +1,9 @@
 *home_start
-[clearstack  stack="call"  ]
+[clearstack stack="call" ]
 [freeimage layer="0" ]
 [bg storage="syosai1-1080.jpg" time="100"]
 [eval exp="f.dress=1"][call storage="asset/As_face.ks"]
-[chara_mod  name="suzune"  face="柔らか"  ]
+[chara_mod name="suzune" face="柔らか" ]
 [chara_show name="suzune" left="-100" top="-20"]
 @layopt layer=message0 visible=true
 @layopt layer=2 visible=true
@@ -23,10 +23,10 @@
 *select_menu
 [call target="*show_status"]
 [chara_show name="suzune" fase="普通" left="-100" top="-20"]
-[glink  color="black"  target="*mission_select1"  x="450"  y="100"  width=""  height=""  text="忍務" ]
-[glink  color="black"  target="*select_preparation"  x="450"  y="200"  width=""  height=""  text="準備" ]
-[glink  color="black"  target="*select_holiday"  x="450"  y="300"  width=""  height=""  text="休息" ]
-[glink  color="black"  target="*mission_sexparty"  x="450"  y="400"  width=""  height=""  text="夜伽" ]
+[glink color="black" target="*mission_select1" x="450" y="100" width="" height="" text="忍務" ]
+[glink color="black" target="*select_preparation" x="450" y="200" width="" height="" text="準備" ]
+[glink color="black" target="*select_holiday" x="450" y="300" width="" height="" text="休息" ]
+[glink color="black" target="*mission_sexparty" x="450" y="400" width="" height="" text="夜伽" ]
 [s]
 
 ;------管理-------------------------------------------------------------------------
@@ -81,17 +81,17 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 *mission_sexparty
 #
 誰と夜伽を行いますか[p]
-[glink  color="black"  storage="yotogi/shogun.ks"  x="450"  y="150"  width=""  height=""  text="将軍" ]
-[glink  color="black"  storage="yotogi/kanrei.ks" x="450"  y="250"  width=""  height=""  text="管領" ]
-[glink  color="black"  target="*mission_select1"  x="450"  y="350"  width=""  height=""  text="もどる" ]
+[glink color="black" storage="yotogi/shogun.ks" x="450" y="150" width="" height="" text="将軍" ]
+[glink color="black" storage="yotogi/kanrei.ks" x="450" y="250" width="" height="" text="管領" ]
+[glink color="black" target="*mission_select1" x="450" y="350" width="" height="" text="もどる" ]
 [s]
 
 ;------休息-------------------------------------------------------------------------
 *select_holiday
-[glink  color="black"  target="*rest"  x="450"  y="150"  width=""  height=""  text="休養" ]
-[glink  color="black"  target="*pray"  x="450"  y="250"  width=""  height=""  text="浄化" ]
-[glink  color="black"  target="*meditation"  x="450"  y="350"  width=""  height=""  text="瞑想" ]
-[glink  color="black"  target="*select_menu"  x="450"  y="450"  width=""  height=""  text="戻る" ]
+[glink color="black" target="*rest" x="450" y="150" width="" height="" text="休養" ]
+[glink color="black" target="*pray" x="450" y="250" width="" height="" text="浄化" ]
+[glink color="black" target="*meditation" x="450" y="350" width="" height="" text="瞑想" ]
+[glink color="black" target="*select_menu" x="450" y="450" width="" height="" text="戻る" ]
 [s]
 
 *rest
@@ -122,24 +122,24 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 ;------装備-------------------------------------------------------------------------
 *select_preparation
 [call target="*show_status"]
-[glink  color="black"  target="*select_arms"  x="450"  y="100"  width=""  height=""  text="武器" ]
-[glink  color="black"  target="*select_item"  x="450"  y="340"  width=""  height=""  text="道具" ]
-[glink  color="black"  target="*select_menu"  x="450"  y="420"  width=""  height=""  text="戻る" ]
+[glink color="black" target="*select_arms" x="450" y="100" width="" height="" text="武器" ]
+[glink color="black" target="*select_item" x="450" y="340" width="" height="" text="道具" ]
+[glink color="black" target="*select_menu" x="450" y="420" width="" height="" text="戻る" ]
 [s]
 
 *select_arms
 [freeimage layer=2]
-[glink  color="black"  target="*selected_arms1"  x="450"  y="150"  width=""  height=""  text="忍者刀・夜雀" ]
-[glink  color="black"  target="*selected_arms2"  x="450"  y="250"  width=""  height=""  text="退魔刀・陽炎" ]
-[glink  color="black"  target="*selected_arms3"  x="450"  y="350"  width=""  height=""  text="脇差・燕" ]
-[glink  color="black"  target="*selected_arms4"  x="450"  y="450"  width=""  height=""  text="打刀・隼" ]
-[glink  color="black"  target="*selected_arms5"  x="750"  y="150"  width=""  height=""  text="忍者刀・夜鷹" ]
-[glink  color="black"  target="*selected_arms6"  x="750"  y="250"  width=""  height=""  text="退魔刀・日天" ]
-[glink  color="black"  target="*selected_arms7"  x="750"  y="350"  width=""  height=""  text="野太刀・大鵬" ]
+[glink color="black" target="*selected_arms1" x="450" y="150" width="" height="" text="忍者刀・夜雀" ]
+[glink color="black" target="*selected_arms2" x="450" y="250" width="" height="" text="退魔刀・陽炎" ]
+[glink color="black" target="*selected_arms3" x="450" y="350" width="" height="" text="脇差・燕" ]
+[glink color="black" target="*selected_arms4" x="450" y="450" width="" height="" text="打刀・隼" ]
+[glink color="black" target="*selected_arms5" x="750" y="150" width="" height="" text="忍者刀・夜鷹" ]
+[glink color="black" target="*selected_arms6" x="750" y="250" width="" height="" text="退魔刀・日天" ]
+[glink color="black" target="*selected_arms7" x="750" y="350" width="" height="" text="野太刀・大鵬" ]
 [s]
 
 *selected_arms1
-[eval exp="f.arms = 1 ,f.arms_name='忍者刀・夜雀'  ,f.arms_type = 1 ,f.arms_atp=30 ,f.arms_pow=0 ,f.arms_mov = 1 "]
+[eval exp="f.arms = 1 ,f.arms_name='忍者刀・夜雀' ,f.arms_type = 1 ,f.arms_atp=30 ,f.arms_pow=0 ,f.arms_mov = 1 "]
 #
 [emb exp="f.arms_name"]を装備した[p][WSs]
 [jump target="*select_preparation"]
@@ -182,24 +182,32 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [s]
 
 *select_item
-アイテムを売買できます[p]
-[glink color="black"  target="*buy_item"  x="450"  y="100"  width=""  height=""  text="買う"]
-[glink color="black"  target="*sell_item"  x="450"  y="180"  width=""  height=""  text="売る"]
-[glink color="black"  target="*select_menu"  x="450"  y="260"  width=""  height=""  text="買い物を終える"]
+[glink color="black" target="*buy_item" x="450" y="100" width="" height="" text="買う"]
+[glink color="black" target="*sell_item" x="450" y="180" width="" height="" text="売る"]
+[glink color="black" target="*select_menu" x="450" y="260" width="" height="" text="買い物を終える"]
+[glink color="black" target="*check_item" x="450" y="340" width="" height="" text="確認"]
+[s]
+
+*check_item
+[emb exp="f.inventory1['name']"][p]
+[emb exp="f.inventory2['name']"][p]
+[emb exp="f.inventory3['name']"][p]
+[cm]
+[jump target=*select_item]
 [s]
 
 *sell_item
 アイテムを売却できます[p]
-[glink  color="red"  target="*sell_item"  x="450"  y="100"  width=""  height=""  text="空" cond="f.inventory1 == null"]
-[glink  color="blue"  target="*sell_inventory1"  x="450"  y="100"  width=""  height=""  text="&f.inventory1['name']" cond="f.inventory1 != null"]
+[glink color="red" target="*sell_item" x="450" y="100" width="" height="" text="空" cond="f.inventory1 == null"]
+[glink color="blue" target="*sell_inventory1" x="450" y="100" width="" height="" text="&f.inventory1['name']" cond="f.inventory1 != null"]
 
-[glink  color="red"  target="*sell_item"  x="450"  y="180"  width=""  height=""  text="空" cond="f.inventory2　== null"]
-[glink  color="blue"  target="*sell_inventory2"  x="450"  y="180"  width=""  height=""  text="&f.inventory2['name']" cond="f.inventory2 != null"]
+[glink color="red" target="*sell_item" x="450" y="180" width="" height="" text="空" cond="f.inventory2　== null"]
+[glink color="blue" target="*sell_inventory2" x="450" y="180" width="" height="" text="&f.inventory2['name']" cond="f.inventory2 != null"]
 
-[glink  color="red"  target="*sell_item"  x="450"  y="260"  width=""  height=""  text="空" cond="f.inventory3 == null"]
-[glink  color="blue"  target="*sell_inventory3"  x="450"  y="260"  width=""  height=""  text="&f.inventory3['name']" cond="f.inventory3 != null"]
+[glink color="red" target="*sell_item" x="450" y="260" width="" height="" text="空" cond="f.inventory3 == null"]
+[glink color="blue" target="*sell_inventory3" x="450" y="260" width="" height="" text="&f.inventory3['name']" cond="f.inventory3 != null"]
 
-[glink  color="black"  target="*select_item"  x="450"  y="340"  width=""  height=""  text="戻る" ]
+[glink color="black" target="*select_item" x="450" y="340" width="" height="" text="戻る" ]
 [s]
 
 *sell_inventory1
@@ -208,6 +216,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [eval exp="f.inventory1 = null"]
 [jump target="*sell_item"]
 [s]
+
 *sell_inventory2
 [emb exp="f.inventory2['name']"]を売却した[p]
 [eval exp="f.inventory2['stock']=1"]
@@ -224,37 +233,37 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 
 *buy_item
 アイテムを購入できます[p]
-[glink  color="blue"  target="*selected_item01"  x="450"  y="100"  width=""  height=""  text="&f.item01['name']" cond="f.item01['stock'] != 0"]
-[glink  color="red"  target="*soldout"  x="450"  y="100"  width=""  height=""  text="売り切れ" cond="f.item01['stock'] == 0"]
+[glink color="blue" target="*selected_item01" x="450" y="100" width="" height="" text="&f.item01['name']" cond="f.item01['stock'] != 0"]
+[glink color="red" target="*soldout" x="450" y="100" width="" height="" text="売り切れ" cond="f.item01['stock'] == 0"]
 
-[glink  color="blue"  target="*selected_item02"  x="450"  y="180"  width=""  height=""  text="&f.item02['name']" cond="f.item02['stock'] != 0"]
-[glink  color="red"  target="*soldout"  x="450"  y="180"  width=""  height=""  text="売り切れ" cond="f.item02['stock'] == 0"]
+[glink color="blue" target="*selected_item02" x="450" y="180" width="" height="" text="&f.item02['name']" cond="f.item02['stock'] != 0"]
+[glink color="red" target="*soldout" x="450" y="180" width="" height="" text="売り切れ" cond="f.item02['stock'] == 0"]
 
-[glink  color="blue"  target="*selected_item03"  x="450"  y="260"  width=""  height=""  text="&f.item03['name']" cond="f.item03['stock'] != 0"]
-[glink  color="red"  target="*soldout"  x="450"  y="260"  width=""  height=""  text="売り切れ" cond="f.item03['stock'] == 0"]
+[glink color="blue" target="*selected_item03" x="450" y="260" width="" height="" text="&f.item03['name']" cond="f.item03['stock'] != 0"]
+[glink color="red" target="*soldout" x="450" y="260" width="" height="" text="売り切れ" cond="f.item03['stock'] == 0"]
 
-[glink  color="blue"  target="*selected_item04"  x="450"  y="340"  width=""  height=""  text="&f.item04['name']" cond="f.item04['stock'] != 0"]
-[glink  color="red"  target="*soldout"  x="450"  y="340"  width=""  height=""  text="売り切れ" cond="f.item04['stock'] == 0"]
+[glink color="blue" target="*selected_item04" x="450" y="340" width="" height="" text="&f.item04['name']" cond="f.item04['stock'] != 0"]
+[glink color="red" target="*soldout" x="450" y="340" width="" height="" text="売り切れ" cond="f.item04['stock'] == 0"]
 
-[glink  color="blue"  target="*selected_item05"  x="450"  y="420"  width=""  height=""  text="&f.item05['name']" cond="f.item05['stock'] != 0"]
-[glink  color="red"  target="*soldout"  x="450"  y="420"  width=""  height=""  text="売り切れ" cond="f.item05['stock'] == 0"]
+[glink color="blue" target="*selected_item05" x="450" y="420" width="" height="" text="&f.item05['name']" cond="f.item05['stock'] != 0"]
+[glink color="red" target="*soldout" x="450" y="420" width="" height="" text="売り切れ" cond="f.item05['stock'] == 0"]
 
-[glink  color="blue"  target="*selected_item06"  x="750"  y="100"  width=""  height=""  text="&f.item06['name']" cond="f.item06['stock'] != 0"]
-[glink  color="red"  target="*soldout"  x="750"  y="100"  width=""  height=""  text="売り切れ" cond="f.item06['stock'] == 0"]
+[glink color="blue" target="*selected_item06" x="750" y="100" width="" height="" text="&f.item06['name']" cond="f.item06['stock'] != 0"]
+[glink color="red" target="*soldout" x="750" y="100" width="" height="" text="売り切れ" cond="f.item06['stock'] == 0"]
 
-[glink  color="blue"  target="*selected_item07"  x="750"  y="180"  width=""  height=""  text="&f.item07['name']" cond="f.item07['stock'] != 0"]
-[glink  color="red"  target="*soldout"  x="750"  y="180"  width=""  height=""  text="売り切れ" cond="f.item07['stock'] == 0"]
+[glink color="blue" target="*selected_item07" x="750" y="180" width="" height="" text="&f.item07['name']" cond="f.item07['stock'] != 0"]
+[glink color="red" target="*soldout" x="750" y="180" width="" height="" text="売り切れ" cond="f.item07['stock'] == 0"]
 
-[glink  color="blue"  target="*selected_item08"  x="750"  y="260"  width=""  height=""  text="&f.item08['name']" cond="f.item08['stock'] != 0"]
-[glink  color="red"  target="*soldout"  x="750"  y="260"  width=""  height=""  text="売り切れ" cond="f.item08['stock'] == 0"]
+[glink color="blue" target="*selected_item08" x="750" y="260" width="" height="" text="&f.item08['name']" cond="f.item08['stock'] != 0"]
+[glink color="red" target="*soldout" x="750" y="260" width="" height="" text="売り切れ" cond="f.item08['stock'] == 0"]
 
-[glink  color="blue"  target="*selected_item09"  x="750"  y="340"  width=""  height=""  text="&f.item09['name']" cond="f.item09['stock'] != 0"]
-[glink  color="red"  target="*soldout"  x="750"  y="340"  width=""  height=""  text="売り切れ" cond="f.item09['stock'] == 0"]
+[glink color="blue" target="*selected_item09" x="750" y="340" width="" height="" text="&f.item09['name']" cond="f.item09['stock'] != 0"]
+[glink color="red" target="*soldout" x="750" y="340" width="" height="" text="売り切れ" cond="f.item09['stock'] == 0"]
 
-[glink  color="blue"  target="*selected_item10"  x="750"  y="420"  width=""  height=""  text="&f.item10['name']" cond="f.item10['stock'] != 0"]
-[glink  color="red"  target="*soldout"  x="750"  y="420"  width=""  height=""  text="売り切れ" cond="f.item10['stock'] == 0"]
+[glink color="blue" target="*selected_item10" x="750" y="420" width="" height="" text="&f.item10['name']" cond="f.item10['stock'] != 0"]
+[glink color="red" target="*soldout" x="750" y="420" width="" height="" text="売り切れ" cond="f.item10['stock'] == 0"]
 
-[glink  color="black"  target="*select_item"  x="750"  y="500"  width=""  height=""  text="戻る" ]
+[glink color="black" target="*select_item" x="750" y="500" width="" height="" text="戻る" ]
 [s]
 
 *soldout
@@ -385,95 +394,95 @@ tf.south = "南法氏 友好度：" + f.FP_south;
 tf.east = "西院氏 友好度：" + f.FP_west;
 tf.west = "東堂氏 友好度：" + f.FP_east;
 if(f.keibi>75){
-  tf.sexparty = "接待 警備体制：厳重" ;
+ tf.sexparty = "接待 警備体制：厳重" ;
 }else if(f.keibi>50){
-  tf.sexparty = "接待 警備体制：普通" ;
+ tf.sexparty = "接待 警備体制：普通" ;
 }else if(f.keibi>25){
-  tf.sexparty = "接待 警備体制：緩い" ;
+ tf.sexparty = "接待 警備体制：緩い" ;
 }else {
-  tf.sexparty = "接待 警備体制：ザル" ;
+ tf.sexparty = "接待 警備体制：ザル" ;
 }
 
 [endscript]
-[glink  color="black"  target="*mission_region_north"  x="450"  y="110"  width="300"  height="30"  text="&tf.north" ]
-[glink  color="black"  target="*mission_region_south"  x="450"  y="190"  width="300"  height="30"  text="&tf.south" ]
-[glink  color="black"  target="*mission_region_east"  x="450"  y="270"  width="300"  height="30"  text="&tf.east" ]
-[glink  color="black"  target="*mission_region_west"  x="450"  y="350"  width="300"  height="30"  text="&tf.west" ]
-[glink  color="black"  target="*select_menu"  x="450"  y="510"  width="300"  height="30"  text="戻る" ]
+[glink color="black" target="*mission_region_north" x="450" y="110" width="300" height="30" text="&tf.north" ]
+[glink color="black" target="*mission_region_south" x="450" y="190" width="300" height="30" text="&tf.south" ]
+[glink color="black" target="*mission_region_east" x="450" y="270" width="300" height="30" text="&tf.east" ]
+[glink color="black" target="*mission_region_west" x="450" y="350" width="300" height="30" text="&tf.west" ]
+[glink color="black" target="*select_menu" x="450" y="510" width="300" height="30" text="戻る" ]
 [s]
 
 *mission_region_north
-[glink  color="black"  target="*mission_north_expr01"  x="450"  y="110"  width=""  height=""  text="密書（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_north_guard01"  x="450"  y="190"  width=""  height=""  text="護衛（丑ノ国・序）" cond="f.Qt_n_expr01 >= 1"]
-[glink  color="black"  target="*mission_intrude_ushi01"  x="450"  y="270"  width=""  height=""  text="潜入（丑ノ国・序）" cond="f.Qt_n_guard01 >= 1"]
-[glink  color="black"  target="*mission_trace_ushi01"  x="450"  y="350"  width=""  height=""  text="追跡（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_undercover_ushi01"  x="450"  y="430"  width=""  height=""  text="合戦（丑ノ国・序）" ]
+[glink color="black" target="*mission_north_expr01" x="450" y="110" width="" height="" text="密書（丑ノ国・序）" ]
+[glink color="black" target="*mission_north_guard01" x="450" y="190" width="" height="" text="護衛（丑ノ国・序）" cond="f.Qt_n_expr01 >= 1"]
+[glink color="black" target="*mission_intrude_ushi01" x="450" y="270" width="" height="" text="潜入（丑ノ国・序）" cond="f.Qt_n_guard01 >= 1"]
+[glink color="black" target="*mission_trace_ushi01" x="450" y="350" width="" height="" text="追跡（丑ノ国・序）" ]
+[glink color="black" target="*mission_undercover_ushi01" x="450" y="430" width="" height="" text="合戦（丑ノ国・序）" ]
 [s]
 
 *mission_region_south
-[glink  color="black"  target="*mission_express_saru01"  x="450"  y="150"  width=""  height=""  text="密書配達（申ノ国・序）" ]
-[glink  color="black"  target="*mission_north_guard01"  x="450"  y="250"  width=""  height=""  text="護衛（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_intrude_ushi01"  x="450"  y="350"  width=""  height=""  text="潜入（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_trace_ushi01"  x="450"  y="450"  width=""  height=""  text="追跡（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_undercover_ushi01"  x="450"  y="550"  width=""  height=""  text="破壊（丑ノ国・序）" ]
+[glink color="black" target="*mission_express_saru01" x="450" y="150" width="" height="" text="密書配達（申ノ国・序）" ]
+[glink color="black" target="*mission_north_guard01" x="450" y="250" width="" height="" text="護衛（丑ノ国・序）" ]
+[glink color="black" target="*mission_intrude_ushi01" x="450" y="350" width="" height="" text="潜入（丑ノ国・序）" ]
+[glink color="black" target="*mission_trace_ushi01" x="450" y="450" width="" height="" text="追跡（丑ノ国・序）" ]
+[glink color="black" target="*mission_undercover_ushi01" x="450" y="550" width="" height="" text="破壊（丑ノ国・序）" ]
 [s]
 
 *mission_region_east
-[glink  color="black"  target="*mission_express_hebi01"  x="450"  y="150"  width=""  height=""  text="密書配達（巳ノ国・序）" ]
-[glink  color="black"  target="*mission_north_guard01"  x="450"  y="250"  width=""  height=""  text="護衛（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_intrude_ushi01"  x="450"  y="350"  width=""  height=""  text="潜入（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_trace_ushi01"  x="450"  y="450"  width=""  height=""  text="追跡（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_undercover_ushi01"  x="450"  y="550"  width=""  height=""  text="破壊（丑ノ国・序）" ]
+[glink color="black" target="*mission_express_hebi01" x="450" y="150" width="" height="" text="密書配達（巳ノ国・序）" ]
+[glink color="black" target="*mission_north_guard01" x="450" y="250" width="" height="" text="護衛（丑ノ国・序）" ]
+[glink color="black" target="*mission_intrude_ushi01" x="450" y="350" width="" height="" text="潜入（丑ノ国・序）" ]
+[glink color="black" target="*mission_trace_ushi01" x="450" y="450" width="" height="" text="追跡（丑ノ国・序）" ]
+[glink color="black" target="*mission_undercover_ushi01" x="450" y="550" width="" height="" text="破壊（丑ノ国・序）" ]
 [s]
 
 *mission_region_west
-[glink  color="black"  target="*mission_express_tori01"  x="450"  y="150"  width=""  height=""  text="密書配達（酉ノ国・序）" ]
-[glink  color="black"  target="*mission_north_guard01"  x="450"  y="250"  width=""  height=""  text="護衛（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_intrude_ushi01"  x="450"  y="350"  width=""  height=""  text="潜入（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_trace_ushi01"  x="450"  y="450"  width=""  height=""  text="追跡（丑ノ国・序）" ]
-[glink  color="black"  target="*mission_undercover_ushi01"  x="450"  y="550"  width=""  height=""  text="破壊（丑ノ国・序）" ]
+[glink color="black" target="*mission_express_tori01" x="450" y="150" width="" height="" text="密書配達（酉ノ国・序）" ]
+[glink color="black" target="*mission_north_guard01" x="450" y="250" width="" height="" text="護衛（丑ノ国・序）" ]
+[glink color="black" target="*mission_intrude_ushi01" x="450" y="350" width="" height="" text="潜入（丑ノ国・序）" ]
+[glink color="black" target="*mission_trace_ushi01" x="450" y="450" width="" height="" text="追跡（丑ノ国・序）" ]
+[glink color="black" target="*mission_undercover_ushi01" x="450" y="550" width="" height="" text="破壊（丑ノ国・序）" ]
 [s]
 
 ;-----丑ノ国
 *mission_north_expr01
-[glink  color="black"  storage="data_story/St_north_expr01.ks"   x="450"  y="150"  width=""  height=""  text="はい" ]
-[glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
+[glink color="black" storage="data_story/St_north_expr01.ks"  x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
 [s]
 
 *mission_north_guard01
-[glink  color="black"  storage="data_story/St_north_guard01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
-[glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
+[glink color="black" storage="data_story/St_north_guard01.ks" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
 [s]
 
 *mission_intrude_ushi01
-[glink  color="black"  storage="data_story/St_north_intrude01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
-[glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
+[glink color="black" storage="data_story/St_north_intrude01.ks" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
 [s]
 
 *mission_trace_ushi01
-[glink  color="black"  storage="data_story/St_north_trace01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
-[glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
+[glink color="black" storage="data_story/St_north_trace01.ks" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
 [s]
 
 *mission_assasin_ushi01
-[glink  color="black"  storage="data_story/St_north_expr01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
-[glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
+[glink color="black" storage="data_story/St_north_expr01.ks" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
 [s]
 
 ;-----申ノ国
 *mission_express_saru01
-[glink  color="black"  storage="data_Quest/north_expr01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
-[glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
+[glink color="black" storage="data_Quest/north_expr01.ks" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
 [s]
 
 ;-----巳ノ国
 *mission_express_hebi01
-[glink  color="black"  storage="data_Quest/north_expr01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
-[glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
+[glink color="black" storage="data_Quest/north_expr01.ks" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
 [s]
 
 ;-----酉ノ国
 *mission_express_tori01
-[glink  color="black"  storage="data_Quest/north_expr01.ks"  x="450"  y="150"  width=""  height=""  text="はい" ]
-[glink  color="black"  target="*mission_select1"  x="450"  y="250"  width=""  height=""  text="もどる" ]
+[glink color="black" storage="data_Quest/north_expr01.ks" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
 [s]

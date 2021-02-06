@@ -46,11 +46,11 @@ f.yPosition7 = 900 - (f.MND * 100);
 [glink color="green" target="*PL_attack_00" x="450" y="&f.yPosition1" width="" height="" text="防　御" cond="f.MND >= 0 && f.MND < 1 "]
 [glink color="green" target="*PL_attack_01" x="450" y="&f.yPosition2" width="" height="" text="牽　制" cond="f.MND >= 0 && f.MND <= 2 "]
 [glink color="green" target="*PL_attack_02" x="450" y="&f.yPosition3" width="" height="" text="格　闘" cond="f.MND >= 1 && f.MND <= 3 "]
-[glink color="blue"  target="*PL_attack_03" x="750" y="&f.yPosition4" width="" height="" text="抜　刀" cond="f.MND >= 2 && f.MND <= 4 "]
+[glink color="blue" target="*PL_attack_03" x="750" y="&f.yPosition4" width="" height="" text="抜　刀" cond="f.MND >= 2 && f.MND <= 4 "]
 [glink color="green" target="*PL_attack_04" x="450" y="&f.yPosition5" width="" height="" text="発　勁" cond="f.MND >= 3 "]
-[glink color="blue"  target="*PL_attack_05" x="750" y="&f.yPosition5" width="" height="" text="斬　撃" cond="f.MND >= 3 "]
-[glink color="blue"  target="*PL_attack_06" x="750" y="&f.yPosition6" width="" height="" text="刺　突" cond="f.MND >= 4 "]
-[glink color="blue"  target="*PL_attack_07" x="750" y="&f.yPosition7" width="" height="" text="必　殺" cond="f.MND >= 5 "]
+[glink color="blue" target="*PL_attack_05" x="750" y="&f.yPosition5" width="" height="" text="斬　撃" cond="f.MND >= 3 "]
+[glink color="blue" target="*PL_attack_06" x="750" y="&f.yPosition6" width="" height="" text="刺　突" cond="f.MND >= 4 "]
+[glink color="blue" target="*PL_attack_07" x="750" y="&f.yPosition7" width="" height="" text="必　殺" cond="f.MND >= 5 "]
 [s]
 
 *PL_magic_select

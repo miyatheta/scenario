@@ -32,8 +32,8 @@
 #
 [chara_hide name="suzune" ]
 [image storage="chara/suzune/1/怒り.png" left="200" top="0" width="770" height="1034" layer="2"]
-[ptext layer="2"  x="800"  y="400"  size="36"  color="red"  bold="bold"  text="くのいち"  ]
-[ptext layer="2"  x="800"  y="450"  size="72"  color="white"  bold="bold"  text="鈴耶"  ]
+[ptext layer="2" x="800" y="400" size="36" color="red" bold="bold" text="くのいち" ]
+[ptext layer="2" x="800" y="450" size="72" color="white" bold="bold" text="鈴耶" ]
 [wait time=900]
 [p]
 #鈴耶

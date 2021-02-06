@@ -11,9 +11,9 @@
 *forejob1
 #鈴耶
 まずは…[p]
-[glink  color="rosy"  target="*handjob"  x="450"  y="150"  width=""  height=""  text="手で奉仕する" ]
-[glink  color="rosy"  target="*mouthjob"  x="450"  y="250"  width=""  height=""  text="口で奉仕する" ]
-[glink  color="rosy"  target="*boobjob"  x="450"  y="350"  width=""  height=""  text="胸で奉仕する" ]
+[glink color="rosy" target="*handjob" x="450" y="150" width="" height="" text="手で奉仕する" ]
+[glink color="rosy" target="*mouthjob" x="450" y="250" width="" height="" text="口で奉仕する" ]
+[glink color="rosy" target="*boobjob" x="450" y="350" width="" height="" text="胸で奉仕する" ]
 [s]
 ;------------------------------------------------------------------------------
 *handjob
@@ -102,9 +102,9 @@
 今度は儂がそなたを慰めてやろう[p]
 #
 そう言うと将軍は…[p]
-[glink  color="rosy"  target="*boobsex"  x="450"  y="150"  width=""  height=""  text="胸を責める" ]
-[glink  color="rosy"  target="*cunniling"  x="450"  y="250"  width=""  height=""  text="秘処を責める" ]
-[glink  color="rosy"  target="*analcunni"  x="450"  y="450"  width=""  height=""  text="尻を責める" ]
+[glink color="rosy" target="*boobsex" x="450" y="150" width="" height="" text="胸を責める" ]
+[glink color="rosy" target="*cunniling" x="450" y="250" width="" height="" text="秘処を責める" ]
+[glink color="rosy" target="*analcunni" x="450" y="450" width="" height="" text="尻を責める" ]
 [s]
 
 ;------------------------------------------------------------------------------
@@ -291,8 +291,8 @@
 *sex1
 #将軍
 さあて、いよいよ本番じゃ[p]
-[glink  color="rosy"  target="*normalsex"  x="450"  y="150"  width=""  height=""  text="通常" ]
-[glink  color="rosy"  target="*analsex"  x="450"  y="250"  width=""  height=""  text="肛姦" ]
+[glink color="rosy" target="*normalsex" x="450" y="150" width="" height="" text="通常" ]
+[glink color="rosy" target="*analsex" x="450" y="250" width="" height="" text="肛姦" ]
 [s]
 
 *normalsex

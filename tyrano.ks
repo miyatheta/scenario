@@ -18,7 +18,7 @@
 [macro name="charaset"]
 
 [backlay]
-[image storage=%storage left=%left|0 top=%top|0 layer=%layer page=back visible=true  ]
+[image storage=%storage left=%left|0 top=%top|0 layer=%layer page=back visible=true ]
 [trans time=%time|1]
 @wt
 
@@ -57,21 +57,21 @@ tf.savetext = "<span style='font-size:10px'>"+tf.save_date+"</span><br />"+tf.ti
 
 [macro name="setsave"]
 
-    [iscript]
+  [iscript]
 
-        TG.menu.doSave(mp.index);
-        
-    [endscript]
+    TG.menu.doSave(mp.index);
+    
+  [endscript]
 
 [endmacro]
 
 [macro name="loading"]
 
-    [iscript]
+  [iscript]
 
-        TG.menu.loadGame(mp.index);
+    TG.menu.loadGame(mp.index);
 
-    [endscript]
+  [endscript]
 
 [endmacro]
 
@@ -81,14 +81,14 @@ tf.savetext = "<span style='font-size:10px'>"+tf.save_date+"</span><br />"+tf.ti
 [iscript]
 	
 	if(sf.cg_view){
-    }else{
-    	sf.cg_view = {};
-    }
+  }else{
+  	sf.cg_view = {};
+  }
 	
 	if(sf.replay_view){
-    }else{
-    	sf.replay_view = {};
-    }
+  }else{
+  	sf.replay_view = {};
+  }
 	
 	
 [endscript]
@@ -106,9 +106,9 @@ tf.savetext = "<span style='font-size:10px'>"+tf.save_date+"</span><br />"+tf.ti
 			tf.is_cg_open = true;
 		}
 		
-        if(typeof mp.thumb !="undefined"){
-            mp.tmp_graphic[0] = mp.thumb;
-        }
+    if(typeof mp.thumb !="undefined"){
+      mp.tmp_graphic[0] = mp.thumb;
+    }
 	
 	
 	[endscript]
@@ -124,11 +124,11 @@ tf.savetext = "<span style='font-size:10px'>"+tf.save_date+"</span><br />"+tf.ti
 ;CGが閲覧された場合、CGモードで表示できるようにする
 [macro name="cg" ]
 
-    [iscript]
+  [iscript]
 
-        sf.cg_view[mp.storage] = "on";
-    
-    [endscript]
+    sf.cg_view[mp.storage] = "on";
+  
+  [endscript]
 
 [endmacro]
 
@@ -158,25 +158,25 @@ tf.savetext = "<span style='font-size:10px'>"+tf.save_date+"</span><br />"+tf.ti
 ;リプレイを開放する
 [macro name="setreplay" ]
 
-    [iscript]
+  [iscript]
 
-        sf.replay_view[mp.name] = {storage:mp.storage, target:mp.target};
-    
-    [endscript]
+    sf.replay_view[mp.name] = {storage:mp.storage, target:mp.target};
+  
+  [endscript]
 
 [endmacro]
 
 [macro name="endreplay"]
 
-    [if exp="tf.flag_replay == true"]
-        
-        @layopt page="fore" layer="message0" visible=false
-        ;システムボタンを非表示にするなど
-        [hidemenubutton]
-        
-        @jump storage="replay.ks" 
-        
-    [endif]
+  [if exp="tf.flag_replay == true"]
+    
+    @layopt page="fore" layer="message0" visible=false
+    ;システムボタンを非表示にするなど
+    [hidemenubutton]
+    
+    @jump storage="replay.ks" 
+    
+  [endif]
 
 [endmacro]
 

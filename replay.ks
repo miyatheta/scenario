@@ -14,17 +14,17 @@
 [image name="label_replay" layer=1 left=0 top=0 storage="config/label_recollection.png" folder="image" ]
 
 [iscript]
-    
-    tf.page = 0;
-    tf.selected_replay_obj = ""; //選択されたリプレイを一時的に保管
-    
+  
+  tf.page = 0;
+  tf.selected_replay_obj = ""; //選択されたリプレイを一時的に保管
+  
 [endscript]
 
 
 
 *replaypage
 [cm]
-[button graphic="config/menu_button_close.png" enterimg="config/menu_button_close2.png"  target="*backtitle" x=1150 y=40 ]
+[button graphic="config/menu_button_close.png" enterimg="config/menu_button_close2.png" target="*backtitle" x=1150 y=40 ]
 
 [iscript]
 	tf.target_page = "page_"+tf.page;
@@ -64,7 +64,7 @@
 [cm]
 
 [iscript]
-    tf.flag_replay = true;
+  tf.flag_replay = true;
 [endscript]
 
 [free layer=1 name="label_replay"]
@@ -74,6 +74,6 @@
 
 *no_image
 
-@jump  target=*replaypage
+@jump target=*replaypage
 
 

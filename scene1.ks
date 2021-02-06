@@ -1,6 +1,6 @@
 *start
 
-[cm  ]
+[cm ]
 [clearfix]
 [start_keyconfig]
 

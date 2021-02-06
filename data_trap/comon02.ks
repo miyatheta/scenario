@@ -28,6 +28,6 @@
 天井から謎の液体が降り注いだ[p]
 液体を浴びた服の繊維が崩れ落ちてゆく！！[r]
 [eval exp="f.dress = 2" ][call storage="asset/As_face.ks"]
-[chara_mod  name="suzune"  face="苦しみ"  ]
+[chara_mod name="suzune" face="苦しみ" ]
 鈴耶は脱衣状態になった[p]
 [return]

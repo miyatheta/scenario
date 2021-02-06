@@ -41,7 +41,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [ptext layer="2" x="700" y="400" text=&tf.vital1 size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssvital1" overwrite="true" ]
 [ptext layer="2" x="700" y="430" text=&tf.vital2 size="30" color="0x333631" edge="white" bold="bold" align="left" name="ssvital2" overwrite="true" ]
 
-[glink  color="black"  target="*close_menu"  x="700"  y="500"  width=""  height=""  text=閉じる ]
+[glink color="black" target="*close_menu" x="700" y="500" width="" height="" text=閉じる ]
 [s]
 
 *close_menu
