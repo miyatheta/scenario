@@ -16,8 +16,8 @@
 *ready1x
 「先へ進む」を選んで下さい[p]
 [glink color="black" target="*goahead1" x="400" y="150" width="" height="" text="先へ進む" ]
-[glink color="black" target="*ready1x" x="400" y="350" width="" height="" text="メニュー" ]
-[glink color="black" target="*ready1x" x="400" y="450" width="" height="" text="撤退する" ]
+[glink color="black" target="*ready1x" x="400" y="250" width="" height="" text="メニュー" ]
+[glink color="black" target="*ready1x" x="400" y="350" width="" height="" text="撤退する" ]
 [s]
 
 *goahead1
@@ -44,9 +44,9 @@
 *ready2
 [progressbar]
 「先へ進む」を選んで下さい[p]
-[glink color="black" target="*goahead2" x="400" y="250" width="" height="" text="先へ進む" ]
-[glink color="black" target="*ready2" x="400" y="350" width="" height="" text="メニュー" ]
-[glink color="black" target="*ready2" x="400" y="450" width="" height="" text="撤退する" ]
+[glink color="black" target="*goahead2" x="400" y="150" width="" height="" text="先へ進む" ]
+[glink color="black" target="*ready2" x="400" y="250" width="" height="" text="メニュー" ]
+[glink color="black" target="*ready2" x="400" y="350" width="" height="" text="撤退する" ]
 [s]
 
 *goahead2

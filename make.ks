@@ -24,16 +24,17 @@
 [chara_new name="shogun" storage="chara/shogun/shogun仮.png" jname="善照" ]
 
 [iscript]
-f.item01={name:"治療薬",value:100,stock:1,used:0,cooltime:7};
-f.item02={name:"治療薬",value:100,stock:1,used:0,cooltime:7};
-f.item03={name:"治療薬",value:100,stock:1,used:0,cooltime:7};
-f.item04={name:"万能薬",value:100,stock:1,used:0,cooltime:7};
-f.item05={name:"鎮静薬",value:100,stock:1,used:0,cooltime:7};
-f.item06={name:"神気湯",value:100,stock:1,used:0,cooltime:7};
-f.item07={name:"煙玉",value:100,stock:1,used:0,cooltime:7};
-f.item08={name:"旅の御守",value:100,stock:1,used:0,cooltime:7};
-f.item09={name:"理力の御守",value:100,stock:1,used:0,cooltime:7};
-f.item10={name:"魔除の御守",value:100,stock:1,used:0,cooltime:7};
+f.item=[0,1,2,3,4,5,6,7,8,9];
+f.item[0]={name:"治療薬",value:100,stock:1,used:0,cooltime:7};
+f.item[1]={name:"治療薬",value:100,stock:1,used:0,cooltime:7};
+f.item[2]={name:"治療薬",value:100,stock:1,used:0,cooltime:7};
+f.item[3]={name:"万能薬",value:100,stock:1,used:0,cooltime:7};
+f.item[4]={name:"鎮静薬",value:100,stock:1,used:0,cooltime:7};
+f.item[5]={name:"神気湯",value:100,stock:1,used:0,cooltime:7};
+f.item[6]={name:"煙玉",value:100,stock:1,used:0,cooltime:7};
+f.item[7]={name:"旅の御守",value:100,stock:1,used:0,cooltime:7};
+f.item[8]={name:"理力の御守",value:100,stock:1,used:0,cooltime:7};
+f.item[9]={name:"魔除の御守",value:100,stock:1,used:0,cooltime:7};
 [endscript]
 
 ;[chara_show x="815" y="0" layer="0"]

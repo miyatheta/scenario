@@ -233,35 +233,35 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 
 *buy_item
 アイテムを購入できます[p]
-[glink color="blue" target="*selected_item01" x="450" y="100" width="" height="" text="&f.item01['name']" cond="f.item01['stock'] != 0"]
-[glink color="red" target="*soldout" x="450" y="100" width="" height="" text="売り切れ" cond="f.item01['stock'] == 0"]
+[glink color="blue" target="*selected_item0" x="450" y="100" width="" height="" text="&f.item[0]['name']" cond="f.item[0]['stock'] != 0"]
+[glink color="red" target="*soldout" x="450" y="100" width="" height="" text="売り切れ" cond="f.item[0]['stock'] == 0"]
 
-[glink color="blue" target="*selected_item02" x="450" y="180" width="" height="" text="&f.item02['name']" cond="f.item02['stock'] != 0"]
-[glink color="red" target="*soldout" x="450" y="180" width="" height="" text="売り切れ" cond="f.item02['stock'] == 0"]
+[glink color="blue" target="*selected_item1" x="450" y="180" width="" height="" text="&f.item[1]['name']" cond="f.item[1]['stock'] != 0"]
+[glink color="red" target="*soldout" x="450" y="180" width="" height="" text="売り切れ" cond="f.item[1]['stock'] == 0"]
 
-[glink color="blue" target="*selected_item03" x="450" y="260" width="" height="" text="&f.item03['name']" cond="f.item03['stock'] != 0"]
-[glink color="red" target="*soldout" x="450" y="260" width="" height="" text="売り切れ" cond="f.item03['stock'] == 0"]
+[glink color="blue" target="*selected_item2" x="450" y="260" width="" height="" text="&f.item[2]['name']" cond="f.item[2]['stock'] != 0"]
+[glink color="red" target="*soldout" x="450" y="260" width="" height="" text="売り切れ" cond="f.item[2]['stock'] == 0"]
 
-[glink color="blue" target="*selected_item04" x="450" y="340" width="" height="" text="&f.item04['name']" cond="f.item04['stock'] != 0"]
-[glink color="red" target="*soldout" x="450" y="340" width="" height="" text="売り切れ" cond="f.item04['stock'] == 0"]
+[glink color="blue" target="*selected_item3" x="450" y="340" width="" height="" text="&f.item[3]['name']" cond="f.item[3]['stock'] != 0"]
+[glink color="red" target="*soldout" x="450" y="340" width="" height="" text="売り切れ" cond="f.item[3]['stock'] == 0"]
 
-[glink color="blue" target="*selected_item05" x="450" y="420" width="" height="" text="&f.item05['name']" cond="f.item05['stock'] != 0"]
-[glink color="red" target="*soldout" x="450" y="420" width="" height="" text="売り切れ" cond="f.item05['stock'] == 0"]
+[glink color="blue" target="*selected_item4" x="450" y="420" width="" height="" text="&f.item[4]['name']" cond="f.item[4]['stock'] != 0"]
+[glink color="red" target="*soldout" x="450" y="420" width="" height="" text="売り切れ" cond="f.item[4]['stock'] == 0"]
 
-[glink color="blue" target="*selected_item06" x="750" y="100" width="" height="" text="&f.item06['name']" cond="f.item06['stock'] != 0"]
-[glink color="red" target="*soldout" x="750" y="100" width="" height="" text="売り切れ" cond="f.item06['stock'] == 0"]
+[glink color="blue" target="*selected_item5" x="750" y="100" width="" height="" text="&f.item[5]['name']" cond="f.item[5]['stock'] != 0"]
+[glink color="red" target="*soldout" x="750" y="100" width="" height="" text="売り切れ" cond="f.item[5]['stock'] == 0"]
 
-[glink color="blue" target="*selected_item07" x="750" y="180" width="" height="" text="&f.item07['name']" cond="f.item07['stock'] != 0"]
-[glink color="red" target="*soldout" x="750" y="180" width="" height="" text="売り切れ" cond="f.item07['stock'] == 0"]
+[glink color="blue" target="*selected_item6" x="750" y="180" width="" height="" text="&f.item[6]['name']" cond="f.item[6]['stock'] != 0"]
+[glink color="red" target="*soldout" x="750" y="180" width="" height="" text="売り切れ" cond="f.item[6]['stock'] == 0"]
 
-[glink color="blue" target="*selected_item08" x="750" y="260" width="" height="" text="&f.item08['name']" cond="f.item08['stock'] != 0"]
-[glink color="red" target="*soldout" x="750" y="260" width="" height="" text="売り切れ" cond="f.item08['stock'] == 0"]
+[glink color="blue" target="*selected_item7" x="750" y="260" width="" height="" text="&f.item[7]['name']" cond="f.item[7]['stock'] != 0"]
+[glink color="red" target="*soldout" x="750" y="260" width="" height="" text="売り切れ" cond="f.item[7]['stock'] == 0"]
 
-[glink color="blue" target="*selected_item09" x="750" y="340" width="" height="" text="&f.item09['name']" cond="f.item09['stock'] != 0"]
-[glink color="red" target="*soldout" x="750" y="340" width="" height="" text="売り切れ" cond="f.item09['stock'] == 0"]
+[glink color="blue" target="*selected_item8" x="750" y="340" width="" height="" text="&f.item[8]['name']" cond="f.item[8]['stock'] != 0"]
+[glink color="red" target="*soldout" x="750" y="340" width="" height="" text="売り切れ" cond="f.item[8]['stock'] == 0"]
 
-[glink color="blue" target="*selected_item10" x="750" y="420" width="" height="" text="&f.item10['name']" cond="f.item10['stock'] != 0"]
-[glink color="red" target="*soldout" x="750" y="420" width="" height="" text="売り切れ" cond="f.item10['stock'] == 0"]
+[glink color="blue" target="*selected_item9" x="750" y="420" width="" height="" text="&f.item[9]['name']" cond="f.item[9]['stock'] != 0"]
+[glink color="red" target="*soldout" x="750" y="420" width="" height="" text="売り切れ" cond="f.item[9]['stock'] == 0"]
 
 [glink color="black" target="*select_item" x="750" y="500" width="" height="" text="戻る" ]
 [s]
@@ -275,115 +275,106 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 どうしても必要なら何かを売ってからにしな[p]
 [jump target="*select_item"][s]
 
-*selected_item01
+*selected_item0
 まいどあり![p]
-[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item01"]
-[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item01"]
-[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item01"]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[0]"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[0]"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[0]"]
 [else][jump target="*inventory_full"]
 [endif]
-[eval exp="f.item01['stock'] = 0"]
+[eval exp="f.item[0]['stock'] = 0"]
 [jump target="*select_item"][s]
 
-*selected_item02
+*selected_item1
 まいどあり![p]
-[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item02"]
-[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item02"]
-[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item02"]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[1]"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[1]"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[1]"]
 [else][jump target="*inventory_full"]
 [endif]
-[eval exp="f.item02['stock'] = 0"]
+[eval exp="f.item[1]['stock'] = 0"]
 [jump target="*select_item"][s]
 
-*selected_item03
+*selected_item2
 まいどあり![p]
-[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item03"]
-[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item03"]
-[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item03"]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[2]"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[2]"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[2]"]
 [else][jump target="*inventory_full"]
 [endif]
-[eval exp="f.item03['stock'] = 0"]
+[eval exp="f.item[2]['stock'] = 0"]
 [jump target="*select_item"][s]
 
-*selected_item04
+*selected_item3
 まいどあり![p]
-[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item04"]
-[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item04"]
-[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item04"]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[3]"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[3]"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[3]"]
 [else][jump target="*inventory_full"]
 [endif]
-[eval exp="f.item04['stock'] = 0"]
+[eval exp="f.item[3]['stock'] = 0"]
 [jump target="*select_item"][s]
 
-*selected_item05
+*selected_item4
 まいどあり![p]
-[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item05"]
-[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item05"]
-[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item05"]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[4]"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[4]"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[4]"]
 [else][jump target="*inventory_full"]
 [endif]
-[eval exp="f.item05['stock'] = 0"]
+[eval exp="f.item[4]['stock'] = 0"]
 [jump target="*select_item"][s]
 
-*selected_item06
+*selected_item5
 まいどあり![p]
-[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item06"]
-[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item06"]
-[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item06"]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[5]"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[5]"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[5]"]
 [else][jump target="*inventory_full"]
 [endif]
-[eval exp="f.item06['stock'] = 0"]
+[eval exp="f.item[5]['stock'] = 0"]
 [jump target="*select_item"][s]
 
-*selected_item07
+*selected_item6
 まいどあり![p]
-[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item07"]
-[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item07"]
-[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item07"]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[6]"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[6]"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[6]"]
 [else][jump target="*inventory_full"]
 [endif]
-[eval exp="f.item07['stock'] = 0"]
+[eval exp="f.item[6]['stock'] = 0"]
 [jump target="*select_item"][s]
 
-*selected_item08
+*selected_item7
 まいどあり![p]
-[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item08"]
-[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item08"]
-[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item08"]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[7]"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[7]"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[7]"]
 [else][jump target="*inventory_full"]
 [endif]
-[eval exp="f.item08['stock'] = 0"]
+[eval exp="f.item[7]['stock'] = 0"]
 [jump target="*select_item"][s]
 
-*selected_item09
+*selected_item8
 まいどあり![p]
-[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item09"]
-[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item09"]
-[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item09"]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[8]"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[8]"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[8]"]
 [else][jump target="*inventory_full"]
 [endif]
-[eval exp="f.item09['stock'] = 0"]
+[eval exp="f.item[8]['stock'] = 0"]
 [jump target="*select_item"][s]
 
-*selected_item10
+*selected_item9
 まいどあり![p]
-[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item10"]
-[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item10"]
-[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item10"]
+[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[9]"]
+[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[9]"]
+[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[9]"]
 [else][jump target="*inventory_full"]
 [endif]
-[eval exp="f.item10['stock'] = 0"]
+[eval exp="f.item[9]['stock'] = 0"]
 [jump target="*select_item"][s]
 
-*selected_item11
-まいどあり![p]
-[if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item11"]
-[elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item11"]
-[elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item11"]
-[else][jump target="*inventory_full"]
-[endif]
-[eval exp="f.item11['stock'] = 0"]
-[jump target="*select_item"][s]
 [s]
 ;------忍務-------------------------------------------------------------------------
 *mission_select1
