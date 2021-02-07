@@ -175,7 +175,7 @@
 [wait time=1000]
 [call storage="battle/Rt_battle_end.ks"]
 [call storage="routin/Rt_setStatus.ks"]
-[call storage="asset/As_result.ks"]
+[call storage="asset/As_result.ks"][call storage="routin/Rt_dairy.ks"]
 [jump storage="data_prison/ushi_torture01.ks"]
 [s]
 
@@ -183,15 +183,12 @@
 *goal
 #鈴耶
 [chara_mod name="suzune" face="柔らか" ]
-無事到着っと[p]
+なんとか凌いだわね[p]
 [call storage="routin/Rt_setStatus.ks"][eval exp="f.dress=1"]
 
-[if exp="f.Qt_n_expr01 != 1"]
-[eval exp="f.Reward = 100"]
-[else]
 [eval exp="f.Reward = 50"]
-[endif]
-
+[eval exp="f.EXP += f.Reward"]
+[eval exp="f.EXP_Total += f.Reward"]
 #
 暗殺者を退け、将軍を守ることに成功した[p]
 [WSs]
@@ -199,6 +196,6 @@
 ;-------------------------------------------------------------------------------
 *result
 [freeimage layer="0" ]
-[call storage="asset/As_result.ks"]
+[call storage="asset/As_result.ks"][call storage="routin/Rt_dairy.ks"]
 [jump storage="home.ks" target="*home_start"]
 [s]

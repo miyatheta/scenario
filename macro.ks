@@ -107,9 +107,11 @@ if(f.keibi>75){
 }else {
  tf.homesecurity = "将軍警護：ザル (" + f.keibi +")";
 }
+tf.EXPs = "戦功:" + f.EXP + "(/" + f.EXP_Total + ")" ;
 [endscript]
 [ptext layer="0" x="0" y="0" width="1270" text=&tf.txt size="30" color="black" edge="white" bold="bold" align="right" name="calender" overwrite="true" ]
 [ptext layer="0" x="0" y="35" width="1270" text=&tf.homesecurity size="10" color="black" edge="white" bold="bold" align="right" name="homesecurity" overwrite="true" ]
+[ptext layer="0" x="0" y="70" width="1270" text=&tf.EXPs size="10" color="black" edge="white" align="right" name="EXPs" overwrite="true" ]
 [endmacro]
 
 [macro name="Milk"]

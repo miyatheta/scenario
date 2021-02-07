@@ -171,7 +171,7 @@
 [wait time=1000]
 [call storage="battle/Rt_battle_end.ks"]
 [call storage="routin/Rt_setStatus.ks"]
-[call storage="asset/As_result.ks"]
+[call storage="asset/As_result.ks"][call storage="routin/Rt_dairy.ks"]
 [jump storage="data_prison/ushi_torture01.ks"]
 [s]
 
@@ -189,13 +189,12 @@
 [eval exp="f.EXP += f.Reward"]
 [eval exp="f.EXP_Total += f.Reward"]
 #
-無事、要人を守ることが出来た[p]北條家との友好度が上昇した[p]
+無事、要人を守ることが出来た[p]
 [WSs]
 
 ;-------------------------------------------------------------------------------
 *result
 [freeimage layer="0" ]
-[call storage="asset/As_result.ks"]
-
+[call storage="asset/As_result.ks"][call storage="routin/Rt_dairy.ks"]
 [jump storage="home.ks" target="*home_start"]
 [s]

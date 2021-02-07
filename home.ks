@@ -233,51 +233,52 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [s]
 
 *buy_item
-アイテムを購入できます[p]
+備品庫からアイテムを持ち出すことができます[p]
 [glink color="blue" target="*selected_item0" x="450" y="100" width="" height="" text="&f.item[0]['name']" cond="f.item[0]['stock'] != 0"]
-[glink color="red" target="*soldout" x="450" y="100" width="" height="" text="売り切れ" cond="f.item[0]['stock'] == 0"]
+[glink color="red" target="*soldout" x="450" y="100" width="" height="" text="在庫切れ" cond="f.item[0]['stock'] == 0"]
 
 [glink color="blue" target="*selected_item1" x="450" y="180" width="" height="" text="&f.item[1]['name']" cond="f.item[1]['stock'] != 0"]
-[glink color="red" target="*soldout" x="450" y="180" width="" height="" text="売り切れ" cond="f.item[1]['stock'] == 0"]
+[glink color="red" target="*soldout" x="450" y="180" width="" height="" text="在庫切れ" cond="f.item[1]['stock'] == 0"]
 
 [glink color="blue" target="*selected_item2" x="450" y="260" width="" height="" text="&f.item[2]['name']" cond="f.item[2]['stock'] != 0"]
-[glink color="red" target="*soldout" x="450" y="260" width="" height="" text="売り切れ" cond="f.item[2]['stock'] == 0"]
+[glink color="red" target="*soldout" x="450" y="260" width="" height="" text="在庫切れ" cond="f.item[2]['stock'] == 0"]
 
 [glink color="blue" target="*selected_item3" x="450" y="340" width="" height="" text="&f.item[3]['name']" cond="f.item[3]['stock'] != 0"]
-[glink color="red" target="*soldout" x="450" y="340" width="" height="" text="売り切れ" cond="f.item[3]['stock'] == 0"]
+[glink color="red" target="*soldout" x="450" y="340" width="" height="" text="在庫切れ" cond="f.item[3]['stock'] == 0"]
 
 [glink color="blue" target="*selected_item4" x="450" y="420" width="" height="" text="&f.item[4]['name']" cond="f.item[4]['stock'] != 0"]
-[glink color="red" target="*soldout" x="450" y="420" width="" height="" text="売り切れ" cond="f.item[4]['stock'] == 0"]
+[glink color="red" target="*soldout" x="450" y="420" width="" height="" text="在庫切れ" cond="f.item[4]['stock'] == 0"]
 
 [glink color="blue" target="*selected_item5" x="750" y="100" width="" height="" text="&f.item[5]['name']" cond="f.item[5]['stock'] != 0"]
-[glink color="red" target="*soldout" x="750" y="100" width="" height="" text="売り切れ" cond="f.item[5]['stock'] == 0"]
+[glink color="red" target="*soldout" x="750" y="100" width="" height="" text="在庫切れ" cond="f.item[5]['stock'] == 0"]
 
 [glink color="blue" target="*selected_item6" x="750" y="180" width="" height="" text="&f.item[6]['name']" cond="f.item[6]['stock'] != 0"]
-[glink color="red" target="*soldout" x="750" y="180" width="" height="" text="売り切れ" cond="f.item[6]['stock'] == 0"]
+[glink color="red" target="*soldout" x="750" y="180" width="" height="" text="在庫切れ" cond="f.item[6]['stock'] == 0"]
 
 [glink color="blue" target="*selected_item7" x="750" y="260" width="" height="" text="&f.item[7]['name']" cond="f.item[7]['stock'] != 0"]
-[glink color="red" target="*soldout" x="750" y="260" width="" height="" text="売り切れ" cond="f.item[7]['stock'] == 0"]
+[glink color="red" target="*soldout" x="750" y="260" width="" height="" text="在庫切れ" cond="f.item[7]['stock'] == 0"]
 
 [glink color="blue" target="*selected_item8" x="750" y="340" width="" height="" text="&f.item[8]['name']" cond="f.item[8]['stock'] != 0"]
-[glink color="red" target="*soldout" x="750" y="340" width="" height="" text="売り切れ" cond="f.item[8]['stock'] == 0"]
+[glink color="red" target="*soldout" x="750" y="340" width="" height="" text="在庫切れ" cond="f.item[8]['stock'] == 0"]
 
 [glink color="blue" target="*selected_item9" x="750" y="420" width="" height="" text="&f.item[9]['name']" cond="f.item[9]['stock'] != 0"]
-[glink color="red" target="*soldout" x="750" y="420" width="" height="" text="売り切れ" cond="f.item[9]['stock'] == 0"]
+[glink color="red" target="*soldout" x="750" y="420" width="" height="" text="在庫切れ" cond="f.item[9]['stock'] == 0"]
 
 [glink color="black" target="*select_item" x="750" y="500" width="" height="" text="戻る" ]
 [s]
 
 *soldout
-その道具は入荷待ちなんだ。すまんな[p]
+今、この道具は在庫切れね・・・[p]
 [jump target="*select_item"][s]
 
 *inventory_full
-・・・って、持ち物がいっぱいじゃねえかよ[p]
-どうしても必要なら何かを売ってからにしな[p]
+持ち物がいっぱいだったわ[p]
+必要なら持ち物を入れ替えないと[p]
 [jump target="*select_item"][s]
 
 *selected_item0
-まいどあり![p]
+#
+[emb exp="f.item[0]"]を所持品に加えた[p]
 [if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[0]"]
 [elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[0]"]
 [elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[0]"]
@@ -287,7 +288,8 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [jump target="*select_item"][s]
 
 *selected_item1
-まいどあり![p]
+#
+[emb exp="f.item[1]"]を所持品に加えた[p]
 [if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[1]"]
 [elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[1]"]
 [elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[1]"]
@@ -297,7 +299,8 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [jump target="*select_item"][s]
 
 *selected_item2
-まいどあり![p]
+#
+[emb exp="f.item[2]"]を所持品に加えた[p]
 [if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[2]"]
 [elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[2]"]
 [elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[2]"]
@@ -307,7 +310,8 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [jump target="*select_item"][s]
 
 *selected_item3
-まいどあり![p]
+#
+[emb exp="f.item[3]"]を所持品に加えた[p]
 [if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[3]"]
 [elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[3]"]
 [elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[3]"]
@@ -317,7 +321,8 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [jump target="*select_item"][s]
 
 *selected_item4
-まいどあり![p]
+#
+[emb exp="f.item[4]"]を所持品に加えた[p]
 [if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[4]"]
 [elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[4]"]
 [elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[4]"]
@@ -327,7 +332,8 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [jump target="*select_item"][s]
 
 *selected_item5
-まいどあり![p]
+#
+[emb exp="f.item[5]"]を所持品に加えた[p]
 [if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[5]"]
 [elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[5]"]
 [elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[5]"]
@@ -337,7 +343,8 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [jump target="*select_item"][s]
 
 *selected_item6
-まいどあり![p]
+#
+[emb exp="f.item[6]"]を所持品に加えた[p]
 [if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[6]"]
 [elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[6]"]
 [elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[6]"]
@@ -347,7 +354,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [jump target="*select_item"][s]
 
 *selected_item7
-まいどあり![p]
+#
 [if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[7]"]
 [elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[7]"]
 [elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[7]"]
@@ -357,7 +364,8 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [jump target="*select_item"][s]
 
 *selected_item8
-まいどあり![p]
+#
+[emb exp="f.item[8]"]を所持品に加えた[p]
 [if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[8]"]
 [elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[8]"]
 [elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[8]"]
@@ -367,7 +375,8 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [jump target="*select_item"][s]
 
 *selected_item9
-まいどあり![p]
+#
+[emb exp="f.item[9]"]を所持品に加えた[p]
 [if exp="f.inventory1 == null"][eval exp="f.inventory1 = f.item[9]"]
 [elsif exp="f.inventory2 == null"][eval exp="f.inventory2 = f.item[9]"]
 [elsif exp="f.inventory3 == null"][eval exp="f.inventory3 = f.item[9]"]
@@ -381,8 +390,141 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 ;------習得-------------------------------------------------------------------------
 *select_training
 戦功を消費してスキルを習得します[p]
+[glink color="blue" target="*selected_skill0" x="450" y="100" width="" height="" text="&f.skill[0]['name']" cond="f.skill[0]['learn'] == 0"]
+[glink color="red" target="*soldout" x="450" y="100" width="" height="" text="習得済み" cond="f.skill[0]['learn'] != 0"]
 
+[glink color="blue" target="*selected_skill1" x="450" y="180" width="" height="" text="&f.skill[1]['name']" cond="f.skill[1]['learn'] == 0"]
+[glink color="red" target="*soldout" x="450" y="180" width="" height="" text="習得済み" cond="f.skill[1]['learn'] != 0"]
 
+[glink color="blue" target="*selected_skill2" x="450" y="260" width="" height="" text="&f.skill[2]['name']" cond="f.skill[2]['learn'] == 0"]
+[glink color="red" target="*soldout" x="450" y="260" width="" height="" text="習得済み" cond="f.skill[2]['learn'] != 0"]
+
+[glink color="blue" target="*selected_skill3" x="450" y="340" width="" height="" text="&f.skill[3]['name']" cond="f.skill[3]['learn'] == 0"]
+[glink color="red" target="*soldout" x="450" y="340" width="" height="" text="習得済み" cond="f.skill[3]['learn'] != 0"]
+
+[glink color="blue" target="*selected_skill4" x="450" y="420" width="" height="" text="&f.skill[4]['name']" cond="f.skill[4]['learn'] == 0"]
+[glink color="red" target="*soldout" x="450" y="420" width="" height="" text="習得済み" cond="f.skill[4]['learn'] != 0"]
+
+[glink color="blue" target="*selected_skill5" x="450" y="500" width="" height="" text="&f.skill[5]['name']" cond="f.skill[5]['learn'] == 0"]
+[glink color="red" target="*soldout" x="450" y="500" width="" height="" text="習得済み" cond="f.skill[5]['learn'] != 0"]
+
+[glink color="blue" target="*selected_skill6" x="450" y="580" width="" height="" text="&f.skill[6]['name']" cond="f.skill[6]['learn'] == 0"]
+[glink color="red" target="*soldout" x="450" y="580" width="" height="" text="習得済み" cond="f.skill[6]['learn'] != 0"]
+
+[glink color="black" target="*select_menu" x="750" y="100" width="" height="" text="習得を終える"]
+[s]
+
+*selected_skill0
+#
+[emb exp="f.skill[0]['name']"]を習得します（戦功200消費）[p]
+[glink color="blue" target="*learning_skill0" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*select_training" x="450" y="250" width="" height="" text="いいえ" ]
+[s]
+*learning_skill0
+[if exp="f.EXP < 200"]
+戦功が足りません[p]
+[jump target="*select_training"]
+[endif]
+[emb exp="f.skill[0]['name']"]を習得した[p]
+[eval exp="f.skill[0]['learn'] = 1"]
+[eval exp="f.EXP -= 200"]
+[jump target="*select_menu"][s]
+
+*selected_skill1
+#
+[emb exp="f.skill[1]['name']"]を習得します（戦功200消費）[p]
+[glink color="blue" target="*learning_skill1" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*select_training" x="450" y="250" width="" height="" text="いいえ" ]
+[s]
+*learning_skill1
+[if exp="f.EXP < 200"]
+戦功が足りません[p]
+[jump target="*select_training"]
+[endif]
+[emb exp="f.skill[1]['name']"]を習得した[p]
+[eval exp="f.skill[1]['learn'] = 1"]
+[eval exp="f.EXP -= 200"]
+[jump target="*select_menu"][s]
+
+*selected_skill2
+#
+[emb exp="f.skill[2]['name']"]を習得します（戦功200消費）[p]
+[glink color="blue" target="*learning_skill2" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*select_training" x="450" y="250" width="" height="" text="いいえ" ]
+[s]
+*learning_skill2
+[if exp="f.EXP < 200"]
+戦功が足りません[p]
+[jump target="*select_training"]
+[endif]
+[emb exp="f.skill[2]['name']"]を習得した[p]
+[eval exp="f.skill[2]['learn'] = 1"]
+[eval exp="f.EXP -= 200"]
+[jump target="*select_menu"][s]
+
+*selected_skill3
+#
+[emb exp="f.skill[3]['name']"]を習得します（戦功200消費）[p]
+[glink color="blue" target="*learning_skill3" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*select_training" x="450" y="250" width="" height="" text="いいえ" ]
+[s]
+*learning_skill3
+[if exp="f.EXP < 200"]
+戦功が足りません[p]
+[jump target="*select_training"]
+[endif]
+[emb exp="f.skill[3]['name']"]を習得した[p]
+[eval exp="f.skill[3]['learn'] = 1"]
+[eval exp="f.EXP -= 200"]
+[jump target="*select_menu"][s]
+
+*selected_skill4
+#
+[emb exp="f.skill[4]['name']"]を習得します（戦功200消費）[p]
+[glink color="blue" target="*learning_skill4" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*select_training" x="450" y="250" width="" height="" text="いいえ" ]
+[s]
+*learning_skill4
+[if exp="f.EXP < 200"]
+戦功が足りません[p]
+[jump target="*select_training"]
+[endif]
+[emb exp="f.skill[4]['name']"]を習得した[p]
+[eval exp="f.skill[4]['learn'] = 1"]
+[eval exp="f.EXP -= 200"]
+[jump target="*select_menu"][s]
+
+*selected_skill5
+#
+[emb exp="f.skill[5]['name']"]を習得します（戦功200消費）[p]
+[glink color="blue" target="*learning_skill5" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*select_training" x="450" y="250" width="" height="" text="いいえ" ]
+[s]
+*learning_skill5
+[if exp="f.EXP < 200"]
+戦功が足りません[p]
+[jump target="*select_training"]
+[endif]
+[emb exp="f.skill[5]['name']"]を習得した[p]
+[eval exp="f.skill[5]['learn'] = 1"]
+[eval exp="f.EXP -= 200"]
+[jump target="*select_menu"][s]
+
+*selected_skill6
+#
+[emb exp="f.skill[6]['name']"]を習得します（戦功200消費）[p]
+[glink color="blue" target="*learning_skill6" x="450" y="150" width="" height="" text="はい" ]
+[glink color="black" target="*select_training" x="450" y="250" width="" height="" text="いいえ" ]
+[s]
+*learning_skill6
+[if exp="f.EXP < 200"]
+戦功が足りません[p]
+[jump target="*select_training"]
+[endif]
+[emb exp="f.skill[6]['name']"]を習得した[p]
+[eval exp="f.skill[6]['learn'] = 1"]
+[eval exp="f.EXP -= 200"]
+[jump target="*select_menu"][s]
 
 ;------忍務-------------------------------------------------------------------------
 *mission_select1

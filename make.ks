@@ -30,11 +30,22 @@ f.item[1]={name:"治療薬",value:100,stock:1,used:0,cooltime:7};
 f.item[2]={name:"治療薬",value:100,stock:1,used:0,cooltime:7};
 f.item[3]={name:"万能薬",value:100,stock:1,used:0,cooltime:7};
 f.item[4]={name:"鎮静薬",value:100,stock:1,used:0,cooltime:7};
-f.item[5]={name:"神気湯",value:100,stock:1,used:0,cooltime:7};
+f.item[5]={name:"針子道具",value:100,stock:1,used:0,cooltime:7};
 f.item[6]={name:"煙玉",value:100,stock:1,used:0,cooltime:7};
 f.item[7]={name:"旅の御守",value:100,stock:1,used:0,cooltime:7};
 f.item[8]={name:"理力の御守",value:100,stock:1,used:0,cooltime:7};
 f.item[9]={name:"魔除の御守",value:100,stock:1,used:0,cooltime:7};
+[endscript]
+
+[iscript]
+f.skill=[0,1,2,3,4,5,6,7,8,9];
+f.skill[0]={name:"鉄身の術",value:100,learn:0,cooltime:7};
+f.skill[1]={name:"陽炎の術",value:100,learn:0,cooltime:7};
+f.skill[2]={name:"修羅の術",value:100,learn:0,cooltime:7};
+f.skill[3]={name:"練気の術",value:100,learn:0,cooltime:7};
+f.skill[4]={name:"討魔の術",value:100,learn:0,cooltime:7};
+f.skill[5]={name:"交叉法",value:100,learn:0,cooltime:7};
+f.skill[6]={name:"魅了の術",value:100,learn:0,cooltime:7};
 [endscript]
 
 ;[chara_show x="815" y="0" layer="0"]

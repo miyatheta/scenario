@@ -64,9 +64,12 @@ f.tag_item = "*" + f.inventory2['name'];
 鈴耶の欲情が解消した[p]
 [return][s]
 
-*神気湯
-[eval exp="f.MP += 30"][eval exp="f.MP = 100" cond="f.MP > 100"]
-鈴耶の欲情が解消した[p]
+*針子道具
+[if exp="f.dress != 1"][eval exp="f.dress = 1"]
+忍び装束を修繕した[p]
+[else]
+今は使う必要がない[p]
+[endif]
 [return][s]
 
 *煙玉

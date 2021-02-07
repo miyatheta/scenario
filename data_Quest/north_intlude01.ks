@@ -469,7 +469,7 @@
 [eval exp="f.EXP += f.Reward"]
 [eval exp="f.EXP_Total += f.Reward"]
 #
-無事、玄部家から機密文書を盗むことが出来た[p]北條家との友好度が上昇した[p]
+無事、牛蔵家から機密文書を盗むことが出来た[p]
 [jump storage="home.ks" target="*home_start"]
 
 [WSs]
@@ -477,7 +477,7 @@
 ;-------------------------------------------------------------------------------
 *result
 [freeimage layer="0" ]
-[call storage="asset/As_result.ks"]
+[call storage="asset/As_result.ks"][call storage="routin/Rt_dairy.ks"]
 
 [s]
 

@@ -30,6 +30,7 @@ f.skill_03CTtxt = "変わり身の術" + f.skill_03CT;
 [glink color="blue" target="*PL_skill_01" x="450" y="300" width="" height="" text="&f.skill_01CTtxt " ]
 [glink color="blue" target="*PL_skill_02" x="450" y="400" width="" height="" text="&f.skill_02CTtxt" ]
 [glink color="blue" target="*PL_skill_03" x="450" y="500" width="" height="" text="&f.skill_03CTtxt" ]
+;[glink color="blue" target="*PL_skill_04" x="450" y="500" width="" height="" text="" cond="f."]
 [s]
 
 *PL_attack_select

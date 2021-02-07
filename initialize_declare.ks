@@ -23,6 +23,6 @@
 [eval exp="f.keibi = 100"]
 [eval exp="f.satisfy = 0 , f.election = 0 , f.handjob = 1 , f.boobjob = 1 , f.mouthjob = 1"]
 [eval exp="f.rootA = 0,f.rootB = 0,f.rootC = 0"]
-[eval exp="f.EXP = 0 ,f.EXP_Total = 0,f.rootC = 0"]
+[eval exp="f.EXP = 0 ,f.EXP_Total = 0"]
 ;rootA=牛寅、rootB=猿,rootC=蛇
 [return]
