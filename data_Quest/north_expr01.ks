@@ -453,7 +453,8 @@
 [eval exp="f.Reward = 50"]
 [endif]
 
-[eval exp="f.rootA += f.Reward"]
+[eval exp="f.EXP += f.Reward"]
+[eval exp="f.EXP_Total += f.Reward"]
 #
 無事、密書を届けることが出来た[p]北條家との友好度が上昇した[p]
 [WSs]

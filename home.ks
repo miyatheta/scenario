@@ -122,9 +122,10 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 ;------装備-------------------------------------------------------------------------
 *select_preparation
 [call target="*show_status"]
-[glink color="black" target="*select_arms" x="450" y="100" width="" height="" text="武器" ]
-[glink color="black" target="*select_item" x="450" y="340" width="" height="" text="道具" ]
-[glink color="black" target="*select_menu" x="450" y="420" width="" height="" text="戻る" ]
+[glink color="black" target="*select_arms" x="450" y="150" width="" height="" text="装飾" ]
+[glink color="black" target="*select_training" x="450" y="250" width="" height="" text="習得" ]
+[glink color="black" target="*select_item" x="450" y="350" width="" height="" text="道具" ]
+[glink color="black" target="*select_menu" x="450" y="450" width="" height="" text="戻る" ]
 [s]
 
 *select_arms
@@ -376,14 +377,20 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [jump target="*select_item"][s]
 
 [s]
+
+;------習得-------------------------------------------------------------------------
+*select_training
+戦功を消費してスキルを習得します[p]
+
+
+
 ;------忍務-------------------------------------------------------------------------
 *mission_select1
 [freeimage layer=2]
 [iscript]
-tf.north = "北條氏 友好度：" + f.rootA;
-tf.south = "南法氏 友好度：" + f.FP_south;
-tf.east = "西院氏 友好度：" + f.FP_west;
-tf.west = "東堂氏 友好度：" + f.FP_east;
+tf.rootA = "シナリオA：";
+tf.rootB = "シナリオB：";
+tf.rootC = "シナリオC：";
 if(f.keibi>75){
  tf.sexparty = "接待 警備体制：厳重" ;
 }else if(f.keibi>50){
@@ -395,10 +402,9 @@ if(f.keibi>75){
 }
 
 [endscript]
-[glink color="black" target="*mission_region_north" x="450" y="110" width="300" height="30" text="&tf.north" ]
-[glink color="black" target="*mission_region_south" x="450" y="190" width="300" height="30" text="&tf.south" ]
-[glink color="black" target="*mission_region_east" x="450" y="270" width="300" height="30" text="&tf.east" ]
-[glink color="black" target="*mission_region_west" x="450" y="350" width="300" height="30" text="&tf.west" ]
+[glink color="black" target="*mission_region_north" x="450" y="110" width="300" height="30" text="&tf.rootA" ]
+[glink color="black" target="*mission_region_south" x="450" y="190" width="300" height="30" text="&tf.rootB" ]
+[glink color="black" target="*mission_region_east" x="450" y="270" width="300" height="30" text="&tf.rootC" ]
 [glink color="black" target="*select_menu" x="450" y="510" width="300" height="30" text="戻る" ]
 [s]
 

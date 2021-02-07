@@ -466,7 +466,8 @@
 [eval exp="f.Reward = 50"]
 [endif]
 
-[eval exp="f.rootA += f.Reward"]
+[eval exp="f.EXP += f.Reward"]
+[eval exp="f.EXP_Total += f.Reward"]
 #
 無事、玄部家から機密文書を盗むことが出来た[p]北條家との友好度が上昇した[p]
 [jump storage="home.ks" target="*home_start"]

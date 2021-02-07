@@ -474,7 +474,8 @@
 無事確保っと！[p]
 [call storage="routin/Rt_setStatus.ks"][eval exp="f.dress=1"]
 
-[eval exp="f.rootA += f.Reward"]
+[eval exp="f.EXP += f.Reward"]
+[eval exp="f.EXP_Total += f.Reward"]
 #
 無事、密書を奪還することが出来た[p]北條家との友好度が上昇した[p]
 [jump storage="home.ks" target="*home_start"]
