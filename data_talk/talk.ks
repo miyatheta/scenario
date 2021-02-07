@@ -3,22 +3,25 @@
 
 
 *select_event
-[getrand min="1" max="100" var="f.event"]
-[if exp="f.event<=20"]
+[getrand min="1" max="7" var="f.event"]
+[if exp="f.event<=1"]
 [jump target=*talk01]
-
-[elsif exp="f.event<=40"]
-[jump target=*talk01]
-
-[elsif exp="f.event<=60"]
-[jump target=*talk01]
-
-[else][jump target=*talk01]
+[elsif exp="f.event<=2"]
+[jump target=*talk02]
+[elsif exp="f.event<=3"]
+[jump target=*talk03]
+[elsif exp="f.event<=4"]
+[jump target=*talk04]
+[elsif exp="f.event<=5"]
+[jump target=*talk05]
+[elsif exp="f.event<=6"]
+[jump target=*talk06]
+[else][jump target=*talk07]
 [endif]
 
 [s]
 *talk_end
-[jump storage="home.ks" target="*home_start"]
+[jump storage="home.ks" target="*talk_end"]
 [s]
 
 
@@ -30,7 +33,7 @@
 気力は攻撃を敵に当てるか[r]
 攻撃を敵に受けることで獲得できる[r]
 ・・・らしい。[r]
-余にはピンとこないのだがな[p]
+儂にはピンとこないのだがな[p]
 ところで、忍術で炎を出したりはできぬのか？[p]
 #鈴耶
 う〜ん。そういう術もありますけど・・・[p]
@@ -38,38 +41,80 @@
 目立つじゃないですかアレ[p]
 #善照
 そ、そうか・・・（ガッカリ）[p]
-[chara_hide_all]
+[cm][chara_hide_all]
 [jump target="*talk_end"]
 [s]
 
 *talk02
+#鈴耶
+殿？何を見てらっしゃるのですか？[p]
 #善照
+おお、鈴耶[r]
+これは海鹿家の家系図じゃ[p]
+#鈴耶
+また随分と古めかしい…[p]
+#善照
+そうだ！！これこそ海鹿家400年の歴史の証よ！[p]
+#鈴耶
+よ、よんひゃくねん！？[p]
+#善照
+200年ほど前に帝を蔑ろにした当時の幕府を打ち倒し、この都に新しい幕府を開いたのじゃ[p]
+#鈴耶
+はえーーー。凄いですね[r]
+ちなみに殿様のお名前は・・・？[p]
+#善照
+ここだな。[l]将軍は儂で１５代目になる[p]
+#
+[cm][chara_hide_all]
 [jump target="*talk_end"]
 [s]
 
 
 *talk03
+#鈴耶
+殿？どうしたのですか？渋い顔をして[p]
 #善照
+鈴耶か…。[p]
+検非違使からの報告を読んでおったのだ[p]
+近頃は都の中まで魑魅魍魎の目撃が絶えん[p]
+#鈴耶
+都は昔の陰陽師の人が張った結界があるはずですけど[p]
+#善照
+天下の荒れようが許容の域をこえておるのだ[p]
+#
+[cm][chara_hide_all]
 [jump target="*talk_end"]
 [s]
 
 
 *talk04
 #善照
+会話４[p]
+#
+[cm][chara_hide_all]
 [jump target="*talk_end"]
 [s]
 
 *talk05
 #善照
+会話５[p]
+#
+[cm][chara_hide_all]
 [jump target="*talk_end"]
 [s]
 
 *talk06
 #善照
+会話６[p]
+#
+[cm][chara_hide_all]
 [jump target="*talk_end"]
 [s]
 
 *talk07
 #善照
+会話７[p]
+#
+[cm][chara_hide_all]
 [jump target="*talk_end"]
 [s]

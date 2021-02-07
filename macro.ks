@@ -114,6 +114,13 @@ tf.EXPs = "戦功:" + f.EXP + "(/" + f.EXP_Total + ")" ;
 [ptext layer="0" x="0" y="70" width="1270" text=&tf.EXPs size="10" color="black" edge="white" align="right" name="EXPs" overwrite="true" ]
 [endmacro]
 
+[macro name="WriteEXP"]
+[iscript]
+tf.EXPs = "戦功:" + f.EXP + "(/" + f.EXP_Total + ")" ;
+[endscript]
+[ptext layer="0" x="0" y="70" width="1270" text=&tf.EXPs size="10" color="black" edge="white" align="right" name="EXPs" overwrite="true" ]
+[endmacro]
+
 [macro name="Milk"]
 [iscript]
 tf.milktxt = "乳：" + f.milkpoint ;

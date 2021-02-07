@@ -1,4 +1,8 @@
 *home_start
+
+[call storage="data_talk/talk.ks"]
+
+*talk_end
 [clearstack stack="call" ]
 [freeimage layer="0" ]
 [bg storage="syosai1-1080.jpg" time="100"]
@@ -12,7 +16,6 @@
 #鈴耶
 ホーム画面よ[r]
 メニューを選択してね[p]
-
 #
 [cm]
 [call storage="routin/Rt_setStatus.ks"]
@@ -427,7 +430,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [endif]
 [emb exp="f.skill[0]['name']"]を習得した[p]
 [eval exp="f.skill[0]['learn'] = 1"]
-[eval exp="f.EXP -= 200"]
+[eval exp="f.EXP -= 200"][WriteEXP]
 [jump target="*select_menu"][s]
 
 *selected_skill1
@@ -443,7 +446,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [endif]
 [emb exp="f.skill[1]['name']"]を習得した[p]
 [eval exp="f.skill[1]['learn'] = 1"]
-[eval exp="f.EXP -= 200"]
+[eval exp="f.EXP -= 200"][WriteEXP]
 [jump target="*select_menu"][s]
 
 *selected_skill2
@@ -459,7 +462,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [endif]
 [emb exp="f.skill[2]['name']"]を習得した[p]
 [eval exp="f.skill[2]['learn'] = 1"]
-[eval exp="f.EXP -= 200"]
+[eval exp="f.EXP -= 200"][WriteEXP]
 [jump target="*select_menu"][s]
 
 *selected_skill3
@@ -475,7 +478,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [endif]
 [emb exp="f.skill[3]['name']"]を習得した[p]
 [eval exp="f.skill[3]['learn'] = 1"]
-[eval exp="f.EXP -= 200"]
+[eval exp="f.EXP -= 200"][WriteEXP]
 [jump target="*select_menu"][s]
 
 *selected_skill4
@@ -491,7 +494,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [endif]
 [emb exp="f.skill[4]['name']"]を習得した[p]
 [eval exp="f.skill[4]['learn'] = 1"]
-[eval exp="f.EXP -= 200"]
+[eval exp="f.EXP -= 200"][WriteEXP]
 [jump target="*select_menu"][s]
 
 *selected_skill5
@@ -507,7 +510,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [endif]
 [emb exp="f.skill[5]['name']"]を習得した[p]
 [eval exp="f.skill[5]['learn'] = 1"]
-[eval exp="f.EXP -= 200"]
+[eval exp="f.EXP -= 200"][WriteEXP]
 [jump target="*select_menu"][s]
 
 *selected_skill6
@@ -523,7 +526,7 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 [endif]
 [emb exp="f.skill[6]['name']"]を習得した[p]
 [eval exp="f.skill[6]['learn'] = 1"]
-[eval exp="f.EXP -= 200"]
+[eval exp="f.EXP -= 200"][WriteEXP]
 [jump target="*select_menu"][s]
 
 ;------忍務-------------------------------------------------------------------------

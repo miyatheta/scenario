@@ -4,7 +4,7 @@
 [eval exp="f.keibi -= 8"]
 ;アイテムの入荷処理
 [iscript]
-for(i=0,i<=9,i++){
+for(i=0;i<=9;i++){
   if(f.item[i]['used'] > 0){
     f.item[i]['cooltime'] -= 1;
   }
@@ -16,3 +16,5 @@ for(i=0,i<=9,i++){
 }
 [endscript]
 [return]
+dairy終了
+[s]
