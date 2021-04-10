@@ -1,36 +1,36 @@
 *start
 ;状態異常処理
 [if exp="f.poison > 0"]
-毒により鈴耶の体力が減少[p]
+毒により鈴猫の体力が減少[p]
 [eval exp="f.HP -= 5"][eval exp="f.HP = 1" cond="f.HP < 0"][WSs]
 [endif]
 
 [if exp="f.aphrodisy > 0"]
 [eval exp="tf.fuck = f.aphrodisy "]
 [eval exp="tf.fuck = tf.fuck * f.CURSE / 100 + tf.fuck"]
-欲情効果により鈴耶の快感[emb exp="tf.fuck"]が上昇[p]
+欲情効果により鈴猫の快感[emb exp="tf.fuck"]が上昇[p]
 [eval exp="f.ERO = tf.fuck + f.aphrodisy"][eval exp="f.ERO = 999" cond="f.ERO < 1000"][WSs]
 [endif]
 
 ;状態異常終了メッセージ--------------------------------------------------------------
 [if exp="f.poison == 1"]
-鈴耶は毒状態から回復した[p]
+鈴猫は毒状態から回復した[p]
 [eval exp="f.poison = 0"]
 [endif]
 
 [if exp="f.excite == 1"]
-鈴耶は興奮状態から回復した[p]
+鈴猫は興奮状態から回復した[p]
 [eval exp="f.excite = 0"]
 [endif]
 
 [if exp="f.slowly == 1"]
 [eval exp="f.MOVE += 3"][WSs]
-鈴耶は鈍足状態から回復した[p]
+鈴猫は鈍足状態から回復した[p]
 [eval exp="f.slowly = 0"]
 [endif]
 
 ;[if exp="f.aphrodisy == 1"]
-;鈴耶は欲情状態から回復した[p]
+;鈴猫は欲情状態から回復した[p]
 ;[endif]
 
 ;表情変更

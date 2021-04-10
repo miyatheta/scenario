@@ -13,7 +13,7 @@
 [else]
 
 判定失敗[p]
-鈴耶は状態異常『淫乱』になった[p]
+鈴猫は状態異常『淫乱』になった[p]
 [chara_mod name="suzune" face="レイプ目"]
 [eval exp="f.nasty = 1"]
 [WSs]

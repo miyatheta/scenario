@@ -5,7 +5,7 @@
 
 ;PLの行動------------------------------------------------------------------------
 #
-鈴耶の攻撃[r]
+鈴猫の攻撃[r]
 [call storage="battle/PL_battle.ks"]
 [if exp="f.escape > 0"][return][endif]
 
@@ -35,11 +35,11 @@
 [TESTER]
 [if exp="f.target > f.rand"]
 #
-鈴耶は敵の攻撃を回避した[p][AVOID]
+鈴猫は敵の攻撃を回避した[p][AVOID]
 [elsif exp="f.invincible > 0"]
 [call storage="battle/Rt_invincible.ks"]
 [else]
-鈴耶の敏捷が１減少[p]
+鈴猫の敏捷が１減少[p]
 [eval exp="f.SPD = f.SPD - 1"][DAMED]
 [endif]
 [jump target="*Round_end"][s]
@@ -52,13 +52,13 @@
 [TESTER]
 [if exp="f.target > f.rand"]
 #
-鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
+鈴猫は敵の攻撃を回避した[p][AVOID][WSs]
 [elsif exp="f.invincible > 0"]
 [call storage="battle/Rt_invincible.ks"]
 [else]
-触手塊は鈴耶に絡みついた[p]
-触手が鈴耶の胸に吸い付く[p]
-#鈴耶
+触手塊は鈴猫に絡みついた[p]
+触手が鈴猫の胸に吸い付く[p]
+#鈴猫
 ひっ！！[p]
 [eval exp="tf.fuck = 200 "]
 [call storage="bochu/Rt_kaikan.ks" target="*BOOB"]
@@ -67,9 +67,9 @@
 [call storage="bochu/Rt_check_orgasm.ks" target="*orgasm" cond="f.ERO >= 1000"]
 [endif]
 [if exp="f.ERO >= 1000 "]
-;鈴耶は絶頂した[p]
+;鈴猫は絶頂した[p]
 [call storage="bochu/Rt_orgasm.ks"]
-触手塊は絶頂した鈴耶から離れると[r]
+触手塊は絶頂した鈴猫から離れると[r]
 茂みへと姿を消した[p]
 [eval exp="f.en_Name = ''"][WriteEnemy]
 [return][s]

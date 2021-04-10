@@ -49,19 +49,19 @@ f.tag_item = "*" + f.inventory2['name'];
 
 *治療薬
 [eval exp="f.HP += 100"][eval exp="f.HP = 2000" cond="f.HP > 2000"]
-鈴耶の体力が100回復した[p]
+鈴猫の体力が100回復した[p]
 [WSs]
 [return][s]
 
 *万能薬
 [eval exp="f.poison=0, f.slowly=0, f.excite=0, f.closed=0"]
-鈴耶の状態異常が全て解消した[p]
+鈴猫の状態異常が全て解消した[p]
 [WSs]
 [return][s]
 
 *鎮静薬
 [eval exp="f.ERO = 0"]
-鈴耶の欲情が解消した[p]
+鈴猫の欲情が解消した[p]
 [return][s]
 
 *針子道具
@@ -74,7 +74,7 @@ f.tag_item = "*" + f.inventory2['name'];
 
 *煙玉
 [eval exp="f.MP += 30"][eval exp="f.MP = 100" cond="f.MP > 100"]
-鈴耶の欲情が解消した[p]
+鈴猫の欲情が解消した[p]
 [return][s]
 
 *旅の御守

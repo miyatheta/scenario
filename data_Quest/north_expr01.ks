@@ -155,7 +155,7 @@
 [if exp="f.event<40"]
 すらいむが現れた[p]
 [eval exp="f.en_Name = 'すらいむ'"]
-妖怪に遭遇したことで鈴耶の淫気が上昇[p]
+妖怪に遭遇したことで鈴猫の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 20"][WSs]
 [eval exp="f.en_DEX = 30, f.en_HP = 135 , f.type = 2, f.Round = 0"]
 [eval exp="f.EN_SAN= 0 "]
@@ -169,7 +169,7 @@
 [elsif exp="f.event<70"]
 ひとだまが現れた[p]
 [eval exp="f.en_Name = 'ひとだま'"]
-妖怪に遭遇したことで鈴耶の淫気が上昇[p]
+妖怪に遭遇したことで鈴猫の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 30"][WSs]
 [eval exp="f.en_DEX = 30, f.en_HP = 105 , f.type = 2, f.Round = 0"]
 [eval exp="f.EN_SAN= 0 "]
@@ -183,7 +183,7 @@
 [else]
 触手塊が現れた[p]
 [eval exp="f.en_Name = '触手塊'"]
-妖怪に遭遇したことで鈴耶の淫気が上昇[p]
+妖怪に遭遇したことで鈴猫の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 50"][WSs]
 [eval exp="f.en_DEX = 30, f.en_HP = 200 , f.type = 2, f.Round = 0"]
 [eval exp="f.EN_SAN= 0 "]
@@ -424,10 +424,10 @@
 
 ;-------------------------------------------------------------------------------
 *defeat
-#鈴耶
+#鈴猫
 そ、そんな・・・[p]
 #
-鈴耶は気を失った[p]
+鈴猫は気を失った[p]
 [chara_hide name="suzune" time=500]
 [freeimage layer="base" ]
 [wait time=1000]
@@ -439,7 +439,7 @@
 
 ;-------------------------------------------------------------------------------
 *goal
-#鈴耶
+#鈴猫
 [chara_mod name="suzune" face="柔らか" ]
 無事到着っと[p]
 [call storage="routin/Rt_setStatus.ks"][eval exp="f.dress=1"]

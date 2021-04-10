@@ -38,7 +38,7 @@
 *exit
 ;護衛任務用
 [cm]
-#鈴耶
+#鈴猫
 時間稼ぎ達成！ここらでお暇させてもらうわ！！[p]
 [jump target="*goal"]
 
@@ -162,10 +162,10 @@
 
 ;-------------------------------------------------------------------------------
 *defeat
-#鈴耶
+#鈴猫
 そ、そんな・・・[p]
 #
-鈴耶は気を失った[p]
+鈴猫は気を失った[p]
 [chara_hide name="suzune" time=500]
 [freeimage layer="base" ]
 [wait time=1000]
@@ -177,7 +177,7 @@
 
 ;-------------------------------------------------------------------------------
 *goal
-#鈴耶
+#鈴猫
 [chara_mod name="suzune" face="柔らか" ]
 [call storage="routin/Rt_setStatus.ks"][eval exp="f.dress=1"]
 [if exp="f.Qt_n_guard01 != 1"]

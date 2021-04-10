@@ -1,7 +1,7 @@
 *milk
 #
-『爆乳化』していた鈴耶の胸からは母乳が迸った[p]
-#鈴耶
+『爆乳化』していた鈴猫の胸からは母乳が迸った[p]
+#鈴猫
 いやあああああああああっ！！[r]おっぱいでちゃううううっ！！[p]
 [eval exp="tf.fuck_milk = f.milkpoint + 50"]
 [eval exp="tf.fuck_milk = tf.fuck_milk * f.CURSE / 100 + tf.fuck_milk"]

@@ -5,7 +5,7 @@
 
 ;PLの行動------------------------------------------------------------------------
 #
-鈴耶の攻撃[r]
+鈴猫の攻撃[r]
 [call storage="battle/PL_battle.ks"]
 [if exp="f.escape > 0"][return][endif]
 
@@ -34,7 +34,7 @@
 [AVOIDANCE]
 [TESTER]
 [if exp="f.target > f.rand"]
-鈴耶は敵の攻撃を回避した[p][AVOID][WSs]
+鈴猫は敵の攻撃を回避した[p][AVOID][WSs]
 [elsif exp="f.invincible > 0"]
 [call storage="battle/Rt_invincible.ks"]
 [else]

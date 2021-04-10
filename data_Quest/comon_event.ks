@@ -2,7 +2,7 @@
 *heal_potion
 #
 回復薬を見つけた[r]
-鈴耶の体力が回復した[p]
+鈴猫の体力が回復した[p]
 [eval exp="f.HP += 100" ][eval exp="f.HP = 1000" cond="f.HP > 1000"]
 [return]
 [s]
@@ -12,7 +12,7 @@
 通りがかった部屋の中から声がするので覗いてみた[p]
 どうやら重要な話し合いのようだ[r]
 念の為に内容と人相を覚えておくことにした[p]
-鈴耶の集中力が増加した[p]
+鈴猫の集中力が増加した[p]
 [eval exp="f.MND += 1" ][eval exp="f.MND = 5" cond="f.MND > 5"]
 [return]
 [s]
@@ -20,7 +20,7 @@
 *get_fruits
 #
 果物を見つけた[r]
-鈴耶の気力が増加した[p]
+鈴猫の気力が増加した[p]
 [eval exp="f.MP += 10"][eval exp="f.MP = 100" cond="f.MP > 100"]
 [return]
 [s]
@@ -45,7 +45,7 @@
 *spring_water
 #
 湧き水を見つけた[r]
-鈴耶の集中力が増加した[p]
+鈴猫の集中力が増加した[p]
 [eval exp="f.MND += 1" ][eval exp="f.MND = 5" cond="f.MND > 5"]
 [return]
 [s]
@@ -53,7 +53,7 @@
 *stone_statue
 #
 お地蔵様を見つけた[r]
-鈴耶の気力が増加した[p]
+鈴猫の気力が増加した[p]
 [eval exp="f.MP += 10"][eval exp="f.MP = 100" cond="f.MP > 100"]
 [return]
 [s]
@@ -61,7 +61,7 @@
 *healing_herbs
 #
 薬草を見つけた[r]
-鈴耶の体力が回復した[p]
+鈴猫の体力が回復した[p]
 [eval exp="f.HP += 100" ][eval exp="f.HP = 1000" cond="f.HP > 1000"]
 [return]
 [s]
@@ -72,7 +72,7 @@
 #
 通りがかった部屋の中から声がするので覗いてみた[p]
 しかし、誰もいなかった[r]背筋がゾクッとした[p]
-鈴耶の気力が減少した[p]
+鈴猫の気力が減少した[p]
 [eval exp="f.MP -= 10" ][eval exp="f.MP = 0" cond="f.MP < 0"][WSs]
 [return]
 [s]
@@ -81,7 +81,7 @@
 #
 通りがかった部屋の中から声がするので覗いてみた[p]
 荒縄で縛られた全裸の男が女中に踏まれている[p]
-鈴耶の気力が減少した[p]
+鈴猫の気力が減少した[p]
 [eval exp="f.MP -= 10" ][eval exp="f.MP = 0" cond="f.MP < 0"][WSs]
 [return]
 [s]
@@ -97,7 +97,7 @@
 *torimochi
 #
 トリモチに足を取られた[p]
-鈴耶は鈍足状態になった[r]一時的に移動力が低下した[p]
+鈴猫は鈍足状態になった[r]一時的に移動力が低下した[p]
 [if exp="f.slowly == 0"]
 ;効果は重複しないのでf.slowly == 0のときだけ減算する
 [eval exp="f.MOVE -= 3"][eval exp="f.MOVE = 1" cond="f.MOVE < 1"]
@@ -118,7 +118,7 @@
 #
 通りがかった部屋の中から声がするので覗いてみた[p]
 女中と侍が情事の最中だった[p]
-鈴耶は興奮状態になった[r]一時的に快感が減少しなくなった[p]
+鈴猫は興奮状態になった[r]一時的に快感が減少しなくなった[p]
 [eval exp="f.excite = 5" ][eval exp="f.excite = 5" cond="f.excite > 5"][WSs]
 [return]
 [s]
@@ -162,7 +162,7 @@
 #
 動く影を見つけた[l][r]
 影はこちらを見るとニタリと笑って消えた[p]
-鈴耶の気力が減少した[p]
+鈴猫の気力が減少した[p]
 [eval exp="f.MP -= 15" ][eval exp="f.MP = 0" cond="f.MP < 0"][WSs]
 [return]
 [s]

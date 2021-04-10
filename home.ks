@@ -1,8 +1,4 @@
 *home_start
-
-[call storage="data_talk/talk.ks"]
-
-*talk_end
 [clearstack stack="call" ]
 [freeimage layer="0" ]
 [bg storage="syosai1-1080.jpg" time="100"]
@@ -13,7 +9,7 @@
 @layopt layer=2 visible=true
 [WriteDate][WSs]
 
-#鈴耶
+#鈴猫
 ホーム画面よ[r]
 メニューを選択してね[p]
 #
@@ -26,10 +22,9 @@
 *select_menu
 [call target="*show_status"]
 [chara_show name="suzune" fase="普通" left="-100" top="-20"]
-[glink color="black" target="*mission_select1" x="450" y="100" width="" height="" text="忍務" ]
+[glink color="black" target="*mission_select1" x="450" y="100" width="" height="" text="出立" ]
 [glink color="black" target="*select_preparation" x="450" y="200" width="" height="" text="準備" ]
 [glink color="black" target="*select_holiday" x="450" y="300" width="" height="" text="休息" ]
-[glink color="black" target="*mission_sexparty" x="450" y="400" width="" height="" text="夜伽" ]
 [s]
 
 ;------管理-------------------------------------------------------------------------
@@ -532,99 +527,3 @@ if(f.tatoo > 0){tf.vital2 = tf.vital2 + "淫紋";}
 ;------忍務-------------------------------------------------------------------------
 *mission_select1
 [freeimage layer=2]
-[iscript]
-tf.rootA = "シナリオA：";
-tf.rootB = "シナリオB：";
-tf.rootC = "シナリオC：";
-if(f.keibi>75){
- tf.sexparty = "接待 警備体制：厳重" ;
-}else if(f.keibi>50){
- tf.sexparty = "接待 警備体制：普通" ;
-}else if(f.keibi>25){
- tf.sexparty = "接待 警備体制：緩い" ;
-}else {
- tf.sexparty = "接待 警備体制：ザル" ;
-}
-
-[endscript]
-[glink color="black" target="*mission_region_north" x="450" y="110" width="300" height="30" text="&tf.rootA" ]
-[glink color="black" target="*mission_region_south" x="450" y="190" width="300" height="30" text="&tf.rootB" ]
-[glink color="black" target="*mission_region_east" x="450" y="270" width="300" height="30" text="&tf.rootC" ]
-[glink color="black" target="*select_menu" x="450" y="510" width="300" height="30" text="戻る" ]
-[s]
-
-*mission_region_north
-[glink color="black" target="*mission_north_expr01" x="450" y="110" width="" height="" text="密書（丑ノ国・序）" ]
-[glink color="black" target="*mission_north_guard01" x="450" y="190" width="" height="" text="護衛（丑ノ国・序）" cond="f.Qt_n_expr01 >= 1"]
-[glink color="black" target="*mission_intrude_ushi01" x="450" y="270" width="" height="" text="潜入（丑ノ国・序）" cond="f.Qt_n_guard01 >= 1"]
-[glink color="black" target="*mission_trace_ushi01" x="450" y="350" width="" height="" text="追跡（丑ノ国・序）" ]
-[glink color="black" target="*mission_undercover_ushi01" x="450" y="430" width="" height="" text="合戦（丑ノ国・序）" ]
-[s]
-
-*mission_region_south
-[glink color="black" target="*mission_express_saru01" x="450" y="150" width="" height="" text="密書配達（申ノ国・序）" ]
-[glink color="black" target="*mission_north_guard01" x="450" y="250" width="" height="" text="護衛（丑ノ国・序）" ]
-[glink color="black" target="*mission_intrude_ushi01" x="450" y="350" width="" height="" text="潜入（丑ノ国・序）" ]
-[glink color="black" target="*mission_trace_ushi01" x="450" y="450" width="" height="" text="追跡（丑ノ国・序）" ]
-[glink color="black" target="*mission_undercover_ushi01" x="450" y="550" width="" height="" text="破壊（丑ノ国・序）" ]
-[s]
-
-*mission_region_east
-[glink color="black" target="*mission_express_hebi01" x="450" y="150" width="" height="" text="密書配達（巳ノ国・序）" ]
-[glink color="black" target="*mission_north_guard01" x="450" y="250" width="" height="" text="護衛（丑ノ国・序）" ]
-[glink color="black" target="*mission_intrude_ushi01" x="450" y="350" width="" height="" text="潜入（丑ノ国・序）" ]
-[glink color="black" target="*mission_trace_ushi01" x="450" y="450" width="" height="" text="追跡（丑ノ国・序）" ]
-[glink color="black" target="*mission_undercover_ushi01" x="450" y="550" width="" height="" text="破壊（丑ノ国・序）" ]
-[s]
-
-*mission_region_west
-[glink color="black" target="*mission_express_tori01" x="450" y="150" width="" height="" text="密書配達（酉ノ国・序）" ]
-[glink color="black" target="*mission_north_guard01" x="450" y="250" width="" height="" text="護衛（丑ノ国・序）" ]
-[glink color="black" target="*mission_intrude_ushi01" x="450" y="350" width="" height="" text="潜入（丑ノ国・序）" ]
-[glink color="black" target="*mission_trace_ushi01" x="450" y="450" width="" height="" text="追跡（丑ノ国・序）" ]
-[glink color="black" target="*mission_undercover_ushi01" x="450" y="550" width="" height="" text="破壊（丑ノ国・序）" ]
-[s]
-
-;-----丑ノ国
-*mission_north_expr01
-[glink color="black" storage="data_story/St_north_expr01.ks"  x="450" y="150" width="" height="" text="はい" ]
-[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
-[s]
-
-*mission_north_guard01
-[glink color="black" storage="data_story/St_north_guard01.ks" x="450" y="150" width="" height="" text="はい" ]
-[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
-[s]
-
-*mission_intrude_ushi01
-[glink color="black" storage="data_story/St_north_intrude01.ks" x="450" y="150" width="" height="" text="はい" ]
-[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
-[s]
-
-*mission_trace_ushi01
-[glink color="black" storage="data_story/St_north_trace01.ks" x="450" y="150" width="" height="" text="はい" ]
-[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
-[s]
-
-*mission_assasin_ushi01
-[glink color="black" storage="data_story/St_north_expr01.ks" x="450" y="150" width="" height="" text="はい" ]
-[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
-[s]
-
-;-----申ノ国
-*mission_express_saru01
-[glink color="black" storage="data_Quest/north_expr01.ks" x="450" y="150" width="" height="" text="はい" ]
-[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
-[s]
-
-;-----巳ノ国
-*mission_express_hebi01
-[glink color="black" storage="data_Quest/north_expr01.ks" x="450" y="150" width="" height="" text="はい" ]
-[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
-[s]
-
-;-----酉ノ国
-*mission_express_tori01
-[glink color="black" storage="data_Quest/north_expr01.ks" x="450" y="150" width="" height="" text="はい" ]
-[glink color="black" target="*mission_select1" x="450" y="250" width="" height="" text="もどる" ]
-[s]

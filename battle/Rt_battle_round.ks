@@ -8,8 +8,8 @@
 
 [if exp="f.ambush > 0"]
 #
-鈴耶の不意打ち[r]
-鈴耶の集中力が上昇[p]
+鈴猫の不意打ち[r]
+鈴猫の集中力が上昇[p]
 [eval exp="f.MND += 1 , f.ambush = 0"][WSs]
 [endif]
 
@@ -48,14 +48,14 @@
 ;-------------------------------------------------------------------------------
 *battle_round_end
 [if exp="f.poison > 0"]
-毒により鈴耶の体力が減少[p]
+毒により鈴猫の体力が減少[p]
 [eval exp="f.HP -= 10"][eval exp="f.HP = 1" cond="f.HP < 0"][WSs]
 [endif]
 
 [if exp="f.aphrodisy > 0"]
 [eval exp="tf.fuck = f.aphrodisy "]
 [eval exp="tf.fuck = tf.fuck * f.CURSE / 100 + tf.fuck"]
-欲情効果により鈴耶の快感[emb exp="tf.fuck"]が上昇[p]
+欲情効果により鈴猫の快感[emb exp="tf.fuck"]が上昇[p]
 [eval exp="f.ERO = tf.fuck + f.aphrodisy"][eval exp="f.ERO = 999" cond="f.ERO < 1000"][WSs]
 [endif]
 

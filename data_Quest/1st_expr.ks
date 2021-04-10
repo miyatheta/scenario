@@ -129,11 +129,11 @@
 
 *tutorial_event4
 すらいむ（水蛭子）が現れた[p]
-#鈴耶
+#鈴猫
 妖怪！？[p]
 [eval exp="f.en_Name = 'すらいむ'"]
 #
-妖怪系の敵に遭遇すると妖怪の瘴気に当てられた鈴耶の淫気が上昇します[p]
+妖怪系の敵に遭遇すると妖怪の瘴気に当てられた鈴猫の淫気が上昇します[p]
 淫気が上昇すると敵やイベントで受ける快感が増加します[p]
 [eval exp="f.CURSE = f.CURSE + 20"][WSs]
 [eval exp="f.en_DEX = 30, f.en_HP = 135 , f.type = 2, f.Round = 0"]
@@ -147,10 +147,10 @@
 
 *tutorial_battle_end2
 [call storage="battle/Rt_battle_end.ks"]
-#鈴耶
+#鈴猫
 （山奥でも妖怪と出会うことなんてほとんどなかったのに・・・）[p]
 （世の乱れが、人々の負の心が妖怪たちを生み出しているのね・・・）[p]
-殿・・・。鈴耶は必ず忍務を果たしてみせます！[p]
+殿・・・。鈴猫は必ず忍務を果たしてみせます！[p]
 [cm]
 ;-------------------------------------------------------------------------------
 
@@ -301,7 +301,7 @@
 [if exp="f.event<40"]
 すらいむが現れた[p]
 [eval exp="f.en_Name = 'すらいむ'"]
-妖怪に遭遇したことで鈴耶の淫気が上昇[p]
+妖怪に遭遇したことで鈴猫の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 20"][WSs]
 [eval exp="f.en_DEX = 30, f.en_HP = 135 , f.type = 2, f.Round = 0"]
 [eval exp="f.EN_SAN= 0 "]
@@ -315,7 +315,7 @@
 [elsif exp="f.event<70"]
 ひとだまが現れた[p]
 [eval exp="f.en_Name = 'ひとだま'"]
-妖怪に遭遇したことで鈴耶の淫気が上昇[p]
+妖怪に遭遇したことで鈴猫の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 30"][WSs]
 [eval exp="f.en_DEX = 30, f.en_HP = 105 , f.type = 2, f.Round = 0"]
 [eval exp="f.EN_SAN= 0 "]
@@ -329,7 +329,7 @@
 [else]
 触手塊が現れた[p]
 [eval exp="f.en_Name = '触手塊'"]
-妖怪に遭遇したことで鈴耶の淫気が上昇[p]
+妖怪に遭遇したことで鈴猫の淫気が上昇[p]
 [eval exp="f.CURSE = f.CURSE + 50"][WSs]
 [eval exp="f.en_DEX = 30, f.en_HP = 200 , f.type = 2, f.Round = 0"]
 [eval exp="f.EN_SAN= 0 "]
@@ -570,10 +570,10 @@
 
 ;-------------------------------------------------------------------------------
 *defeat
-#鈴耶
+#鈴猫
 そ、そんな・・・[p]
 #
-鈴耶は気を失った[p]
+鈴猫は気を失った[p]
 [chara_hide name="suzune" time=500]
 [freeimage layer="base" ]
 [wait time=1000]
@@ -585,7 +585,7 @@
 
 ;-------------------------------------------------------------------------------
 *goal
-#鈴耶
+#鈴猫
 [chara_mod name="suzune" face="柔らか" ]
 無事到着っと[p]
 [call storage="routin/Rt_setStatus.ks"][eval exp="f.dress=1"]

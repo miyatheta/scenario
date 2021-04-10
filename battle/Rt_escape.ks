@@ -1,4 +1,4 @@
-鈴耶は逃走した（20後退）[p]
+鈴猫は逃走した（20後退）[p]
 [call storage="battle/Rt_battle_end.ks"]
 [eval exp="f.escape = 0"]
 [eval exp="f.progress -= 20" cond="f.Quest_type!=3"]
