@@ -510,7 +510,7 @@ f.Deck.splice(0,5);
 [s]
 
 *バースト
-敵の攻撃[p]
+敵の攻撃[r]
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.rand < 80"]
 敵は鈴猫を拘束した[p]
@@ -614,7 +614,7 @@ f.Deck.splice(0,5);
 [eval exp="f.En_BIND -= 20"]
 拘束力が20減少[p]
 上限値が＋１された[p]
-[status_update]
+[show_bind][status_update]
 [eval exp="f.Limit += 1"]
 [jump target="*脱出判定" cond="f.En_BIND <= 0"]
 ;上限値
@@ -632,7 +632,7 @@ f.Deck.splice(0,5);
 鈴猫は２０の快感を受けた[p]
 [else]
 [eval exp="f.HP -= 10"]
-敵の攻撃[p]
+敵の攻撃[r]
 １０のダメージを受けた[p]
 [status_update]
 [endif]
@@ -666,7 +666,7 @@ f.Deck.splice(0,5);
 [eval exp="f.En_BIND -= 20"]
 拘束力が20減少[p]
 上限値が＋１された[p]
-[status_update]
+[show_bind][status_update]
 [eval exp="f.Limit += 1"]
 [jump target="*脱出判定" cond="f.En_BIND <= 0"]
 ;上限値
@@ -684,7 +684,7 @@ f.Deck.splice(0,5);
 鈴猫は２０の快感を受けた[p]
 [else]
 [eval exp="f.HP -= 10"]
-敵の攻撃[p]
+敵の攻撃[r]
 １０のダメージを受けた[p]
 [status_update]
 [endif]
@@ -717,7 +717,7 @@ f.Deck.splice(0,5);
 [eval exp="f.En_BIND -= 20"]
 拘束力が20減少[p]
 上限値が＋１された[p]
-[status_update]
+[show_bind][status_update]
 [eval exp="f.Limit += 1"]
 [jump target="*脱出判定" cond="f.En_BIND <= 0"]
 ;上限値
@@ -735,7 +735,7 @@ f.Deck.splice(0,5);
 鈴猫は２０の快感を受けた[p]
 [else]
 [eval exp="f.HP -= 10"]
-敵の攻撃[p]
+敵の攻撃[r]
 １０のダメージを受けた[p]
 [status_update]
 [endif]
