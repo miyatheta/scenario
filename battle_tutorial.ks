@@ -161,11 +161,11 @@ f.Bind_ptxt = "拘束力:" + f.Bind ;
 [ptext layer="3" x="410" y="220" text=&f.Draw3_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Draw3" overwrite="true"]
 [ptext layer="3" x="410" y="260" text=&f.Draw4_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Draw4" overwrite="true"]
 [ptext layer="3" x="410" y="300" text=&f.Draw5_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Draw5" overwrite="true"]
-[ptext layer="3" x="450" y="50" text=&f.Bind_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Bind" overwrite="true" cond="f.Bind > 0"]
+[ptext layer="3" x="450" y="50" text=&f.Bind_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Bind" overwrite="true" cond="f.Rt_Bind > 0"]
 [endmacro]
 ;ラウンド終了時に表示をリブレッシュ
 [macro name="reflesh_score"]
-[eval exp="f.En_DEF='' ,f.comand='' ,f.Target='' ,f.Limit='' ,f.Total='' ,f.Bind = 0"]
+[eval exp="f.En_DEF='' ,f.comand='' ,f.Target='' ,f.Limit='' ,f.Total='' "]
 [eval exp="f.Draw1_txt='' ,f.Draw2_txt='' ,f.Draw3_txt='' ,f.Draw4_txt='' ,f.Draw5_txt=''"]
 [eval exp="f.ATP_red = 0 ,f.RES_green = 0 "]
 [show_score]
@@ -176,10 +176,18 @@ f.Bind_ptxt = "拘束力:" + f.Bind ;
 [iscript]
 f.HP_ptxt = "体力:" + f.HP ;
 f.MP_ptxt = "気力:" + f.MP ;
+f.ERO_ptxt = "快感:" + f.ERO ;
 f.En_HP_ptxt = "体力:" + f.En_HP ;
+if(f.orgasm>0){
+  f.orgasm_ptxt = "絶頂状態" + f.Rt_orgasm;
+}else{
+  f.orgasm_ptxt = "";
+}
 [endscript]
-[ptext layer="0" x="10" y="650" text=&f.HP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="HP" overwrite="true" ]
-[ptext layer="0" x="10" y="680" text=&f.MP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="MP" overwrite="true" ]
+[ptext layer="0" x="10" y="620" text=&f.HP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="HP" overwrite="true" ]
+[ptext layer="0" x="10" y="650" text=&f.MP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="MP" overwrite="true" ]
+[ptext layer="0" x="10" y="680" text=&f.ERO_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="ERO" overwrite="true" ]
+[ptext layer="0" x="150" y="10" text=&f.orgasm_ptxt size="40" color="0xff1493" edge="white" bold="bold" align="left" name="orgasm" overwrite="true" ]
 [ptext layer="0" x="900" y="10" text=&f.En_HP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_HP" overwrite="true" ]
 [endmacro]
 ;--------------------------------------------------------------------------------
@@ -192,9 +200,9 @@ f.En_HP_ptxt = "体力:" + f.En_HP ;
 ;--------------------------------------------------------------------------------
 #
 戦闘開始[p]
-[eval exp="f.comand='' ,f.Target='' ,f.Limit='' ,f.Total='' ,f.Bind = 0"]
+[eval exp="f.comand='' ,f.Target='' ,f.Limit='' ,f.Total='' ,f.Bind = 0 ,f.Rt_Bind = 0"]
 [eval exp="f.Draw1_txt='' ,f.Draw2_txt='' ,f.Draw3_txt='' ,f.Draw4_txt='' ,f.Draw5_txt=''"]
-[eval exp="f.HP = 2000 , f.MP = 0 "]
+[eval exp="f.HP = 2000 , f.MP = 0 , f.SAN = 60 , f.orgasm = 0"]
 [eval exp="f.ATP = 50 , f.ATP_red = 0 , f.RES = 40 , f.RES_green = 0 "]
 [eval exp="f.En_HP = 10000 ,f.En_DEF='' "]
 [eval exp="f.round=0"]
@@ -334,7 +342,7 @@ f.Deck.splice(0,5);
 [if exp="f.round < 2"]装備の投擲武器による攻撃を行います[p]
 [endif]
 通常攻撃[p]
-[eval exp="f.damage = (f.ATP + f.ATP_red)"]
+[eval exp="f.damage = (f.ATP + f.ATP_red) - (f.orgasm * 30)"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた[p]
 [update_status]
@@ -343,7 +351,7 @@ f.Deck.splice(0,5);
 *敵攻撃１
 敵の攻撃！[p]
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < (f.RES + f.RES_green)"]
+[if exp="f.rand < (f.RES + f.RES_green) - (f.orgasm * 30)"]
 鈴猫は敵の攻撃を回避した[p]
 [jump target="*ドロー３"]
 [endif]
@@ -357,8 +365,8 @@ f.Deck.splice(0,5);
 敵のスキル使用[r]
 「守備体勢」[r]
 敵の守備力が＋１された[p]
+[eval exp="f.En_DEF++"]
 [show_score]
-[eval exp="f.Target++ , f.En_DEF++"]
 [elsif exp="f.En_DEF <= 13"]
 [eval exp="f.HP -= 100"]
 １００のダメージを受けた[p]
@@ -415,7 +423,7 @@ f.Deck.splice(0,5);
 
 *通常攻撃２
 通常攻撃[p]
-[eval exp="f.damage = (f.ATP + f.ATP_red)"]
+[eval exp="f.damage = (f.ATP + f.ATP_red) - (f.orgasm * 30)"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた[p]
 [update_status]
@@ -424,7 +432,7 @@ f.Deck.splice(0,5);
 *敵攻撃２
 敵の攻撃！[p]
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < (f.RES + f.RES_green)"]
+[if exp="f.rand < (f.RES + f.RES_green) - (f.orgasm * 30)"]
 鈴猫は敵の攻撃を回避した[p]
 [jump target="*ドロー４"]
 [endif]
@@ -438,7 +446,7 @@ f.Deck.splice(0,5);
 敵のスキル使用[r]
 「守備体勢」[r]
 敵の守備力が＋１された[p]
-[eval exp="f.Target++ , f.En_DEF++"]
+[eval exp="f.En_DEF++"]
 [elsif exp="f.En_DEF <= 13"]
 [eval exp="f.HP -= 100"]
 １００のダメージを受けた[p]
@@ -494,7 +502,7 @@ f.Deck.splice(0,5);
 
 *通常攻撃３
 通常攻撃[p]
-[eval exp="f.damage = (f.ATP + f.ATP_red)"]
+[eval exp="f.damage = (f.ATP + f.ATP_red) - (f.orgasm * 30)"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた[p]
 [update_status]
@@ -503,7 +511,7 @@ f.Deck.splice(0,5);
 *敵攻撃３
 敵の攻撃！[p]
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < (f.RES + f.RES_green)"]
+[if exp="f.rand < (f.RES + f.RES_green) - (f.orgasm * 30)"]
 鈴猫は敵の攻撃を回避した[p]
 [jump target="*ドロー５"]
 [endif]
@@ -517,7 +525,7 @@ f.Deck.splice(0,5);
 敵のスキル使用[r]
 「守備体勢」[r]
 敵の守備力が＋１された[p]
-[eval exp="f.Target++ , f.En_DEF++"]
+[eval exp="f.En_DEF++"]
 [elsif exp="f.En_DEF <= 13"]
 [eval exp="f.HP -= 100"]
 １００のダメージを受けた[p]
@@ -584,7 +592,7 @@ f.Deck.splice(0,5);
 
 *コマンド３
 鈴猫の拳[r]
-[eval exp="f.damage = (2 * f.ATP + f.ATP_red)"]
+[eval exp="f.damage = (2 * f.ATP + f.ATP_red) - (f.orgasm * 50)"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた[p]
 [update_status]
@@ -593,7 +601,7 @@ f.Deck.splice(0,5);
 [s]
 *コマンド４
 鈴猫の下段蹴り[r]
-[eval exp="f.damage = (4 * f.ATP + f.ATP_red)"]
+[eval exp="f.damage = (4 * f.ATP + f.ATP_red) - (f.orgasm * 100)"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた[p]
 [update_status]
@@ -602,7 +610,7 @@ f.Deck.splice(0,5);
 [s]
 *コマンド５
 鈴猫の回し蹴り[r]
-[eval exp="f.damage = (6 * f.ATP + f.ATP_red)"]
+[eval exp="f.damage = (6 * f.ATP + f.ATP_red) - (f.orgasm * 150)"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた[p]
 [update_status]
@@ -611,7 +619,7 @@ f.Deck.splice(0,5);
 [s]
 *コマンド６
 鈴猫の踵落とし[r]
-[eval exp="f.damage =  (8 * f.ATP + f.ATP_red)"]
+[eval exp="f.damage =  (8 * f.ATP + f.ATP_red) - (f.orgasm * 200)"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた[p]
 [update_status]
@@ -620,7 +628,7 @@ f.Deck.splice(0,5);
 [s]
 *コマンド７
 鈴猫の飛び蹴り[r]
-[eval exp="f.damage = (10 * f.ATP + f.ATP_red)"]
+[eval exp="f.damage = (10 * f.ATP + f.ATP_red) - (f.orgasm * 250)"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた[p]
 [update_status]
@@ -647,6 +655,11 @@ f.Deck.splice(0,5);
 今回、使用した札は[emb exp="f.Cards[f.Hand[0]]['txt']"]、
 [emb exp="f.Cards[f.Hand[1]]['txt']"]、[emb exp="f.Cards[f.Hand[2]]['txt']"]、
 [emb exp="f.Cards[f.Hand[3]]['txt']"]、[emb exp="f.Cards[f.Hand[4]]['txt']"]です[p]
+[if exp="f.Rt_orgasm ==1"]
+[eval exp="f.Rt_orgasm = 0 , f.orgasm = 0"]
+[elsif exp="f.Rt_orgasm ==2"]
+[eval exp="f.Rt_orgasm--"]
+[endif]
 [DeActivate]
 [reflesh_score]
 [ReShuffle]
@@ -664,47 +677,60 @@ f.Deck.splice(0,5);
 
 ;拘束された-------------------------------------------------------------------------------
 *拘束開始
+[DeActivate]
+[reflesh_score]
+[ReShuffle]
+[eval exp="f.Bind = 200 ,f.Rt_Bind = 1"]
 [show_score]
-[eval exp="f.Bind = 200 "]
+#鈴猫
+この！離しなさいよ！！[p]
+#
 
 *拘束ラウンド開始
+[getrand min="1" max="100" var="f.rand"]
+[if exp="f.rand<33"]
+[eval exp="f.En_DEF = 15"]
+[elsif exp="f.rand<66"]
+[eval exp="f.En_DEF = 14"]
+[else]
+[eval exp="f.En_DEF = 13"]
+[endif]
 [show_score]
-[eval exp="f.En_DEF = 15 "]
 [show_score]
 ;手札作成
 [eval exp="f.Hand=[f.Deck[0],f.Deck[1],f.Deck[2],f.Deck[3],f.Deck[4]]"]
 [iscript]
 f.Deck.splice(0,5);
 [endscript]
-#鈴猫
-この！離しなさいよ！！[p]
-#
+
 *拘束ドロー１
-[glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw1=f.Hand[0],f.Cards[f.Hand[0]]['active']=0" cond="f.Cards[f.Hand[0]]['active']>0" target="*抵抗コマンド選択" ]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー１" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー１" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー１" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー１" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw1=f.Hand[0],f.Cards[f.Hand[0]]['active']=0" cond="f.Cards[f.Hand[0]]['active']>0" target="*抵抗コマンド選択" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー１" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー１" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー１" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー１" ]
 [s]
 *抵抗コマンド選択
 [eval exp="f.Total = 0 + f.Cards[f.Draw1]['value']"]
+[eval exp="f.Draw1_txt = f.Cards[f.Draw1]['txt'] "]
 [show_score]
 コマンドを選択してください[p]
-[glink color="blue" x="550" y="350" text="暴れる(6)" exp="f.comand=6" target="*拘束ドロー２" ]
-[glink color="blue" x="550" y="400" text="噛みつき(7)" exp="f.comand=7" target="*拘束ドロー２" ]
-[glink color="blue" x="550" y="450" text="頭突(8)" exp="f.comand=8" target="*拘束ドロー２" ]
-[glink color="blue" x="550" y="500" text="金的(9)" exp="f.comand=9" target="*拘束ドロー２" ]
+[glink color="gray" x="550" y="350" text="暴れる(6)" exp="f.comand=6" target="*拘束ドロー２" ]
+[glink color="gray" x="550" y="400" text="噛みつき(7)" exp="f.comand=7" target="*拘束ドロー２" ]
+[glink color="gray" x="550" y="450" text="頭突(8)" exp="f.comand=8" target="*拘束ドロー２" ]
+[glink color="gray" x="550" y="500" text="金的(9)" exp="f.comand=9" target="*拘束ドロー２" ]
 [s]
 *拘束ドロー２
 [eval exp="f.Limit=21"][show_score]
 ２枚目のカードを選択してください[p]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw2=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー２完了" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw2=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー２完了" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw2=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー２完了" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw2=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー２完了" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw2=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー２完了" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw2=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー２完了" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw2=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー２完了" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw2=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー２完了" ]
 [s]
 *拘束ドロー２完了
 [eval exp="f.Total = f.Total + f.Cards[f.Draw2]['value']"]
+[eval exp="f.Draw2_txt = f.Cards[f.Draw2]['txt'] "]
 [show_score]
 *拘束判定１
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
@@ -722,11 +748,11 @@ f.Deck.splice(0,5);
 #
 鈴猫は拘束を振りほどこうともがいた[p]
 [eval exp="f.Bind -= 20"]
-拘束力が20減少[p]
-上限値が＋１された[p]
+拘束力が20減少[r]
+守備力が-１された[p]
+[eval exp="f.En_DEF-- "]
 [show_score][update_status]
-[eval exp="f.Limit += 1"]
-[jump target="*脱出判定" cond="f.Bind <= 0"]
+[jump target="*拘束脱出" cond="f.Bind <= 0"]
 [show_score]
 
 *敵拘束攻撃１
@@ -739,23 +765,26 @@ f.Deck.splice(0,5);
 #鈴猫
 あんっ！！[p]
 #
-鈴猫は２０の快感を受けた[p]
+鈴猫は１０の快感を受けた[p]
+[eval exp="f.ERO += 10"][call target="*絶頂" cond="f.ERO >= 100"]
+[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [else]
-[eval exp="f.HP -= 10"]
 敵の攻撃[r]
 １０のダメージを受けた[p]
-[update_status]
+[eval exp="f.HP -= 10"]
 [endif]
+[update_status]
 
 *敵拘束ドロー３
 ３枚目のカードを選択してください[p]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw3=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー３完了" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw3=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー３完了" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw3=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー３完了" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw3=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー３完了" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw3=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー３完了" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw3=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー３完了" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw3=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー３完了" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw3=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー３完了" ]
 [s]
 *拘束ドロー３完了
 [eval exp="f.Total = f.Total + f.Cards[f.Draw3]['value']"]
+[eval exp="f.Draw3_txt = f.Cards[f.Draw3]['txt'] "]
 [show_score]
 *拘束判定２
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
@@ -772,11 +801,11 @@ f.Deck.splice(0,5);
 *抵抗攻撃２
 鈴猫は拘束を振りほどこうともがいた[p]
 [eval exp="f.Bind -= 20"]
-拘束力が20減少[p]
-上限値が＋１された[p]
+拘束力が20減少[r]
+守備力が-１された[p]
+[eval exp="f.En_DEF-- "]
 [show_score][update_status]
-[eval exp="f.Limit += 1"]
-[jump target="*脱出判定" cond="f.Bind <= 0"]
+[jump target="*拘束脱出" cond="f.Bind <= 0"]
 [show_score]
 
 *敵拘束攻撃２
@@ -789,13 +818,16 @@ f.Deck.splice(0,5);
 #鈴猫
 あんっ！！[p]
 #
-鈴猫は２０の快感を受けた[p]
+鈴猫は１０の快感を受けた[p]
+[eval exp="f.ERO += 10"][call target="*絶頂" cond="f.ERO >= 100"]
+[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [else]
-[eval exp="f.HP -= 10"]
 敵の攻撃[r]
 １０のダメージを受けた[p]
-[update_status]
+[eval exp="f.HP -= 10"]
 [endif]
+[update_status]
+
 *拘束ドロー４
 ４枚目のカードを選択してください[p]
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw4=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー４完了" ]
@@ -805,6 +837,7 @@ f.Deck.splice(0,5);
 [s]
 *拘束ドロー４完了
 [eval exp="f.Total = f.Total + f.Cards[f.Draw4]['value']"]
+[eval exp="f.Draw4_txt = f.Cards[f.Draw4]['txt'] "]
 [show_score]
 *拘束判定３
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
@@ -821,11 +854,11 @@ f.Deck.splice(0,5);
 *抵抗攻撃３
 鈴猫は拘束を振りほどこうともがいた[p]
 [eval exp="f.Bind -= 20"]
-拘束力が20減少[p]
-上限値が＋１された[p]
+拘束力が20減少[r]
+守備力が-１された[p]
+[eval exp="f.En_DEF-- "]
 [show_score][update_status]
-[eval exp="f.Limit += 1"]
-[jump target="*脱出判定" cond="f.Bind <= 0"]
+[jump target="*拘束脱出" cond="f.Bind <= 0"]
 [show_score]
 
 *敵拘束攻撃３
@@ -838,22 +871,26 @@ f.Deck.splice(0,5);
 #鈴猫
 あんっ！！[p]
 #
-鈴猫は２０の快感を受けた[p]
+鈴猫は１０の快感を受けた[p]
+[eval exp="f.ERO += 10"][call target="*絶頂" cond="f.ERO >= 100"]
+[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [else]
-[eval exp="f.HP -= 10"]
 敵の攻撃[r]
 １０のダメージを受けた[p]
-[update_status]
+[eval exp="f.HP -= 10"]
 [endif]
+[update_status]
+
 *抵抗ドロー５
 ５枚目のカードを選択してください[p]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw5=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*抵抗ドロー５完了" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw5=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*抵抗ドロー５完了" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw5=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*抵抗ドロー５完了" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw5=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*抵抗ドロー５完了" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw5=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*抵抗ドロー５完了" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw5=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*抵抗ドロー５完了" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw5=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*抵抗ドロー５完了" ]
+[glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw5=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*抵抗ドロー５完了" ]
 [s]
 *抵抗ドロー５完了
 [eval exp="f.Total = f.Total + f.Cards[f.Draw5]['value']"]
+[eval exp="f.Draw5_txt = f.Cards[f.Draw5]['txt'] "]
 [show_score]
 *拘束判定４
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
@@ -880,9 +917,9 @@ error697
 *抵抗コマンド６
 鈴猫は暴れた[p]
 [eval exp="f.Bind -= 40"]
-拘束力が60減少[p]
+拘束力が40減少[p]
 [show_score]
-[jump target="*脱出判定" cond="f.Bind <= 0"]
+[jump target="*拘束脱出" cond="f.Bind <= 0"]
 [jump target="*拘束ラウンド継続"]
 [s]
 *抵抗コマンド７
@@ -890,7 +927,7 @@ error697
 [eval exp="f.Bind -= 80"]
 拘束力が80減少[p]
 [show_score]
-[jump target="*脱出判定" cond="f.Bind <= 0"]
+[jump target="*拘束脱出" cond="f.Bind <= 0"]
 [jump target="*拘束ラウンド継続"]
 [s]
 *抵抗コマンド８
@@ -898,7 +935,7 @@ error697
 [eval exp="f.Bind -= 120"]
 拘束力が120減少[p]
 [show_score]
-[jump target="*脱出判定" cond="f.Bind <= 0"]
+[jump target="*拘束脱出" cond="f.Bind <= 0"]
 [jump target="*拘束ラウンド継続"]
 [s]
 *抵抗コマンド９
@@ -906,12 +943,14 @@ error697
 [eval exp="f.Bind -= 200"]
 拘束力が200減少[p]
 [show_score]
-[jump target="*脱出判定" cond="f.Bind <= 0"]
+[jump target="*拘束脱出" cond="f.Bind <= 0"]
 [jump target="*拘束ラウンド継続"]
 [s]
 
-*脱出判定
+*拘束脱出
 鈴猫は拘束を振りほどいた！[p]
+[eval exp="f.Rt_Bind = 0"]
+[ptext layer="3" x="450" y="50" text="" size="30" color="0x333631" edge="white" bold="bold" align="left" name="Bind" overwrite="true"]
 [jump target="*ラウンド終了"]
 [s]
 
@@ -922,9 +961,10 @@ error697
 #鈴猫
 いやぁっ！！[p]
 #
-鈴猫は２００の快感を受けた[p]
+鈴猫は２０の快感を受けた[p]
+[eval exp="f.ERO += 20"][call target="*絶頂" cond="f.ERO >= 100"]
+[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [update_status]
-;[jump target="*絶頂判定" cond="f.HP <= 0"]
 [jump target="*拘束ラウンド継続"]
 [s]
 
@@ -936,4 +976,99 @@ error697
 [reflesh_score]
 [ReShuffle]
 [jump target="*拘束ラウンド開始"]
+[s]
+
+;レイプ----------------------------------------------------------------------
+*レイプ１
+#敵
+もう！我慢できねえぜ！！[r]
+このまま本番に行かせてもらうぜ！！[p]
+#鈴猫
+ちょっ！！やめーーーーーー[p]
+#
+忍者はマラを鈴猫の秘裂に挿入した[p]
+[chara_mod name="suzune" face="泣き"]
+#鈴猫
+（ーーーーーーーッ！！）[p]
+#
+鈴猫は挿入の衝撃に歯を食いしばった[p]
+#忍者
+どうだ！俺のマラの感触は！！[p]
+[chara_mod name="suzune" face="苦しみ"]
+#鈴猫
+はっ！！小さすぎて入ったのが分かんなかったわよっ！！[p]
+#忍者
+ちっ！まだ入れただけだ！！こっからが本番だぜ！！[p]
+オラオラ！！オラァ！！[p]
+#
+忍者はしっかりと鈴猫の腰を抱え込むと激しく腰を打ち付けた[p]
+[chara_mod name="suzune" face="喘ぎ"]
+#鈴猫
+んっ！！こんな奴にぃ！！ううんっ！！[p]
+#
+鈴猫は３０の快感を受けた[p]
+[eval exp="f.ERO += 30"][call target="*絶頂" cond="f.ERO >= 100"]
+[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
+[update_status]
+[return]
+[s]
+
+*レイプ２
+#
+忍者は魔羅で鈴猫の膣を荒々しく突き上げた[p]
+[chara_mod name="suzune" face="喘ぎ"]
+#鈴猫
+あんっ！！あんっ！！ひあっ！！[p]
+#忍者
+へへっ！！いい声で鳴くようになってきたじゃねえか！！[p]
+#鈴猫
+う、うるさっ！！ひぃぃん！！！[p]
+#忍者
+よしっ！！このまま中でぶちまけてやるぜ！！[p]
+#鈴猫
+！！やめろぉっ！！ばかぁ！！んうううっ！！[p]
+#忍者
+うおおおおおっ！！出すぞ！！[p]
+#
+忍者は鈴猫の中で射精した[p]
+[chara_mod name="suzune" face="泣き"]
+#鈴猫
+いやあああああっ！！！[p]
+#
+鈴猫は精の迸りを子宮に感じながら嬌声を上げた[r]
+#
+鈴猫は５０の快感を受けた[p]
+[eval exp="f.ERO += 50"][call target="*絶頂" cond="f.ERO >= 100"]
+[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
+[update_status]
+#忍者
+へへへ、なかなか良かったぜ[p]
+#
+忍者は嫌らしく笑いながらマラを引き抜くと鈴猫の尻を叩いた[p]
+#鈴猫
+ああんっ！！[p]
+#
+その場にくずおれた鈴猫の秘裂からごぽりと精液が溢れた[p]
+[chara_mod name="suzune" face="厳しい"]
+#鈴猫
+くっ！絶対許さないんだから！！[p]
+#
+鈴猫はよろよろと立ち上がると敵を睨みつけた[p]
+[return]
+[s]
+;絶頂----------------------------------------------------------------------
+*絶頂
+[chara_mod name="suzune" face="絶頂"]
+#鈴猫
+いやあああっ！！らめぇぇぇぇっ！！[p]
+イクっ！！イクイクイクーーーーっ！！[p]
+#
+鈴猫は絶頂した[r]
+体力が50減少[p]
+[eval exp="f.HP -= 50"]
+絶頂状態になった[r]
+理性が１減少した[p]
+[eval exp="f.SAN -= 1 , f.orgasm = 1 , f.Rt_orgasm = 2 , f.ERO = 0"]
+[chara_mod name="suzune" face="喘ぎ"]
+[return]
 [s]
