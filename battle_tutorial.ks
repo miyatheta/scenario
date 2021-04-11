@@ -204,7 +204,7 @@ if(f.orgasm>0){
 [eval exp="f.Draw1_txt='' ,f.Draw2_txt='' ,f.Draw3_txt='' ,f.Draw4_txt='' ,f.Draw5_txt=''"]
 [eval exp="f.HP = 2000 , f.MP = 0 , f.SAN = 60 , f.orgasm = 0"]
 [eval exp="f.ATP = 50 , f.ATP_red = 0 , f.RES = 40 , f.RES_green = 0 "]
-[eval exp="f.En_HP = 10000 ,f.En_DEF='' "]
+[eval exp="f.En_HP = 10000 ,f.En_DEF ='' ,f.En_ERO = 0 ,f.Rape_mode = 0"]
 [eval exp="f.round=0"]
 
 ;カード構築
@@ -657,6 +657,8 @@ f.Deck.splice(0,5);
 [emb exp="f.Cards[f.Hand[3]]['txt']"]、[emb exp="f.Cards[f.Hand[4]]['txt']"]です[p]
 [if exp="f.Rt_orgasm ==1"]
 [eval exp="f.Rt_orgasm = 0 , f.orgasm = 0"]
+[chara_mod name="suzune" face="怒り" cond="f.ERO < 70"]
+[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 70"]
 [elsif exp="f.Rt_orgasm ==2"]
 [eval exp="f.Rt_orgasm--"]
 [endif]
@@ -688,7 +690,10 @@ f.Deck.splice(0,5);
 
 *拘束ラウンド開始
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand<33"]
+[if exp="f.rand < f.En_ERO"]
+[eval exp="f.Rape_mode = 1"]
+[eval exp="f.En_DEF = 16"]
+[elsif exp="f.rand<33"]
 [eval exp="f.En_DEF = 15"]
 [elsif exp="f.rand<66"]
 [eval exp="f.En_DEF = 14"]
@@ -702,6 +707,7 @@ f.Deck.splice(0,5);
 [iscript]
 f.Deck.splice(0,5);
 [endscript]
+[call target="*レイプ１" cond="f.Rape_mode > 0"]
 
 *拘束ドロー１
 [glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw1=f.Hand[0],f.Cards[f.Hand[0]]['active']=0" cond="f.Cards[f.Hand[0]]['active']>0" target="*抵抗コマンド選択" ]
@@ -722,6 +728,7 @@ f.Deck.splice(0,5);
 [s]
 *拘束ドロー２
 [eval exp="f.Limit=21"][show_score]
+[call target="*レイプ２" cond="f.Rape_mode > 0"]
 ２枚目のカードを選択してください[p]
 [glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw2=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー２完了" ]
 [glink color="gray" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw2=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー２完了" ]
@@ -756,19 +763,25 @@ f.Deck.splice(0,5);
 [show_score]
 
 *敵拘束攻撃１
+[getrand min="1" max="100" var="f.rand"]
+[if exp="f.Rape_mode > 0"]
+[call target="*レイプ３"]
+[elsif exp="f.rand < 60"]
 #敵
 へっ！！おとなしくしな！！[p]
 #
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < 60"]
 敵は鈴猫の胸を揉みしだいた[p]
 #鈴猫
 あんっ！！[p]
 #
 鈴猫は１０の快感を受けた[p]
-[eval exp="f.ERO += 10"][call target="*絶頂" cond="f.ERO >= 100"]
+[eval exp="f.ERO += 10"][eval exp="f.En_ERO += 5"]
+[call target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [else]
+#敵
+暴れんじゃねえよ！[p]
+#
 敵の攻撃[r]
 １０のダメージを受けた[p]
 [eval exp="f.HP -= 10"]
@@ -809,19 +822,25 @@ f.Deck.splice(0,5);
 [show_score]
 
 *敵拘束攻撃２
+[getrand min="1" max="100" var="f.rand"]
+[if exp="f.Rape_mode > 0"]
+[call target="*レイプ３"]
+[elsif exp="f.rand < 60"]
 #敵
 へっ！！おとなしくしな！！[p]
 #
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < 60"]
 敵は鈴猫の胸を揉みしだいた[p]
 #鈴猫
 あんっ！！[p]
 #
 鈴猫は１０の快感を受けた[p]
-[eval exp="f.ERO += 10"][call target="*絶頂" cond="f.ERO >= 100"]
+[eval exp="f.ERO += 10"][eval exp="f.En_ERO += 5"]
+[call target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [else]
+#敵
+暴れんじゃねえよ！[p]
+#
 敵の攻撃[r]
 １０のダメージを受けた[p]
 [eval exp="f.HP -= 10"]
@@ -862,19 +881,25 @@ f.Deck.splice(0,5);
 [show_score]
 
 *敵拘束攻撃３
+[getrand min="1" max="100" var="f.rand"]
+[if exp="f.Rape_mode > 0"]
+[call target="*レイプ３"]
+[elsif exp="f.rand < 60"]
 #敵
 へっ！！おとなしくしな！！[p]
 #
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < 60"]
 敵は鈴猫の胸を揉みしだいた[p]
 #鈴猫
 あんっ！！[p]
 #
 鈴猫は１０の快感を受けた[p]
-[eval exp="f.ERO += 10"][call target="*絶頂" cond="f.ERO >= 100"]
+[eval exp="f.ERO += 10"][eval exp="f.En_ERO += 5"]
+[call target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [else]
+#敵
+暴れんじゃねえよ！！[p]
+#
 敵の攻撃[r]
 １０のダメージを受けた[p]
 [eval exp="f.HP -= 10"]
@@ -916,7 +941,7 @@ error697
 
 *抵抗コマンド６
 鈴猫は暴れた[p]
-[eval exp="f.Bind -= 40"]
+[eval exp="f.Bind -= 40 ,f.En_ERO -= 2"]
 拘束力が40減少[p]
 [show_score]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
@@ -924,7 +949,7 @@ error697
 [s]
 *抵抗コマンド７
 鈴猫は噛み付いた[p]
-[eval exp="f.Bind -= 80"]
+[eval exp="f.Bind -= 80 ,f.En_ERO -= 4"]
 拘束力が80減少[p]
 [show_score]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
@@ -932,7 +957,7 @@ error697
 [s]
 *抵抗コマンド８
 鈴猫の頭突き[p]
-[eval exp="f.Bind -= 120"]
+[eval exp="f.Bind -= 120 ,f.En_ERO -= 6"]
 拘束力が120減少[p]
 [show_score]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
@@ -940,7 +965,7 @@ error697
 [s]
 *抵抗コマンド９
 鈴猫の金的[p]
-[eval exp="f.Bind -= 200"]
+[eval exp="f.Bind -= 200 ,f.En_ERO -= 8"]
 拘束力が200減少[p]
 [show_score]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
@@ -948,21 +973,25 @@ error697
 [s]
 
 *拘束脱出
-鈴猫は拘束を振りほどいた！[p]
+鈴猫は自由を取り戻した！[p]
 [eval exp="f.Rt_Bind = 0"]
+[eval exp="f.Rape_mode = 0" cond="f.Rape_mode > 0"]
 [ptext layer="3" x="450" y="50" text="" size="30" color="0x333631" edge="white" bold="bold" align="left" name="Bind" overwrite="true"]
 [jump target="*ラウンド終了"]
 [s]
 
 *拘束バースト
-[getrand min="1" max="100" var="f.rand"]
+[if exp="f.Rape_mode > 0"]
+[jump target="*レイプ４"]
+[endif]
 #敵
 敵は鈴猫の秘所を弄った[p]
 #鈴猫
 いやぁっ！！[p]
 #
 鈴猫は２０の快感を受けた[p]
-[eval exp="f.ERO += 20"][call target="*絶頂" cond="f.ERO >= 100"]
+[eval exp="f.ERO += 20"][eval exp="f.En_ERO += 5"]
+[call target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [update_status]
 [jump target="*拘束ラウンド継続"]
@@ -990,8 +1019,10 @@ error697
 [chara_mod name="suzune" face="泣き"]
 #鈴猫
 （ーーーーーーーッ！！）[p]
-#
-鈴猫は挿入の衝撃に歯を食いしばった[p]
+[chara_mod name="suzune" face="苦しみ"]
+[return]
+
+*レイプ２
 #忍者
 どうだ！俺のマラの感触は！！[p]
 [chara_mod name="suzune" face="苦しみ"]
@@ -999,10 +1030,15 @@ error697
 はっ！！小さすぎて入ったのが分かんなかったわよっ！！[p]
 #忍者
 ちっ！まだ入れただけだ！！こっからが本番だぜ！！[p]
-オラオラ！！オラァ！！[p]
 #
+[return]
+[s]
+
+*レイプ３
 忍者はしっかりと鈴猫の腰を抱え込むと激しく腰を打ち付けた[p]
 [chara_mod name="suzune" face="喘ぎ"]
+#忍者
+オラオラ、オラァ！！[p]
 #鈴猫
 んっ！！こんな奴にぃ！！ううんっ！！[p]
 #
@@ -1013,7 +1049,7 @@ error697
 [return]
 [s]
 
-*レイプ２
+*レイプ４
 #
 忍者は魔羅で鈴猫の膣を荒々しく突き上げた[p]
 [chara_mod name="suzune" face="喘ぎ"]
@@ -1038,7 +1074,7 @@ error697
 鈴猫は精の迸りを子宮に感じながら嬌声を上げた[r]
 #
 鈴猫は５０の快感を受けた[p]
-[eval exp="f.ERO += 50"][call target="*絶頂" cond="f.ERO >= 100"]
+[eval exp="f.ERO += 50"][jump target="*絶頂フェイタル" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [update_status]
 #忍者
@@ -1054,7 +1090,7 @@ error697
 くっ！絶対許さないんだから！！[p]
 #
 鈴猫はよろよろと立ち上がると敵を睨みつけた[p]
-[return]
+[jump target="*拘束脱出"]
 [s]
 ;絶頂----------------------------------------------------------------------
 *絶頂
@@ -1066,9 +1102,62 @@ error697
 鈴猫は絶頂した[r]
 体力が50減少[p]
 [eval exp="f.HP -= 50"]
+[eval exp="f.HP = 1" cond="f.HP <= 0"]
 絶頂状態になった[r]
 理性が１減少した[p]
 [eval exp="f.SAN -= 1 , f.orgasm = 1 , f.Rt_orgasm = 2 , f.ERO = 0"]
-[chara_mod name="suzune" face="喘ぎ"]
+[chara_mod name="suzune" face="レイプ目"]
 [return]
+[s]
+
+;フェイタル----------------------------------------------------------------------
+*絶頂フェイタル
+[chara_mod name="suzune" face="絶頂"]
+#鈴猫
+いやあああっ！！らめぇぇぇぇっ！！[p]
+イクっ！！イクイクイクーーーーっ！！[p]
+#
+鈴猫は絶頂した[r]
+体力が100減少[p]
+[eval exp="f.HP -= 100"]
+[if exp="f.HP <= 0"][jump target="*気絶フェイタル"][endif]
+絶頂状態になった[r]
+理性が１減少した[p]
+[eval exp="f.SAN -= 1 , f.orgasm = 1 , f.Rt_orgasm = 2 , f.ERO = 0"]
+[chara_mod name="suzune" face="レイプ目"]
+#忍者
+へへへ、なかなか良かったぜ[p]
+#
+忍者は嫌らしく笑いながらマラを引き抜くと鈴猫の尻を叩いた[p]
+#鈴猫
+ああんっ！！[p]
+#
+その場にくずおれた鈴猫の秘裂からごぽりと精液が溢れた[p]
+#鈴猫
+んっ！このぉ……ぜったい、ゆるさないんらからぁっ！[p]
+#
+鈴猫はよろよろと立ち上がると敵を睨みつけた[p]
+[jump target="*拘束脱出"]
+[s]
+
+*気絶フェイタル
+[chara_mod name="suzune" face="レイプ目"]
+[eval exp="f.bind = 0"]
+#
+鈴猫は気絶した！[p]
+#忍者
+へへへ、なかなか良かったぜ[p]
+#
+忍者は白目を剥いて痙攣する鈴猫からマラを引き抜いた[p]
+#鈴猫
+あうぅ・・・[p]
+#
+支えとなっていた肉棒を失い鈴猫はその場に崩折れる[r]
+どろりと鈴猫の秘裂から精液がこぼれた[p]
+#忍者
+このままヤリ捨てるのは勿体ねえ上玉だな[r]
+ねぐらまでお持ち帰りさせてもらおうか！！[p]
+#
+忍者はニヤリとほくそ笑むと鈴猫を担ぎ上げて意気揚々と闇の中へ消えていった[p]
+ゲームオーバー（実際には忍者の住処へ続きます）
 [s]
