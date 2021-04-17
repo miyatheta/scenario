@@ -258,11 +258,8 @@ if(f.orgasm>0){
 [s]
 
 *ドロー１ボーナス
-[if exp="f.round < 2"]
-ドローしたカードの色に応じてボーナスが発生します[p]
-赤なら与えるダメージアップ、青なら気力アップ[r]
-緑色なら回避アップ、黄色なら上限値が＋１されます[p]
-[endif]
+[call storage="tutorial.ks" target="*ドローボーナス" cond="f.tutorial01 != 1"]
+
 [if exp="f.Cards[f.Draw1]['color'] == 'red' "]
 攻撃力アップ[r]
 [eval exp="f.ATP_red += 10"]
@@ -283,10 +280,7 @@ if(f.orgasm>0){
 [eval exp="f.Total = 0 + f.Cards[f.Draw1]['value']"]
 [eval exp="f.Draw1_txt = f.Cards[f.Draw1]['txt'] "]
 [show_score]
-[if exp="f.round < 2"]
-コマンドを選択してください。
-コマンドのコストと守備力の合算が目標値になります[p]
-[endif]
+[call storage="tutorial.ks" target="*目標値" cond="f.tutorial02 != 1"]
 
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="拳(3)" exp="f.comand=3" target="*ドロー２" ]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="下段蹴り(4)" exp="f.comand=4" target="*ドロー２" ]

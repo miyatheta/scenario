@@ -301,7 +301,7 @@ error697
 [eval exp="f.Rt_Bind = 0"]
 [eval exp="f.Rape_mode = 0" cond="f.Rape_mode > 0"]
 [ptext layer="3" x="450" y="50" text="" size="30" color="0x333631" edge="white" bold="bold" align="left" name="Bind" overwrite="true"]
-[jump target="*ラウンド終了"]
+[jump storage="battle.ks" target="*ラウンド終了"]
 [s]
 
 *拘束バースト

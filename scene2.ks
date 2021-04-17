@@ -41,5 +41,5 @@
 
 [cm][clearfix]
 @layopt layer=message0 visible=false
-[jump storage="battle_tutorial.ks"]
+[jump storage="battle.ks"]
 [s]
