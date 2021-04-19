@@ -11,7 +11,7 @@
 ;ゲームで必ず必要な初期化処理はこのファイルに記述するのがオススメ
 @call storage="make.ks"
 ;変数宣言
-@call storage="initialize_declare.ks"
+@call storage="initialize.ks"
 
 ;メッセージボックスは非表示
 @layopt layer="message" visible=false

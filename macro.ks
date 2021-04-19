@@ -1,4 +1,211 @@
 *macros
+
+;----------------------------------------------------------------------------------------
+;カード関係
+;----------------------------------------------------------------------------------------
+[macro name="Initialize_Cards"]
+;Cards=カードの情報を収めた連想(ハッシュ・辞書)配列(=オブジェクト)を収めた配列(多次元配列)を作成。
+;Deck=カードのidを並べたもの。
+[iscript]
+f.Cards=[
+{color:"red",value:1,active:1,txt:"赤1"},
+{color:"red",value:2,active:1,txt:"赤2"},
+{color:"red",value:3,active:1,txt:"赤3"},
+{color:"red",value:4,active:1,txt:"赤4"},
+{color:"red",value:5,active:1,txt:"赤5"},
+{color:"red",value:6,active:1,txt:"赤6"},
+{color:"red",value:7,active:1,txt:"赤7"},
+{color:"red",value:8,active:1,txt:"赤8"},
+{color:"red",value:9,active:1,txt:"赤9"},
+{color:"red",value:10,active:1,txt:"赤十"},
+{color:"red",value:10,active:1,txt:"赤月"},
+{color:"red",value:10,active:1,txt:"赤花"},
+{color:"red",value:10,active:1,txt:"赤雪"},
+{color:"blue",value:1,active:1,txt:"青1"},
+{color:"blue",value:2,active:1,txt:"青2"},
+{color:"blue",value:3,active:1,txt:"青3"},
+{color:"blue",value:4,active:1,txt:"青4"},
+{color:"blue",value:5,active:1,txt:"青5"},
+{color:"blue",value:6,active:1,txt:"青6"},
+{color:"blue",value:7,active:1,txt:"青7"},
+{color:"blue",value:8,active:1,txt:"青8"},
+{color:"blue",value:9,active:1,txt:"青9"},
+{color:"blue",value:10,active:1,txt:"青十"},
+{color:"blue",value:10,active:1,txt:"青月"},
+{color:"blue",value:10,active:1,txt:"青花"},
+{color:"blue",value:10,active:1,txt:"青雪"},
+{color:"green",value:1,active:1,txt:"緑1"},
+{color:"green",value:2,active:1,txt:"緑2"},
+{color:"green",value:3,active:1,txt:"緑3"},
+{color:"green",value:4,active:1,txt:"緑4"},
+{color:"green",value:5,active:1,txt:"緑5"},
+{color:"green",value:6,active:1,txt:"緑6"},
+{color:"green",value:7,active:1,txt:"緑7"},
+{color:"green",value:8,active:1,txt:"緑8"},
+{color:"green",value:9,active:1,txt:"緑9"},
+{color:"green",value:10,active:1,txt:"緑十"},
+{color:"green",value:10,active:1,txt:"緑月"},
+{color:"green",value:10,active:1,txt:"緑花"},
+{color:"green",value:10,active:1,txt:"緑雪"},
+{color:"orange",value:1,active:1,txt:"黄1"},
+{color:"orange",value:2,active:1,txt:"黄2"},
+{color:"orange",value:3,active:1,txt:"黄3"},
+{color:"orange",value:4,active:1,txt:"黄4"},
+{color:"orange",value:5,active:1,txt:"黄5"},
+{color:"orange",value:6,active:1,txt:"黄6"},
+{color:"orange",value:7,active:1,txt:"黄7"},
+{color:"orange",value:8,active:1,txt:"黄8"},
+{color:"orange",value:9,active:1,txt:"黄9"},
+{color:"orange",value:10,active:1,txt:"黄十"},
+{color:"orange",value:10,active:1,txt:"黄月"},
+{color:"orange",value:10,active:1,txt:"黄花"},
+{color:"orange",value:10,active:1,txt:"黄雪"},
+];
+f.Deck = [];
+n = f.Cards.length;
+for( i=0 ; i<n ; i++){f.Deck.push(i);}
+[endscript]
+[endmacro]
+
+[macro name="DeckShuffle"]
+DeckShuffle[p]
+;Deckはシャッフルした山札(ただしカード自体ではなくカードの位置nの列。引き換え番号みたいなもの）
+[iscript]
+for(i = f.Deck.length - 1; i >= 0; i--){
+    var r = Math.floor(Math.random() * (i + 1));
+    var tmp = f.Deck[i];
+    f.Deck[i] = f.Deck[r];
+    f.Deck[r] = tmp;
+}
+[endscript]
+[endmacro]
+
+[macro name="Calc_Card"]
+;各色の数値を計算
+[iscript]
+f.Red=0,f.Green=0,f.Blue=0,f.Black=0;
+for(i = 4; i >= 0; i--){
+  if(f.Cards[f.Hand[i]]['color'] == "red"){f.Red += f.Cards[f.Hand[i]]['value'];}
+}
+for(i = 4; i >= 0; i--){
+  if(f.Cards[f.Hand[i]]['color'] == "green"){f.Green += f.Cards[f.Hand[i]]['value'];}
+}
+for(i = 4; i >= 0; i--){
+  if(f.Cards[f.Hand[i]]['color'] == "blue"){f.Blue += f.Cards[f.Hand[i]]['value'];}
+}
+for(i = 4; i >= 0; i--){
+  if(f.Cards[f.Hand[i]]['color'] == "black"){f.Black += f.Cards[f.Hand[i]]['value'];}
+}
+[endscript]
+[endmacro]
+
+[macro name="make_hand"]
+;手札作成
+;HandにDeckからカード追加
+;追加分をDeckから削除
+;f.Handも中身は引き換え番号
+[eval exp="f.Hand=[f.Deck[0],f.Deck[1],f.Deck[2],f.Deck[3],f.Deck[4]]"]
+[iscript]
+f.Deck.splice(0,5);
+[endscript]
+[endmacro]
+
+[macro name="DeActivate"]
+;すべての手札を使用済みに
+[iscript]
+f.Cards[f.Hand[0]]['active']=0;
+f.Cards[f.Hand[1]]['active']=0;
+f.Cards[f.Hand[2]]['active']=0;
+f.Cards[f.Hand[3]]['active']=0;
+f.Cards[f.Hand[4]]['active']=0;
+[endscript]
+[endmacro]
+
+[macro name="ReShuffle"]
+;カードのアクティベートとデッキの再構築
+[iscript]
+d = f.Deck.length;
+if(d < 5){
+  f.Deck = [];
+  n = f.Cards.length;
+  for(i=0; i<n; i++){f.Cards[i]['active'] = 1 ;}
+  for(i=0; i<n; i++){f.Deck.push(i);}
+  for(i = n - 1; i >= 0; i--){
+      var r = Math.floor(Math.random() * (i + 1));
+      var tmp = f.Deck[i];
+      f.Deck[i] = f.Deck[r];
+      f.Deck[r] = tmp;
+  }
+}
+[endscript]
+[endmacro]
+
+;--------------------------------------------------------------------------------
+;スコア表示マクロ
+[macro name="show_score"]
+[eval exp="f.Target = f.En_DEF + f.comand" ]
+[iscript]
+f.round_ptxt = f.round + "回";
+f.En_DEF_ptxt = "守備力:" + f.En_DEF ;
+f.comand_ptxt = "コスト:" + f.comand ;
+f.Target_ptxt = "目標値:" + f.Target ;
+f.Limit_ptxt = "上限値:" + f.Limit ;
+f.Total_ptxt = "合計値:" + f.Total ;
+f.Draw1_ptxt = "１手目:" + f.Draw1_txt ;
+f.Draw2_ptxt = "２手目:" + f.Draw2_txt ;
+f.Draw3_ptxt = "３手目:" + f.Draw3_txt ;
+f.Draw4_ptxt = "４手目:" + f.Draw4_txt ;
+f.Draw5_ptxt = "５手目:" + f.Draw5_txt ;
+f.Bind_ptxt = "拘束力:" + f.Bind ;
+[endscript]
+[ptext layer="3" x="520" y="0" text=&f.round_ptxt size="30" color="0xffffff" edge="red" bold="bold" align="left" name="Round" overwrite="true" ]
+[ptext layer="3" x="630" y="100" text=&f.En_DEF_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="En_DEF" overwrite="true" ]
+[ptext layer="3" x="630" y="140" text=&f.comand_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="comand" overwrite="true" ]
+[ptext layer="3" x="630" y="180" text=&f.Target_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Target" overwrite="true"]
+[ptext layer="3" x="630" y="220" text=&f.Limit_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Limit" overwrite="true"]
+[ptext layer="3" x="410" y="100" text=&f.Total_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Total" overwrite="true"]
+[ptext layer="3" x="410" y="140" text=&f.Draw1_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Draw1" overwrite="true"]
+[ptext layer="3" x="410" y="180" text=&f.Draw2_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Draw2" overwrite="true"]
+[ptext layer="3" x="410" y="220" text=&f.Draw3_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Draw3" overwrite="true"]
+[ptext layer="3" x="410" y="260" text=&f.Draw4_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Draw4" overwrite="true"]
+[ptext layer="3" x="410" y="300" text=&f.Draw5_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Draw5" overwrite="true"]
+[ptext layer="3" x="450" y="50" text=&f.Bind_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Bind" overwrite="true" cond="f.Rt_Bind > 0"]
+[endmacro]
+;ラウンド終了時に表示をリブレッシュ
+[macro name="reflesh_score"]
+[eval exp="f.En_DEF='' ,f.comand='' ,f.Target='' ,f.Limit='' ,f.Total='' "]
+[eval exp="f.Draw1_txt='' ,f.Draw2_txt='' ,f.Draw3_txt='' ,f.Draw4_txt='' ,f.Draw5_txt=''"]
+[eval exp="f.ATP_red = 0 ,f.RES_green = 0 "]
+[show_score]
+[endmacro]
+
+;ステータス更新マクロ
+[macro name="update_status"]
+[iscript]
+f.HP_ptxt = "体力:" + f.HP ;
+f.MP_ptxt = "気力:" + f.MP ;
+f.ERO_ptxt = "快感:" + f.ERO ;
+f.En_HP_ptxt = "体力:" + f.En_HP ;
+f.En_MP_ptxt = "気力:" + f.En_MP ;
+f.En_ERO_ptxt = "興奮度:" + f.En_ERO + "％";
+if(f.orgasm>0){
+  f.orgasm_ptxt = "絶頂状態" + f.Rt_orgasm;
+}else{
+  f.orgasm_ptxt = "";
+}
+[endscript]
+[ptext layer="0" x="10" y="620" text=&f.HP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="HP" overwrite="true" ]
+[ptext layer="0" x="10" y="650" text=&f.MP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="MP" overwrite="true" ]
+[ptext layer="0" x="10" y="680" text=&f.ERO_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="ERO" overwrite="true" ]
+[ptext layer="0" x="150" y="10" text=&f.orgasm_ptxt size="40" color="0xff1493" edge="white" bold="bold" align="left" name="orgasm" overwrite="true" ]
+[ptext layer="0" x="850" y="10" text=&f.En_HP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_HP" overwrite="true" ]
+[ptext layer="0" x="850" y="40" text=&f.En_MP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_MP" overwrite="true" ]
+[ptext layer="0" x="850" y="70" text=&f.En_ERO_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_ERO" overwrite="true" ]
+
+[endmacro]
+
+;--------------------------------------------------------------------------------
+
 [macro name="MND1"]
 [eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
 [endmacro]
