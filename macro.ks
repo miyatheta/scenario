@@ -143,7 +143,6 @@ if(d < 5){
 ;--------------------------------------------------------------------------------
 ;スコア表示マクロ
 [macro name="show_score"]
-[eval exp="f.Target = f.En_DEF + f.comand" ]
 [iscript]
 f.round_ptxt = f.round + "回";
 f.En_DEF_ptxt = "守備力:" + f.En_DEF ;

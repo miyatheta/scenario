@@ -14,7 +14,7 @@
 [eval exp="f.comand='' ,f.Target='' ,f.Limit='' ,f.Total='' ,f.Bind = 0 ,f.Rt_Bind = 0"]
 [eval exp="f.Draw1_txt='' ,f.Draw2_txt='' ,f.Draw3_txt='' ,f.Draw4_txt='' ,f.Draw5_txt=''"]
 [eval exp="f.HP = 2000 , f.MP = 0 , f.SAN = 60 , f.orgasm = 0"]
-[eval exp="f.ATP = 50 , f.ATP_red = 0 , f.RES = 40 , f.RES_green = 0 "]
+[eval exp="f.ATP = 50 , f.ATP_red = 0 , f.RES = 40 , f.RES_green = 0 ,f.DEF_Yellow = 0"]
 [eval exp="f.ERO_DEF = 0"]
 [eval exp="f.En_DEF ='' ,f.En_MP = 0 ,f.En_ERO = 0 ,f.Rape_mode = 0 ,f.En_BURST = 0"]
 [eval exp="f.round=0"]
@@ -30,11 +30,13 @@
 *ラウンド開始
 [eval exp="f.round++"]
 [eval exp="f.Limit=21"]
+
 [show_score][update_status]
 
 *敵パターン抽選
 敵の守備力が表示されます[p]
 [call storage="&f.enemy_PASS" target="*行動パターン" ]
+
 [show_score]
 ;手札作成
 [make_hand]
@@ -58,10 +60,10 @@
 [eval exp="f.MP += 10"][eval exp="f.MP = 100" cond="f.MP > 100"]
 [elsif exp="f.Cards[f.Draw1]['color'] == 'green' "]
 回避アップ[r]
-[eval exp="f.RES_green += 20"]
+[eval exp="f.RES_green += 40"]
 [elsif exp="f.Cards[f.Draw1]['color'] == 'orange' "]
-上限値アップ[r]
-[eval exp="f.Limit += 1"]
+ダメージカット[r]
+[eval exp="f.DEF_Yellow += 10"]
 [else]
 [endif]
 [show_score][update_status]
@@ -72,15 +74,18 @@
 [show_score]
 [call storage="tutorial.ks" target="*目標値" cond="f.tutorial02 != 1"]
 
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="拳(3)" exp="f.comand=3" target="*ドロー２" ]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="下段蹴り(4)" exp="f.comand=4" target="*ドロー２" ]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="回し蹴り(5)" exp="f.comand=5" target="*ドロー２" ]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="踵落とし(6)" exp="f.comand=6" target="*ドロー２" ]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="飛び蹴り(7)" exp="f.comand=7" target="*ドロー２" ]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="拳(3)" exp="f.comand=3" target="*目標設定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="下段蹴り(4)" exp="f.comand=4" target="*目標設定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="回し蹴り(5)" exp="f.comand=5" target="*目標設定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="踵落とし(6)" exp="f.comand=6" target="*目標設定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="飛び蹴り(7)" exp="f.comand=7" target="*目標設定"]
 [s]
 
-*ドロー２
+*目標設定
+[eval exp="f.Target = f.En_DEF + f.comand" ]
 [show_score]
+
+*ドロー２
 ２枚目のカードを選択してください[p]
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw2=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*ドロー２完了" ]
 [glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw2=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*ドロー２完了" ]
@@ -102,10 +107,10 @@
 [eval exp="f.MP += 10"][eval exp="f.MP = 100" cond="f.MP > 100"]
 [elsif exp="f.Cards[f.Draw2]['color'] == 'green' "]
 回避アップ[r]
-[eval exp="f.RES_green += 20"]
+[eval exp="f.RES_green += 40"]
 [elsif exp="f.Cards[f.Draw2]['color'] == 'orange' "]
-上限値アップ[r]
-[eval exp="f.Limit += 1"]
+ダメージカット[r]
+[eval exp="f.DEF_Yellow += 10"]
 [else]
 [endif]
 [show_score][update_status]
@@ -120,21 +125,18 @@
 [jump target="*バースト"]
 [else]
 目標未達[p]
-[jump target="*通常攻撃１"]
+[jump storage="&f.enemy_PASS" target="*敵攻撃１"]
 [endif]
 [s]
 
-*通常攻撃１
-[call storage="tutorial.ks" target="*通常攻撃１" cond="f.tutorial05 != 1"]
-通常攻撃[p]
+*反撃１
+[call storage="tutorial.ks" target="*反撃１" cond="f.tutorial05 != 1"]
+反撃[p]
 [eval exp="f.damage = (f.ATP + f.ATP_red) - (f.orgasm * 30)"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた[p]
 [update_status]
 [show_score]
-
-*敵攻撃１
-[call storage="&f.enemy_PASS" target="*敵攻撃１"]
 
 *ドロー３
 ３枚目のカードを選択してください[p]
@@ -158,10 +160,10 @@
 [eval exp="f.MP += 10"][eval exp="f.MP = 100" cond="f.MP > 100"]
 [elsif exp="f.Cards[f.Draw3]['color'] == 'green' "]
 回避アップ[r]
-[eval exp="f.RES_green += 20"]
+[eval exp="f.RES_green += 40"]
 [elsif exp="f.Cards[f.Draw3]['color'] == 'orange' "]
-上限値アップ[r]
-[eval exp="f.Limit += 1"]
+ダメージカット[r]
+[eval exp="f.DEF_Yellow += 10"]
 [else]
 [endif]
 [show_score][update_status]
@@ -175,12 +177,12 @@
 [jump target="*バースト"]
 [else]
 目標未達[p]
-[jump target="*通常攻撃２"]
+[jump storage="&f.enemy_PASS" target="*敵攻撃２"]
 [endif]
 [s]
 
-*通常攻撃２
-通常攻撃[p]
+*反撃２
+反撃[p]
 [eval exp="f.damage = (f.ATP + f.ATP_red) - (f.orgasm * 30)"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた[p]
@@ -212,10 +214,10 @@
 [eval exp="f.MP += 10"][eval exp="f.MP = 100" cond="f.MP > 100"]
 [elsif exp="f.Cards[f.Draw4]['color'] == 'green' "]
 回避アップ[r]
-[eval exp="f.RES_green += 20"]
+[eval exp="f.RES_green += 40"]
 [elsif exp="f.Cards[f.Draw4]['color'] == 'orange' "]
-上限値アップ[r]
-[eval exp="f.Limit += 1"]
+ダメージカット[r]
+[eval exp="f.DEF_Yellow += 10"]
 [else]
 [endif]
 [show_score][update_status]
@@ -229,12 +231,12 @@
 [jump target="*バースト"]
 [else]
 目標未達[p]
-[jump target="*通常攻撃３"]
+[jump storage="&f.enemy_PASS" target="*敵攻撃３"]
 [endif]
 [s]
 
-*通常攻撃３
-通常攻撃[p]
+*反撃３
+反撃[p]
 [eval exp="f.damage = (f.ATP + f.ATP_red) - (f.orgasm * 30)"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた[p]
@@ -266,10 +268,10 @@
 [eval exp="f.MP += 10"][eval exp="f.MP = 100" cond="f.MP > 100"]
 [elsif exp="f.Cards[f.Draw5]['color'] == 'green' "]
 回避アップ[r]
-[eval exp="f.RES_green += 20"]
+[eval exp="f.RES_green += 40"]
 [elsif exp="f.Cards[f.Draw5]['color'] == 'orange' "]
-上限値アップ[r]
-[eval exp="f.Limit += 1"]
+ダメージカット[r]
+[eval exp="f.DEF_Yellow += 10"]
 [else]
 [endif]
 [show_score][update_status]

@@ -40,13 +40,18 @@ f.Deck.splice(0,5);
 [show_score]
 コマンドを選択してください[p]
 [if exp="f.Rape_mode > 0"]
-[glink color="gray" x="550" y="500" text="耐える(4)" exp="f.comand = 4" target="*拘束ドロー２" ]
+[glink color="gray" x="550" y="500" text="耐える(3)" exp="f.comand = 1" target="*目標設定" ]
 [s][else]
-[glink color="gray" x="550" y="350" text="暴れる(1)" exp="f.comand = 1" target="*拘束ドロー２" ]
-[glink color="gray" x="550" y="400" text="噛みつき(2)" exp="f.comand = 2" target="*拘束ドロー２" ]
-[glink color="gray" x="550" y="450" text="頭突(3)" exp="f.comand = 3" target="*拘束ドロー２" ]
-[glink color="gray" x="550" y="500" text="金的(4)" exp="f.comand = 4" target="*拘束ドロー２" ]
+[glink color="gray" x="550" y="350" text="耐える(３)" exp="f.comand = 1" target="*目標設定" ]
+[glink color="gray" x="550" y="400" text="暴れる(6)" exp="f.comand = 2" target="*目標設定" ]
+[glink color="gray" x="550" y="450" text="噛みつき(8)" exp="f.comand = 3" target="*目標設定" ]
+[glink color="gray" x="550" y="500" text="金的(10)" exp="f.comand = 4" target="*目標設定" ]
 [s][endif]
+
+*目標設定
+[eval exp="f.Target = f.En_DEF + f.comand" ]
+[show_score]
+
 *拘束ドロー２
 [eval exp="f.Limit=21"][show_score]
 [call storage="&f.enemy_PASS" target="*レイプ序" cond="f.Rape_mode > 0"]
