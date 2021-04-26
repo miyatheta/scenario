@@ -204,6 +204,9 @@ if(f.orgasm>0){
 [endmacro]
 
 ;--------------------------------------------------------------------------------
+[macro name="wt2"]
+[wait time="200"][cm]
+[endmacro]
 
 [macro name="MND1"]
 [eval exp="f.MND += 1" cond="f.MND < 5"][WSs]

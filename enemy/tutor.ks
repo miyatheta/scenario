@@ -264,13 +264,8 @@
 #鈴猫
 んっ！！こんな奴にぃ！！ううんっ！！[p]
 #
-[if exp="f.ERO_DEF < 1"]
-鈴猫は３０の快感を受けた[p]
-[eval exp="f.ERO += 30"][eval exp="f.ERO += 15" cond="f.orgasm > 0"]
-[else]
 鈴猫は１０の快感を受けた[p]
 [eval exp="f.ERO += 10"][eval exp="f.ERO += 5" cond="f.orgasm > 0"]
-[endif]
 [call target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [update_status]
@@ -300,9 +295,15 @@
 #
 鈴猫は精の迸りを子宮に感じながら嬌声を上げた[r]
 #
+[if exp="f.ERO_DEF > 0"]
+鈴猫は１０の快感を受けた[p]
+[eval exp="f.ERO += 10"]
+[else]
 鈴猫は５０の快感を受けた[p]
+[eval exp="f.ERO += 50"]
+[endif]
 [eval exp="f.En_MP = 0 ,f.En_ERO = 0"]
-[eval exp="f.ERO += 50"][eval exp="f.ERO += 25" cond="f.orgasm > 0"]
+[eval exp="f.ERO += 25" cond="f.orgasm > 0"]
 [update_status]
 [jump target="*絶頂フィニッシュ" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]

@@ -17,8 +17,9 @@
 [eval exp="f.Rape_mode = 1"]
 [endif]
 
-[call storage="&f.enemy_PASS" target="*レイプ開始" cond="f.Rape_mode > 0"]
-[eval exp="f.En_DEF = 17"]
+[call storage="&f.enemy_PASS" target="*レイプ開始" cond="f.Rape_mode == 1"]
+[eval exp="f.En_DEF = 10"]
+[eval exp="f.En_DEF = 17" cond="f.Rape_mode > 0"]
 [show_score]
 ;手札作成
 [eval exp="f.Hand=[f.Deck[0],f.Deck[1],f.Deck[2],f.Deck[3],f.Deck[4]]"]
@@ -40,21 +41,21 @@ f.Deck.splice(0,5);
 [show_score]
 コマンドを選択してください[p]
 [if exp="f.Rape_mode > 0"]
-[glink color="gray" x="550" y="500" text="耐える(3)" exp="f.comand = 1" target="*目標設定" ]
+[glink color="gray" x="550" y="500" text="耐える(3)" exp="f.comand = 3 ,f.comandId = 0" target="*目標設定" ]
 [s][else]
-[glink color="gray" x="550" y="350" text="耐える(３)" exp="f.comand = 1" target="*目標設定" ]
-[glink color="gray" x="550" y="400" text="暴れる(6)" exp="f.comand = 2" target="*目標設定" ]
-[glink color="gray" x="550" y="450" text="噛みつき(8)" exp="f.comand = 3" target="*目標設定" ]
-[glink color="gray" x="550" y="500" text="金的(10)" exp="f.comand = 4" target="*目標設定" ]
+[glink color="gray" x="550" y="350" text="もがく(5)" exp="f.comand = 5 ,f.comandId = 1" target="*目標設定" ]
+[glink color="gray" x="550" y="400" text="暴れる(7)" exp="f.comand = 7 ,f.comandId = 2" target="*目標設定" ]
+[glink color="gray" x="550" y="450" text="噛み付く(9)" exp="f.comand = 9 ,f.comandId = 3" target="*目標設定" ]
+[glink color="gray" x="550" y="500" text="金的(11)" exp="f.comand = 11 ,f.comandId = 4" target="*目標設定" ]
 [s][endif]
-
 *目標設定
 [eval exp="f.Target = f.En_DEF + f.comand" ]
 [show_score]
 
 *拘束ドロー２
 [eval exp="f.Limit=21"][show_score]
-[call storage="&f.enemy_PASS" target="*レイプ序" cond="f.Rape_mode > 0"]
+[call storage="&f.enemy_PASS" target="*レイプ序" cond="f.Rape_mode == 1"]
+[call storage="&f.enemy_PASS" target="*レイプ続" cond="f.Rape_mode > 1"]
 ２枚目のカードを選択してください[p]
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw2=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー２完了" ]
 [glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw2=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー２完了" ]
@@ -65,42 +66,33 @@ f.Deck.splice(0,5);
 [eval exp="f.Total = f.Total + f.Cards[f.Draw2]['value']"]
 [eval exp="f.Draw2_txt = f.Cards[f.Draw2]['txt'] "]
 [show_score]
-*抵抗判定１
+*拘束ドロー２判定
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
-判定成功[p]
+[call target="*判定成功"]
 [jump target="*抵抗コマンド実行"]
 [elsif exp="f.Total > f.Limit "]
-判定失敗[p]
+[call target="*判定失敗"]
+[jump target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
 [jump target="*拘束バースト"]
 [else]
-目標未達[p]
-[jump target="*猥雑耐久１" cond="f.Rape_mode > 0"]
+[call target="*目標未達"]
+[jump target="*猥雑対抗１" cond="f.Rape_mode > 0"]
 [jump target="*抵抗行動１"]
 [endif]
 [s]
 *抵抗行動１
-#
-鈴猫は拘束を振りほどこうともがいた[p]
-[eval exp="f.Bind -= 20"]
-拘束力が20減少[r]
-守備力が-１された[p]
-[eval exp="f.En_DEF-- "]
-[show_score][update_status]
+[call target="*抵抗行動"]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
-[show_score]
 [jump target="*敵拘束攻撃１"]
 [s]
-*猥雑耐久１
-#
-鈴猫は快感に耐えるために身構えた[p]
-[chara_mod name="suzune" face="怒り" cond="f.ERO >= 60 && f.orgasm == 0"]
-[eval exp="f.ERO_DEF = 1"]
+*猥雑対抗１
+[call target="*猥雑対抗"]
 [jump target="*敵拘束攻撃１"]
 [s]
-
 *敵拘束攻撃１
 [call storage="&f.enemy_PASS" target="*敵拘束攻撃１" cond="f.Rape_mode == 0"]
 [call storage="&f.enemy_PASS" target="*レイプ本番" cond="f.Rape_mode > 0"]
+
 
 *拘束ドロー３
 ３枚目のカードを選択してください[p]
@@ -113,41 +105,33 @@ f.Deck.splice(0,5);
 [eval exp="f.Total = f.Total + f.Cards[f.Draw3]['value']"]
 [eval exp="f.Draw3_txt = f.Cards[f.Draw3]['txt'] "]
 [show_score]
-*抵抗判定２
+*拘束ドロー３判定
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
-判定成功[p]
+[call target="*判定成功"]
 [jump target="*抵抗コマンド実行"]
 [elsif exp="f.Total > f.Limit "]
-判定失敗[p]
+[call target="*判定失敗"]
+[jump target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
 [jump target="*拘束バースト"]
 [else]
-目標未達[p]
-[jump target="*猥雑耐久２" cond="f.Rape_mode > 0"]
+[call target="*目標未達"]
+[jump target="*猥雑対抗２" cond="f.Rape_mode > 0"]
 [jump target="*抵抗行動２"]
 [endif]
 [s]
 *抵抗行動２
-鈴猫は拘束を振りほどこうともがいた[p]
-[eval exp="f.Bind -= 20"]
-拘束力が20減少[r]
-守備力が-１された[p]
-[eval exp="f.En_DEF-- "]
-[show_score][update_status]
+[call target="*抵抗行動"]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
-[show_score]
 [jump target="*敵拘束攻撃２"]
 [s]
-*猥雑耐久２
-#
-鈴猫は快感に耐えるために身構えた[p]
-[chara_mod name="suzune" face="怒り" cond="f.ERO >= 60 && f.orgasm == 0"]
-[eval exp="f.ERO_DEF = 1"]
+*猥雑対抗２
+[call target="*猥雑対抗"]
 [jump target="*敵拘束攻撃２"]
 [s]
-
 *敵拘束攻撃２
 [call storage="&f.enemy_PASS" target="*敵拘束攻撃２" cond="f.Rape_mode == 0"]
 [call storage="&f.enemy_PASS" target="*レイプ本番" cond="f.Rape_mode > 0"]
+
 
 *拘束ドロー４
 ４枚目のカードを選択してください[p]
@@ -160,94 +144,122 @@ f.Deck.splice(0,5);
 [eval exp="f.Total = f.Total + f.Cards[f.Draw4]['value']"]
 [eval exp="f.Draw4_txt = f.Cards[f.Draw4]['txt'] "]
 [show_score]
-*抵抗判定３
+*拘束ドロー４判定
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
-判定成功[p]
+[call target="*判定成功"]
 [jump target="*抵抗コマンド実行"]
 [elsif exp="f.Total > f.Limit "]
-判定失敗[p]
+[call target="*判定失敗"]
+[jump target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
 [jump target="*拘束バースト"]
 [else]
-目標未達[p]
-[jump target="*猥雑耐久３" cond="f.Rape_mode > 0"]
+[call target="*目標未達"]
+[jump target="*猥雑対抗３" cond="f.Rape_mode > 0"]
 [jump target="*抵抗行動３"]
 [endif]
 [s]
 *抵抗行動３
-鈴猫は拘束を振りほどこうともがいた[p]
-[eval exp="f.Bind -= 20"]
-拘束力が20減少[r]
-守備力が-１された[p]
-[eval exp="f.En_DEF-- "]
-[show_score][update_status]
+[call target="*抵抗行動"]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
-[show_score]
 [jump target="*敵拘束攻撃３"]
 [s]
-*猥雑耐久３
-#
-鈴猫は快感に耐えるために身構えた[p]
-[chara_mod name="suzune" face="怒り" cond="f.ERO >= 60 && f.orgasm == 0"]
-[eval exp="f.ERO_DEF = 1"]
+*猥雑対抗３
+[call target="*猥雑対抗"]
 [jump target="*敵拘束攻撃３"]
 [s]
-
 *敵拘束攻撃３
 [call storage="&f.enemy_PASS" target="*敵拘束攻撃３" cond="f.Rape_mode == 0"]
 [call storage="&f.enemy_PASS" target="*レイプ本番" cond="f.Rape_mode > 0"]
 
-*抵抗ドロー５
+
+*拘束ドロー５
 ５枚目のカードを選択してください[p]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw5=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*抵抗ドロー５完了" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw5=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*抵抗ドロー５完了" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw5=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*抵抗ドロー５完了" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw5=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*抵抗ドロー５完了" ]
+[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw5=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー５完了" ]
+[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw5=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー５完了" ]
+[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw5=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー５完了" ]
+[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw5=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー５完了" ]
 [s]
-*抵抗ドロー５完了
+*拘束ドロー５完了
 [eval exp="f.Total = f.Total + f.Cards[f.Draw5]['value']"]
 [eval exp="f.Draw5_txt = f.Cards[f.Draw5]['txt'] "]
 [show_score]
-*抵抗判定４
+*拘束ドロー５判定
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
-判定成功[p]
+[call target="*判定成功"]
 [jump target="*抵抗コマンド実行"]
 [else]
-判定失敗[p]
+[call target="*判定失敗"]
+[jump target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
 [jump target="*拘束バースト"]
 [endif]
 [s]
+
 *抵抗コマンド実行
-[if exp="f.comand == 1"]
+[if  exp="f.comandId == 0"]
+[jump target="*抵抗コマンド０"]
+[elsif exp="f.comandId == 1"]
 [jump target="*抵抗コマンド１"]
-[elsif exp="f.comand == 2"]
+[elsif exp="f.comandId == 2"]
 [jump target="*抵抗コマンド２"]
-[elsif exp="f.comand == 3"]
+[elsif exp="f.comandId == 3"]
 [jump target="*抵抗コマンド３"]
-[elsif exp="f.comand == 4"]
+[elsif exp="f.comandId == 4"]
 [jump target="*抵抗コマンド４"]
 [endif]
 error697
 [s]
+
 ;---------------------------
+*判定成功
+判定成功[p]
+[return][s]
+*判定失敗
+判定失敗[p]
+[return][s]
+*目標未達
+目標未達[p]
+[return][s]
+*抵抗行動
+#
+鈴猫は拘束を振りほどこうともがいた[p]
+[eval exp="f.Bind -= 20"]
+拘束力が20減少[p]
+[show_score][update_status]
+[return][s]
+*猥雑対抗
+#
+鈴猫は快感に耐えるために身構えた[p]
+[chara_mod name="suzune" face="怒り" cond="f.ERO >= 60 && f.orgasm == 0"]
+[return][s]
+;---------------------------
+*抵抗コマンド０
+鈴猫は快感に耐えるために身構えた[p]
+[eval exp="f.ERO_DEF = 1"]
+[call storage="&f.enemy_PASS" target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
+[jump target="*拘束脱出" ]
+[s]
 *抵抗コマンド１
-鈴猫は暴れた[p]
-[eval exp="f.Bind -= 40 ,f.En_ERO -= 2"]
-拘束力が40減少[p]
+鈴猫はもがいた[p]
+[eval exp="f.Bind -= 20 ,f.En_ERO -= 2"]
+[eval exp="f.En_ERO = 0 " cond="f.En_ERO < 0"]
+拘束力が20減少[p]
 [show_score]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
 [jump target="*拘束ラウンド継続"]
 [s]
 *抵抗コマンド２
-鈴猫は噛み付いた[p]
+鈴猫は暴れた[p]
 [eval exp="f.Bind -= 80 ,f.En_ERO -= 4"]
+[eval exp="f.En_ERO = 0 " cond="f.En_ERO < 0"]
 拘束力が80減少[p]
 [show_score]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
 [jump target="*拘束ラウンド継続"]
 [s]
 *抵抗コマンド３
-鈴猫の頭突き[p]
+鈴猫は噛み付いた[p]
 [eval exp="f.Bind -= 120 ,f.En_ERO -= 6"]
+[eval exp="f.En_ERO = 0 " cond="f.En_ERO < 0"]
 拘束力が120減少[p]
 [show_score]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
@@ -255,8 +267,10 @@ error697
 [s]
 *抵抗コマンド４
 鈴猫の金的[p]
-[eval exp="f.Bind -= 200 ,f.En_ERO -= 8"]
-拘束力が200減少[p]
+[eval exp="f.Bind -= 180 ,f.En_ERO -= 9"]
+[eval exp="f.En_ERO = 0 " cond="f.En_ERO < 0"]
+
+拘束力が180減少[p]
 [show_score]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
 [jump target="*拘束ラウンド継続"]
@@ -264,9 +278,13 @@ error697
 
 *拘束バースト
 [call storage="&f.enemy_PASS" target="*拘束バースト" cond="f.Rape_mode == 0"]
-[call storage="&f.enemy_PASS" target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
-[jump target="*拘束脱出" cond="f.Rape_mode > 0"]
 [jump target="*拘束ラウンド継続"]
+[s]
+
+*レイプフィニッシュ
+[eval exp="f.ERO_DEF = 0"]
+[call storage="&f.enemy_PASS" target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
+[jump target="*拘束脱出" ]
 [s]
 
 *拘束脱出
@@ -281,6 +299,8 @@ error697
 今回、使用した札は[emb exp="f.Cards[f.Hand[0]]['txt']"]、
 [emb exp="f.Cards[f.Hand[1]]['txt']"]、[emb exp="f.Cards[f.Hand[2]]['txt']"]、
 [emb exp="f.Cards[f.Hand[3]]['txt']"]、[emb exp="f.Cards[f.Hand[4]]['txt']"]です[p]
+[eval exp="f.En_ERO += 5 "]
+[update_status]
 [DeActivate]
 [reflesh_score]
 [ReShuffle]
