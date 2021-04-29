@@ -28,12 +28,12 @@ f.Deck.splice(0,5);
 [endscript]
 
 
-*拘束ドロー１
+*拘束ドロー1
 [glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw1=f.Hand[0],f.Cards[f.Hand[0]]['active']=0" cond="f.Cards[f.Hand[0]]['active']>0" target="*抵抗コマンド選択" ]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー１" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー１" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー１" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー１" ]
+[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー1" ]
+[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー1" ]
+[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー1" ]
+[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー1" ]
 [s]
 *抵抗コマンド選択
 [eval exp="f.Total = 0 + f.Cards[f.Draw1]['value']"]
@@ -52,21 +52,21 @@ f.Deck.splice(0,5);
 [eval exp="f.Target = f.En_DEF + f.comand" ]
 [show_score]
 
-*拘束ドロー２
+*拘束ドロー2
 [eval exp="f.Limit=21"][show_score]
 [call storage="&f.enemy_PASS" target="*レイプ序" cond="f.Rape_mode == 1"]
 [call storage="&f.enemy_PASS" target="*レイプ続" cond="f.Rape_mode > 1"]
 ２枚目のカードを選択してください[p]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw2=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー２完了" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw2=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー２完了" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw2=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー２完了" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw2=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー２完了" ]
+[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw2=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー2完了" ]
+[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw2=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー2完了" ]
+[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw2=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー2完了" ]
+[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw2=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー2完了" ]
 [s]
-*拘束ドロー２完了
+*拘束ドロー2完了
 [eval exp="f.Total = f.Total + f.Cards[f.Draw2]['value']"]
 [eval exp="f.Draw2_txt = f.Cards[f.Draw2]['txt'] "]
 [show_score]
-*拘束ドロー２判定
+*拘束ドロー2判定
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
 [call target="*判定成功"]
 [jump target="*抵抗コマンド実行"]
@@ -76,36 +76,36 @@ f.Deck.splice(0,5);
 [jump target="*拘束バースト"]
 [else]
 [call target="*目標未達"]
-[jump target="*猥雑対抗１" cond="f.Rape_mode > 0"]
-[jump target="*抵抗行動１"]
+[jump target="*猥雑対抗" cond="f.Rape_mode > 0"]
+[jump target="*抵抗行動1"]
 [endif]
 [s]
-*抵抗行動１
+*抵抗行動1
 [call target="*抵抗行動"]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
-[jump target="*敵拘束攻撃１"]
+[jump target="*敵拘束攻撃1"]
 [s]
-*猥雑対抗１
+*猥雑対抗1
 [call target="*猥雑対抗"]
-[jump target="*敵拘束攻撃１"]
+[jump target="*敵拘束攻撃1"]
 [s]
-*敵拘束攻撃１
-[call storage="&f.enemy_PASS" target="*敵拘束攻撃１" cond="f.Rape_mode == 0"]
+*敵拘束攻撃1
+[call storage="&f.enemy_PASS" target="*敵拘束攻撃1" cond="f.Rape_mode == 0"]
 [call storage="&f.enemy_PASS" target="*レイプ本番" cond="f.Rape_mode > 0"]
 
 
-*拘束ドロー３
+*拘束ドロー3
 ３枚目のカードを選択してください[p]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw3=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー３完了" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw3=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー３完了" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw3=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー３完了" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw3=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー３完了" ]
+[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw3=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー3完了" ]
+[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw3=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー3完了" ]
+[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw3=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー3完了" ]
+[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw3=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー3完了" ]
 [s]
-*拘束ドロー３完了
+*拘束ドロー3完了
 [eval exp="f.Total = f.Total + f.Cards[f.Draw3]['value']"]
 [eval exp="f.Draw3_txt = f.Cards[f.Draw3]['txt'] "]
 [show_score]
-*拘束ドロー３判定
+*拘束ドロー3判定
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
 [call target="*判定成功"]
 [jump target="*抵抗コマンド実行"]
@@ -115,36 +115,36 @@ f.Deck.splice(0,5);
 [jump target="*拘束バースト"]
 [else]
 [call target="*目標未達"]
-[jump target="*猥雑対抗２" cond="f.Rape_mode > 0"]
-[jump target="*抵抗行動２"]
+[jump target="*猥雑対抗2" cond="f.Rape_mode > 0"]
+[jump target="*抵抗行動2"]
 [endif]
 [s]
-*抵抗行動２
+*抵抗行動2
 [call target="*抵抗行動"]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
-[jump target="*敵拘束攻撃２"]
+[jump target="*敵拘束攻撃2"]
 [s]
-*猥雑対抗２
+*猥雑対抗2
 [call target="*猥雑対抗"]
-[jump target="*敵拘束攻撃２"]
+[jump target="*敵拘束攻撃2"]
 [s]
-*敵拘束攻撃２
-[call storage="&f.enemy_PASS" target="*敵拘束攻撃２" cond="f.Rape_mode == 0"]
+*敵拘束攻撃2
+[call storage="&f.enemy_PASS" target="*敵拘束攻撃2" cond="f.Rape_mode == 0"]
 [call storage="&f.enemy_PASS" target="*レイプ本番" cond="f.Rape_mode > 0"]
 
 
-*拘束ドロー４
+*拘束ドロー4
 ４枚目のカードを選択してください[p]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw4=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー４完了" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw4=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー４完了" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw4=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー４完了" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw4=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー４完了" ]
+[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw4=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー4完了" ]
+[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw4=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー4完了" ]
+[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw4=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー4完了" ]
+[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw4=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー4完了" ]
 [s]
-*拘束ドロー４完了
+*拘束ドロー4完了
 [eval exp="f.Total = f.Total + f.Cards[f.Draw4]['value']"]
 [eval exp="f.Draw4_txt = f.Cards[f.Draw4]['txt'] "]
 [show_score]
-*拘束ドロー４判定
+*拘束ドロー4判定
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
 [call target="*判定成功"]
 [jump target="*抵抗コマンド実行"]
@@ -154,36 +154,36 @@ f.Deck.splice(0,5);
 [jump target="*拘束バースト"]
 [else]
 [call target="*目標未達"]
-[jump target="*猥雑対抗３" cond="f.Rape_mode > 0"]
-[jump target="*抵抗行動３"]
+[jump target="*猥雑対抗3" cond="f.Rape_mode > 0"]
+[jump target="*抵抗行動3"]
 [endif]
 [s]
-*抵抗行動３
+*抵抗行動3
 [call target="*抵抗行動"]
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
-[jump target="*敵拘束攻撃３"]
+[jump target="*敵拘束攻撃3"]
 [s]
-*猥雑対抗３
+*猥雑対抗3
 [call target="*猥雑対抗"]
-[jump target="*敵拘束攻撃３"]
+[jump target="*敵拘束攻撃3"]
 [s]
-*敵拘束攻撃３
-[call storage="&f.enemy_PASS" target="*敵拘束攻撃３" cond="f.Rape_mode == 0"]
+*敵拘束攻撃3
+[call storage="&f.enemy_PASS" target="*敵拘束攻撃3" cond="f.Rape_mode == 0"]
 [call storage="&f.enemy_PASS" target="*レイプ本番" cond="f.Rape_mode > 0"]
 
 
-*拘束ドロー５
+*拘束ドロー5
 ５枚目のカードを選択してください[p]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw5=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー５完了" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw5=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー５完了" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw5=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー５完了" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw5=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー５完了" ]
+[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw5=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー5完了" ]
+[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw5=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー5完了" ]
+[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw5=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー5完了" ]
+[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw5=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー5完了" ]
 [s]
-*拘束ドロー５完了
+*拘束ドロー5完了
 [eval exp="f.Total = f.Total + f.Cards[f.Draw5]['value']"]
 [eval exp="f.Draw5_txt = f.Cards[f.Draw5]['txt'] "]
 [show_score]
-*拘束ドロー５判定
+*拘束ドロー5判定
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
 [call target="*判定成功"]
 [jump target="*抵抗コマンド実行"]
@@ -198,13 +198,13 @@ f.Deck.splice(0,5);
 [if  exp="f.comandId == 0"]
 [jump target="*抵抗コマンド０"]
 [elsif exp="f.comandId == 1"]
-[jump target="*抵抗コマンド１"]
+[jump target="*抵抗コマンド1"]
 [elsif exp="f.comandId == 2"]
-[jump target="*抵抗コマンド２"]
+[jump target="*抵抗コマンド2"]
 [elsif exp="f.comandId == 3"]
-[jump target="*抵抗コマンド３"]
+[jump target="*抵抗コマンド3"]
 [elsif exp="f.comandId == 4"]
-[jump target="*抵抗コマンド４"]
+[jump target="*抵抗コマンド4"]
 [endif]
 error697
 [s]
@@ -238,7 +238,7 @@ error697
 [call storage="&f.enemy_PASS" target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
 [jump target="*拘束脱出" ]
 [s]
-*抵抗コマンド１
+*抵抗コマンド1
 鈴猫はもがいた[p]
 [eval exp="f.Bind -= 20 ,f.En_ERO -= 2"]
 [eval exp="f.En_ERO = 0 " cond="f.En_ERO < 0"]
@@ -247,7 +247,7 @@ error697
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
 [jump target="*拘束ラウンド継続"]
 [s]
-*抵抗コマンド２
+*抵抗コマンド2
 鈴猫は暴れた[p]
 [eval exp="f.Bind -= 80 ,f.En_ERO -= 4"]
 [eval exp="f.En_ERO = 0 " cond="f.En_ERO < 0"]
@@ -256,7 +256,7 @@ error697
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
 [jump target="*拘束ラウンド継続"]
 [s]
-*抵抗コマンド３
+*抵抗コマンド3
 鈴猫は噛み付いた[p]
 [eval exp="f.Bind -= 120 ,f.En_ERO -= 6"]
 [eval exp="f.En_ERO = 0 " cond="f.En_ERO < 0"]
@@ -265,7 +265,7 @@ error697
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
 [jump target="*拘束ラウンド継続"]
 [s]
-*抵抗コマンド４
+*抵抗コマンド4
 鈴猫の金的[p]
 [eval exp="f.Bind -= 180 ,f.En_ERO -= 9"]
 [eval exp="f.En_ERO = 0 " cond="f.En_ERO < 0"]

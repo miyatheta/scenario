@@ -1,5 +1,5 @@
 *エネミーデータ
-[eval exp="f.En_HP = 2000 ,f.En_MP_gain =　30"]
+[eval exp="f.En_HP = 2000 ,f.En_MP_gain =　30 , f.En_ATP = 50 , f.En_DEX = 0"]
 [return][s]
 
 *行動パターン
@@ -21,12 +21,33 @@
 [endif]
 [return][s]
 
-*敵攻撃１
+*回避
+[getrand min="1" max="100" var="f.rand"]
+[if exp="f.rand < (f.RES + f.RES_green) - f.En_DEX - (f.orgasm * 30) "]
+[endif]
+
+*攻撃
+[eval exp="f.damage=f.En_ATP * f.RATE"]
+[eval exp="f.HP -= f.damage"]
+[emb exp="f.damage"]のダメージを受けた。[p]
+[return][s]
+
+*敵攻撃
+;ターゲットテキストの作成
+[iscript]
+f.counterTag = "*反撃" + f.Down;
+f.nextDraw = f.Down + 1;
+f.returnTag = "*ドロー" + f.nextDraw;
+[endscript]
+[return][s]
+
+*敵攻撃1
+[call target="*敵攻撃"]
 敵の攻撃！[p]
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.rand < (f.RES + f.RES_green) - (f.orgasm * 30)"]
 鈴猫は敵の攻撃を回避した[p]
-[jump storage="battle.ks" target="*反撃１"]
+[jump storage="battle.ks" target="&f.counterTag"]
 [endif]
 
 [if exp="f.En_DEF <= 11"]
@@ -52,15 +73,16 @@
 [endif]
 
 [update_status][show_score]
-[jump storage="battle.ks" target="*ドロー３"]
+[jump storage="battle.ks" target="&f.returnTag"]
 [s]
 
-*敵攻撃２
+*敵攻撃2
+[call target="*敵攻撃"]
 敵の攻撃！[p]
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.rand < (f.RES + f.RES_green) - (f.orgasm * 30)"]
 鈴猫は敵の攻撃を回避した[p]
-[jump storage="battle.ks" target="*反撃２"]
+[jump storage="battle.ks" target="&f.counterTag"]
 [endif]
 
 [if exp="f.En_DEF <= 11"]
@@ -84,15 +106,16 @@
 ５０のダメージを受けた。[p]
 [endif]
 [update_status][show_score]
-[jump storage="battle.ks" target="*ドロー４"]
+[jump storage="battle.ks" target="&f.returnTag"]
 [s]
 
-*敵攻撃３
+*敵攻撃3
+[call target="*敵攻撃"]
 敵の攻撃！[p]
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.rand < (f.RES + f.RES_green) - (f.orgasm * 30)"]
 鈴猫は敵の攻撃を回避した[p]
-[jump storage="battle.ks" target="*反撃３"]
+[jump storage="battle.ks" target="&f.counterTag"]
 [endif]
 
 [if exp="f.En_DEF <= 11"]
@@ -114,7 +137,7 @@
 ５０のダメージを受けた。[p]
 [endif]
 [update_status][show_score]
-[jump storage="battle.ks" target="*ドロー５"]
+[jump storage="battle.ks" target="&f.returnTag"]
 [s]
 
 *バースト
@@ -138,7 +161,7 @@
 
 ;拘束----------------------------------------------------------------------------
 
-*敵拘束攻撃１
+*敵拘束攻撃1
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.rand < 90"]
 #敵
@@ -164,7 +187,7 @@
 [update_status][show_score]
 [return][s]
 
-*敵拘束攻撃２
+*敵拘束攻撃2
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.rand < 90"]
 #敵
@@ -190,7 +213,7 @@
 [update_status][show_score]
 [return][s]
 
-*敵拘束攻撃３
+*敵拘束攻撃3
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.rand < 90"]
 #敵
