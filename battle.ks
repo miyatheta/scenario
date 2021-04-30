@@ -29,7 +29,7 @@
 [jump target="*ラウンド開始"]
 ;サブルーチン-----------------------------------------------------------------------
 *ドローボーナス
-[call storage="tutorial.ks" target="*ドローボーナス" cond="f.tutorial01 != 1"]
+[call storage="tutorial.ks" target="*ドローボーナスについて" cond="f.tutorial01 != 1"]
 [if exp="f.drawColor == 'red' "]
 攻撃力アップ[wt2]
 [eval exp="f.ATP_red += 10"]
@@ -108,9 +108,17 @@
 [jump target="*バースト"]
 [else]
 目標未達[p]
-[jump storage="&f.enemy_PASS" target="&f.Path"]
+[jump target="&f.Path"]
 [endif]
 [s]
+
+*攻撃
+鈴猫の攻撃[wt2]
+[eval exp="f.damage = (f.ATP + f.ATP_red) - (f.orgasm * 30)"]
+[eval exp="f.En_HP -= f.damage"]
+[emb exp="f.damage"]のダメージを与えた[p]
+[show_score][update_status]
+[return][s]
 
 *反撃
 反撃[wt2]
@@ -130,14 +138,14 @@
 [show_score][update_status]
 
 *敵パターン抽選
-敵の守備力が表示されます[p]
+;敵の守備力が表示されます[p]
 [call storage="&f.enemy_PASS" target="*行動パターン" ]
 [show_score]
 ;手札作成
 [make_hand]
 
 *カード配布
-１枚目のカードが表示されます[wt2]
+;１枚目のカードが表示されます[wt2]
 [glink color="rosy" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="手札配布" target="*ドロー1" ]
 [s]
 *ドロー1
@@ -150,7 +158,7 @@
 [show_score][update_status]
 *ドロー1ボーナス
 [eval exp="f.drawColor = f.Cards[f.Draw1]['color']"][call target="*ドローボーナス"]
-[call storage="tutorial.ks" target="*目標値" cond="f.tutorial02 != 1"]
+[call storage="tutorial.ks" target="*目標値について" cond="f.tutorial02 != 1"]
 *コマンド選択
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="拳(3)" exp="f.comand=3" target="*目標設定"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="下段蹴り(4)" exp="f.comand=4" target="*目標設定"]
@@ -168,11 +176,11 @@
 [show_score]
 
 *ドロー2
-２枚目のカードを選択してください[l]
+;２枚目のカードを選択してください[l]
 [eval exp="f.Draw = 0 , f.Down = 2 , f.Path = '*ドロー2完了' "]
 [jump target="*ドロー"]
 *ドロー2完了
-[call storage="tutorial.ks" target="*ドロー2" cond="f.tutorial03 != 1"]
+[call storage="tutorial.ks" target="*ドローについて" cond="f.tutorial03 != 1"]
 [eval exp="f.Draw2 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw2]['value']"]
 [eval exp="f.Draw2_txt = f.Cards[f.Draw2]['txt'] "]
@@ -181,20 +189,24 @@
 [eval exp="f.drawColor = f.Cards[f.Draw2]['color']"]
 [call target="*ドローボーナス"]
 *ドロー2判定
-[call storage="tutorial.ks" target="*判定1" cond="f.tutorial04 != 1"]
-[eval exp="f.Path = '*敵攻撃' "]
+[call storage="tutorial.ks" target="*判定について" cond="f.tutorial04 != 1"]
+[eval exp="f.Path = '*攻撃2' "]
 [jump target="*ドロー判定"]
+*攻撃2
+[call storage="tutorial.ks" target="*攻撃について" cond="f.tutorial05 != 1"]
+[call target="*攻撃"]
+[jump target="*勝利" cond="f.En_HP <= 0"]
+[jump storage="&f.enemy_PASS" target="*敵攻撃"]
 *反撃2
-[call storage="tutorial.ks" target="*反撃1" cond="f.tutorial05 != 1"]
+[call storage="tutorial.ks" target="*反撃について" cond="f.tutorial05 != 1"]
 [call target="*反撃"]
 [jump target="*勝利" cond="f.En_HP <= 0"]
 
 *ドロー3
-３枚目のカードを選択してください[l]
+;３枚目のカードを選択してください[l]
 [eval exp="f.Draw = 0 , f.Down = 3 , f.Path = '*ドロー3完了' "]
 [jump target="*ドロー"]
 *ドロー3完了
-[call storage="tutorial.ks" target="*ドロー3" cond="f.tutorial06 != 1"]
 [eval exp="f.Draw3 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw3]['value']"]
 [eval exp="f.Draw3_txt = f.Cards[f.Draw3]['txt'] "]
@@ -203,18 +215,21 @@
 [eval exp="f.drawColor = f.Cards[f.Draw3]['color']"]
 [call target="*ドローボーナス"]
 *ドロー3判定
-[eval exp="f.Path = '*敵攻撃' "]
+[eval exp="f.Path = '*攻撃3' "]
 [jump target="*ドロー判定"]
+*攻撃3
+[call target="*攻撃"]
+[jump target="*勝利" cond="f.En_HP <= 0"]
+[jump storage="&f.enemy_PASS" target="*敵攻撃"]
 *反撃3
 [call target="*反撃"]
 [jump target="*勝利" cond="f.En_HP <= 0"]
 
 *ドロー4
-４枚目のカードを選択してください[l]
+;４枚目のカードを選択してください[l]
 [eval exp="f.Draw = 0 , f.Down = 4 , f.Path = '*ドロー4完了' "]
 [jump target="*ドロー"]
 *ドロー4完了
-[call storage="tutorial.ks" target="*ドロー4" cond="f.tutorial07 != 1"]
 [eval exp="f.Draw4 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw4]['value']"]
 [eval exp="f.Draw4_txt = f.Cards[f.Draw4]['txt'] "]
@@ -223,18 +238,21 @@
 [eval exp="f.drawColor = f.Cards[f.Draw4]['color']"]
 [call target="*ドローボーナス"]
 *ドロー4判定
-[eval exp="f.Path = '*敵攻撃' "]
+[eval exp="f.Path = '*攻撃4' "]
 [jump target="*ドロー判定"]
+*攻撃4
+[call target="*攻撃"]
+[jump target="*勝利" cond="f.En_HP <= 0"]
+[jump storage="&f.enemy_PASS" target="*敵攻撃"]
 *反撃4
 [call target="*反撃"]
 [jump target="*勝利" cond="f.En_HP <= 0"]
 
 *ドロー5
-５枚目のカードを選択してください[p]
+;５枚目のカードを選択してください[p]
 [eval exp="f.Draw = 0 , f.Down = 5 , f.Path = '*ドロー5完了' "]
 [jump target="*ドロー"]
 *ドロー5完了
-[call storage="tutorial.ks" target="*ドロー5" cond="f.tutorial08 != 1"]
 [eval exp="f.Draw5 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw5]['value']"]
 [eval exp="f.Draw5_txt = f.Cards[f.Draw5]['txt'] "]
@@ -244,10 +262,10 @@
 [call target="*ドローボーナス"]
 *ドロー5判定
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
-判定成功[p]
+判定成功[wt2]
 [jump target="*コマンド実行"]
 [else]
-判定失敗[p]
+判定失敗[wt2]
 [jump target="*バースト"]
 [endif]
 [s]
@@ -319,12 +337,25 @@
 #鈴猫
 空蝉の術！[wt2]
 #
-敵の攻撃を回避した[wt2]
+鈴猫は敵の攻撃を回避した[wt2]
 鈴猫は装束を失った[wt2]
 [eval exp="f.dress=2 , f.invincible=0"]
 [call storage="As_face.ks"]
 [chara_mod name="suzune" face="厳しい" ]
-[jump storage="battle.ks" target="&f.counterTag"]
+[jump target="&f.returnTag"]
+[s]
+*空蝉発動拘束時
+#
+;敵の攻撃演出後
+#鈴猫
+空蝉の術！[wt2]
+#
+鈴猫は敵の掴みを回避した[wt2]
+鈴猫は装束を失った[wt2]
+[eval exp="f.dress=2 , f.invincible=0"]
+[call storage="As_face.ks"]
+[chara_mod name="suzune" face="厳しい" ]
+[jump target="*ラウンド終了"]
 [s]
 
 ;---------------------------------------------

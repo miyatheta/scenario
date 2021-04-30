@@ -83,11 +83,7 @@ f.Deck.splice(0,5);
 
 *拘束ドロー1
 [eval exp="f.Draw = 0 , f.Down = 1 , f.Path = '*ドロー1完了' "]
-[glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw1=f.Hand[0],f.Cards[f.Hand[0]]['active']=0" cond="f.Cards[f.Hand[0]]['active']>0" target="*抵抗コマンド選択" ]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー1" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー1" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー1" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー1" ]
+[jump target="*ドロー"]
 [s]
 *ドロー1完了
 *抵抗コマンド選択
@@ -113,10 +109,7 @@ f.Deck.splice(0,5);
 [call storage="&f.enemy_PASS" target="*レイプ続" cond="f.Rape_mode > 1"]
 ２枚目のカードを選択してください[p]
 [eval exp="f.Draw = 0 , f.Down = 2 , f.Path = '*拘束ドロー2完了' "]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw2=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー2完了" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw2=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー2完了" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw2=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー2完了" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw2=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー2完了" ]
+[jump target="*ドロー"]
 [s]
 *拘束ドロー2完了
 [eval exp="f.Total = f.Total + f.Cards[f.Draw2]['value']"]
@@ -132,7 +125,7 @@ f.Deck.splice(0,5);
 [jump target="*拘束バースト"]
 [else]
 [call target="*目標未達"]
-[jump target="*猥雑対抗" cond="f.Rape_mode > 0"]
+[jump target="*猥雑対抗1" cond="f.Rape_mode > 0"]
 [jump target="*抵抗行動1"]
 [endif]
 [s]
@@ -153,10 +146,7 @@ f.Deck.splice(0,5);
 *拘束ドロー3
 ３枚目のカードを選択してください[p]
 [eval exp="f.Draw = 0 , f.Down = 3 , f.Path = '*拘束ドロー3完了' "]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw3=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー3完了" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw3=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー3完了" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw3=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー3完了" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw3=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー3完了" ]
+[jump target="*ドロー"]
 [s]
 *拘束ドロー3完了
 [eval exp="f.Total = f.Total + f.Cards[f.Draw3]['value']"]
@@ -193,10 +183,7 @@ f.Deck.splice(0,5);
 *拘束ドロー4
 ４枚目のカードを選択してください[p]
 [eval exp="f.Draw = 0 , f.Down = 4 , f.Path = '*拘束ドロー4完了' "]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw4=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー4完了" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw4=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー4完了" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw4=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー4完了" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw4=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー4完了" ]
+[jump target="*ドロー"]
 [s]
 *拘束ドロー4完了
 [eval exp="f.Total = f.Total + f.Cards[f.Draw4]['value']"]
@@ -233,10 +220,7 @@ f.Deck.splice(0,5);
 *拘束ドロー5
 ５枚目のカードを選択してください[p]
 [eval exp="f.Draw = 0 , f.Down = 5 , f.Path = '*拘束ドロー5完了' "]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y exp="f.Draw5=f.Hand[1],f.Cards[f.Hand[1]]['active']=0" cond="f.Cards[f.Hand[1]]['active']>0" target="*拘束ドロー5完了" ]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y exp="f.Draw5=f.Hand[2],f.Cards[f.Hand[2]]['active']=0" cond="f.Cards[f.Hand[2]]['active']>0" target="*拘束ドロー5完了" ]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y exp="f.Draw5=f.Hand[3],f.Cards[f.Hand[3]]['active']=0" cond="f.Cards[f.Hand[3]]['active']>0" target="*拘束ドロー5完了" ]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y exp="f.Draw5=f.Hand[4],f.Cards[f.Hand[4]]['active']=0" cond="f.Cards[f.Hand[4]]['active']>0" target="*拘束ドロー5完了" ]
+[jump target="*ドロー"]
 [s]
 *拘束ドロー5完了
 [eval exp="f.Total = f.Total + f.Cards[f.Draw5]['value']"]

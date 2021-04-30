@@ -1,18 +1,22 @@
 *エネミーデータ
-[eval exp="f.En_HP = 2000 ,f.En_MP_gain =　30 , f.En_ATP = 20 , f.En_DEX = 0"]
+[eval exp="f.En_HP = 2000 ,f.En_MP_gain =　30 , f.En_ATP = 10 , f.En_DEX = 0 ,f.En_BASE_ERO = 30"]
 [return][s]
 
 *行動パターン
 ;敵の行動パターン選定
 ;チャージ判定
 [eval exp="f.En_BURST = 0" cond="f.En_BURST > 0"]
-[if exp="f.En_MP >= 100"]
-[eval exp="f.En_BURST = 1"]
-敵は力を溜めている[p]
-[endif]
+[eval exp="f.En_HOLD = 0" cond="f.En_HOLD > 0"]
 ;判定可能変数（残りHP）
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand<25"]
+[if exp="f.En_MP >= 100"]
+[eval exp="f.En_BURST = 1"]
+[eval exp="f.En_DEF = 18"]
+敵が印を切った[p]
+[elsif exp="f.rand < f.En_BASE_ERO + f.ERO"]
+[eval exp="f.En_DEF = 14"]
+[eval exp="f.En_HOLD = 1" ]
+[elsif exp="f.rand<25"]
 [eval exp="f.En_DEF = 15"]
 [elsif exp="f.rand<50"]
 [eval exp="f.En_DEF = 14"]
@@ -27,6 +31,7 @@
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.rand < (f.RES + f.RES_green) - f.En_DEX - (f.orgasm * 30) "]
 [eval exp="f.Pary = 1"]
+回避した[wt2]
 [endif]
 [return][s]
 
@@ -80,11 +85,11 @@ error-battle-970
 [s]
 
 *弱攻撃
-[eval exp="f.BASE= 50, f.En_DEX=10"]
+[eval exp="f.BASE= 30, f.En_DEX=10"]
 ;回避判定
 [call target="*回避"]
 ;回避成功の場合ジャンプ
-[jump storage="battle.ks" target="&f.counterTag" cond="f.Pary > 0"]
+[jump storage="battle.ks" target="&f.returnTag" cond="f.Pary > 0"]
 ;無敵の場合ジャンプ
 [jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
 ;失敗の場合ダメージ
@@ -96,13 +101,13 @@ error-battle-970
 [s]
 
 *中攻撃
-[eval exp="f.BASE= 100 , f.En_DEX = 5"]
+[eval exp="f.BASE= 40 , f.En_DEX = 5"]
 ;回避判定
 [call target="*回避"]
 ;回避成功の場合ジャンプ
-[jump storage="battle.ks" target="&f.counterTag" cond="f.Pary > 0"]
+[jump storage="battle.ks" target="&f.returnTag" cond="f.Pary > 0"]
 ;無敵の場合ジャンプ
-[jump storage="battle.ks" target="&f.counterTag" cond="f.invincible > 0"]
+[jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
 ;失敗の場合ダメージ
 ;ダメージ演出
 [call target="*ダメージ計算"]
@@ -112,13 +117,13 @@ error-battle-970
 [s]
 
 *強攻撃
-[eval exp="f.BASE= 150 , f.En_DEX = -5"]
+[eval exp="f.BASE= 50 , f.En_DEX = -5"]
 ;回避判定
 [call target="*回避"]
 ;回避成功の場合ジャンプ
-[jump storage="battle.ks" target="&f.counterTag" cond="f.Pary > 0"]
+[jump storage="battle.ks" target="&f.returnTag" cond="f.Pary > 0"]
 ;無敵の場合ジャンプ
-[jump storage="battle.ks" target="&f.counterTag" cond="f.invincible > 0"]
+[jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
 ;失敗の場合ダメージ
 ;ダメージ演出
 [call target="*ダメージ計算"]
@@ -132,122 +137,46 @@ error-battle-970
 敵のスキル使用[wt2]
 「守備体勢」[wt2]
 敵の守備力が＋１された[p]
-[update_status][show_score]
-[jump storage="battle.ks" target="&f.returnTag"]
-[s]
-
-
-*敵攻撃1
-[call target="*敵攻撃"]
-敵の攻撃！[p]
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < (f.RES + f.RES_green) - (f.orgasm * 30)"]
-鈴猫は敵の攻撃を回避した[p]
-[jump storage="battle.ks" target="&f.counterTag"]
-[endif]
-
-[if exp="f.En_DEF <= 11"]
-[eval exp="f.HP -= 150"]
-１5０のダメージを受けた。[p]
-
-[elsif exp="f.En_DEF <= 12"]
-[eval exp="f.HP -= 100"]
-１００のダメージを受けた。[p]
-敵のスキル使用[r]
-「守備体勢」[r]
-敵の守備力が＋１された[p]
 [eval exp="f.En_DEF += 1"][eval exp="f.Target += 1" ]
-
-[elsif exp="f.En_DEF <= 13"]
-[eval exp="f.HP -= 100"]
-１００のダメージを受けた。[p]
-
-[else]
-
-[eval exp="f.HP -= 50"]
-５０のダメージを受けた。[p]
-[endif]
-
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
 [s]
 
-*敵攻撃2
-[call target="*敵攻撃"]
-敵の攻撃！[p]
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < (f.RES + f.RES_green) - (f.orgasm * 30)"]
-鈴猫は敵の攻撃を回避した[p]
-[jump storage="battle.ks" target="&f.counterTag"]
-[endif]
-
-[if exp="f.En_DEF <= 11"]
-[eval exp="f.HP -= 150"]
-１5０のダメージを受けた。[p]
-
-[elsif exp="f.En_DEF <= 12"]
-[eval exp="f.HP -= 100"]
-１００のダメージを受けた。[p]
-敵のスキル使用[r]
-「守備体勢」[r]
-敵の守備力が＋１された[p]
-[eval exp="f.En_DEF += 1"][eval exp="f.Target += 1" ]
-
-[elsif exp="f.En_DEF <= 13"]
-[eval exp="f.HP -= 100"]
-１００のダメージを受けた。[p]
-[else]
-
-[eval exp="f.HP -= 50"]
-５０のダメージを受けた。[p]
-[endif]
-[update_status][show_score]
-[jump storage="battle.ks" target="&f.returnTag"]
-[s]
-
-*敵攻撃3
-[call target="*敵攻撃"]
-敵の攻撃！[p]
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < (f.RES + f.RES_green) - (f.orgasm * 30)"]
-鈴猫は敵の攻撃を回避した[p]
-[jump storage="battle.ks" target="&f.counterTag"]
-[endif]
-
-[if exp="f.En_DEF <= 11"]
-[eval exp="f.HP -= 150"]
-１5０のダメージを受けた。[p]
-[elsif exp="f.En_DEF <= 12"]
-[eval exp="f.HP -= 100"]
-１００のダメージを受けた。[p]
-敵のスキル使用[r]
-「守備体勢」[r]
-敵の守備力が＋１された[p]
-[eval exp="f.En_DEF += 1"][eval exp="f.Target += 1" ]
-
-[elsif exp="f.En_DEF <= 13"]
-[eval exp="f.HP -= 100"]
-１００のダメージを受けた。[p]
-[else]
-[eval exp="f.HP -= 50"]
-５０のダメージを受けた。[p]
-[endif]
-[update_status][show_score]
-[jump storage="battle.ks" target="&f.returnTag"]
-[s]
+;バースト----------------------------------------------------------------------------
 
 *バースト
 敵の攻撃[r]
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.En_BURST > 0"]
+[if exp="f.En_HOLD > 0" ]
+[jump target="*拘束攻撃"]
+[elsif exp="f.En_BURST > 0"]
+[jump target="*敵チャージ攻撃"]
+[else]
+[jump target="*バースト攻撃"]
+[endif]
+[s]
+
+*チャージ攻撃
 敵のチャージ攻撃[r]
+[jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
 [eval exp="f.HP -= 200"]
 ２００のダメージを受けた[p]
 [update_status]
-[else]
+[jump storage="battle.ks" target="*ラウンド終了"]
+[s]
+
+*拘束攻撃
 敵は鈴猫を拘束した[p]
+[jump storage="battle.ks" target="*空蝉発動拘束時" cond="f.invincible > 0"]
 [jump storage="battle/bind.ks" target="*拘束開始"]
-[endif]
+[jump storage="battle.ks" target="*ラウンド終了"]
+[s]
+
+*バースト攻撃
+敵のバースト攻撃[r]
+[jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
+[eval exp="f.HP -= 200"]
+２００のダメージを受けた[p]
+[update_status]
 [jump target="*敗北" cond="f.HP <= 0"]
 [jump storage="battle.ks" target="*ラウンド終了"]
 [s]
