@@ -1,14 +1,16 @@
 *エネミーデータ
-[eval exp="f.En_HP = 2000 ,f.En_MP_gain =　30 , f.En_ATP = 50 , f.En_DEX = 0"]
+[eval exp="f.En_HP = 2000 ,f.En_MP_gain =　30 , f.En_ATP = 20 , f.En_DEX = 0"]
 [return][s]
 
 *行動パターン
 ;敵の行動パターン選定
+;チャージ判定
 [eval exp="f.En_BURST = 0" cond="f.En_BURST > 0"]
 [if exp="f.En_MP >= 100"]
 [eval exp="f.En_BURST = 1"]
 敵は力を溜めている[p]
 [endif]
+;判定可能変数（残りHP）
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.rand<25"]
 [eval exp="f.En_DEF = 15"]
@@ -24,10 +26,13 @@
 *回避
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.rand < (f.RES + f.RES_green) - f.En_DEX - (f.orgasm * 30) "]
+[eval exp="f.Pary = 1"]
 [endif]
+[return][s]
 
-*攻撃
-[eval exp="f.damage=f.En_ATP * f.RATE"]
+*ダメージ計算
+[getrand min="1" max="&f.En_ATP" var="f.rand"]
+[eval exp="f.damage = f.BASE + f.rand"]
 [eval exp="f.HP -= f.damage"]
 [emb exp="f.damage"]のダメージを受けた。[p]
 [return][s]
@@ -39,7 +44,98 @@ f.counterTag = "*反撃" + f.Down;
 f.nextDraw = f.Down + 1;
 f.returnTag = "*ドロー" + f.nextDraw;
 [endscript]
-[return][s]
+;[eval exp="f.Pary = 0"]
+敵の攻撃！[p]
+;攻撃パターンを決める変数
+;①チャージ②行動パターン③残りHP④ドロー１の色＝f.Cards[f.Draw1]['color']
+;⑤ドロー時の色の内訳[Calc_Card]とf.色でアクセス
+;⑥ドロー時の色の合計値[Calc_Card]とf.色Valueでアクセス
+;⑦ドロー時の罰札の内訳
+;⑧何回目のドローか？
+[Calc_Card]
+[getrand min="1" max="100" var="f.rand"]
+[if exp="f.Orange > 2 && f.Down < 3"]
+;条件分岐後各攻撃方法のラベルへジャンプ
+[jump target="*強攻撃"]
+[elsif exp="f.Down > 3 && f.rand < 50"]
+[jump target="*強攻撃"]
+[elsif exp="f.Green > 2 && f.rand < 50"]
+[jump target="*強攻撃"]
+[elsif exp="f.OrangeValue > 10 && f.rand < 50"]
+[jump target="*中攻撃"]
+[elsif exp="f.OrangeValue <= 10 && f.rand < 50"]
+[jump target="*特殊行動"]
+[elsif exp="f.rand > 90"]
+[jump target="*強攻撃"]
+[elsif exp="f.rand > 60"]
+[jump target="*中攻撃"]
+[elsif exp="f.rand > 40"]
+[jump target="*特殊行動"]
+[else]
+;else後にはデフォルトの行動を書く
+[jump target="*弱攻撃"]
+[endif]
+;ここまで来ることはない
+error-battle-970
+[s]
+
+*弱攻撃
+[eval exp="f.BASE= 50, f.En_DEX=10"]
+;回避判定
+[call target="*回避"]
+;回避成功の場合ジャンプ
+[jump storage="battle.ks" target="&f.counterTag" cond="f.Pary > 0"]
+;無敵の場合ジャンプ
+[jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
+;失敗の場合ダメージ
+;ダメージ演出
+[call target="*ダメージ計算"]
+;生死の判定
+[update_status][show_score]
+[jump storage="battle.ks" target="&f.returnTag"]
+[s]
+
+*中攻撃
+[eval exp="f.BASE= 100 , f.En_DEX = 5"]
+;回避判定
+[call target="*回避"]
+;回避成功の場合ジャンプ
+[jump storage="battle.ks" target="&f.counterTag" cond="f.Pary > 0"]
+;無敵の場合ジャンプ
+[jump storage="battle.ks" target="&f.counterTag" cond="f.invincible > 0"]
+;失敗の場合ダメージ
+;ダメージ演出
+[call target="*ダメージ計算"]
+;生死の判定
+[update_status][show_score]
+[jump storage="battle.ks" target="&f.returnTag"]
+[s]
+
+*強攻撃
+[eval exp="f.BASE= 150 , f.En_DEX = -5"]
+;回避判定
+[call target="*回避"]
+;回避成功の場合ジャンプ
+[jump storage="battle.ks" target="&f.counterTag" cond="f.Pary > 0"]
+;無敵の場合ジャンプ
+[jump storage="battle.ks" target="&f.counterTag" cond="f.invincible > 0"]
+;失敗の場合ダメージ
+;ダメージ演出
+[call target="*ダメージ計算"]
+;生死の判定
+[update_status][show_score]
+[jump storage="battle.ks" target="&f.returnTag"]
+[s]
+
+*特殊行動
+#
+敵のスキル使用[wt2]
+「守備体勢」[wt2]
+敵の守備力が＋１された[p]
+[update_status][show_score]
+[jump storage="battle.ks" target="&f.returnTag"]
+[s]
+
 
 *敵攻撃1
 [call target="*敵攻撃"]
@@ -153,7 +249,8 @@ f.returnTag = "*ドロー" + f.nextDraw;
 [jump storage="battle/bind.ks" target="*拘束開始"]
 [endif]
 [jump target="*敗北" cond="f.HP <= 0"]
-[return][s]
+[jump storage="battle.ks" target="*ラウンド終了"]
+[s]
 
 *敗北
 鈴猫は敗北した[p]

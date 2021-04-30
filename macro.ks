@@ -68,7 +68,7 @@ for( i=0 ; i<n ; i++){f.Deck.push(i);}
 [endmacro]
 
 [macro name="DeckShuffle"]
-DeckShuffle[p]
+DeckShuffle[r]
 ;Deckはシャッフルした山札(ただしカード自体ではなくカードの位置nの列。引き換え番号みたいなもの）
 [iscript]
 for(i = f.Deck.length - 1; i >= 0; i--){
@@ -83,20 +83,35 @@ for(i = f.Deck.length - 1; i >= 0; i--){
 [macro name="Calc_Card"]
 ;各色の数値を計算
 [iscript]
-f.Red=0,f.Green=0,f.Blue=0,f.Black=0;
+f.Red=0,f.Green=0,f.Blue=0,f.Orange=0;
+f.RedValue=0,f.GreenValue=0,f.BlueValue=0,f.OrangeValue=0;
 for(i = 4; i >= 0; i--){
-  if(f.Cards[f.Hand[i]]['color'] == "red"){f.Red += f.Cards[f.Hand[i]]['value'];}
+  if(f.Cards[f.Hand[i]]['color'] == "red"){
+    f.Red += 1;
+    f.RedValue += f.Cards[f.Hand[i]]['value'];
+  }
 }
 for(i = 4; i >= 0; i--){
-  if(f.Cards[f.Hand[i]]['color'] == "green"){f.Green += f.Cards[f.Hand[i]]['value'];}
+  if(f.Cards[f.Hand[i]]['color'] == "green"){
+    f.Green += 1;
+    f.GreenValue += f.Cards[f.Hand[i]]['value'];
+  }
 }
 for(i = 4; i >= 0; i--){
-  if(f.Cards[f.Hand[i]]['color'] == "blue"){f.Blue += f.Cards[f.Hand[i]]['value'];}
+  if(f.Cards[f.Hand[i]]['color'] == "blue"){
+    f.Blue += 1;
+    f.BlueValue += f.Cards[f.Hand[i]]['value'];
+  }
 }
 for(i = 4; i >= 0; i--){
-  if(f.Cards[f.Hand[i]]['color'] == "black"){f.Black += f.Cards[f.Hand[i]]['value'];}
+  if(f.Cards[f.Hand[i]]['color'] == "orange"){
+    f.Orange += 1;
+    f.OrangeValue += f.Cards[f.Hand[i]]['value'];
+  }
 }
 [endscript]
+;赤：[emb exp="f.Red"]、青：[emb exp="f.Blue"]、緑：[emb exp="f.Green"]、黄：[emb exp="f.Orange"][wt2]
+;赤値：[emb exp="f.RedValue"]、青値：[emb exp="f.BlueValue"]、緑値：[emb exp="f.GreenValue"]、黄値：[emb exp="f.OrangeValue"][wt2]
 [endmacro]
 
 [macro name="make_hand"]
@@ -208,154 +223,6 @@ if(f.orgasm>0){
 [wait time="200"][cm]
 [endmacro]
 
-[macro name="MND1"]
-[eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
-[endmacro]
-
-[macro name="MND0"]
-[eval exp="f.MND -= 1" cond="f.MND > 0"][WSs]
-[endmacro]
-
-[macro name="STRIKE"]
-;攻撃威力の算出
-[eval exp="f.ATP = f.STR + f.arms_atp + f.acceA_atp + f.acceB_atp"]
-[eval exp="f.MGP = f.POW + f.arms_pow + f.acceA_pow + f.acceB_pow"]
-[eval exp="tf.argment = (f.ATP * f.DTR) * f.EN_GRD + f.rand"]
-;退魔力の算出
-[if exp="f.type==2"]
-[eval exp="tf.argment = tf.argment / 2 "]
-[eval exp="tf.argment = tf.argment + (f.MGP * f.DTR) " cond="f.enchant > 0"]
-[eval exp="tf.argment = tf.argment * 3 " cond="f.arms_type == 2 "]
-[endif]
-;絶頂時の攻撃ダウン
-;[eval exp="tf.argment = tf.argment * 0.5 " cond="f.acme > 0"]
-[endmacro]
-
-[macro name="AVOIDANCE"]
-[eval exp="f.target = (f.SPD - f.en_DEX) * 5 + (f.MND*10) + f.AVD - f.Hitrate"]
-[eval exp="f.target = f.target + (f.En_Raptured * 5)"]
-[endmacro]
-
-;攻撃成功時
-[macro name="ATKED"]
-[eval exp="f.MP += 3" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
-[endmacro]
-
-;回避時
-[macro name="AVOID"]
-[eval exp="f.MND += 1" cond="f.MND < 5"][WSs]
-[endmacro]
-
-;セクハラ時
-[macro name="SKEBE"]
-[eval exp="f.MND -= 1" cond="f.MND > 0"][WSs]
-;[eval exp="f.MP += 5" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
-[endmacro]
-
-;被弾時
-[macro name="DAMED"]
-;[eval exp="f.MND -= 1" cond="f.MND > 0"]
-[eval exp="f.HP = 0" cond="f.HP < 0"][WSs]
-[eval exp="f.MP += 5" ][eval exp="f.MP = 100" cond="f.MP > 100"][WSs]
-[endmacro]
-
-[macro name="WSs"]
-[call storage="routin/Rt_WriteStatus.ks"]
-[endmacro]
-
-[macro name="progressbar"]
-;[eval exp="f.progress = f.goal" cond="f.progress > f.goal"]
-[iscript]
-f.progressbar = "進行度：" + f.progress + "/" + f.goal;
-[endscript]
-[ptext layer="0" x="150" y="600" text=&f.progressbar size="20" color="black" edge="white" bold="bold" align="left" name="progressbar" overwrite="true" ]
-[endmacro]
-
-[macro name="progressbar_guard"]
-[iscript]
-f.progressbar = "逃走距離：" + f.progress + "/" + f.goal;
-[endscript]
-[ptext layer="0" x="150" y="600" text=&f.progressbar size="20" color="black" edge="white" bold="bold" align="left" name="progressbar" overwrite="true" ]
-[endmacro]
-
-[macro name="progressbar_trace"]
-[iscript]
-f.progressbar = "現在地：" + f.progress + "敵所在：" + f.En_progress + "追跡限界：" + f.goal;
-[endscript]
-[ptext layer="0" x="150" y="600" text=&f.progressbar size="20" color="black" edge="white" bold="bold" align="left" name="progressbar" overwrite="true" ]
-[endmacro]
-
-[macro name="securitybar"]
-[eval exp="f.warning = 100" cond="f.warning > 100"]
-[iscript]
-f.warningLv = "警戒度：" + f.warning ;
-f.securityLv = "警戒態勢：" + f.security + "/" + f.security_MAX;
-[endscript]
-[ptext layer="0" x="150" y="640" text=&f.warningLv size="20" color="black" edge="white" bold="bold" align="left" name="warningbar" overwrite="true" ]
-[ptext layer="0" x="150" y="660" text=&f.securityLv size="20" color="black" edge="white" bold="bold" align="left" name="securitybar" overwrite="true" ]
-[endmacro]
-
-[macro name="WriteEnemy"]
-[iscript]
-tf.enNametxt = "敵：" + f.en_Name ;
-tf.enSANtxt = "理性：" + f.EN_SAN ;
-[endscript]
-[ptext layer="0" x="0" y="100" width="1270" text=&tf.enNametxt size="30" color="red" bold="bold" align="right" name="enemyname" overwrite="true" ]
-[ptext layer="0" x="0" y="150" width="1270" text=&tf.enSANtxt size="20" color="red" bold="bold" align="right" name="enemysan" overwrite="true" ]
-[endmacro]
-
-[macro name="WriteDate"]
-[iscript]
-tf.txt = f.date + "/60日" ;
-if(f.keibi>75){
- tf.homesecurity = "将軍警護：厳重 (" + f.keibi +")";
-}else if(f.keibi>50){
- tf.homesecurity = "将軍警護：普通 (" + f.keibi +")";
-}else if(f.keibi>25){
- tf.homesecurity = "将軍警護：緩い (" + f.keibi +")";
-}else {
- tf.homesecurity = "将軍警護：ザル (" + f.keibi +")";
-}
-tf.EXPs = "戦功:" + f.EXP + "(/" + f.EXP_Total + ")" ;
-[endscript]
-[ptext layer="0" x="0" y="0" width="1270" text=&tf.txt size="30" color="black" edge="white" bold="bold" align="right" name="calender" overwrite="true" ]
-[ptext layer="0" x="0" y="35" width="1270" text=&tf.homesecurity size="10" color="black" edge="white" bold="bold" align="right" name="homesecurity" overwrite="true" ]
-[ptext layer="0" x="0" y="70" width="1270" text=&tf.EXPs size="10" color="black" edge="white" align="right" name="EXPs" overwrite="true" ]
-[endmacro]
-
-[macro name="WriteEXP"]
-[iscript]
-tf.EXPs = "戦功:" + f.EXP + "(/" + f.EXP_Total + ")" ;
-[endscript]
-[ptext layer="0" x="0" y="70" width="1270" text=&tf.EXPs size="10" color="black" edge="white" align="right" name="EXPs" overwrite="true" ]
-[endmacro]
-
-[macro name="Milk"]
-[iscript]
-tf.milktxt = "乳：" + f.milkpoint ;
-[endscript]
-[if exp="f.milk > 0"]
-[ptext layer="0" x="10" y="300" text=&tf.milktxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="milkpoint" overwrite="true" ]
-[endif]
-[endmacro]
-
-[macro name="TESTER"]
-[if exp="f.bind > 0"]
-拘束値：[emb exp="f.bind"]>判定値：[emb exp="f.rand"][p]
-[else]
-目標値：[emb exp="f.target"]>判定値：[emb exp="f.rand"][p]
-[endif]
-[endmacro]
-
-[macro name="orgasm"]
-鈴猫の理性が１減少した[p]
-[eval exp="f.ERO = 0 , f.SAN -= 1 , f.MND = 0"]
-[eval exp="f.SAN = 0" cond="f.SAN < 0"]
-[eval exp=" tf.argment = tf.fuck / 10"][getMathRound var="f.damage"]
-[eval exp="f.HP -= f.damage"][eval exp="f.HP = 0" cond="f.HP < 0"]
-鈴猫の体力が[emb exp="f.damage"]減少した[p]
-[WSs]
-[endmacro]
 ; [getMathRound var="XXX"]
 ; 一時変数 tf.argment に小数点以下を四捨五入した整数をセットするマクロです。
 ; var には変数の名前を指定できます（var="f.a"のように）。
