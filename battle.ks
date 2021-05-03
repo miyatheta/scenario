@@ -47,28 +47,29 @@
 [show_score][update_status]
 [return][s]
 
+;１回目のみ
+;選択後
+;未選択、心眼使用
+;通常
 *ドロー
 [if exp="f.Cards[f.Hand[0]]['active']==0"]
 [glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw =f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="*ドロー" ]
 [else]
 [glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw1=f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="&f.Path" ]
 [endif]
-;１回めのみ
+
 [if exp="f.Down == 1"]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=1" target="*ドロー" ]
-;選択後
+[glink color="black"                         size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=1" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[1]]['active']==0"]
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text="&f.Cards[f.Hand[1]]['txt']" exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=0" target="*ドロー" ]
-;未選択、心眼使用
 [elsif exp="f.Cards[f.Hand[1]]['active']> 0 && f.shingan>0"]
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text="&f.Cards[f.Hand[1]]['txt']" exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=0" target="&f.Path" ]
-;通常
 [else]
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=0" target="&f.Path" ]
 [endif]
 
 [if exp="f.Down == 1"]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=1" target="*ドロー" ]
+[glink color="black"                        size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=1" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[2]]['active']==0"]
 [glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y text="&f.Cards[f.Hand[2]]['txt']" exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[2]]['active']> 0 && f.shingan>0"]
@@ -78,7 +79,7 @@
 [endif]
 
 [if exp="f.Down == 1"]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=1" target="*ドロー" ]
+[glink color="black"                        size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=1" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[3]]['active']==0"]
 [glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y text="&f.Cards[f.Hand[3]]['txt']" exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[3]]['active']> 0 && f.shingan>0"]
@@ -88,7 +89,7 @@
 [endif]
 
 [if exp="f.Down == 1"]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[4],f.Cards[f.Hand[4]]['active']=1" target="*ドロー" ]
+[glink color="black"                        size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[4],f.Cards[f.Hand[4]]['active']=1" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[4]]['active']==0"]
 [glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y text="&f.Cards[f.Hand[4]]['txt']" exp="f.Draw =f.Hand[4],f.Cards[f.Hand[4]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[4]]['active']> 0 && f.shingan>0"]
@@ -108,7 +109,7 @@
 [jump target="*バースト"]
 [else]
 目標未達[p]
-[jump target="&f.Path"]
+[jump storage="&f.enemy_PASS"  target="&f.Path"]
 [endif]
 [s]
 
@@ -160,11 +161,11 @@
 [eval exp="f.drawColor = f.Cards[f.Draw1]['color']"][call target="*ドローボーナス"]
 [call storage="tutorial.ks" target="*目標値について" cond="f.tutorial02 != 1"]
 *コマンド選択
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="拳(3)" exp="f.comand=3" target="*目標設定"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="下段蹴り(4)" exp="f.comand=4" target="*目標設定"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="回し蹴り(5)" exp="f.comand=5" target="*目標設定"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="踵落とし(6)" exp="f.comand=6" target="*目標設定"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="飛び蹴り(7)" exp="f.comand=7" target="*目標設定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="疾風の構え(7)" exp="f.comand=7" target="*目標設定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="流水の構え(8)" exp="f.comand=8" target="*目標設定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="円月の構え(9)" exp="f.comand=9" target="*目標設定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="火影の構え(10)" exp="f.comand=10" target="*目標設定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="紫電の構え(11)" exp="f.comand=11" target="*目標設定"]
 [glink color="red" size="18" x="0" y="450" text="スキル" exp="f.skillCase=1 , f.returnStr='battle.ks' , f.returnTag='*コマンド選択'" storage="skill.ks" target="*"]
 [s]
 *目標設定
@@ -190,17 +191,8 @@
 [call target="*ドローボーナス"]
 *ドロー2判定
 [call storage="tutorial.ks" target="*判定について" cond="f.tutorial04 != 1"]
-[eval exp="f.Path = '*攻撃2' "]
+[eval exp="f.Path = '*敵行動' "]
 [jump target="*ドロー判定"]
-*攻撃2
-[call storage="tutorial.ks" target="*攻撃について" cond="f.tutorial05 != 1"]
-[call target="*攻撃"]
-[jump target="*勝利" cond="f.En_HP <= 0"]
-[jump storage="&f.enemy_PASS" target="*敵攻撃"]
-*反撃2
-[call storage="tutorial.ks" target="*反撃について" cond="f.tutorial05 != 1"]
-[call target="*反撃"]
-[jump target="*勝利" cond="f.En_HP <= 0"]
 
 *ドロー3
 ;３枚目のカードを選択してください[l]
@@ -215,15 +207,8 @@
 [eval exp="f.drawColor = f.Cards[f.Draw3]['color']"]
 [call target="*ドローボーナス"]
 *ドロー3判定
-[eval exp="f.Path = '*攻撃3' "]
+[eval exp="f.Path = '*敵行動' "]
 [jump target="*ドロー判定"]
-*攻撃3
-[call target="*攻撃"]
-[jump target="*勝利" cond="f.En_HP <= 0"]
-[jump storage="&f.enemy_PASS" target="*敵攻撃"]
-*反撃3
-[call target="*反撃"]
-[jump target="*勝利" cond="f.En_HP <= 0"]
 
 *ドロー4
 ;４枚目のカードを選択してください[l]
@@ -238,15 +223,8 @@
 [eval exp="f.drawColor = f.Cards[f.Draw4]['color']"]
 [call target="*ドローボーナス"]
 *ドロー4判定
-[eval exp="f.Path = '*攻撃4' "]
+[eval exp="f.Path = '*敵行動' "]
 [jump target="*ドロー判定"]
-*攻撃4
-[call target="*攻撃"]
-[jump target="*勝利" cond="f.En_HP <= 0"]
-[jump storage="&f.enemy_PASS" target="*敵攻撃"]
-*反撃4
-[call target="*反撃"]
-[jump target="*勝利" cond="f.En_HP <= 0"]
 
 *ドロー5
 ;５枚目のカードを選択してください[p]
@@ -271,61 +249,77 @@
 [s]
 
 *コマンド実行
-[if exp="f.comand == 3"]
+[if exp="f.comand == 7"]
+[jump target="*コマンド1"]
+[elsif exp="f.comand == 8"]
+[jump target="*コマンド2"]
+[elsif exp="f.comand == 9"]
 [jump target="*コマンド3"]
-[elsif exp="f.comand == 4"]
+[elsif exp="f.comand == 10"]
 [jump target="*コマンド4"]
-[elsif exp="f.comand == 5"]
+[elsif exp="f.comand == 11"]
 [jump target="*コマンド5"]
-[elsif exp="f.comand == 6"]
-[jump target="*コマンド6"]
-[elsif exp="f.comand == 7"]
-[jump target="*コマンド7"]
 [endif]
 [s]
 
 ;----------------------------------
-*コマンド3
-鈴猫の拳[r]
-[eval exp="f.damage = (2 * f.ATP + f.ATP_red) - (f.orgasm * 50)"]
+*ダメージ計算
+[eval exp="f.damage = f.BASE * (f.ATP + f.ATP_red) - (f.orgasm * 50) "]
 [eval exp="f.En_HP -= f.damage"]
-[emb exp="f.damage"]のダメージを与えた[p]
+[emb exp="f.damage"]のダメージを与えた。[p]
+[return][s]
+
+
+*コマンド1
+鈴猫の攻撃[wt2]
+#鈴猫
+疾風迅雷！！付いてこれるかしら！？[wt2]
+#
+[eval exp="f.BASE = 2"]
+[call target="*ダメージ計算"]
+[update_status]
+[jump target="*勝利" cond="f.En_HP <= 0"]
+[jump target="*ラウンド終了"]
+[s]
+*コマンド2
+鈴猫の攻撃[wt2]
+#鈴猫
+流水行雲。捉えてみなさい！[wt2]
+#
+[eval exp="f.BASE = 4"]
+[call target="*ダメージ計算"]
+[update_status]
+[jump target="*勝利" cond="f.En_HP <= 0"]
+[jump target="*ラウンド終了"]
+[s]
+*コマンド3
+鈴猫の攻撃[wt2]
+#鈴猫
+食らいなさい！円月殺法！！[wt2]
+#
+[eval exp="f.BASE = 6"]
+[call target="*ダメージ計算"]
 [update_status]
 [jump target="*勝利" cond="f.En_HP <= 0"]
 [jump target="*ラウンド終了"]
 [s]
 *コマンド4
-鈴猫の下段蹴り[r]
-[eval exp="f.damage = (4 * f.ATP + f.ATP_red) - (f.orgasm * 100)"]
-[eval exp="f.En_HP -= f.damage"]
-[emb exp="f.damage"]のダメージを与えた[p]
+鈴猫の攻撃[wt2]
+#鈴猫
+星火燎原！！いっくわよーー！！[wt2]
+[eval exp="f.BASE = 8"]
+[call target="*ダメージ計算"]
 [update_status]
 [jump target="*勝利" cond="f.En_HP <= 0"]
 [jump target="*ラウンド終了"]
 [s]
 *コマンド5
-鈴猫の回し蹴り[r]
-[eval exp="f.damage = (6 * f.ATP + f.ATP_red) - (f.orgasm * 150)"]
-[eval exp="f.En_HP -= f.damage"]
-[emb exp="f.damage"]のダメージを与えた[p]
-[update_status]
-[jump target="*勝利" cond="f.En_HP <= 0"]
-[jump target="*ラウンド終了"]
-[s]
-*コマンド6
-鈴猫の踵落とし[r]
-[eval exp="f.damage =  (8 * f.ATP + f.ATP_red) - (f.orgasm * 200)"]
-[eval exp="f.En_HP -= f.damage"]
-[emb exp="f.damage"]のダメージを与えた[p]
-[update_status]
-[jump target="*勝利" cond="f.En_HP <= 0"]
-[jump target="*ラウンド終了"]
-[s]
-*コマンド7
-鈴猫の飛び蹴り[r]
-[eval exp="f.damage = (10 * f.ATP + f.ATP_red) - (f.orgasm * 250)"]
-[eval exp="f.En_HP -= f.damage"]
-[emb exp="f.damage"]のダメージを与えた[p]
+鈴猫の攻撃[wt2]
+#鈴猫
+これで決める！雷轟閃電！！！[wt2]
+#
+[eval exp="f.BASE = 10"]
+[call target="*ダメージ計算"]
 [update_status]
 [jump target="*勝利" cond="f.En_HP <= 0"]
 [jump target="*ラウンド終了"]
@@ -378,6 +372,7 @@
 [endif]
 [eval exp="f.En_MP += f.En_MP_gain"]
 [eval exp="f.En_MP = 0" cond="f.En_BURST > 0"]
+[eval exp="f.En_ATP_Plus = 0, f.En_DFP_Plus = 0 , f.En_DEX_Plus = 0 "]
 [DeActivate]
 [reflesh_score]
 [ReShuffle]

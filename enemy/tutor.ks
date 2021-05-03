@@ -1,5 +1,6 @@
 *エネミーデータ
 [eval exp="f.En_HP = 2000 ,f.En_MP_gain =　30 , f.En_ATP = 10 , f.En_DEX = 0 ,f.En_BASE_ERO = 30"]
+[eval exp="f.En_ATP_Plus = 0, f.En_DFP_Plus = 0 , f.En_DEX_Plus = 0 "]
 [return][s]
 
 *行動パターン
@@ -11,46 +12,48 @@
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.En_MP >= 100"]
 [eval exp="f.En_BURST = 1"]
-[eval exp="f.En_DEF = 18"]
+[eval exp="f.En_DEF = 11"]
 敵が印を切った[p]
 [elsif exp="f.rand < f.En_BASE_ERO + f.ERO"]
-[eval exp="f.En_DEF = 14"]
+[eval exp="f.En_DEF = 10"]
 [eval exp="f.En_HOLD = 1" ]
+敵は鈴猫の身体を舐めるように見ている[p]
 [elsif exp="f.rand<25"]
-[eval exp="f.En_DEF = 15"]
+[eval exp="f.En_DEF = 9"]
 [elsif exp="f.rand<50"]
-[eval exp="f.En_DEF = 14"]
+[eval exp="f.En_DEF = 8"]
 [elsif exp="f.rand<75"]
-[eval exp="f.En_DEF = 13"]
+[eval exp="f.En_DEF = 7"]
 [else]
-[eval exp="f.En_DEF = 12"]
+[eval exp="f.En_DEF = 7"]
 [endif]
 [return][s]
 
 *回避
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < (f.RES + f.RES_green) - f.En_DEX - (f.orgasm * 30) "]
+[if exp="f.rand < (f.RES + f.RES_green) - (f.En_DEX + f.En_DEX_Plus) - (f.orgasm * 30) "]
 [eval exp="f.Pary = 1"]
-回避した[wt2]
+#鈴猫
+甘い！！[r]
+#
+鈴猫は敵の攻撃を回避した[p]
 [endif]
 [return][s]
 
 *ダメージ計算
 [getrand min="1" max="&f.En_ATP" var="f.rand"]
-[eval exp="f.damage = f.BASE + f.rand"]
+[eval exp="f.damage = f.BASE + f.En_ATP_Plus + f.rand"]
 [eval exp="f.HP -= f.damage"]
 [emb exp="f.damage"]のダメージを受けた。[p]
 [return][s]
 
-*敵攻撃
+*敵行動
 ;ターゲットテキストの作成
 [iscript]
-f.counterTag = "*反撃" + f.Down;
 f.nextDraw = f.Down + 1;
 f.returnTag = "*ドロー" + f.nextDraw;
 [endscript]
 ;[eval exp="f.Pary = 0"]
-敵の攻撃！[p]
 ;攻撃パターンを決める変数
 ;①チャージ②行動パターン③残りHP④ドロー１の色＝f.Cards[f.Draw1]['color']
 ;⑤ドロー時の色の内訳[Calc_Card]とf.色でアクセス
@@ -59,59 +62,40 @@ f.returnTag = "*ドロー" + f.nextDraw;
 ;⑧何回目のドローか？
 [Calc_Card]
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.Orange > 2 && f.Down < 3"]
-;条件分岐後各攻撃方法のラベルへジャンプ
-[jump target="*強攻撃"]
-[elsif exp="f.Down > 3 && f.rand < 50"]
-[jump target="*強攻撃"]
-[elsif exp="f.Green > 2 && f.rand < 50"]
-[jump target="*強攻撃"]
-[elsif exp="f.OrangeValue > 10 && f.rand < 50"]
-[jump target="*中攻撃"]
-[elsif exp="f.OrangeValue <= 10 && f.rand < 50"]
-[jump target="*特殊行動"]
-[elsif exp="f.rand > 90"]
-[jump target="*強攻撃"]
+[if exp="f.rand > 90"]
+[jump target="*攻撃バフ"]
 [elsif exp="f.rand > 60"]
-[jump target="*中攻撃"]
+[jump target="*防御バフ"]
 [elsif exp="f.rand > 40"]
-[jump target="*特殊行動"]
+[jump target="*守備力アップ"]
 [else]
 ;else後にはデフォルトの行動を書く
-[jump target="*弱攻撃"]
+[jump target="*命中バフ"]
 [endif]
 ;ここまで来ることはない
 error-battle-970
 [s]
 
-*弱攻撃
-[eval exp="f.BASE= 30, f.En_DEX=10"]
-;回避判定
-[call target="*回避"]
-;回避成功の場合ジャンプ
-[jump storage="battle.ks" target="&f.returnTag" cond="f.Pary > 0"]
-;無敵の場合ジャンプ
-[jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
-;失敗の場合ダメージ
-;ダメージ演出
-[call target="*ダメージ計算"]
-;生死の判定
+*攻撃バフ
+練気[r]
+敵の攻撃力がアップ[wt2]
+[eval exp="f.En_ATP_Plus = 50"]
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
 [s]
 
-*中攻撃
-[eval exp="f.BASE= 40 , f.En_DEX = 5"]
-;回避判定
-[call target="*回避"]
-;回避成功の場合ジャンプ
-[jump storage="battle.ks" target="&f.returnTag" cond="f.Pary > 0"]
-;無敵の場合ジャンプ
-[jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
-;失敗の場合ダメージ
-;ダメージ演出
-[call target="*ダメージ計算"]
-;生死の判定
+*防御バフ
+硬気功[r]
+敵の防御力がアップ[wt2]
+[eval exp="f.En_DFP_Plus = 50"]
+[update_status][show_score]
+[jump storage="battle.ks" target="&f.returnTag"]
+[s]
+
+*命中バフ
+精神統一[r]
+敵の命中力がアップ[wt2]
+[eval exp="f.En_DFP_Plus = 10"]
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
 [s]
@@ -132,7 +116,7 @@ error-battle-970
 [jump storage="battle.ks" target="&f.returnTag"]
 [s]
 
-*特殊行動
+*守備力アップ
 #
 敵のスキル使用[wt2]
 「守備体勢」[wt2]
@@ -149,18 +133,27 @@ error-battle-970
 [if exp="f.En_HOLD > 0" ]
 [jump target="*拘束攻撃"]
 [elsif exp="f.En_BURST > 0"]
-[jump target="*敵チャージ攻撃"]
+[jump target="*チャージ攻撃"]
 [else]
 [jump target="*バースト攻撃"]
 [endif]
 [s]
 
 *チャージ攻撃
-敵のチャージ攻撃[r]
+敵のチャージ攻撃[p]
+[eval exp="f.BASE= 200 , f.En_DEX = 0"]
+;回避判定
+[call target="*回避"]
+;回避成功の場合ジャンプ
+[jump storage="battle.ks" target="*ラウンド終了" cond="f.Pary > 0"]
+;無敵の場合ジャンプ
 [jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
-[eval exp="f.HP -= 200"]
-２００のダメージを受けた[p]
-[update_status]
+;失敗の場合ダメージ
+;ダメージ演出
+[call target="*ダメージ計算"]
+;生死の判定
+[update_status][show_score]
+[jump target="*敗北" cond="f.HP <= 0"]
 [jump storage="battle.ks" target="*ラウンド終了"]
 [s]
 
@@ -173,10 +166,18 @@ error-battle-970
 
 *バースト攻撃
 敵のバースト攻撃[r]
+[eval exp="f.BASE= 50 , f.En_DEX = -5"]
+;回避判定
+[call target="*回避"]
+;回避成功の場合ジャンプ
+[jump storage="battle.ks" target="&f.returnTag" cond="f.Pary > 0"]
+;無敵の場合ジャンプ
 [jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
-[eval exp="f.HP -= 200"]
-２００のダメージを受けた[p]
-[update_status]
+;失敗の場合ダメージ
+;ダメージ演出
+[call target="*ダメージ計算"]
+;生死の判定
+[update_status][show_score]
 [jump target="*敗北" cond="f.HP <= 0"]
 [jump storage="battle.ks" target="*ラウンド終了"]
 [s]

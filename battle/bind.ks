@@ -1,25 +1,26 @@
+;１回目のみ
+;選択後
+;未選択、心眼使用
+;通常
 *ドロー
 [if exp="f.Cards[f.Hand[0]]['active']==0"]
 [glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw =f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="*ドロー" ]
 [else]
-[glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw1=f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="*ドロー1完了" ]
+[glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw1=f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="&f.Path" ]
 [endif]
-;１回めのみ
+
 [if exp="f.Down == 1"]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=1" target="*ドロー" ]
-;選択後
+[glink color="black"                         size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=1" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[1]]['active']==0"]
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text="&f.Cards[f.Hand[1]]['txt']" exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=0" target="*ドロー" ]
-;未選択、心眼使用
 [elsif exp="f.Cards[f.Hand[1]]['active']> 0 && f.shingan>0"]
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text="&f.Cards[f.Hand[1]]['txt']" exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=0" target="&f.Path" ]
-;通常
 [else]
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=0" target="&f.Path" ]
 [endif]
 
 [if exp="f.Down == 1"]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=1" target="*ドロー" ]
+[glink color="black"                        size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=1" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[2]]['active']==0"]
 [glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y text="&f.Cards[f.Hand[2]]['txt']" exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[2]]['active']> 0 && f.shingan>0"]
@@ -29,7 +30,7 @@
 [endif]
 
 [if exp="f.Down == 1"]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=1" target="*ドロー" ]
+[glink color="black"                        size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=1" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[3]]['active']==0"]
 [glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y text="&f.Cards[f.Hand[3]]['txt']" exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[3]]['active']> 0 && f.shingan>0"]
@@ -39,7 +40,7 @@
 [endif]
 
 [if exp="f.Down == 1"]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[4],f.Cards[f.Hand[4]]['active']=1" target="*ドロー" ]
+[glink color="black"                        size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[4],f.Cards[f.Hand[4]]['active']=1" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[4]]['active']==0"]
 [glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y text="&f.Cards[f.Hand[4]]['txt']" exp="f.Draw =f.Hand[4],f.Cards[f.Hand[4]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[4]]['active']> 0 && f.shingan>0"]
@@ -86,10 +87,11 @@ f.Deck.splice(0,5);
 [jump target="*ドロー"]
 [s]
 *ドロー1完了
-*抵抗コマンド選択
+[Calc_Card]
 [eval exp="f.Total = 0 + f.Cards[f.Draw1]['value']"]
 [eval exp="f.Draw1_txt = f.Cards[f.Draw1]['txt'] "]
 [show_score]
+*抵抗コマンド選択
 コマンドを選択してください[p]
 [if exp="f.Rape_mode > 0"]
 [glink color="gray" x="550" y="500" text="耐える(3)" exp="f.comand = 3 ,f.comandId = 0" target="*目標設定" ]
@@ -112,6 +114,7 @@ f.Deck.splice(0,5);
 [jump target="*ドロー"]
 [s]
 *拘束ドロー2完了
+[eval exp="f.Draw2 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw2]['value']"]
 [eval exp="f.Draw2_txt = f.Cards[f.Draw2]['txt'] "]
 [show_score]
@@ -149,6 +152,7 @@ f.Deck.splice(0,5);
 [jump target="*ドロー"]
 [s]
 *拘束ドロー3完了
+[eval exp="f.Draw3 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw3]['value']"]
 [eval exp="f.Draw3_txt = f.Cards[f.Draw3]['txt'] "]
 [show_score]
@@ -186,6 +190,7 @@ f.Deck.splice(0,5);
 [jump target="*ドロー"]
 [s]
 *拘束ドロー4完了
+[eval exp="f.Draw4 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw4]['value']"]
 [eval exp="f.Draw4_txt = f.Cards[f.Draw4]['txt'] "]
 [show_score]
@@ -223,6 +228,7 @@ f.Deck.splice(0,5);
 [jump target="*ドロー"]
 [s]
 *拘束ドロー5完了
+[eval exp="f.Draw5 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw5]['value']"]
 [eval exp="f.Draw5_txt = f.Cards[f.Draw5]['txt'] "]
 [show_score]
