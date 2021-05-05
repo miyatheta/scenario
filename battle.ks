@@ -13,12 +13,13 @@
 戦闘開始[wt2]
 [eval exp="f.comand='' ,f.Target='' ,f.Limit='' ,f.Total='' ,f.Bind = 0 ,f.Rt_Bind = 0"]
 [eval exp="f.Draw1_txt='' ,f.Draw2_txt='' ,f.Draw3_txt='' ,f.Draw4_txt='' ,f.Draw5_txt=''"]
-[eval exp="f.HP = 2000 , f.MP = 0 , f.SAN = 60 , f.orgasm = 0 , f.dress = 1"]
+[eval exp="f.HP = 2000 , f.MP = 0 , f.BP = 0 , f.SAN = 60 , f.orgasm = 0 , f.dress = 1"]
+[eval exp="f.critical = 1"]
 [eval exp="f.shingan = 0 , f.invincible = 0"]
-[eval exp="f.ATP = 50 , f.ATP_red = 0 , f.RES = 40 , f.RES_green = 0 ,f.DEF_Yellow = 0"]
+[eval exp="f.ATP = 50 , f.Bonus_Red = 0 , f.RES = 40 , f.Bonus_Green = 0 ,f.DEF_Yellow = 0"]
 [eval exp="f.ERO_DEF = 0"]
 [eval exp="f.En_DEF ='' ,f.En_MP = 0 ,f.En_ERO = 0 ,f.Rape_mode = 0 ,f.En_BURST = 0"]
-[eval exp="f.round=0"]
+[eval exp="f.round=0 , f.Rt_Bind = 0"]
 [call storage="&f.enemy_PASS" target="*エネミーデータ" ]
 
 ;カード構築
@@ -31,17 +32,18 @@
 *ドローボーナス
 [call storage="tutorial.ks" target="*ドローボーナスについて" cond="f.tutorial01 != 1"]
 [if exp="f.drawColor == 'red' "]
-攻撃力アップ[wt2]
-[eval exp="f.ATP_red += 10"]
+武：武芸レベル＋１[wt5]
+[eval exp="f.Bonus_Red += 1"]
 [elsif exp="f.drawColor == 'blue' "]
-気力アップ[wt2]
+術：気力＋１０[wt5]
 [eval exp="f.MP += 10"][eval exp="f.MP = 100" cond="f.MP > 100"]
 [elsif exp="f.drawColor == 'green' "]
-回避アップ[wt2]
-[eval exp="f.RES_green += 40"]
+感：回避＋１[wt5]
+[eval exp="f.Bonus_Green += 1"]
 [elsif exp="f.drawColor == 'orange' "]
-守備力ダウン[wt2]
-[eval exp="f.En_DEF -= 1 , f.Target -= 1"]
+技：技能クールタイム-１[wt5]
+[eval exp="f.Bonus_Orange += 1"]
+;技能クールのための処理
 [else]
 [endif]
 [show_score][update_status]
@@ -97,25 +99,12 @@
 [else]
 [glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[4],f.Cards[f.Hand[4]]['active']=0" target="&f.Path" ]
 [endif]
-[glink color="red" size="18" x="0" y="450" text="スキル" exp="f.skillCase=1 , f.returnStr='battle.ks' , f.returnTag='*ドロー'" storage="skill.ks" target="*"]
-[s]
-
-*ドロー判定
-[if exp="f.Target <= f.Total && f.Total <= f.Limit "]
-判定成功[p]
-[jump target="*コマンド実行"]
-[elsif exp="f.Total > f.Limit "]
-判定失敗[p]
-[jump target="*バースト"]
-[else]
-目標未達[p]
-[jump storage="&f.enemy_PASS"  target="&f.Path"]
-[endif]
+[glink color="red" size="18" x="0" y="450" text="スキル" exp="f.skillCase=1 , f.returnStr='battle.ks' , f.returnTag='*ドロー'" storage="skill.ks" target="*スキル選択"]
 [s]
 
 *攻撃
 鈴猫の攻撃[wt2]
-[eval exp="f.damage = (f.ATP + f.ATP_red) - (f.orgasm * 30)"]
+[eval exp="f.damage = (f.ATP) - (f.orgasm * 30)"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた[p]
 [show_score][update_status]
@@ -123,24 +112,28 @@
 
 *反撃
 反撃[wt2]
-[eval exp="f.damage = (f.ATP + f.ATP_red) - (f.orgasm * 30)"]
+[eval exp="f.damage = (f.ATP) - (f.orgasm * 30)"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた[p]
 [show_score][update_status]
 [return][s]
 
-[macro name="skillButton"]
-[button folder="image/button" graphic="skill.png" storage="skill.ks" width="50" height="50" x="0" y="300" fix="true" ]
-[endmacro]
 ;--------------------------------------------------------------------------------
+
 *ラウンド開始
 [eval exp="f.round++"]
 [eval exp="f.Limit=21"]
 [show_score][update_status]
 
 *敵パターン抽選
-;敵の守備力が表示されます[p]
-[call storage="&f.enemy_PASS" target="*行動パターン" ]
+;敵のヘッドが表示されます[p]
+[if exp="f.Rape_mode > 0"]
+[call storage="&f.enemy_PASS" target="*レイプ時ハンド抽選"]
+[elxif exp="f.Rt_Bind > 0 "]
+[call storage="&f.enemy_PASS" target="*拘束時ハンド抽選"]
+[else]
+[call storage="&f.enemy_PASS" target="*通常時ハンド抽選" ]
+[endif]
 [show_score]
 ;手札作成
 [make_hand]
@@ -149,178 +142,192 @@
 ;１枚目のカードが表示されます[wt2]
 [glink color="rosy" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="手札配布" target="*ドロー1" ]
 [s]
+
 *ドロー1
-[eval exp="f.Draw = 0 , f.Down = 1 , f.Path = '*ドロー1完了' "]
-[jump target="*ドロー"]
+[eval exp="f.Draw = 0 , f.Down = 1 , f.Path = '*ドロー1完了'"][jump target="*ドロー"]
 *ドロー1完了
 [Calc_Card]
 [eval exp="f.Total = 0 + f.Cards[f.Draw1]['value']"]
 [eval exp="f.Draw1_txt = f.Cards[f.Draw1]['txt'] "]
 [show_score][update_status]
+;*バースト判定1(バーストはない)
 *ドロー1ボーナス
-[eval exp="f.drawColor = f.Cards[f.Draw1]['color']"][call target="*ドローボーナス"]
+[eval exp="f.drawColor = f.Cards[f.Draw1]['color']"]
+[call target="*ドローボーナス"]
 [call storage="tutorial.ks" target="*目標値について" cond="f.tutorial02 != 1"]
-*コマンド選択
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="疾風の構え(7)" exp="f.comand=7" target="*目標設定"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="流水の構え(8)" exp="f.comand=8" target="*目標設定"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="円月の構え(9)" exp="f.comand=9" target="*目標設定"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="火影の構え(10)" exp="f.comand=10" target="*目標設定"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="紫電の構え(11)" exp="f.comand=11" target="*目標設定"]
-[glink color="red" size="18" x="0" y="450" text="スキル" exp="f.skillCase=1 , f.returnStr='battle.ks' , f.returnTag='*コマンド選択'" storage="skill.ks" target="*"]
+;*敵行動1（敵は行動しない）
+;*敵行動1完了
+*ドロー1コマンド
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="練気(ヒット)"    exp="" cond="f.Down < 5" target="*ドロー2"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="技能(スキル)"     exp=""  storage="skill.ks" target="*スキル選択"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="忍術(ベット)"     exp="" cond="f.Down == 1" storage="magick.ks" target="*忍術選択"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > 12" target="*ハンド判定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="防御(フォールド)"   exp="" cond="f.Total >= 13 , f.Total <= 16" target="*防御"]
 [s]
-*目標設定
-[if exp="21 < f.En_DEF + f.comand"]
-コストオーバーです。コマンドを再選択してください[p]
-[jump target="*コマンド選択"]
-[endif]
-[eval exp="f.Target = f.En_DEF + f.comand" ]
-[show_score]
 
 *ドロー2
-;２枚目のカードを選択してください[l]
-[eval exp="f.Draw = 0 , f.Down = 2 , f.Path = '*ドロー2完了' "]
-[jump target="*ドロー"]
+[eval exp="f.Draw = 0 , f.Down = 2 , f.Path = '*ドロー2完了' "][jump target="*ドロー"]
 *ドロー2完了
 [call storage="tutorial.ks" target="*ドローについて" cond="f.tutorial03 != 1"]
 [eval exp="f.Draw2 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw2]['value']"]
 [eval exp="f.Draw2_txt = f.Cards[f.Draw2]['txt'] "]
 [show_score]
+;*バースト判定2(バーストはない絶対２１以下の為)
 *ドロー2ボーナス
 [eval exp="f.drawColor = f.Cards[f.Draw2]['color']"]
 [call target="*ドローボーナス"]
-*ドロー2判定
-[call storage="tutorial.ks" target="*判定について" cond="f.tutorial04 != 1"]
-[eval exp="f.Path = '*敵行動' "]
-[jump target="*ドロー判定"]
+;21（ブラックジャック）→即判定
+[jump target="*ハンド判定" cond="f.Total == 21"]
+*敵行動2
+[jump storage="&f.enemy_PASS" target="*敵行動分岐"]
+*敵行動2完了
+*ドロー2コマンド
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="練気(ヒット)"    exp="" cond="f.Down < 5" target="*ドロー3"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="技能(スキル)"     exp=""  storage="skill.ks" target="*スキル選択"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="忍術(ベット)"     exp="" cond="f.Down == 1" storage="magick.ks" target="*忍術選択"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > 12" target="*ハンド判定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="防御(フォールド)"   exp="" cond="f.Total >= 13 , f.Total <= 16" target="*防御"]
+[s]
 
 *ドロー3
 ;３枚目のカードを選択してください[l]
-[eval exp="f.Draw = 0 , f.Down = 3 , f.Path = '*ドロー3完了' "]
-[jump target="*ドロー"]
+[eval exp="f.Draw = 0 , f.Down = 3 , f.Path = '*ドロー3完了' "][jump target="*ドロー"]
 *ドロー3完了
 [eval exp="f.Draw3 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw3]['value']"]
 [eval exp="f.Draw3_txt = f.Cards[f.Draw3]['txt'] "]
 [show_score]
+*バースト判定3
+[jump target="*バースト" cond="f.Total > f.Limit "]
 *ドロー3ボーナス
 [eval exp="f.drawColor = f.Cards[f.Draw3]['color']"]
 [call target="*ドローボーナス"]
-*ドロー3判定
-[eval exp="f.Path = '*敵行動' "]
-[jump target="*ドロー判定"]
+;21（ブラックジャック）→即判定
+[jump target="*ハンド判定" cond="f.Total == 21"]
+*敵行動3
+[jump storage="&f.enemy_PASS" target="*敵行動分岐"]
+*敵行動3完了
+*ドロー3コマンド
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="練気(ヒット)"    exp="" cond="f.Down < 5" target="*ドロー4"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="技能(スキル)"     exp=""  storage="skill.ks" target="*スキル選択"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="忍術(ベット)"     exp="" cond="f.Down == 1" storage="magick.ks" target="*忍術選択"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > 12" target="*ハンド判定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="防御(フォールド)"   exp="" cond="f.Total >= 13 , f.Total <= 16" target="*防御"]
+[s]
 
 *ドロー4
-;４枚目のカードを選択してください[l]
-[eval exp="f.Draw = 0 , f.Down = 4 , f.Path = '*ドロー4完了' "]
-[jump target="*ドロー"]
+[eval exp="f.Draw = 0 , f.Down = 4 , f.Path = '*ドロー4完了' "][jump target="*ドロー"]
 *ドロー4完了
 [eval exp="f.Draw4 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw4]['value']"]
 [eval exp="f.Draw4_txt = f.Cards[f.Draw4]['txt'] "]
 [show_score]
+*バースト判定4
+[jump target="*バースト" cond="f.Total > f.Limit "]
 *ドロー4ボーナス
 [eval exp="f.drawColor = f.Cards[f.Draw4]['color']"]
 [call target="*ドローボーナス"]
-*ドロー4判定
-[eval exp="f.Path = '*敵行動' "]
-[jump target="*ドロー判定"]
+;21（ブラックジャック）→即判定
+[jump target="*ハンド判定" cond="f.Total == 21"]
+*敵行動4
+[jump storage="&f.enemy_PASS" target="*敵行動分岐"]
+*敵行動4完了
+*ドロー4コマンド
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="練気(ヒット)"    exp="" cond="f.Down < 5" target="*ドロー5"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="技能(スキル)"     exp=""  storage="skill.ks" target="*スキル選択"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="忍術(ベット)"     exp="" cond="f.Down == 1" storage="magick.ks" target="*忍術選択"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > 12" target="*ハンド判定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="防御(フォールド)"   exp="" cond="f.Total >= 13 , f.Total <= 16" target="*防御"]
+[s]
 
 *ドロー5
-;５枚目のカードを選択してください[p]
-[eval exp="f.Draw = 0 , f.Down = 5 , f.Path = '*ドロー5完了' "]
-[jump target="*ドロー"]
+[eval exp="f.Draw = 0 , f.Down = 5 , f.Path = '*ドロー5完了' "][jump target="*ドロー"]
 *ドロー5完了
 [eval exp="f.Draw5 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw5]['value']"]
 [eval exp="f.Draw5_txt = f.Cards[f.Draw5]['txt'] "]
 [show_score]
+*バースト判定5
+[jump target="*バースト" cond="f.Total > f.Limit "]
 *ドロー5ボーナス
 [eval exp="f.drawColor = f.Cards[f.Draw5]['color']"]
 [call target="*ドローボーナス"]
+;*敵行動5(行動しない)
+;*敵行動5完了
+;*ドロー5コマンド(自動的に判定へ)
 *ドロー5判定
+[jump target="*ハンド判定"]
+[s]
+
+*ハンド判定
+ショウダウン[p]
+[eval exp="f.Target = f.En_Hand1 + f.En_Hand2" ]
+[show_score]
+[emb exp="f.Total"]対[emb exp="f.Target"][p]
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
 判定成功[wt2]
-[jump target="*コマンド実行"]
+;武芸選択
+[jump target="*判定成功"]
 [else]
 判定失敗[wt2]
-[jump target="*バースト"]
+[jump target="*判定失敗"]
 [endif]
 [s]
 
-*コマンド実行
-[if exp="f.comand == 7"]
-[jump target="*コマンド1"]
-[elsif exp="f.comand == 8"]
-[jump target="*コマンド2"]
-[elsif exp="f.comand == 9"]
-[jump target="*コマンド3"]
-[elsif exp="f.comand == 10"]
-[jump target="*コマンド4"]
-[elsif exp="f.comand == 11"]
-[jump target="*コマンド5"]
+*判定成功
+[if exp="f.Rape_mode > 0"]
+[jump storage="&f.enemy_PASS" target="*レイプ脱出"]
+
+[elsif exp="f.Rt_Bind > 0"]
+[jump storage="&f.enemy_PASS" target="*拘束脱出"]
+
+
+[else]
+[jump storage="MartialArts.ks" target="*武芸レベル判定"]
+[endif]
+[s]
+
+*防御
+#
+鈴猫は守りを固めた
+[jump target="*判定失敗"]
+[s]
+
+*バースト
+#
+バースト[wt2]
+[jump storage="&f.enemy_PASS" target="*バーストセクハラ攻撃" cond="f.Rt_Bind > 0"]
+;ここでレイプシーンを分岐させるのもあり？
+[jump storage="&f.enemy_PASS" target="*拘束開始"]
+[s]
+
+*判定失敗
+[if exp="f.Rape_mode > 0"]
+[jump storage="&f.enemy_PASS" target="*レイプフィニッシュ"]
+
+[elsif exp="f.Rt_Bind > 0"]
+[jump storage="&f.enemy_PASS" target="*バーストセクハラ攻撃"]
+
+[else]
+[jump storage="&f.enemy_PASS" target="*攻撃"]
 [endif]
 [s]
 
 ;----------------------------------
 *ダメージ計算
-[eval exp="f.damage = f.BASE * (f.ATP + f.ATP_red) - (f.orgasm * 50) "]
+[if exp="f.Total == 21"]
+[eval exp="f.critical = 1.5" ]
+会心の一撃[r]
+[endif]
+[eval exp="tf.argment = f.BASE * (f.ATP) - (f.orgasm * 50) * f.critical"]
+[getMathRound var="f.damage"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた。[p]
 [return][s]
 
 
-*コマンド1
-鈴猫の攻撃[wt2]
-#鈴猫
-疾風迅雷！！付いてこれるかしら！？[wt2]
-#
-[eval exp="f.BASE = 2"]
-[call target="*ダメージ計算"]
-[update_status]
-[jump target="*勝利" cond="f.En_HP <= 0"]
-[jump target="*ラウンド終了"]
-[s]
-*コマンド2
-鈴猫の攻撃[wt2]
-#鈴猫
-流水行雲。捉えてみなさい！[wt2]
-#
-[eval exp="f.BASE = 4"]
-[call target="*ダメージ計算"]
-[update_status]
-[jump target="*勝利" cond="f.En_HP <= 0"]
-[jump target="*ラウンド終了"]
-[s]
-*コマンド3
-鈴猫の攻撃[wt2]
-#鈴猫
-食らいなさい！円月殺法！！[wt2]
-#
-[eval exp="f.BASE = 6"]
-[call target="*ダメージ計算"]
-[update_status]
-[jump target="*勝利" cond="f.En_HP <= 0"]
-[jump target="*ラウンド終了"]
-[s]
-*コマンド4
-鈴猫の攻撃[wt2]
-#鈴猫
-星火燎原！！いっくわよーー！！[wt2]
-[eval exp="f.BASE = 8"]
-[call target="*ダメージ計算"]
-[update_status]
-[jump target="*勝利" cond="f.En_HP <= 0"]
-[jump target="*ラウンド終了"]
-[s]
-*コマンド5
-鈴猫の攻撃[wt2]
-#鈴猫
-これで決める！雷轟閃電！！！[wt2]
-#
-[eval exp="f.BASE = 10"]
-[call target="*ダメージ計算"]
-[update_status]
+*勝利判定
 [jump target="*勝利" cond="f.En_HP <= 0"]
 [jump target="*ラウンド終了"]
 [s]
@@ -338,6 +345,7 @@
 [chara_mod name="suzune" face="厳しい" ]
 [jump target="&f.returnTag"]
 [s]
+
 *空蝉発動拘束時
 #
 ;敵の攻撃演出後
@@ -354,10 +362,6 @@
 
 ;---------------------------------------------
 
-*バースト
-[jump storage="&f.enemy_PASS" target="*バースト"]
-[s]
-
 *ラウンド終了
 今回、使用した札は[emb exp="f.Cards[f.Hand[0]]['txt']"]、
 [emb exp="f.Cards[f.Hand[1]]['txt']"]、[emb exp="f.Cards[f.Hand[2]]['txt']"]、
@@ -373,6 +377,7 @@
 [eval exp="f.En_MP += f.En_MP_gain"]
 [eval exp="f.En_MP = 0" cond="f.En_BURST > 0"]
 [eval exp="f.En_ATP_Plus = 0, f.En_DFP_Plus = 0 , f.En_DEX_Plus = 0 "]
+[eval exp="f.critical = 1"]
 [DeActivate]
 [reflesh_score]
 [ReShuffle]

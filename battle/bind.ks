@@ -72,8 +72,8 @@
 [endif]
 
 [call storage="&f.enemy_PASS" target="*レイプ開始" cond="f.Rape_mode == 1"]
-[eval exp="f.En_DEF = 10"]
-[eval exp="f.En_DEF = 17" cond="f.Rape_mode > 0"]
+[eval exp="f.En_Hand1 = 10 , f.En_Hand2 = 7"]
+[eval exp="f.En_Hand1 = 10 , f.En_Hand2 = 10" cond="f.Rape_mode > 0"]
 [show_score]
 ;手札作成
 [eval exp="f.Hand=[f.Deck[0],f.Deck[1],f.Deck[2],f.Deck[3],f.Deck[4]]"]
@@ -94,15 +94,15 @@ f.Deck.splice(0,5);
 *抵抗コマンド選択
 コマンドを選択してください[p]
 [if exp="f.Rape_mode > 0"]
-[glink color="gray" x="550" y="500" text="耐える(3)" exp="f.comand = 3 ,f.comandId = 0" target="*目標設定" ]
+[glink color="gray" x=&f.pos_Comand_btn_x1 y="500" text="耐える(3)" exp="f.comand = 3 ,f.comandId = 10" target="*目標設定" ]
 [s][else]
-[glink color="gray" x="550" y="350" text="もがく(5)" exp="f.comand = 5 ,f.comandId = 1" target="*目標設定" ]
-[glink color="gray" x="550" y="400" text="暴れる(7)" exp="f.comand = 7 ,f.comandId = 2" target="*目標設定" ]
-[glink color="gray" x="550" y="450" text="噛み付く(9)" exp="f.comand = 9 ,f.comandId = 3" target="*目標設定" ]
-[glink color="gray" x="550" y="500" text="金的(11)" exp="f.comand = 11 ,f.comandId = 4" target="*目標設定" ]
+[glink color="gray" x=&f.pos_Comand_btn_x1 y="400" text="もがく(5)" exp="f.comand = 5 ,f.comandId = 11" target="*目標設定" ]
+[glink color="gray" x=&f.pos_Comand_btn_x1 y="450" text="暴れる(7)" exp="f.comand = 7 ,f.comandId = 12" target="*目標設定" ]
+[glink color="gray" x=&f.pos_Comand_btn_x2 y="400" text="噛み付く(9)" exp="f.comand = 9 ,f.comandId = 13" target="*目標設定" ]
+[glink color="gray" x=&f.pos_Comand_btn_x2 y="450" text="金的(11)" exp="f.comand = 11 ,f.comandId = 14" target="*目標設定" ]
 [s][endif]
 *目標設定
-[eval exp="f.Target = f.En_DEF + f.comand" ]
+[eval exp="f.Target = f.En_Hand1 + f.En_Hand2" ]
 [show_score]
 
 *拘束ドロー2
@@ -244,15 +244,15 @@ f.Deck.splice(0,5);
 [s]
 
 *抵抗コマンド実行
-[if  exp="f.comandId == 0"]
+[if  exp="f.comandId == 10"]
 [jump target="*抵抗コマンド０"]
-[elsif exp="f.comandId == 1"]
+[elsif exp="f.comandId == 11"]
 [jump target="*抵抗コマンド1"]
-[elsif exp="f.comandId == 2"]
+[elsif exp="f.comandId == 12"]
 [jump target="*抵抗コマンド2"]
-[elsif exp="f.comandId == 3"]
+[elsif exp="f.comandId == 13"]
 [jump target="*抵抗コマンド3"]
-[elsif exp="f.comandId == 4"]
+[elsif exp="f.comandId == 14"]
 [jump target="*抵抗コマンド4"]
 [endif]
 error697

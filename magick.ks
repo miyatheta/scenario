@@ -1,4 +1,4 @@
-*スキル選択
+*忍術選択
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="心眼(CT20)" target="*心眼"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="変り身(CT20)" target="*変り身"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="誘惑(CT10)" target="*誘惑"]

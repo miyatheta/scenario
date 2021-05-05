@@ -24,7 +24,7 @@
 *敵攻撃１
 敵の攻撃！[p]
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < (f.RES + f.RES_green) - (f.orgasm * 30)"]
+[if exp="f.rand < (f.RES + f.Bonus_Green) - (f.orgasm * 30)"]
 鈴猫は敵の攻撃を回避した[p]
 [return]
 [endif]
@@ -53,7 +53,7 @@
 *敵攻撃２
 敵の攻撃！[p]
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < (f.RES + f.RES_green) - (f.orgasm * 30)"]
+[if exp="f.rand < (f.RES + f.Bonus_Green) - (f.orgasm * 30)"]
 鈴猫は敵の攻撃を回避した[p]
 [return]
 [endif]
@@ -81,7 +81,7 @@
 *敵攻撃３
 敵の攻撃！[p]
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < (f.RES + f.RES_green) - (f.orgasm * 30)"]
+[if exp="f.rand < (f.RES + f.Bonus_Green) - (f.orgasm * 30)"]
 鈴猫は敵の攻撃を回避した[p]
 [return]
 [endif]

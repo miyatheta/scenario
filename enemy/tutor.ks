@@ -1,37 +1,12 @@
 *エネミーデータ
-[eval exp="f.En_HP = 2000 ,f.En_MP_gain =　30 , f.En_ATP = 10 , f.En_DEX = 0 ,f.En_BASE_ERO = 30"]
+[eval exp="f.En_HP = 2000 ,f.En_MP_gain =　30 , f.En_ATP = 10 , f.En_DEX = 0 "]
+[eval exp="f.En_Bind = 200 , f.En_BASE_ERO = 30"]
 [eval exp="f.En_ATP_Plus = 0, f.En_DFP_Plus = 0 , f.En_DEX_Plus = 0 "]
-[return][s]
-
-*行動パターン
-;敵の行動パターン選定
-;チャージ判定
-[eval exp="f.En_BURST = 0" cond="f.En_BURST > 0"]
-[eval exp="f.En_HOLD = 0" cond="f.En_HOLD > 0"]
-;判定可能変数（残りHP）
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.En_MP >= 100"]
-[eval exp="f.En_BURST = 1"]
-[eval exp="f.En_DEF = 11"]
-敵が印を切った[p]
-[elsif exp="f.rand < f.En_BASE_ERO + f.ERO"]
-[eval exp="f.En_DEF = 10"]
-[eval exp="f.En_HOLD = 1" ]
-敵は鈴猫の身体を舐めるように見ている[p]
-[elsif exp="f.rand<25"]
-[eval exp="f.En_DEF = 9"]
-[elsif exp="f.rand<50"]
-[eval exp="f.En_DEF = 8"]
-[elsif exp="f.rand<75"]
-[eval exp="f.En_DEF = 7"]
-[else]
-[eval exp="f.En_DEF = 7"]
-[endif]
 [return][s]
 
 *回避
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < (f.RES + f.RES_green) - (f.En_DEX + f.En_DEX_Plus) - (f.orgasm * 30) "]
+[if exp="f.rand < (f.RES + f.Bonus_Green * 5 ) - (f.En_DEX + f.En_DEX_Plus) "]
 [eval exp="f.Pary = 1"]
 #鈴猫
 甘い！！[r]
@@ -47,12 +22,80 @@
 [emb exp="f.damage"]のダメージを受けた。[p]
 [return][s]
 
-*敵行動
+;-------------------------------------------------------------------------------
+
+*通常時ハンド抽選
+;敵の行動パターン選定
+;チャージ判定フラグリセット
+[eval exp="f.En_BURST = 0" cond="f.En_BURST > 0"]
+;拘束行動判定フラグリセット
+[eval exp="f.En_HOLD = 0" cond="f.En_HOLD > 0"]
+;判定可能変数（残りHP）
+[getrand min="1" max="100" var="f.rand"]
+
+[if exp="f.En_MP >= 100"]
+[eval exp="f.En_BURST = 1"]
+[eval exp="f.En_Hand1 = 10 , f.En_Hand2 = 9"]
+敵が印を切った[p]
+
+[elsif exp="f.rand<25"]
+[eval exp="f.En_Hand1 = 7 , f.En_Hand2 = 10"]
+
+[elsif exp="f.rand<50"]
+[eval exp="f.En_Hand1 = 6 , f.En_Hand2 = 10"]
+
+[elsif exp="f.rand<75"]
+[eval exp="f.En_Hand1 = 5 , f.En_Hand2 = 10"]
+
+[else]
+[eval exp="f.En_Hand1 = 3 , f.En_Hand2 = 10"]
+
+[endif]
+[return][s]
+
+*拘束時ハンド抽選
+#
+鈴猫は敵に拘束されている[wt2]
+[getrand min="1" max="100" var="f.rand"]
+[if exp="f.En_MP >= 100"]
+[eval exp="f.En_Hand1 = 10 , f.En_Hand2 = 7"]
+[else]
+[eval exp="f.En_Hand1 = 10 , f.En_Hand2 = 7"]
+[endif]
+[return][s]
+
+*レイプ時ハンド抽選
+#
+鈴猫は敵に犯されている[wt2]
+[call target="*レイプ導入"]
+;導入の演出
+[getrand min="1" max="100" var="f.rand"]
+[if exp="f.En_MP >= 100"]
+[eval exp="f.En_Hand1 = 10 , f.En_Hand2 = 10"]
+[else]
+[eval exp="f.En_Hand1 = 10 , f.En_Hand2 = 10"]
+[endif]
+[return][s]
+
+;-------------------------------------------------------------------------------
+
+*敵行動分岐
 ;ターゲットテキストの作成
+;行動終了後は*敵行動X完了に戻る
 [iscript]
-f.nextDraw = f.Down + 1;
-f.returnTag = "*ドロー" + f.nextDraw;
+f.returnTag = "*敵行動" + f.Down + "完了";
 [endscript]
+[if exp="f.Rape_mode > 0"]
+[jump target="*レイプスキル"]
+[elsif exp="f.Rt_Bind > 0"]
+[jump target="*セクハラスキル"]
+[else]
+[jump target="*敵スキル使用"]
+[endif]
+
+;スキル使用----------------------------------------------------------------------------
+
+*敵スキル使用
 ;[eval exp="f.Pary = 0"]
 ;攻撃パターンを決める変数
 ;①チャージ②行動パターン③残りHP④ドロー１の色＝f.Cards[f.Draw1]['color']
@@ -77,7 +120,7 @@ error-battle-970
 [s]
 
 *攻撃バフ
-練気[r]
+「練気」[r]
 敵の攻撃力がアップ[wt2]
 [eval exp="f.En_ATP_Plus = 50"]
 [update_status][show_score]
@@ -85,7 +128,7 @@ error-battle-970
 [s]
 
 *防御バフ
-硬気功[r]
+「硬気功」[r]
 敵の防御力がアップ[wt2]
 [eval exp="f.En_DFP_Plus = 50"]
 [update_status][show_score]
@@ -93,19 +136,31 @@ error-battle-970
 [s]
 
 *命中バフ
-精神統一[r]
+「精神統一」[r]
 敵の命中力がアップ[wt2]
-[eval exp="f.En_DFP_Plus = 10"]
+[eval exp="f.En_DEX_Plus = 10"]
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
 [s]
 
-*強攻撃
+*守備力アップ
+#
+「気迫」[wt2]
+気力が−１0された[p]
+[eval exp="f.MP -= 10"][eval exp="f.MP = 0" cond="f.MP < 0"]
+[update_status][show_score]
+[jump storage="battle.ks" target="&f.returnTag"]
+[s]
+
+;攻撃----------------------------------------------------------------------------
+
+*敵攻撃
+敵の攻撃[r]
 [eval exp="f.BASE= 50 , f.En_DEX = -5"]
 ;回避判定
 [call target="*回避"]
 ;回避成功の場合ジャンプ
-[jump storage="battle.ks" target="&f.returnTag" cond="f.Pary > 0"]
+[jump storage="battle.ks" target="*ラウンド終了" cond="f.Pary > 0"]
 ;無敵の場合ジャンプ
 [jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
 ;失敗の場合ダメージ
@@ -113,30 +168,8 @@ error-battle-970
 [call target="*ダメージ計算"]
 ;生死の判定
 [update_status][show_score]
-[jump storage="battle.ks" target="&f.returnTag"]
-[s]
-
-*守備力アップ
-#
-敵のスキル使用[wt2]
-「守備体勢」[wt2]
-敵の守備力が＋１された[p]
-[eval exp="f.En_DEF += 1"][eval exp="f.Target += 1" ]
-[update_status][show_score]
-[jump storage="battle.ks" target="&f.returnTag"]
-[s]
-
-;バースト----------------------------------------------------------------------------
-
-*バースト
-敵の攻撃[r]
-[if exp="f.En_HOLD > 0" ]
-[jump target="*拘束攻撃"]
-[elsif exp="f.En_BURST > 0"]
-[jump target="*チャージ攻撃"]
-[else]
-[jump target="*バースト攻撃"]
-[endif]
+[jump target="*敗北" cond="f.HP <= 0"]
+[jump storage="battle.ks" target="*ラウンド終了"]
 [s]
 
 *チャージ攻撃
@@ -157,38 +190,30 @@ error-battle-970
 [jump storage="battle.ks" target="*ラウンド終了"]
 [s]
 
-*拘束攻撃
-敵は鈴猫を拘束した[p]
-[jump storage="battle.ks" target="*空蝉発動拘束時" cond="f.invincible > 0"]
-[jump storage="battle/bind.ks" target="*拘束開始"]
-[jump storage="battle.ks" target="*ラウンド終了"]
-[s]
-
-*バースト攻撃
-敵のバースト攻撃[r]
-[eval exp="f.BASE= 50 , f.En_DEX = -5"]
-;回避判定
-[call target="*回避"]
-;回避成功の場合ジャンプ
-[jump storage="battle.ks" target="&f.returnTag" cond="f.Pary > 0"]
-;無敵の場合ジャンプ
-[jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
-;失敗の場合ダメージ
-;ダメージ演出
-[call target="*ダメージ計算"]
-;生死の判定
-[update_status][show_score]
-[jump target="*敗北" cond="f.HP <= 0"]
-[jump storage="battle.ks" target="*ラウンド終了"]
-[s]
-
 *敗北
 鈴猫は敗北した[p]
 [s]
 
 ;拘束----------------------------------------------------------------------------
+*拘束開始
+[eval exp="f.BASE= 0, f.En_DEX = 70"]
+敵は鈴猫に組み付いた[p]
+;回避判定
+[call target="*回避"]
+;回避成功の場合ジャンプ
+[jump storage="battle.ks" target="*ラウンド終了" cond="f.Pary > 0"]
+;無敵の場合ジャンプ
+[jump storage="battle.ks" target="*空蝉発動拘束時" cond="f.invincible > 0"]
+;失敗の場合拘束
+#鈴猫
+この！離しなさいよ！！[p]
+#
+[eval exp="f.Bind = f.En_Bind , f.Rt_Bind = 1"]
+;f.Bind=拘束力,f.Rt_Bind=拘束状態であることを示すフラグ
+[jump storage="battle.ks" target="*ラウンド終了"]
+[s]
 
-*敵拘束攻撃1
+*セクハラスキル
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.rand < 90"]
 #敵
@@ -212,61 +237,10 @@ error-battle-970
 [eval exp="f.HP -= 10"]
 [endif]
 [update_status][show_score]
-[return][s]
+[jump storage="battle.ks" target="&f.returnTag"]
+[s]
 
-*敵拘束攻撃2
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < 90"]
-#敵
-へっ！！おとなしくしな！！[p]
-#
-敵は鈴猫の胸を揉みしだいた[p]
-#鈴猫
-あんっ！！[p]
-#
-鈴猫は１０の快感を受けた[p]
-[eval exp="f.ERO += 10"][eval exp="f.ERO += 5" cond="f.orgasm > 0"]
-[eval exp="f.En_ERO += 10"]
-[call target="*絶頂" cond="f.ERO >= 100"]
-[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
-[else]
-#敵
-暴れんじゃねえよ！[p]
-#
-敵の攻撃[r]
-１０のダメージを受けた。[p]
-[eval exp="f.HP -= 10"]
-[endif]
-[update_status][show_score]
-[return][s]
-
-*敵拘束攻撃3
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < 90"]
-#敵
-へっ！！おとなしくしな！！[p]
-#
-敵は鈴猫の胸を揉みしだいた[p]
-#鈴猫
-あんっ！！[p]
-#
-鈴猫は１０の快感を受けた[p]
-[eval exp="f.ERO += 10"][eval exp="f.ERO += 5" cond="f.orgasm > 0"]
-[eval exp="f.En_ERO += 10"]
-[call target="*絶頂" cond="f.ERO >= 100"]
-[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
-[else]
-#敵
-暴れんじゃねえよ！！[p]
-#
-敵の攻撃[r]
-１０のダメージを受けた。[p]
-[eval exp="f.HP -= 10"]
-[endif]
-[update_status][show_score]
-[return][s]
-
-*拘束バースト
+*バーストセクハラ攻撃
 #敵
 敵は鈴猫の秘所を弄った[p]
 #鈴猫
@@ -278,7 +252,28 @@ error-battle-970
 [call target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [update_status]
-[return][s]
+[jump storage="battle.ks" target="*本番突入判定"]
+[s]
+
+*本番突入判定
+[getrand min="1" max="100" var="f.rand"]
+[if exp="f.rand < f.En_ERO"]
+[eval exp="f.Rape_mode = 1"]
+[jump target="*レイプ開始"]
+[endif]
+[jump storage="battle.ks" target="*ラウンド終了"]
+[s]
+
+*拘束脱出
+#鈴猫
+この！離しなさいよっ！！[p]
+#
+鈴猫は自由を取り戻した！[p]
+[eval exp="f.Rt_Bind = 0"]
+[eval exp="f.Rape_mode = 0" cond="f.Rape_mode > 0"]
+[ptext layer="3" x="450" y="50" text="" size="30" color="0x333631" edge="white" bold="bold" align="left" name="Bind" overwrite="true"]
+[jump storage="battle.ks" target="*ラウンド終了"]
+[s]
 
 ;レイプ----------------------------------------------------------------------
 *レイプ開始
@@ -293,9 +288,10 @@ error-battle-970
 #鈴猫
 （ーーーーーーーッ！！）[p]
 [chara_mod name="suzune" face="苦しみ"]
-[return][s]
+[jump storage="battle.ks" target="*ラウンド終了"]
+[s]
 
-*レイプ序
+*レイプ導入
 #忍者
 どうだ！俺のマラの感触は！！[p]
 [chara_mod name="suzune" face="苦しみ"]
@@ -306,7 +302,7 @@ error-battle-970
 #
 [return][s]
 
-*レイプ本番
+*レイプスキル
 忍者はしっかりと鈴猫の腰を抱え込むと激しく腰を打ち付けた[p]
 [chara_mod name="suzune" face="喘ぎ"]
 #忍者
@@ -372,6 +368,61 @@ error-battle-970
 鈴猫はよろよろと立ち上がると敵を睨みつけた[p]
 [return]
 [s]
+
+*レイプ脱出
+#
+忍者は魔羅で鈴猫の膣を荒々しく突き上げた[p]
+[chara_mod name="suzune" face="喘ぎ"]
+#鈴猫
+あんっ！！あんっ！！ひあっ！！[p]
+#忍者
+へへっ！！いい声で鳴くようになってきたじゃねえか！！[p]
+#鈴猫
+う、うるさっ！！ひぃぃん！！！[p]
+#忍者
+よしっ！！このまま中でぶちまけてやるぜ！！[p]
+#鈴猫
+！！やめろぉっ！！ばかぁ！！んうううっ！！[p]
+#忍者
+うおおおおおっ！！出すぞ！！[p]
+#
+忍者は鈴猫の中で射精した[p]
+[chara_mod name="suzune" face="泣き"]
+#鈴猫
+いやあああああっ！！！[p]
+#
+鈴猫は精の迸りを子宮に感じながら嬌声を上げた[r]
+#
+[if exp="f.ERO_DEF > 0"]
+鈴猫は１０の快感を受けた[p]
+[eval exp="f.ERO += 10"]
+[else]
+鈴猫は５０の快感を受けた[p]
+[eval exp="f.ERO += 50"]
+[endif]
+[eval exp="f.En_MP = 0 ,f.En_ERO = 0"]
+[eval exp="f.ERO += 25" cond="f.orgasm > 0"]
+[update_status]
+[jump target="*絶頂フィニッシュ" cond="f.ERO >= 100"]
+[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
+#忍者
+へへへ、なかなか良かったぜ[p]
+#
+忍者は嫌らしく笑いながらマラを引き抜くと鈴猫の尻を叩いた[p]
+#鈴猫
+ああんっ！！[p]
+#
+その場にくずおれた鈴猫の秘裂からごぽりと精液が溢れた[p]
+[chara_mod name="suzune" face="厳しい"]
+#鈴猫
+くっ！絶対許さないんだから！！[p]
+#
+鈴猫はよろよろと立ち上がると敵を睨みつけた[p]
+[return]
+[s]
+
+
+
 
 ;絶頂----------------------------------------------------------------------
 *絶頂

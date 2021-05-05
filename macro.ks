@@ -160,8 +160,8 @@ if(d < 5){
 [macro name="show_score"]
 [iscript]
 f.round_ptxt = f.round + "回";
-f.En_DEF_ptxt = "守備力:" + f.En_DEF ;
-f.comand_ptxt = "コスト:" + f.comand ;
+f.En_DEF_ptxt = "敵１手:" + f.En_Hand1 ;
+f.comand_ptxt = "敵２手:" + f.En_Hand2 ;
 f.Target_ptxt = "目標値:" + f.Target ;
 f.Limit_ptxt = "上限値:" + f.Limit ;
 f.Total_ptxt = "合計値:" + f.Total ;
@@ -189,7 +189,7 @@ f.Bind_ptxt = "拘束力:" + f.Bind ;
 [macro name="reflesh_score"]
 [eval exp="f.En_DEF='' ,f.comand='' ,f.Target='' ,f.Limit='' ,f.Total='' "]
 [eval exp="f.Draw1_txt='' ,f.Draw2_txt='' ,f.Draw3_txt='' ,f.Draw4_txt='' ,f.Draw5_txt=''"]
-[eval exp="f.ATP_red = 0 ,f.RES_green = 0 "]
+[eval exp="f.Bonus_Red = 0 ,f.Bonus_Green = 0 "]
 [show_score]
 [endmacro]
 
@@ -198,9 +198,10 @@ f.Bind_ptxt = "拘束力:" + f.Bind ;
 [iscript]
 f.HP_ptxt = "体力:" + f.HP ;
 f.MP_ptxt = "気力:" + f.MP ;
+f.BP_ptxt = "武芸レベル:" + f.Bonus_Red ;
 f.ERO_ptxt = "快感:" + f.ERO ;
-f.En_HP_ptxt = "体力:" + f.En_HP ;
-f.En_MP_ptxt = "気力:" + f.En_MP ;
+f.En_HP_ptxt = "敵体力:" + f.En_HP ;
+f.En_MP_ptxt = "敵気力:" + f.En_MP ;
 f.En_ERO_ptxt = "興奮度:" + f.En_ERO + "％";
 if(f.orgasm>0){
   f.orgasm_ptxt = "絶頂状態" + f.Rt_orgasm;
@@ -208,8 +209,9 @@ if(f.orgasm>0){
   f.orgasm_ptxt = "";
 }
 [endscript]
-[ptext layer="0" x="10" y="620" text=&f.HP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="HP" overwrite="true" ]
-[ptext layer="0" x="10" y="650" text=&f.MP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="MP" overwrite="true" ]
+[ptext layer="0" x="10" y="590" text=&f.HP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="HP" overwrite="true" ]
+[ptext layer="0" x="10" y="620" text=&f.MP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="MP" overwrite="true" ]
+[ptext layer="0" x="10" y="650" text=&f.BP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="Arts" overwrite="true" ]
 [ptext layer="0" x="10" y="680" text=&f.ERO_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="ERO" overwrite="true" ]
 [ptext layer="0" x="150" y="10" text=&f.orgasm_ptxt size="40" color="0xff1493" edge="white" bold="bold" align="left" name="orgasm" overwrite="true" ]
 [ptext layer="0" x="850" y="10" text=&f.En_HP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_HP" overwrite="true" ]
@@ -221,6 +223,10 @@ if(f.orgasm>0){
 ;--------------------------------------------------------------------------------
 [macro name="wt2"]
 [wait time="200"][cm]
+[endmacro]
+
+[macro name="wt5"]
+[wait time="500"][cm]
 [endmacro]
 
 ; [getMathRound var="XXX"]
