@@ -53,7 +53,7 @@
 *武芸レベル3-1
 ;装甲貫通
 「螺旋」[wt2]
-[eval exp="f.BASE = 4"]
+[eval exp="f.BASE = 5"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
@@ -61,7 +61,7 @@
 *武芸レベル3-2
 ;必中
 「疾風迅雷」[wt2]
-[eval exp="f.BASE = 4"]
+[eval exp="f.BASE = 5"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
@@ -69,15 +69,15 @@
 *武芸レベル3-3
 ;妖怪に大ダメージ
 「日天掌」[wt2]
-[eval exp="f.BASE = 4"]
+[eval exp="f.BASE = 5"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 
 *武芸レベル3-4
-;毒を付与
+;毒を付与。相手が毒状態の時威力アップ
 「雀蜂」[wt2]
-[eval exp="f.BASE = 4"]
+[eval exp="f.BASE = 5"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
@@ -85,8 +85,17 @@
 *武芸レベル2-1
 ;敵の札に３の倍数で威力アップ
 ;弧を描く蹴り技
+[iscript]
+f.MA_bonus = 0;
+for(i=0;i<5;i++){
+  if(f.Cards[f.Hand[i]]['value'] == 3){
+    f.MA_bonus = 1;
+    break;
+  }
+}
+[endscript]
 「三日月」[wt2]
-[eval exp="f.BASE = 3"]
+[eval exp="f.BASE = 3 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
@@ -94,8 +103,17 @@
 *武芸レベル2-2
 ;敵の札に5の倍数で威力アップ
 ;拳のラッシュ
+[iscript]
+f.MA_bonus = 0;
+for(i=0;i<5;i++){
+  if(f.Cards[f.Hand[i]]['value'] == 5){
+    f.MA_bonus = 1;
+    break;
+  }
+}
+[endscript]
 「五月雨」[wt2]
-[eval exp="f.BASE = 3"]
+[eval exp="f.BASE = 3 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
@@ -103,8 +121,17 @@
 *武芸レベル2-3
 ;敵の札に4の倍数で威力アップ
 ;苦無を八本投擲する
+[iscript]
+f.MA_bonus = 0;
+for(i=0;i<5;i++){
+  if(f.Cards[f.Hand[i]]['value'] == 4){
+    f.MA_bonus = 1;
+    break;
+  }
+}
+[endscript]
 「八重の椿」[wt2]
-[eval exp="f.BASE = 3"]
+[eval exp="f.BASE = 3 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
@@ -112,8 +139,17 @@
 *武芸レベル2-4
 ;敵の札に7の倍数で威力アップ
 ;幸せ投げ
+[iscript]
+f.MA_bonus = 0;
+for(i=0;i<5;i++){
+  if(f.Cards[f.Hand[i]]['value'] == 7){
+    f.MA_bonus = 1;
+    break;
+  }
+}
+[endscript]
 「虹霓落とし」[wt2]
-[eval exp="f.BASE = 3"]
+[eval exp="f.BASE = 3 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
@@ -121,58 +157,120 @@
 *武芸レベル1-1
 ;一のカードで威力アップ
 ;手刀
+[iscript]
+f.MA_bonus = 0;
+for(i=0;i<5;i++){
+  if(f.Cards[f.Hand[i]]['value'] == 1){
+    f.MA_bonus = 1.5;
+    break;
+  }
+}
+[endscript]
 「初風」[wt2]
-[eval exp="f.BASE = 2"]
+[eval exp="f.BASE = 2 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
+
 *武芸レベル1-2
 ;雪の札で威力アップ
 ;掌打
+[iscript]
+f.MA_bonus = 0;
+for(i=0;i<5;i++){
+  if(f.Cards[f.Hand[i]]['txt'].indexOf('雪') != -1){
+    f.MA_bonus = 1.5;
+    break;
+  }
+}
+[endscript]
 「吹雪」[wt2]
-[eval exp="f.BASE = 2"]
+[eval exp="f.BASE = 2 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
+
 *武芸レベル1-3
 ;月の札で威力アップ
 ;沈み込んだところから上段蹴り
+[iscript]
+f.MA_bonus = 0;
+for(i=0;i<5;i++){
+  if(f.Cards[f.Hand[i]]['txt'].indexOf('月') != -1){
+    f.MA_bonus = 1.5;
+    break;
+  }
+}
+[endscript]
 「朧」[wt2]
-[eval exp="f.BASE = 2"]
+[eval exp="f.BASE = 2 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
+
 *武芸レベル1-4
 ;花の札で威力アップ
 ;中断回し膝蹴り
+[iscript]
+f.MA_bonus = 0;
+for(i=0;i<5;i++){
+  if(f.Cards[f.Hand[i]]['txt'].indexOf('花') != -1){
+    f.MA_bonus = 1.5;
+    break;
+  }
+}
+[endscript]
 「花嵐」[wt2]
-[eval exp="f.BASE = 2"]
+[eval exp="f.BASE = 2 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 
 
 *武芸レベルMAX-1
-;手札の数によって威力アップ
+;手札の数値によって威力アップ。倍率は控えめだが制限はゆるい。２１はクリティカルが乗るので実質高倍率
 ;目くらましの上段蹴りから始まる円の動きを取るコンビネーション
-「円月の舞」[wt2]
-[eval exp="f.BASE = 5"]
+;中断回し膝蹴り
+[iscript]
+f.MA_bonus = 0;
+if(f.Total >= 16){f.MA_bonus = 0;}
+if(f.Total >= 18){f.MA_bonus = 1;}
+if(f.Total == 20){f.MA_bonus = 2;}
+if(f.Total == 21){f.MA_bonus = 3;}
+[endscript]
+「桜花連武」[wt2]
+[eval exp="f.BASE = 5 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 *武芸レベルMAX-2
-;ドロー数によって威力アップ。５枚引くと威力最大
+;ドロー数によって威力アップ。数値が低くても枚数次第で火力アップ。クリティカルでない限り４ドロは桜花より強い。
 ;至近距離での正拳連打。５枚の場合最後に上段蹴りで〆る。
+[iscript]
+f.MA_bonus = 0;
+if(f.Down == 2){f.MA_bonus = 0;}
+if(f.Down == 3){f.MA_bonus = 1;}
+if(f.Down == 4){f.MA_bonus = 2.5;}
+if(f.Down == 5){f.MA_bonus = 5;}
+[endscript]
 「四神衝」[wt2]
-[eval exp="f.BASE = 5"]
+[eval exp="f.BASE = 5 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 *武芸レベルMAX-3
-;残りHPが少ないほど威力アップ
+;残りHPが少ないほど威力アップ。札に一切依存しない代わり条件を満たすまで威力が低い。
 ;カウンターの一撃
+[iscript]
+f.MA_bonus = -0.5;
+if(f.HP <= 1000){f.MA_bonus = 0;}
+if(f.HP <= 750){f.MA_bonus = 1.5;}
+if(f.HP <= 500){f.MA_bonus = 3;}
+if(f.HP <= 300){f.MA_bonus = 4.5;}
+if(f.HP <= 100){f.MA_bonus = 6;}
+[endscript]
 「乾坤」[wt2]
-[eval exp="f.BASE = 5"]
+[eval exp="f.BASE = 5 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]

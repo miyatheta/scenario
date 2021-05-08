@@ -160,9 +160,13 @@ if(d < 5){
 [macro name="show_score"]
 [iscript]
 f.round_ptxt = f.round + "回";
-f.En_DEF_ptxt = "敵１手:" + f.En_Hand1 ;
-f.comand_ptxt = "敵２手:" + f.En_Hand2 ;
-f.Target_ptxt = "目標値:" + f.Target ;
+f.En_Hand1_ptxt = "敵１手:" + f.En_Hand1 ;
+if(f.Target == ''){
+  f.En_Hand2_ptxt = "敵２手:？" ;
+}else{
+  f.En_Hand2_ptxt = "敵２手:" + f.En_Hand2 ;
+}
+f.Target_ptxt = "合計値:" + f.Target ;
 f.Limit_ptxt = "上限値:" + f.Limit ;
 f.Total_ptxt = "合計値:" + f.Total ;
 f.Draw1_ptxt = "１手目:" + f.Draw1_txt ;
@@ -173,10 +177,10 @@ f.Draw5_ptxt = "５手目:" + f.Draw5_txt ;
 f.Bind_ptxt = "拘束力:" + f.Bind ;
 [endscript]
 [ptext layer="3" x="520" y="0" text=&f.round_ptxt size="30" color="0xffffff" edge="red" bold="bold" align="left" name="Round" overwrite="true" ]
-[ptext layer="3" x="630" y="100" text=&f.En_DEF_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="En_DEF" overwrite="true" ]
-[ptext layer="3" x="630" y="140" text=&f.comand_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="comand" overwrite="true" ]
-[ptext layer="3" x="630" y="180" text=&f.Target_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Target" overwrite="true"]
-[ptext layer="3" x="630" y="220" text=&f.Limit_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Limit" overwrite="true"]
+[ptext layer="3" x="630" y="100" text=&f.Target_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Target" overwrite="true"]
+[ptext layer="3" x="630" y="140" text=&f.En_Hand1_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="En_Hand1" overwrite="true" ]
+[ptext layer="3" x="630" y="180" text=&f.En_Hand2_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="En_Hand2" overwrite="true" ]
+;[ptext layer="3" x="630" y="220" text=&f.Limit_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Limit" overwrite="true"]
 [ptext layer="3" x="410" y="100" text=&f.Total_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Total" overwrite="true"]
 [ptext layer="3" x="410" y="140" text=&f.Draw1_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Draw1" overwrite="true"]
 [ptext layer="3" x="410" y="180" text=&f.Draw2_ptxt size="30" color="0x333631" edge="white" bold="bold" align="left" name="Draw2" overwrite="true"]
