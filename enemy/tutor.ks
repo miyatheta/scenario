@@ -18,7 +18,8 @@
 
 *ダメージ計算
 [getrand min="1" max="&f.En_ATP" var="f.rand"]
-[eval exp="f.damage = (f.BASE + f.En_ATP_Plus + f.rand) / f.Guard"]
+[eval exp="tf.argment= (f.BASE + f.En_ATP_Plus + f.rand) / f.Guard"]
+[getMathRound var="f.damage"]
 [eval exp="f.damage = 0" cond="f.damage < 0"]
 [eval exp="f.HP -= f.damage"]
 [emb exp="f.damage"]のダメージを受けた。[p]
@@ -157,7 +158,7 @@ error-battle-970
 ;攻撃----------------------------------------------------------------------------
 
 *敵攻撃
-敵の攻撃[r]
+敵の攻撃[wt5]
 [eval exp="f.BASE= 50 , f.En_DEX = -5"]
 ;回避判定
 [call target="*回避"]
@@ -329,7 +330,8 @@ error-battle-970
 [call target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [update_status]
-[return][s]
+[jump storage="battle.ks" target="&f.returnTag"]
+[s]
 
 *レイプ脱出判定
 [eval exp="f.Bind -= f.Total"]
@@ -487,7 +489,7 @@ error-battle-970
 んっ！このぉ……ぜったい、ゆるさないんらからぁっ！[p]
 #
 鈴猫はよろよろと立ち上がると敵を睨みつけた[p]
-[return][s]
+[jump target="*レイプ終了"][s]
 
 *気絶フィニッシュ
 [chara_mod name="suzune" face="レイプ目"]

@@ -12,30 +12,30 @@
 [s]
 
 *武芸レベルMAX
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="円月の舞" target="*武芸レベルMAX-1"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="桜花演武" target="*武芸レベルMAX-1"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="四神衝" target="*武芸レベルMAX-2"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="乾坤" target="*武芸レベルMAX-3"]
 [s]
 
 *武芸レベル3
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="螺旋・鎧通し" target="*武芸レベル3-1"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="疾風迅雷" target="*武芸レベル3-2"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="日天掌" target="*武芸レベル3-3"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="雷電脚" target="*武芸レベル3-1"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="螺旋掌" target="*武芸レベル3-2"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="凶祓い" target="*武芸レベル3-3"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="雀蜂" target="*武芸レベル3-4"]
 [s]
 
 *武芸レベル2
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="三日月" target="*武芸レベル2-1"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="三連脚" target="*武芸レベル2-1"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="五月雨" target="*武芸レベル2-2"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="八重の椿" target="*武芸レベル2-3"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="四十雀" target="*武芸レベル2-3"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="虹霓落とし" target="*武芸レベル2-4"]
 [s]
 
 *武芸レベル1
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="初風" target="*武芸レベル1-1"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="一輪草" target="*武芸レベル1-1"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="吹雪" target="*武芸レベル1-2"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="朧" target="*武芸レベル1-3"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="花嵐" target="*武芸レベル1-4"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="旋花" target="*武芸レベル1-4"]
 [s]
 
 *ダメージ計算
@@ -51,16 +51,16 @@
 [return][s]
 
 *武芸レベル3-1
-;装甲貫通
-「螺旋」[wt2]
+;装甲貫通。孤塁抜き
+「雷電脚」[wt2]
 [eval exp="f.BASE = 5"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 
 *武芸レベル3-2
-;必中
-「疾風迅雷」[wt2]
+;防御無視。発勁
+「螺旋掌」[wt2]
 [eval exp="f.BASE = 5"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
@@ -68,7 +68,7 @@
 
 *武芸レベル3-3
 ;妖怪に大ダメージ
-「日天掌」[wt2]
+「凶祓い」[wt2]
 [eval exp="f.BASE = 5"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
@@ -83,73 +83,81 @@
 [s]
 
 *武芸レベル2-1
-;敵の札に３の倍数で威力アップ
+;場に3の倍数の札があると枚数分だけ威力アップ（3.3/3.8/4.3/4.8/5.3/5.8/5.8/6.3/6.8）7
 ;弧を描く蹴り技
 [iscript]
 f.MA_bonus = 0;
+if(f.En_Hand1%3 == 0){f.MA_bonus += 0.2;}
+if(f.En_Hand2%3 == 0){f.MA_bonus += 0.2;}
 for(i=0;i<5;i++){
-  if(f.Cards[f.Hand[i]]['value'] == 3){
-    f.MA_bonus = 1;
+  if(f.Cards[f.Hand[i]]['value']%4 == 0){
+    f.MA_bonus += 0.2;
     break;
   }
 }
 [endscript]
-「三日月」[wt2]
-[eval exp="f.BASE = 3 + f.MA_bonus"]
+「三連脚」[wt2]
+[eval exp="f.BASE = 3.3 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 
 *武芸レベル2-2
-;敵の札に5の倍数で威力アップ
+;場に5の倍数の札があると枚数分だけ威力アップ(2.8/3.5/4.2/4.9/5.6/6.3/7.0)6
 ;拳のラッシュ
 [iscript]
 f.MA_bonus = 0;
+if(f.En_Hand1%5 == 0){f.MA_bonus += 0.4;}
+if(f.En_Hand2%5 == 0){f.MA_bonus += 0.4;}
 for(i=0;i<5;i++){
-  if(f.Cards[f.Hand[i]]['value'] == 5){
-    f.MA_bonus = 1;
+  if(f.Cards[f.Hand[i]]['value']%4 == 0){
+    f.MA_bonus += 0.4;
     break;
   }
 }
 [endscript]
 「五月雨」[wt2]
-[eval exp="f.BASE = 3 + f.MA_bonus"]
+[eval exp="f.BASE = 3.0 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 
 *武芸レベル2-3
-;敵の札に4の倍数で威力アップ
-;苦無を八本投擲する
+;場に4の倍数の札があると枚数分だけ威力アップ(3/3.5/4.2/4.9/5.6/6.3/7.0)
+;宙から敵を踏みつける
 [iscript]
 f.MA_bonus = 0;
+if(f.En_Hand1%4 == 0){f.MA_bonus += 0.4;}
+if(f.En_Hand2%4 == 0){f.MA_bonus += 0.4;}
 for(i=0;i<5;i++){
-  if(f.Cards[f.Hand[i]]['value'] == 4){
-    f.MA_bonus = 1;
+  if(f.Cards[f.Hand[i]]['value']%4 == 0){
+    f.MA_bonus += 0.4;
     break;
   }
 }
 [endscript]
-「八重の椿」[wt2]
-[eval exp="f.BASE = 3 + f.MA_bonus"]
+「四十雀」[wt2]
+[eval exp="f.BASE = 3.2 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 
 *武芸レベル2-4
-;敵の札に7の倍数で威力アップ
+;場に7の倍数の札があると枚数分だけ威力アップ
 ;幸せ投げ
 [iscript]
 f.MA_bonus = 0;
+if(f.En_Hand1%7 == 0){f.MA_bonus += 0.7;}
+if(f.En_Hand2%7 == 0){f.MA_bonus += 0.7;}
 for(i=0;i<5;i++){
-  if(f.Cards[f.Hand[i]]['value'] == 7){
-    f.MA_bonus = 1;
+  if(f.Cards[f.Hand[i]]['value']%7 == 0){
+    f.MA_bonus += 0.7;
     break;
   }
 }
 [endscript]
 「虹霓落とし」[wt2]
-[eval exp="f.BASE = 3 + f.MA_bonus"]
+[eval exp="f.BASE = 3.2 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
@@ -161,13 +169,13 @@ for(i=0;i<5;i++){
 f.MA_bonus = 0;
 for(i=0;i<5;i++){
   if(f.Cards[f.Hand[i]]['value'] == 1){
-    f.MA_bonus = 1.5;
+    f.MA_bonus = 1.0;
     break;
   }
 }
 [endscript]
-「初風」[wt2]
-[eval exp="f.BASE = 2 + f.MA_bonus"]
+「一輪草」[wt2]
+[eval exp="f.BASE = 2.4 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
@@ -187,6 +195,8 @@ for(i=0;i<5;i++){
 「吹雪」[wt2]
 [eval exp="f.BASE = 2 + f.MA_bonus"]
 [call target="*ダメージ計算"]
+敵の興奮度-5[wt2]
+[eval exp="f.En_ERO -= 5"][eval exp="f.En_ERO = 0" cond="f.En_ERO < 0"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 
@@ -197,7 +207,7 @@ for(i=0;i<5;i++){
 f.MA_bonus = 0;
 for(i=0;i<5;i++){
   if(f.Cards[f.Hand[i]]['txt'].indexOf('月') != -1){
-    f.MA_bonus = 1.5;
+    f.MA_bonus = 1.3;
     break;
   }
 }
@@ -205,24 +215,31 @@ for(i=0;i<5;i++){
 「朧」[wt2]
 [eval exp="f.BASE = 2 + f.MA_bonus"]
 [call target="*ダメージ計算"]
+気力が+5[wt2]
+[eval exp="f.MP += 5"][eval exp="f.MP = 100" cond="f.MP > 100"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 
 *武芸レベル1-4
 ;花の札で威力アップ
-;中断回し膝蹴り
+;中段回し膝蹴り
 [iscript]
 f.MA_bonus = 0;
 for(i=0;i<5;i++){
   if(f.Cards[f.Hand[i]]['txt'].indexOf('花') != -1){
-    f.MA_bonus = 1.5;
+    f.MA_bonus = 1.3;
     break;
   }
 }
 [endscript]
-「花嵐」[wt2]
+「旋花」[wt2]
 [eval exp="f.BASE = 2 + f.MA_bonus"]
 [call target="*ダメージ計算"]
+[getrand min="1" max="100" var="f.rand"]
+[if exp="f.rand > 50"]
+CTが１減少した[wt2]
+[eval exp="f.Bonus_Orange += 1"]
+[endif]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 
@@ -238,11 +255,12 @@ if(f.Total >= 18){f.MA_bonus = 1;}
 if(f.Total == 20){f.MA_bonus = 2;}
 if(f.Total == 21){f.MA_bonus = 3;}
 [endscript]
-「桜花連武」[wt2]
+「乱舞・雪月花」[wt2]
 [eval exp="f.BASE = 5 + f.MA_bonus"]
 [call target="*ダメージ計算"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
+
 *武芸レベルMAX-2
 ;ドロー数によって威力アップ。数値が低くても枚数次第で火力アップ。クリティカルでない限り４ドロは桜花より強い。
 ;至近距離での正拳連打。５枚の場合最後に上段蹴りで〆る。
