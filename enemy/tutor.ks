@@ -58,7 +58,7 @@
 
 *拘束時ハンド抽選
 #
-鈴猫は敵に拘束されている[wt2]
+鈴猫は敵に拘束されている[wt5]
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.En_MP >= 100"]
 [eval exp="f.En_Hand1 = 10 , f.En_Hand2 = 7"]
@@ -69,7 +69,7 @@
 
 *レイプ時ハンド抽選
 #
-鈴猫は敵に犯されている[wt2]
+鈴猫は敵に犯されている[wt5]
 [call target="*レイプ導入"]
 ;導入の演出
 [getrand min="1" max="100" var="f.rand"]
@@ -124,7 +124,7 @@ error-battle-970
 
 *攻撃バフ
 「練気」[r]
-敵の攻撃力がアップ[wt2]
+敵の攻撃力がアップ[wt5]
 [eval exp="f.En_ATP_Plus = 50"]
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
@@ -132,7 +132,7 @@ error-battle-970
 
 *防御バフ
 「硬気功」[r]
-敵の防御力がアップ[wt2]
+敵の防御力がアップ[wt5]
 [eval exp="f.En_DFP_Plus = 50"]
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
@@ -140,7 +140,7 @@ error-battle-970
 
 *命中バフ
 「精神統一」[r]
-敵の命中力がアップ[wt2]
+敵の命中力がアップ[wt5]
 [eval exp="f.En_DEX_Plus = 10"]
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
@@ -148,7 +148,7 @@ error-battle-970
 
 *守備力アップ
 #
-「気迫」[wt2]
+「気迫」[wt5]
 気力が−１0された[p]
 [eval exp="f.MP -= 10"][eval exp="f.MP = 0" cond="f.MP < 0"]
 [update_status][show_score]
@@ -245,7 +245,7 @@ error-battle-970
 
 *拘束脱出判定
 #
-鈴猫は暴れた[wt2]
+鈴猫は暴れた[wt5]
 #鈴猫
 この！離しなさいよ！！[p]
 #
