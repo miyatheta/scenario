@@ -17,7 +17,7 @@
 [eval exp="f.critical = 1"]
 [eval exp="f.shingan = 0 , f.invincible = 0 ,f.Guard = 1 , f.Pary = 0"]
 [eval exp="f.skill1_CT = 0 , f.skill2_CT = 0 , f.skill3_CT = 0 , f.skill4_CT = 0"]
-[eval exp="f.Magic_set = 0, f.Magic3_set = 0 , f.Magic2_set = 0 , f.Magic1_set = 0"]
+[eval exp="f.Magic_set = 0"]
 [eval exp="f.ATP = 50 , f.Bonus_Red = 0 , f.RES = 40 , f.Bonus_Green = 0 ,f.DEF_Yellow = 0"]
 [eval exp="f.Red = 0 , f.Blue = 0 , f.Green = 0 , f.Orange = 0"]
 
@@ -67,13 +67,13 @@ for(i=0 ; i<n ; i++){
 *ドロー
 [if exp="f.Cards[f.Hand[0]]['active']==0"]
 [glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y font_color="0x696969" text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw =f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="*ドロー" ]
+[elsif exp="f.Cards[f.Hand[0]]['active']> 0 && f.shingan>0"]
+[glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y font_color="0xffffff" text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw =f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="&f.Path" ]
 [else]
-[glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y font_color="0xffffff" text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw1=f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="&f.Path" ]
+[glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y font_color="0xffffff" text=""                           exp="f.Draw =f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="&f.Path" ]
 [endif]
 
-[if exp="f.Down == 1"]
-[glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y font_color="0x696969" text=""                           exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=1" target="*ドロー" ]
-[elsif exp="f.Cards[f.Hand[1]]['active']==0"]
+[if exp="f.Cards[f.Hand[1]]['active']==0"]
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y font_color="0x696969" text="&f.Cards[f.Hand[1]]['txt']" exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[1]]['active']> 0 && f.shingan>0"]
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y font_color="0xffffff" text="&f.Cards[f.Hand[1]]['txt']" exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=0" target="&f.Path" ]
@@ -81,9 +81,7 @@ for(i=0 ; i<n ; i++){
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y font_color="0xffffff" text=""                           exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=0" target="&f.Path" ]
 [endif]
 
-[if exp="f.Down == 1"]
-[glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y font_color="0x696969" text=""                           exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=1" target="*ドロー" ]
-[elsif exp="f.Cards[f.Hand[2]]['active']==0"]
+[if exp="f.Cards[f.Hand[2]]['active']==0"]
 [glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y font_color="0x696969" text="&f.Cards[f.Hand[2]]['txt']" exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[2]]['active']> 0 && f.shingan>0"]
 [glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y font_color="0xffffff" text="&f.Cards[f.Hand[2]]['txt']" exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=0" target="&f.Path" ]
@@ -91,9 +89,7 @@ for(i=0 ; i<n ; i++){
 [glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y font_color="0xffffff" text=""                           exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=0" target="&f.Path" ]
 [endif]
 
-[if exp="f.Down == 1"]
-[glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y font_color="0x696969" text=""                           exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=1" target="*ドロー" ]
-[elsif exp="f.Cards[f.Hand[3]]['active']==0"]
+[if exp="f.Cards[f.Hand[3]]['active']==0"]
 [glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y font_color="0x696969" text="&f.Cards[f.Hand[3]]['txt']" exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[3]]['active']> 0 && f.shingan>0"]
 [glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y font_color="0xffffff" text="&f.Cards[f.Hand[3]]['txt']" exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=0" target="&f.Path" ]
@@ -101,9 +97,7 @@ for(i=0 ; i<n ; i++){
 [glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y font_color="0xffffff" text=""                           exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=0" target="&f.Path" ]
 [endif]
 
-[if exp="f.Down == 1"]
-[glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y font_color="0x696969" text=""                           exp="f.Draw =f.Hand[4],f.Cards[f.Hand[4]]['active']=1" target="*ドロー" ]
-[elsif exp="f.Cards[f.Hand[4]]['active']==0"]
+[if exp="f.Cards[f.Hand[4]]['active']==0"]
 [glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y font_color="0x696969" text="&f.Cards[f.Hand[4]]['txt']" exp="f.Draw =f.Hand[4],f.Cards[f.Hand[4]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[4]]['active']> 0 && f.shingan>0"]
 [glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y font_color="0xffffff" text="&f.Cards[f.Hand[4]]['txt']" exp="f.Draw =f.Hand[4],f.Cards[f.Hand[4]]['active']=0" target="&f.Path" ]
@@ -167,7 +161,7 @@ for(i=0 ; i<n ; i++){
 *ドロー1
 [eval exp="f.Draw = 0 , f.Down = 1 , f.Path = '*ドロー1完了'"][jump target="*ドロー"]
 *ドロー1完了
-[Calc_Card]
+[eval exp="f.Draw1 = f.Draw"]
 [eval exp="f.Total = 0 + f.Cards[f.Draw1]['value']"]
 [eval exp="f.Draw1_txt = f.Cards[f.Draw1]['txt'] "]
 [show_score][update_status]
@@ -181,11 +175,12 @@ for(i=0 ; i<n ; i++){
 *ドロー1コマンド
 [glink color="red" size="18" x="0" y="450" text="スキル" exp="f.skillCase=1 , f.returnStr='battle.ks' , f.returnTag='*ドロー'" storage="skill.ks" target="*スキル選択"]
 
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="練気(ヒット)"    exp="" cond="f.Down < 5" target="*ドロー2"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="格闘(ヒット)"    exp="" cond="f.Bind < 1" target="*ドロー2"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="抵抗する(ヒット)"    exp="" cond="f.Bind > 0" target="*ドロー2"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="技能(スキル)"    exp="f.returnTag = '*ドロー1コマンド'"  storage="skill.ks" target="*スキル選択"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="忍術(ベット)"    exp="" cond="f.Down == 1 || f.Magick_set!=1" storage="magick.ks" target="*忍術選択"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > 12" target="*"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="防御(フォールド)"   exp="" cond="f.Total >= 13 && f.Total <= 16" target="*防御"]
+;[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > 12" target="*ハンド判定"]
+;[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="防御(フォールド)"   exp="" cond="f.Total >= 13 && f.Total <= 16" target="*防御"]
 [s]
 
 *ドロー2
@@ -195,16 +190,24 @@ for(i=0 ; i<n ; i++){
 [eval exp="f.Draw2 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw2]['value']"]
 [eval exp="f.Draw2_txt = f.Cards[f.Draw2]['txt'] "]
+[iscript]
+if(f.Total > 21 && f.Cards[f.Draw2]['value']==11){
+  f.Total -= 10;
+  f.Draw2_txt = f.Cards[f.Draw2]['Ace']
+}
+[endscript]
 [show_score]
 ;*バースト判定2(バーストはない絶対２１以下の為)
 *ドロー2ボーナス
 [eval exp="f.drawColor = f.Cards[f.Draw2]['color']"]
 [call target="*ドローボーナス" cond="f.Bind < 1"]
 ;敵の２枚目も開示
-[eval exp="f.Target = f.En_Hand1 + f.En_Hand2" ]
-[show_score]
-;
-[jump target="*ハンド判定" cond="f.Total > f.Target"]
+;[eval exp="f.Target = f.En_Hand1 + f.En_Hand2" ]
+;[show_score]
+[if exp="f.Total == 21"]
+先手必勝[wt5]
+[jump target="*ハンド判定"]
+[endif]
 *敵行動2
 [jump storage="&f.enemy_PASS" target="*敵行動分岐"]
 *敵行動2完了
@@ -212,8 +215,8 @@ for(i=0 ; i<n ; i++){
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="練気(ヒット)"    exp="" cond="f.Down < 5" target="*ドロー3"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="技能(スキル)"     exp="f.returnTag = '*ドロー2コマンド'"  storage="skill.ks" target="*スキル選択"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="忍術(ベット)"     exp="" cond="f.Down == 1" storage="magick.ks" target="*忍術選択"]
-;[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > 12" target="*"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="防御(フォールド)"   exp="" cond="f.Total >= 13 && f.Total <= 16" target="*防御"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > f.Target" target="*ハンド判定"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="防御(フォールド)"   exp="" cond="f.Total <= f.En_Hand1" target="*防御"]
 [s]
 
 *ドロー3
@@ -223,6 +226,18 @@ for(i=0 ; i<n ; i++){
 [eval exp="f.Draw3 = f.Draw"]
 [eval exp="f.Total = f.Total + f.Cards[f.Draw3]['value']"]
 [eval exp="f.Draw3_txt = f.Cards[f.Draw3]['txt'] "]
+[iscript]
+if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
+  f.Total -= 10;
+  f.Draw3_txt = f.Cards[f.Draw3]['Ace']
+}else if(f.Total > 21 && f.Cards[f.Draw2]['value']==11){
+  f.Total -= 10;
+  f.Draw2_txt = f.Cards[f.Draw2]['Ace']
+}else if(f.Total > 21 && f.Cards[f.Draw1]['value']==11){
+  f.Total -= 10;
+  f.Draw1_txt = f.Cards[f.Draw1]['Ace']
+}
+[endscript]
 [show_score]
 *バースト判定3
 [jump target="*バースト" cond="f.Total > f.Limit "]
@@ -230,61 +245,10 @@ for(i=0 ; i<n ; i++){
 [eval exp="f.drawColor = f.Cards[f.Draw3]['color']"]
 [call target="*ドローボーナス" cond="f.Bind < 1"]
 [show_score]
-;
-[jump target="*ハンド判定" cond="f.Total > f.Target"]
-*敵行動3
-[jump storage="&f.enemy_PASS" target="*敵行動分岐"]
-*敵行動3完了
-*ドロー3コマンド
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="練気(ヒット)"    exp="" cond="f.Down < 5" target="*ドロー4"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="技能(スキル)"     exp="f.returnTag = '*ドロー3コマンド'"  storage="skill.ks" target="*スキル選択"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="忍術(ベット)"     exp="" cond="f.Down == 1" storage="magick.ks" target="*忍術選択"]
-;[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > 12" target="*"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="防御(フォールド)"   exp="" cond="f.Total >= 13 && f.Total <= 16" target="*防御"]
-[s]
-
-*ドロー4
-[eval exp="f.Draw = 0 , f.Down = 4 , f.Path = '*ドロー4完了' "][jump target="*ドロー"]
-*ドロー4完了
-[eval exp="f.Draw4 = f.Draw"]
-[eval exp="f.Total = f.Total + f.Cards[f.Draw4]['value']"]
-[eval exp="f.Draw4_txt = f.Cards[f.Draw4]['txt'] "]
-[show_score]
-*バースト判定4
-[jump target="*バースト" cond="f.Total > f.Limit "]
-*ドロー4ボーナス
-[eval exp="f.drawColor = f.Cards[f.Draw4]['color']"]
-[call target="*ドローボーナス" cond="f.Bind < 1"]
-[show_score]
-;
-[jump target="*ハンド判定" cond="f.Total > f.Target"]
-*敵行動4
-[jump storage="&f.enemy_PASS" target="*敵行動分岐"]
-*敵行動4完了
-*ドロー4コマンド
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="練気(ヒット)"    exp="" cond="f.Down < 5" target="*ドロー5"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="技能(スキル)"     exp="f.returnTag = '*ドロー4コマンド'"  storage="skill.ks" target="*スキル選択"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="忍術(ベット)"     exp="" cond="f.Down == 1" storage="magick.ks" target="*忍術選択"]
-;[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > 12" target="*"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="防御(フォールド)"   exp="" cond="f.Total >= 13 && f.Total <= 16" target="*防御"]
-[s]
-
-*ドロー5
-[eval exp="f.Draw = 0 , f.Down = 5 , f.Path = '*ドロー5完了' "][jump target="*ドロー"]
-*ドロー5完了
-[eval exp="f.Draw5 = f.Draw"]
-[eval exp="f.Total = f.Total + f.Cards[f.Draw5]['value']"]
-[eval exp="f.Draw5_txt = f.Cards[f.Draw5]['txt'] "]
-[show_score]
-*バースト判定5
-[jump target="*バースト" cond="f.Total > f.Limit "]
-*ドロー5ボーナス
-[eval exp="f.drawColor = f.Cards[f.Draw5]['color']"]
-[call target="*ドローボーナス" cond="f.Bind < 1"]
-;*敵行動5(行動しない)
-;*敵行動5完了
-;*ドロー5コマンド(自動的に判定へ)
-*ドロー5判定
+;*敵行動3(行動しない)
+;*敵行動3完了
+;*ドロー3コマンド(自動的に判定へ)
+*ドロー3判定
 [jump target="*ハンド判定"]
 [s]
 
@@ -298,6 +262,9 @@ for(i=0 ; i<n ; i++){
 [s]
 
 *ハンド判定
+;敵の２枚目も開示
+[eval exp="f.Target = f.En_Hand1 + f.En_Hand2" ]
+[show_score]
 勝負あり[wt5]
 [emb exp="f.Total"]対[emb exp="f.Target"][p]
 [if exp="f.Target <= f.Total && f.Total <= f.Limit "]
@@ -311,6 +278,7 @@ for(i=0 ; i<n ; i++){
 [s]
 
 *判定成功
+[jump storage="magick.ks" target="*忍術判定" cond="f.Magic_set > 0"]
 [if exp="f.Rape_mode > 0"]
 [jump storage="&f.enemy_PASS" target="*レイプ脱出判定"]
 
@@ -318,8 +286,7 @@ for(i=0 ; i<n ; i++){
 [jump storage="&f.enemy_PASS" target="*拘束脱出判定"]
 
 [else]
-[jump storage="magick.ks" target="*忍術判定" cond="f.Magic_set > 0"]
-[jump storage="MartialArts.ks" target="*武芸レベル判定"]
+[jump storage="MartialArts.ks" target="*武芸判定"]
 [endif]
 [s]
 
@@ -353,7 +320,7 @@ for(i=0 ; i<n ; i++){
 [eval exp="f.dress=2 , f.invincible=0"]
 [call storage="As_face.ks"]
 [chara_mod name="suzune" face="厳しい" ]
-[jump target="&f.returnTag"]
+[jump storage="battle.ks" target="*ラウンド終了"]
 [s]
 
 *空蝉発動拘束時
@@ -376,7 +343,7 @@ for(i=0 ; i<n ; i++){
 今回、使用した札は[emb exp="f.Cards[f.Hand[0]]['txt']"]、
 [emb exp="f.Cards[f.Hand[1]]['txt']"]、[emb exp="f.Cards[f.Hand[2]]['txt']"]、
 [emb exp="f.Cards[f.Hand[3]]['txt']"]、[emb exp="f.Cards[f.Hand[4]]['txt']"]です[p]
-[eval exp="f.shingan=0"]
+[eval exp="f.shingan=0 , f.Pary = 0"]
 [if exp="f.Rt_orgasm ==1"]
 [eval exp="f.Rt_orgasm = 0 , f.orgasm = 0"]
 [chara_mod name="suzune" face="怒り" cond="f.ERO < 70"]
@@ -389,7 +356,7 @@ for(i=0 ; i<n ; i++){
 [eval exp="f.En_ATP_Plus = 0, f.En_DFP_Plus = 0 , f.En_DEX_Plus = 0 "]
 [eval exp="f.critical = 1 , f.Guard = 1"]
 [eval exp="f.Red = 0 , f.Blue = 0 , f.Green = 0 , f.Orange = 0"]
-[eval exp="f.Magic_set = 0, f.Magic3_set = 0 , f.Magic2_set = 0 , f.Magic1_set = 0"]
+[eval exp="f.Magic_set = 0 "]
 [DeActivate]
 [reflesh_score]
 [ReShuffle]

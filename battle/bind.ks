@@ -4,14 +4,14 @@
 ;通常
 *ドロー
 [if exp="f.Cards[f.Hand[0]]['active']==0"]
-[glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw =f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="*ドロー" ]
+[glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y font_color="0x696969" text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw =f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="*ドロー" ]
+[elsif exp="f.Cards[f.Hand[0]]['active']> 0 && f.shingan>0"]
+[glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y font_color="0xffffff" text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw =f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="&f.Path" ]
 [else]
-[glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw1=f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="&f.Path" ]
+[glink color="&f.Cards[f.Hand[0]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x1 y=&f.pos_Card_y font_color="0xffffff" text="&f.Cards[f.Hand[0]]['txt']" exp="f.Draw1=f.Hand[0],f.Cards[f.Hand[0]]['active']=0" target="&f.Path" ]
 [endif]
 
-[if exp="f.Down == 1"]
-[glink color="black"                         size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=1" target="*ドロー" ]
-[elsif exp="f.Cards[f.Hand[1]]['active']==0"]
+[if exp="f.Cards[f.Hand[1]]['active']==0"]
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text="&f.Cards[f.Hand[1]]['txt']" exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[1]]['active']> 0 && f.shingan>0"]
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text="&f.Cards[f.Hand[1]]['txt']" exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=0" target="&f.Path" ]
@@ -19,9 +19,7 @@
 [glink color="&f.Cards[f.Hand[1]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x2 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[1],f.Cards[f.Hand[1]]['active']=0" target="&f.Path" ]
 [endif]
 
-[if exp="f.Down == 1"]
-[glink color="black"                        size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=1" target="*ドロー" ]
-[elsif exp="f.Cards[f.Hand[2]]['active']==0"]
+[if exp="f.Cards[f.Hand[2]]['active']==0"]
 [glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y text="&f.Cards[f.Hand[2]]['txt']" exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[2]]['active']> 0 && f.shingan>0"]
 [glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y text="&f.Cards[f.Hand[2]]['txt']" exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=0" target="&f.Path" ]
@@ -29,9 +27,7 @@
 [glink color="&f.Cards[f.Hand[2]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x3 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[2],f.Cards[f.Hand[2]]['active']=0" target="&f.Path" ]
 [endif]
 
-[if exp="f.Down == 1"]
-[glink color="black"                        size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=1" target="*ドロー" ]
-[elsif exp="f.Cards[f.Hand[3]]['active']==0"]
+[if exp="f.Cards[f.Hand[3]]['active']==0"]
 [glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y text="&f.Cards[f.Hand[3]]['txt']" exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[3]]['active']> 0 && f.shingan>0"]
 [glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y text="&f.Cards[f.Hand[3]]['txt']" exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=0" target="&f.Path" ]
@@ -39,9 +35,7 @@
 [glink color="&f.Cards[f.Hand[3]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x4 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[3],f.Cards[f.Hand[3]]['active']=0" target="&f.Path" ]
 [endif]
 
-[if exp="f.Down == 1"]
-[glink color="black"                        size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y text=""                           exp="f.Draw =f.Hand[4],f.Cards[f.Hand[4]]['active']=1" target="*ドロー" ]
-[elsif exp="f.Cards[f.Hand[4]]['active']==0"]
+[if  exp="f.Cards[f.Hand[4]]['active']==0"]
 [glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y text="&f.Cards[f.Hand[4]]['txt']" exp="f.Draw =f.Hand[4],f.Cards[f.Hand[4]]['active']=0" target="*ドロー" ]
 [elsif exp="f.Cards[f.Hand[4]]['active']> 0 && f.shingan>0"]
 [glink color="&f.Cards[f.Hand[4]]['color']" size="18" width="15" height="100" x=&f.pos_Card_x5 y=&f.pos_Card_y text="&f.Cards[f.Hand[4]]['txt']" exp="f.Draw =f.Hand[4],f.Cards[f.Hand[4]]['active']=0" target="&f.Path" ]
@@ -181,44 +175,6 @@ f.Deck.splice(0,5);
 [s]
 *敵拘束攻撃2
 [call storage="&f.enemy_PASS" target="*敵拘束攻撃2" cond="f.Rape_mode == 0"]
-[call storage="&f.enemy_PASS" target="*レイプ本番" cond="f.Rape_mode > 0"]
-
-
-*拘束ドロー4
-４枚目のカードを選択してください[p]
-[eval exp="f.Draw = 0 , f.Down = 4 , f.Path = '*拘束ドロー4完了' "]
-[jump target="*ドロー"]
-[s]
-*拘束ドロー4完了
-[eval exp="f.Draw4 = f.Draw"]
-[eval exp="f.Total = f.Total + f.Cards[f.Draw4]['value']"]
-[eval exp="f.Draw4_txt = f.Cards[f.Draw4]['txt'] "]
-[show_score]
-*拘束ドロー4判定
-[if exp="f.Target <= f.Total && f.Total <= f.Limit "]
-[call target="*判定成功"]
-[jump target="*抵抗コマンド実行"]
-[elsif exp="f.Total > f.Limit "]
-[call target="*判定失敗"]
-[jump target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
-[jump target="*拘束バースト"]
-[else]
-[call target="*目標未達"]
-[jump target="*猥雑対抗3" cond="f.Rape_mode > 0"]
-[jump target="*抵抗行動3"]
-[endif]
-[s]
-*抵抗行動3
-[call target="*抵抗行動"]
-[jump target="*拘束脱出" cond="f.Bind <= 0"]
-[jump target="*敵拘束攻撃3"]
-[s]
-*猥雑対抗3
-[call target="*猥雑対抗"]
-[jump target="*敵拘束攻撃3"]
-[s]
-*敵拘束攻撃3
-[call storage="&f.enemy_PASS" target="*敵拘束攻撃3" cond="f.Rape_mode == 0"]
 [call storage="&f.enemy_PASS" target="*レイプ本番" cond="f.Rape_mode > 0"]
 
 

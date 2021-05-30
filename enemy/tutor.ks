@@ -1,6 +1,6 @@
 *エネミーデータ
 [eval exp="f.En_HP = 2000 ,f.En_MP_gain =　30 , f.En_ATP = 10 , f.En_DEX = 0 "]
-[eval exp="f.En_Bind = 30 , f.En_BASE_ERO = 30"]
+[eval exp="f.En_Bind = 20 , f.En_BASE_ERO = 30"]
 [eval exp="f.En_ATP_Plus = 0, f.En_DFP_Plus = 0 , f.En_DEX_Plus = 0 "]
 [eval exp="f.En_Hand1 = 0 , f.En_Hand2 = 0 "]
 [return]error101[s]
@@ -149,8 +149,8 @@ error-battle-970
 *守備力アップ
 #
 「気迫」[wt5]
-気力が−１0された[p]
-[eval exp="f.MP -= 10"][eval exp="f.MP = 0" cond="f.MP < 0"]
+気力が−５された[p]
+[eval exp="f.MP -= 5"][eval exp="f.MP = 0" cond="f.MP < 0"]
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
 [s]
@@ -274,7 +274,7 @@ error-battle-970
 #
 鈴猫は２０の快感を受けた[p]
 [eval exp="f.ERO += 20"][eval exp="f.ERO += 10" cond="f.orgasm > 0"]
-[eval exp="f.En_ERO += 20"]
+[eval exp="f.En_ERO += 10"]
 [call target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [update_status]
@@ -376,6 +376,7 @@ error-battle-970
 ちっ！肝心のところで！！[p]
 #
 忍者は舌打ちをしながらマラを仕舞い直した[p]
+[chara_mod name="suzune" face="厳しい"]
 #鈴猫
 くっ！絶対許さないんだから！！[p]
 #
