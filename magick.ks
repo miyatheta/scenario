@@ -126,7 +126,7 @@ for(i=0;i<3;i++){
 [eval exp="f.BASE = 5 + f.Bonus_Honor"]
 [call target="*ダメージ計算"]
 [eval exp="f.Magic_set = 0"]
-[jump storage="&f.returnStr" target="&f.returnTag"]
+[jump storage="battle.ks" target="*勝利判定"]
 [s]
 
 *鎌鼬

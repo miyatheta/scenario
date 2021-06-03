@@ -18,7 +18,7 @@
 
 *ダメージ計算
 [getrand min="1" max="&f.En_ATP" var="f.rand"]
-[eval exp="tf.argment= (f.BASE + f.En_ATP_Plus + f.rand) / f.Guard - (f.Bonus_Orange * 5)"]
+[eval exp="tf.argment= (f.BASE  + f.En_ATP_Plus + f.rand) / f.Guard - (f.Bonus_Orange * 5)"]
 [getMathRound var="f.damage"]
 [eval exp="f.damage = 0" cond="f.damage < 0"]
 [eval exp="f.HP -= f.damage"]
@@ -158,8 +158,11 @@ error-battle-970
 ;攻撃----------------------------------------------------------------------------
 
 *敵攻撃
+[if exp="f.En_BURST > 0"]
+[jump target="*チャージ攻撃"]
+[endif]
 敵の攻撃[wt5]
-[eval exp="f.BASE= 50 , f.En_DEX = -5"]
+[eval exp="f.BASE = 200 , f.En_DEX = -5"]
 ;回避判定
 [call target="*回避"]
 ;回避成功の場合ジャンプ
@@ -177,7 +180,7 @@ error-battle-970
 
 *チャージ攻撃
 敵のチャージ攻撃[p]
-[eval exp="f.BASE= 200 , f.En_DEX = 0"]
+[eval exp="f.BASE = 500 , f.En_DEX = 0 ,f.En_BURST = 0"]
 ;回避判定
 [call target="*回避"]
 ;回避成功の場合ジャンプ
@@ -199,7 +202,7 @@ error-battle-970
 
 ;拘束----------------------------------------------------------------------------
 *拘束開始
-[eval exp="f.BASE= 0, f.En_DEX = 70"]
+[eval exp="f.BASE = 0, f.En_DEX = 70"]
 「隙あり！！」[wt5]
 敵は鈴猫に組み付いた[p]
 ;回避判定
@@ -234,17 +237,6 @@ error-battle-970
 [jump storage="battle.ks" target="&f.returnTag"]
 [s]
 
-*拘束引き分け
-#敵
-暴れんじゃねえよ！[p]
-#
-敵は鈴猫を締め上げた[r]
-１０のダメージを受けた。[p]
-[eval exp="f.HP -= 10"]
-[update_status][show_score]
-[jump storage="battle.ks" target="&f.returnTag"]
-[s]
-
 *拘束脱出判定
 #
 鈴猫は暴れた[wt5]
@@ -257,6 +249,17 @@ error-battle-970
 [jump target="*拘束脱出" cond="f.Bind <= 0"]
 しかし、振りほどくことはできなかった[p]
 [jump storage="&f.enemy_PASS" target="*バーストセクハラ攻撃"]
+[s]
+
+*拘束引き分け
+#敵
+暴れんじゃねえよ！[p]
+#
+敵は鈴猫を締め上げた[r]
+１０のダメージを受けた。[p]
+[eval exp="f.HP -= 10"]
+[update_status][show_score]
+[jump storage="battle.ks" target="*ラウンド終了"]
 [s]
 
 *拘束脱出
