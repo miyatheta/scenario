@@ -41,6 +41,5 @@
 
 [cm][clearfix]
 @layopt layer=message0 visible=false
-[glink x="550" y="250" text="通常" storage="battle.ks" exp="f.enemy_PASS = 'enemy/tutor.ks'"]
-[glink x="550" y="350" text="デバッグ用" storage="battle.ks" exp="f.enemy_PASS = 'enemy/debagger.ks'"]
+[glink x="400" y="400" text="通常" storage="battle.ks" exp="f.enemy_PASS = 'enemy/tutor.ks'"]
 [s]

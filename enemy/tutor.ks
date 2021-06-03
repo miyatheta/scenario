@@ -1,5 +1,5 @@
 *エネミーデータ
-[eval exp="f.En_HP = 2000 ,f.En_MP_gain =　30 , f.En_ATP = 10 , f.En_DEX = 0 "]
+[eval exp="f.En_HP = 2000 ,f.En_MP_gain =　30 , f.En_ATP = 10 , f.En_DEX = 0 , f.En_RES = 30 "]
 [eval exp="f.En_Bind = 20 , f.En_BASE_ERO = 30"]
 [eval exp="f.En_ATP_Plus = 0, f.En_DFP_Plus = 0 , f.En_DEX_Plus = 0 "]
 [eval exp="f.En_Hand1 = 0 , f.En_Hand2 = 0 "]
@@ -18,7 +18,7 @@
 
 *ダメージ計算
 [getrand min="1" max="&f.En_ATP" var="f.rand"]
-[eval exp="tf.argment= (f.BASE + f.En_ATP_Plus + f.rand) / f.Guard"]
+[eval exp="tf.argment= (f.BASE + f.En_ATP_Plus + f.rand) / f.Guard - (f.Bonus_Orange * 5)"]
 [getMathRound var="f.damage"]
 [eval exp="f.damage = 0" cond="f.damage < 0"]
 [eval exp="f.HP -= f.damage"]
@@ -149,8 +149,8 @@ error-battle-970
 *守備力アップ
 #
 「気迫」[wt5]
-気力が−５された[p]
-[eval exp="f.MP -= 5"][eval exp="f.MP = 0" cond="f.MP < 0"]
+呼吸が−１された[p]
+[eval exp="f.BP -= 1"][eval exp="f.BP = 0" cond="f.BP < 0"]
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
 [s]
@@ -200,6 +200,7 @@ error-battle-970
 ;拘束----------------------------------------------------------------------------
 *拘束開始
 [eval exp="f.BASE= 0, f.En_DEX = 70"]
+「隙あり！！」[wt5]
 敵は鈴猫に組み付いた[p]
 ;回避判定
 [call target="*回避"]
@@ -217,8 +218,6 @@ error-battle-970
 [s]
 
 *セクハラスキル
-[getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand < 90"]
 #敵
 へっ！！おとなしくしな！！[p]
 #
@@ -231,14 +230,17 @@ error-battle-970
 [eval exp="f.En_ERO += 10"]
 [call target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
-[else]
+[update_status][show_score]
+[jump storage="battle.ks" target="&f.returnTag"]
+[s]
+
+*拘束引き分け
 #敵
 暴れんじゃねえよ！[p]
 #
-敵の攻撃[r]
+敵は鈴猫を締め上げた[r]
 １０のダメージを受けた。[p]
 [eval exp="f.HP -= 10"]
-[endif]
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
 [s]
@@ -336,7 +338,7 @@ error-battle-970
 *レイプ脱出判定
 [eval exp="f.Bind -= f.Total"]
 [jump target="*レイプ脱出" cond="f.Bind <= 0"]
-[jump target="**レイプフィニッシュ"]
+[jump target="*レイプフィニッシュ"]
 [s]
 
 *レイプ脱出
@@ -439,7 +441,7 @@ error-battle-970
 *レイプ終了
 #
 鈴猫は自由を取り戻した！[p]
-[eval exp="f.Rt_Bind = 0"]
+[eval exp="f.Rt_Bind = 0 , f.Bind = 0"]
 [eval exp="f.Rape_mode = 0" cond="f.Rape_mode > 0"]
 [ptext layer="3" x="450" y="50" text="" size="30" color="0x333631" edge="white" bold="bold" align="left" name="Bind" overwrite="true"]
 [jump storage="battle.ks" target="*ラウンド終了"]

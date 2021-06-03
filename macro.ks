@@ -201,7 +201,7 @@ f.Bind_ptxt = "拘束力:" + f.Bind ;
 [iscript]
 f.HP_ptxt = "体力:" + f.HP ;
 f.MP_ptxt = "気力:" + f.MP ;
-f.BP_ptxt = "武芸レベル:" + f.Bonus_Red ;
+f.BP_ptxt = "呼吸:" + f.BP ;
 f.ERO_ptxt = "快感:" + f.ERO ;
 f.En_HP_ptxt = "敵体力:" + f.En_HP ;
 f.En_MP_ptxt = "敵気力:" + f.En_MP ;

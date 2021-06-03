@@ -85,6 +85,17 @@
 [return][s]
 
 *忍術判定
+;補正値計算
+[eval exp="f.Bonus_Honor = 0"]
+;絵札ボーナス
+[iscript]
+for(i=0;i<3;i++){
+  if(f.Cards[f.Hand[i]]['honor'] > 0){
+    f.Bonus_Honor += 0.3;
+    break;
+  }
+}
+[endscript]
 [if exp="f.Magic_set == 11"]
 [jump target="*苦無術"]
 
@@ -112,7 +123,7 @@
 「乱れ苦無！！鳳仙花！！」[wt2]
 #
 鈴猫は無数の苦無を投げつけた[wt5]
-[eval exp="f.BASE = 5"]
+[eval exp="f.BASE = 5 + f.Bonus_Honor"]
 [call target="*ダメージ計算"]
 [eval exp="f.Magic_set = 0"]
 [jump storage="&f.returnStr" target="&f.returnTag"]
@@ -124,10 +135,10 @@
 「吹き荒れろ颶風！！鎌鼬！！」[wt5]
 #
 不可視の刃が周囲を切り刻んだ[wt5]
-[eval exp="f.BASE = 8"]
+[eval exp="f.BASE = 8 + f.Bonus_Honor"]
 [call target="*ダメージ計算"]
 [eval exp="f.Magic_set = 0"]
-[jump storage="&f.returnStr" target="&f.returnTag"]
+[jump storage="battle.ks" target="*勝利判定"]
 [s]
 
 *火遁
@@ -136,10 +147,10 @@
 「燃え上がれ！！必殺・焔舞い！！」[wt5]
 #
 [wt5]
-[eval exp="f.BASE = 10"]
+[eval exp="f.BASE = 10 + f.Bonus_Honor"]
 [call target="*ダメージ計算"]
 [eval exp="f.Magic_set = 0"]
-[jump storage="&f.returnStr" target="*バースト"]
+[jump storage="battle.ks" target="*勝利判定"]
 [s]
 
 *退魔
@@ -147,11 +158,11 @@
 #鈴猫
 「破魔調伏！螺旋功！！」[wt5]
 #
-[eval exp="f.BASE = 5"]
+[eval exp="f.BASE = 5 + f.Bonus_Honor"]
 [call target="*ダメージ計算"]
 [eval exp="f.MP=0"]
 [eval exp=" f.Magic_set = 0"]
-[jump storage="&f.returnStr" target="&f.returnTag"]
+[jump storage="battle.ks" target="*勝利判定"]
 [s]
 
 *房中術体力吸収
@@ -159,10 +170,10 @@
 「魂吸いの法」[wt2]
 #
 敵の興奮度に応じて体力を回復[wt5]
-[eval exp="f.BASE = 5"]
+[eval exp="f.BASE = 5 + f.Bonus_Honor"]
 [call target="*ダメージ計算"]
 [eval exp="f.Magic_set = 0"]
-[jump storage="&f.returnStr" target="&f.returnTag"]
+[jump storage="battle.ks" target="*勝利判定"]
 [s]
 
 *房中術デバフ
@@ -171,10 +182,10 @@
 #
 敵の手札を-1[wt2]
 [wt5]
-[eval exp="f.BASE = 5"]
+[eval exp="f.BASE = 5 + f.Bonus_Honor"]
 [call target="*ダメージ計算"]
 [eval exp="f.Magic_set = 0"]
-[jump storage="&f.returnStr" target="&f.returnTag"]
+[jump storage="battle.ks" target="*勝利判定"]
 [s]
 
 
