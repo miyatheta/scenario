@@ -5,8 +5,8 @@
 [glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" cond="f.Bind<1" text="破魔・螺旋功(気力50)" target="*忍術4準備"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="500" cond="f.Bind<1" text="戻る" storage="battle.ks" target="*ドロー1コマンド"]
 
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" cond="f.Bind>0" text="房中術・魂吸いの法(気力50)" target="*房中術1準備"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" cond="f.Bind>0" text="房中術・筒枯らしの法(気力30)" target="*房中術2準備"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" cond="f.Bind>0" text="房中術・魂吸い(気力50)" target="*房中術1準備" exp="f.Magic_set=91"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" cond="f.Bind>0" text="房中術・筒枯らし(気力30)" target="*房中術2準備" exp="f.Magic_set=92"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="500" cond="f.Bind>0" text="戻る" storage="battle.ks" target="*ドロー1コマンド"]
 [s]
 
@@ -166,26 +166,22 @@ for(i=0;i<3;i++){
 [s]
 
 *房中術体力吸収
-#鈴猫
-「魂吸いの法」[wt2]
 #
-敵の興奮度に応じて体力を回復[wt5]
-[eval exp="f.BASE = 5 + f.Bonus_Honor"]
-[call target="*ダメージ計算"]
+;敵の興奮度に応じて体力を回復[wt5]
+[eval exp="f.damage = f.En_ERO * 5"]
+鈴猫は敵の精力を吸収した。体力が[emb exp="f.damage"]回復[p]
+[eval exp="f.HP += f.damage"]
 [eval exp="f.Magic_set = 0"]
-[jump storage="battle.ks" target="*勝利判定"]
+[return]
 [s]
 
 *房中術デバフ
-#鈴猫
-「筒がらしの法」[wt2]
 #
-敵の手札を-1[wt2]
-[wt5]
-[eval exp="f.BASE = 5 + f.Bonus_Honor"]
-[call target="*ダメージ計算"]
+;敵の判定値-3[wt5]
+敵は鈴猫に精気を吸いつくされた。敵は不能状態に陥った（３ターン）[p]
+[eval exp="f.En_Impotenz= 1 , f.Rt_En_Impotenz= 4"]
 [eval exp="f.Magic_set = 0"]
-[jump storage="battle.ks" target="*勝利判定"]
+[return]
 [s]
 
 

@@ -149,7 +149,7 @@ for(i=0 ; i<n ; i++){
 *ドロー1コマンド
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="格闘(ベット)"    exp="" cond="f.Bind < 1 && f.orgasm < 1" storage="MartialArts.ks" target="*武芸選択"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="抵抗する(ヒット)"    exp="" cond="f.Bind > 0 && f.orgasm < 1" target="*ドロー2"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="忍術(ベット)"    exp="" cond="f.Down == 1 || f.Magick_set!=1" storage="magick.ks" target="*忍術選択"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="忍術(ベット)"    exp="" cond="f.Down == 1 || f.Magic_set!=1" storage="Magic.ks" target="*忍術選択"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="技能(スキル)"    exp="f.returnTag = '*ドロー1コマンド'"  storage="skill.ks" target="*スキル選択"]
 ;[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > 12" target="*ハンド判定"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="防御(フォールド)"   exp="" cond="f.BP==0" target="*防御"]
@@ -186,7 +186,7 @@ if(f.Total > 21 && f.Cards[f.Draw2]['value']==11){
 *ドロー2コマンド
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="練気(ヒット)"    exp="" cond="f.Bind < 1 && f.orgasm < 1" target="*ドロー3"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="抵抗する(ヒット)"    exp="" cond="f.Bind > 0 && f.orgasm < 1" target="*ドロー3"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="忍術(ベット)"    exp="" cond="f.Down == 1 || f.Magick_set!=1" storage="magick.ks" target="*忍術選択"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="忍術(ベット)"    exp="" cond="f.Down == 1 || f.Magic_set!=1" storage="Magic.ks" target="*忍術選択"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="技能(スキル)"    exp="f.returnTag = '*ドロー2コマンド'"  storage="skill.ks" target="*スキル選択"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > f.Target" target="*ハンド判定"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="防御(フォールド)"   exp="" cond="f.Total <= f.En_Hand1" target="*防御"]
@@ -226,8 +226,13 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 [s]
 
 *ハンド判定
+#
 ;敵の２枚目も開示
 [eval exp="f.Target = f.En_Hand1 + f.En_Hand2" ]
+[if exp="f.En_Impotenz > 0"]
+不能状態による弱体化[wt5]
+[eval exp="f.Target -= 3" ]
+[endif]
 [show_score]
 勝負あり[wt5]
 [emb exp="f.Total"]対[emb exp="f.Target"][p]
@@ -248,7 +253,7 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 [s]
 
 *判定成功
-[jump storage="magick.ks" target="*忍術判定" cond="f.Magic_set > 0"]
+[jump storage="Magic.ks" target="*忍術判定" cond="f.Magic_set > 0"]
 [if exp="f.Rape_mode > 0"]
 [jump storage="&f.enemy_PASS" target="*レイプ脱出判定"]
 
@@ -293,7 +298,7 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 *息切れ
 #
 鈴猫は息切れを起こした!![wt5]
-身動きが取れないない!![wt5]
+身動きが取れない!![wt5]
 [jump target="*バースト"]
 [s]
 
@@ -366,11 +371,13 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 ;---------------------------------------------
 
 *ラウンド終了
+#
 今回、使用した札は[emb exp="f.Cards[f.Hand[0]]['txt']"]、
 [emb exp="f.Cards[f.Hand[1]]['txt']"]、[emb exp="f.Cards[f.Hand[2]]['txt']"]、
 [emb exp="f.Cards[f.Hand[3]]['txt']"]、[emb exp="f.Cards[f.Hand[4]]['txt']"]です[p]
 [eval exp="f.BP = 0" cond="f.BP <= 0"][eval exp="f.BP_reserved = 0"]
 [eval exp="f.shingan=0 , f.Pary = 0"]
+;絶頂状態の解消
 [if exp="f.Rt_orgasm ==1"]
 [eval exp="f.Rt_orgasm = 0 , f.orgasm = 0"]
 [chara_mod name="suzune" face="怒り" cond="f.ERO < 70"]
@@ -378,6 +385,16 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 [elsif exp="f.Rt_orgasm ==2"]
 [eval exp="f.Rt_orgasm--"]
 [endif]
+;チャージ判定フラグリセット
+[eval exp="f.En_BURST = 0 , f.En_MP = 0" cond="f.En_BURST > 0"]
+;インポ状態フラグリセット
+[eval exp="f.Rt_En_Impotenz -= 1 " cond="Rt_En_Impotenz > 0"]
+[if exp="f.Rt_En_Impotenz == 0 && f.En_Impotenz > 0 "]
+[eval exp="f.En_Impotenz = 0"]
+敵は不能状態から立ち直った[p]
+[endif]
+;拘束行動判定フラグリセット
+[eval exp="f.En_HOLD = 0" cond="f.En_HOLD > 0"]
 [eval exp="f.En_MP += f.En_MP_gain"]
 [eval exp="f.En_MP = 0" cond="f.En_BURST > 0"]
 [eval exp="f.En_ATP_Plus = 0, f.En_DFP_Plus = 0 , f.En_DEX_Plus = 0 "]

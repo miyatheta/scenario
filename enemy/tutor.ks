@@ -3,6 +3,7 @@
 [eval exp="f.En_Bind = 20 , f.En_BASE_ERO = 30"]
 [eval exp="f.En_ATP_Plus = 0, f.En_DFP_Plus = 0 , f.En_DEX_Plus = 0 "]
 [eval exp="f.En_Hand1 = 0 , f.En_Hand2 = 0 "]
+[eval exp="f.En_Impotenz= 0"]
 [return]error101[s]
 
 *回避
@@ -29,10 +30,6 @@
 
 *通常時ハンド抽選
 ;敵の行動パターン選定
-;チャージ判定フラグリセット
-[eval exp="f.En_BURST = 0" cond="f.En_BURST > 0"]
-;拘束行動判定フラグリセット
-[eval exp="f.En_HOLD = 0" cond="f.En_HOLD > 0"]
 ;判定可能変数（残りHP）
 [getrand min="1" max="100" var="f.rand"]
 
@@ -202,6 +199,8 @@ error-battle-970
 
 ;拘束----------------------------------------------------------------------------
 *拘束開始
+鈴猫は体勢を崩した！！[p]
+[jump target="*インポ状態" cond="f.En_Impotenz > 0"]
 [eval exp="f.BASE = 0, f.En_DEX = 70"]
 「隙あり！！」[wt5]
 敵は鈴猫に組み付いた[p]
@@ -217,6 +216,12 @@ error-battle-970
 #
 [eval exp="f.Bind = f.En_Bind , f.Rt_Bind = 1"]
 ;f.Bind=拘束力,f.Rt_Bind=拘束状態であることを示すフラグ
+[jump storage="battle.ks" target="*ラウンド終了"]
+[s]
+
+*インポ状態
+しかし、不能状態の敵は動きが鈍かった[r]
+鈴猫は体勢を立て直した！！[wt5]
 [jump storage="battle.ks" target="*ラウンド終了"]
 [s]
 
@@ -339,12 +344,6 @@ error-battle-970
 [s]
 
 *レイプ脱出判定
-[eval exp="f.Bind -= f.Total"]
-[jump target="*レイプ脱出" cond="f.Bind <= 0"]
-[jump target="*レイプフィニッシュ"]
-[s]
-
-*レイプ脱出
 #
 忍者は魔羅で鈴猫の膣を荒々しく突き上げた[p]
 [chara_mod name="suzune" face="喘ぎ"]
@@ -360,6 +359,13 @@ error-battle-970
 ！！やめろぉっ！！ばかぁ！！んうううっ！！[p]
 #忍者
 うおおおおおっ！！出すぞ！！[p]
+[eval exp="f.Bind -= f.Total"]
+[jump target="*レイプカウンター" cond="f.Magic_set >= 90"]
+[jump target="*レイプ脱出" cond="f.Bind <= 0"]
+[jump target="*レイプフィニッシュ"]
+[s]
+
+*レイプ脱出
 #鈴猫
 いやあああああっ！！！[p]
 #
@@ -391,21 +397,6 @@ error-battle-970
 
 *レイプフィニッシュ
 #
-忍者は魔羅で鈴猫の膣を荒々しく突き上げた[p]
-[chara_mod name="suzune" face="喘ぎ"]
-#鈴猫
-あんっ！！あんっ！！ひあっ！！[p]
-#忍者
-へへっ！！いい声で鳴くようになってきたじゃねえか！！[p]
-#鈴猫
-う、うるさっ！！ひぃぃん！！！[p]
-#忍者
-よしっ！！このまま中でぶちまけてやるぜ！！[p]
-#鈴猫
-！！やめろぉっ！！ばかぁ！！んうううっ！！[p]
-#忍者
-うおおおおおっ！！出すぞ！！[p]
-#
 忍者は鈴猫の中で射精した[p]
 [chara_mod name="suzune" face="泣き"]
 #鈴猫
@@ -420,6 +411,51 @@ error-battle-970
 鈴猫は５０の快感を受けた[p]
 [eval exp="f.ERO += 50"]
 [endif]
+敵の気力と性欲が霧消した[p]
+[eval exp="f.En_MP = 0 ,f.En_ERO = 0"]
+[eval exp="f.ERO += 25" cond="f.orgasm > 0"]
+[update_status]
+[jump target="*絶頂フィニッシュ" cond="f.ERO >= 100"]
+[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
+#忍者
+へへへ、なかなか良かったぜ[p]
+#
+忍者は嫌らしく笑いながらマラを引き抜くと鈴猫の尻を叩いた[p]
+#鈴猫
+ああんっ！！[p]
+#
+その場にくずおれた鈴猫の秘裂からごぽりと精液が溢れた[p]
+[chara_mod name="suzune" face="厳しい"]
+#鈴猫
+くっ！絶対許さないんだから！！[p]
+#
+鈴猫はよろよろと立ち上がると敵を睨みつけた[p]
+[jump target="*レイプ終了"]
+[s]
+
+*レイプカウンター
+#鈴猫
+[chara_mod name="suzune" face="厳しい"]
+（かかった！今よ！！）[p]
+[if exp="f.Magic_set == 91"]
+「魂吸いの術！」[p]
+[else]
+「筒枯らしの術！」[p]
+[endif]
+#
+鈴猫の膣が妖しく蠢き敵の魔羅を締め上げる[p]
+#忍者
+「ぐおおおおおおお！！？？」[p]
+忍者は鈴猫の中で射精した[p]
+想像を絶する快感が陰茎を中心に吹き荒れる[p]
+[if exp="f.Magic_set == 91"]
+[call storage="Magic.ks" target="*房中術体力吸収"]
+[else]
+[call storage="Magic.ks" target="*房中術デバフ"]
+[endif]
+
+#
+敵の気力と性欲が霧消した[p]
 [eval exp="f.En_MP = 0 ,f.En_ERO = 0"]
 [eval exp="f.ERO += 25" cond="f.orgasm > 0"]
 [update_status]
