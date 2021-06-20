@@ -1,4 +1,18 @@
 *macros
+;----------------------------------------------------------------------------------------
+;ステータス設定
+;----------------------------------------------------------------------------------------
+;ステージ開始時に読み込む
+[macro name="set_status"]
+[eval exp="f.HP = 2000 , f.MP = 0 , f.BP = 8 , f.SAN = 60 , f.orgasm = 0 , f.dress = 1"]
+[eval exp="f.ATP_down = 0, f.DEF_down = 0 , f.RES_down = 0, f.DEX_down = 0 ,f.ERO_down = 0"]
+[eval exp="f.ATP_plus = 0, f.DEF_plus = 0, f.RES_plus = 0, f.DEX_plus = 0 , f.ERO_plus = 0"]
+;カード構築
+[Initialize_Cards]
+;初回シャッフル
+[DeckShuffle]
+[endmacro]
+
 
 ;----------------------------------------------------------------------------------------
 ;カード関係
@@ -68,7 +82,7 @@ for( i=0 ; i<n ; i++){f.Deck.push(i);}
 [endmacro]
 
 [macro name="DeckShuffle"]
-DeckShuffle[r]
+;DeckShuffle[r]
 ;Deckはシャッフルした山札(ただしカード自体ではなくカードの位置nの列。引き換え番号みたいなもの）
 [iscript]
 for(i = f.Deck.length - 1; i >= 0; i--){
@@ -196,7 +210,6 @@ f.Bind_ptxt = "拘束力:" + f.Bind ;
 [show_score]
 [endmacro]
 
-;ステータス更新マクロ
 [macro name="update_status"]
 [iscript]
 f.HP_ptxt = "体力:" + f.HP ;
@@ -220,9 +233,68 @@ if(f.orgasm>0){
 [ptext layer="0" x="850" y="10" text=&f.En_HP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_HP" overwrite="true" ]
 [ptext layer="0" x="850" y="40" text=&f.En_MP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_MP" overwrite="true" ]
 [ptext layer="0" x="850" y="70" text=&f.En_ERO_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_ERO" overwrite="true" ]
+[bad_status]
+[endmacro]
+
+;状態異常表示マクロ
+[macro name="bad_status"]
+[iscript]
+f.Y = 10 ;
+if(f.Poizon > 0){
+  f.poizon_ptxt = "毒:" + f.HP ;
+  f.Y += 10 ;
+  f.PoizonY = f.Y;
+}
+if(f.ERO_down > 0){
+  f.EROdown_ptxt = "感度上昇:" + f.ERO_down ;
+  f.Y += 30 ;
+  f.EROdownY = f.Y;
+}
+if(f.DEF_down > 0){
+  f.DEFdown_ptxt = "防御低下:" + f.DEF_down ;
+  f.Y += 30 ;
+  f.DEFdownY = f.Y;
+}
+if(f.ATP_down > 0){
+  f.ATPdown_ptxt = "攻撃低下:" + f.ATP_down ; ;
+  f.Y += 30 ;
+  f.ATPdownY = f.Y;
+}
+if(f.RES_down > 0){
+  f.RESdown_ptxt = "回避低下:" + f.RES_down ; ;
+  f.Y += 30 ;
+  f.RESdownY = f.Y;
+}
+if(f.DEX_down > 0){
+  f.DEXdown_ptxt = "命中低下:" + f.DEX_down ; ;
+  f.Y += 30 ;
+  f.DEXdownY = f.Y;
+}
+[endscript]
+[ptext layer="0" x="10" y=f.poizonY text=&f.poizon_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="Poizon" overwrite="true" ]
+[ptext layer="0" x="10" y=f.EROdownY text=&f.EROdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="EROdown" overwrite="true" ]
+[ptext layer="0" x="10" y=f.DEFdownY text=&f.DEFdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="DEFdown" overwrite="true" ]
+[ptext layer="0" x="10" y=f.ATPdownY text=&f.ATPdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="ATPdown" overwrite="true" ]
+[ptext layer="0" x="10" y=f.RESdownY text=&f.RESdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="RESdown" overwrite="true" ]
+[ptext layer="0" x="10" y=f.DEXdownY text=&f.DEXdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="DEXdown" overwrite="true" ]
 
 [endmacro]
 
+;--------------------------------------------------------------------------------
+;被ダメージ計算
+[macro name="damaged"]
+[getrand min="1" max="&f.En_ATP" var="f.rand"]
+[eval exp="tf.argment= (f.BASE * (f.En_ATP - f.Bonus_Orange*5 + f.DEF_down) * (1+f.En_ATP_Plus/100) ) / f.Guard + f.rand"]
+[getMathRound var="f.damage"]
+[eval exp="f.damage = 0" cond="f.damage < 0"]
+[eval exp="f.HP -= f.damage"]
+[emb exp="f.damage"]のダメージを受けた。[p]
+[endmacro]
+;被エロダメージ計算
+[macro name="EROdamage"]
+[eval exp="tf.argment = f.BASE + f.ERO_down"][eval exp="tf.argment = tf.argment * 1.5" cond="f.orgasm > 0"]
+[getMathRound var="f.damage"]
+[endmacro]
 ;--------------------------------------------------------------------------------
 [macro name="wt2"]
 [wait time="200"][cm]

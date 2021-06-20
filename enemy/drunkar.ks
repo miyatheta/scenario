@@ -4,7 +4,7 @@
 
 *ダメージ計算
 [getrand min="1" max="&f.En_ATP" var="f.rand"]
-[eval exp="tf.argment= (f.BASE * (f.En_ATP - f.Bonus_Orange*5) * (1+f.En_ATP_Plus/100) ) / f.Guard + f.rand"]
+[eval exp="tf.argment= (f.BASE * (f.En_ATP - f.Bonus_Orange*5) * (1+f.En_ATP_Plus) ) / f.Guard + f.rand"]
 [getMathRound var="f.damage"]
 [eval exp="f.damage = 0" cond="f.damage < 0"]
 [eval exp="f.HP -= f.damage"]
@@ -167,7 +167,7 @@ error-battle-970
 [jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
 ;失敗の場合ダメージ
 ;ダメージ演出
-[damaged]
+[call target="*ダメージ計算"]
 ;生死の判定
 [update_status][show_score]
 [jump target="*敗北" cond="f.HP <= 0"]
@@ -185,7 +185,7 @@ error-battle-970
 [jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
 ;失敗の場合ダメージ
 ;ダメージ演出
-[damaged]
+[call target="*ダメージ計算"]
 ;生死の判定
 [update_status][show_score]
 [jump target="*敗北" cond="f.HP <= 0"]
@@ -225,7 +225,6 @@ error-battle-970
 [s]
 
 *セクハラスキル
-[eval exp="f.BASE = 10"][EROdamage]
 #忍者
 へっ！！おとなしくしな！！[p]
 #
@@ -233,8 +232,9 @@ error-battle-970
 #鈴猫
 あんっ！！[p]
 #
-鈴猫は[emb exp="f.damage"]の快感を受けた[p]
-[eval exp="f.ERO += f.damage"][eval exp="f.En_ERO += 10"]
+鈴猫は１０の快感を受けた[p]
+[eval exp="f.ERO += 10"][eval exp="f.ERO += 5" cond="f.orgasm > 0"]
+[eval exp="f.En_ERO += 10"]
 [call storage="battle.ks" target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [update_status][show_score]
@@ -276,14 +276,14 @@ error-battle-970
 [s]
 
 *バーストセクハラ攻撃
-[eval exp="f.BASE = 20"][EROdamage]
 #忍者
 [emb exp="f.En_name"]は鈴猫の秘所を弄った[p]
 #鈴猫
 いやぁっ！！[p]
 #
-鈴猫は[emb exp="f.damage"]の快感を受けた[p]
-[eval exp="f.ERO += f.damage"][eval exp="f.En_ERO += 10"]
+鈴猫は２０の快感を受けた[p]
+[eval exp="f.ERO += 20"][eval exp="f.ERO += 10" cond="f.orgasm > 0"]
+[eval exp="f.En_ERO += 10"]
 [call storage="battle.ks" target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [update_status]
@@ -327,7 +327,6 @@ error-battle-970
 [return][s]
 
 *レイプスキル
-[eval exp="f.BASE = 10"][EROdamage]
 忍者はしっかりと鈴猫の腰を抱え込むと激しく腰を打ち付けた[p]
 [chara_mod name="suzune" face="喘ぎ"]
 #忍者
@@ -335,8 +334,8 @@ error-battle-970
 #鈴猫
 んっ！！こんな奴にぃ！！ううんっ！！[p]
 #
-鈴猫は[emb exp="f.damage"]の快感を受けた[p]
-[eval exp="f.ERO += f.damage"]
+鈴猫は１０の快感を受けた[p]
+[eval exp="f.ERO += 10"][eval exp="f.ERO += 5" cond="f.orgasm > 0"]
 [call storage="battle.ks" target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [update_status]
@@ -405,14 +404,15 @@ error-battle-970
 鈴猫は精の迸りを子宮に感じながら嬌声を上げた[r]
 #
 [if exp="f.ERO_DEF > 0"]
-[eval exp="f.BASE = 10"][EROdamage]
+鈴猫は１０の快感を受けた[p]
+[eval exp="f.ERO += 10"]
 [else]
-[eval exp="f.BASE = 50"][EROdamage]
+鈴猫は５０の快感を受けた[p]
+[eval exp="f.ERO += 50"]
 [endif]
-鈴猫は[emb exp="f.damage"]の快感を受けた[p]
-[eval exp="f.ERO += f.damage"]
 [emb exp="f.En_name"]の気力と性欲が霧消した[p]
 [eval exp="f.En_MP = 0 ,f.En_ERO = 0"]
+[eval exp="f.ERO += 25" cond="f.orgasm > 0"]
 [update_status]
 [jump target="*絶頂フィニッシュ" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]

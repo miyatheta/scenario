@@ -11,26 +11,21 @@
 
 #
 戦闘開始[wt2]
+;基本設定
+[eval exp="f.round=0 "]
 [eval exp="f.comand='' ,f.Target='' ,f.Limit='' ,f.Total='' ,f.Bind = 0 ,f.Rt_Bind = 0"]
-[eval exp="f.Draw1_txt='' ,f.Draw2_txt='' ,f.Draw3_txt='' ,f.Draw4_txt='' ,f.Draw5_txt=''"]
-[eval exp="f.HP = 2000 , f.MP = 0 , f.BP = 8 , f.SAN = 60 , f.orgasm = 0 , f.dress = 1"]
-[eval exp="f.critical = 1"]
-[eval exp="f.shingan = 0 , f.invincible = 0 ,f.Guard = 1 , f.Pary = 0"]
+;効果
+[eval exp="f.critical = 1 , f.Pary = 0 , f.Guard = 1 , f.ERO_DEF = 0"]
+[eval exp="f.shingan = 0 , f.invincible = 0 "]
 [eval exp="f.skill1_CT = 0 , f.skill2_CT = 0 , f.skill3_CT = 0 , f.skill4_CT = 0"]
-[eval exp="f.Magic_set = 0"]
-[eval exp="f.ATP = 50 , f.Bonus_Red = 0 , f.RES = 40 , f.Bonus_Green = 0 ,f.Bonus_Orange = 0"]
-[eval exp="f.Red = 0 , f.Blue = 0 , f.Green = 0 , f.Orange = 0"]
-[eval exp="f.Bonus_Honor = 0 "]
-
-[eval exp="f.ERO_DEF = 0"]
+[eval exp="f.Magic_set = 0 , f.Marts_set = 0"]
+;カード関係
+[eval exp="f.Draw1_txt='' ,f.Draw2_txt='' ,f.Draw3_txt='' ,f.Draw4_txt='' ,f.Draw5_txt=''"]
+[eval exp="f.Red = 0 , f.Blue = 0 , f.Green = 0 , f.Orange = 0 , f.Bonus_Honor = 0"]
+[eval exp="f.ATP = 50 , f.Bonus_Red = 0 , f.RES = 40 , f.Bonus_Green = 0 , f.Bonus_Orange = 0"]
+;敵ステータス初期化
 [eval exp="f.En_DEF ='' ,f.En_MP = 0 ,f.En_ERO = 0 ,f.Rape_mode = 0 ,f.En_BURST = 0"]
-[eval exp="f.round=0 , f.Rt_Bind = 0"]
-[call storage="&f.enemy_PASS" target="*エネミーデータ" ]
-
-;カード構築
-[Initialize_Cards]
-;初回シャッフル
-[DeckShuffle]
+[call storage="&f.enemy_PATH" target="*エネミーデータ" ]
 
 [jump target="*ラウンド開始"]
 ;サブルーチン-----------------------------------------------------------------------
@@ -117,11 +112,11 @@ for(i=0 ; i<n ; i++){
 *敵パターン抽選
 ;敵のヘッドが表示されます[p]
 [if exp="f.Rape_mode > 0"]
-[call storage="&f.enemy_PASS" target="*レイプ時ハンド抽選"]
+[call storage="&f.enemy_PATH" target="*レイプ時ハンド抽選"]
 [elsif exp="f.Rt_Bind > 0 "]
-[call storage="&f.enemy_PASS" target="*拘束時ハンド抽選"]
+[call storage="&f.enemy_PATH" target="*拘束時ハンド抽選"]
 [else]
-[call storage="&f.enemy_PASS" target="*通常時ハンド抽選" ]
+[call storage="&f.enemy_PATH" target="*通常時ハンド抽選" ]
 [endif]
 [show_score]
 ;手札作成
@@ -147,8 +142,8 @@ for(i=0 ; i<n ; i++){
 ;*敵行動1（敵は行動しない）
 ;*敵行動1完了
 *ドロー1コマンド
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="格闘(ベット)"    exp="" cond="f.Bind < 1 && f.orgasm < 1" storage="MartialArts.ks" target="*武芸選択"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="抵抗する(ヒット)"    exp="" cond="f.Bind > 0 && f.orgasm < 1" target="*ドロー2"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="格闘(ベット)"    exp="" cond="f.Bind < 1" storage="MartialArts.ks" target="*武芸選択"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="抵抗する(ヒット)"    exp="" cond="f.Bind > 0 " target="*ドロー2"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="忍術(ベット)"    exp="" cond="f.Down == 1 || f.Magic_set!=1" storage="Magic.ks" target="*忍術選択"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="技能(スキル)"    exp="f.returnTag = '*ドロー1コマンド'"  storage="skill.ks" target="*スキル選択"]
 ;[glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > 12" target="*ハンド判定"]
@@ -181,12 +176,12 @@ if(f.Total > 21 && f.Cards[f.Draw2]['value']==11){
 [jump target="*ハンド判定"]
 [endif]
 *敵行動2
-[jump storage="&f.enemy_PASS" target="*敵行動分岐"]
+[jump storage="&f.enemy_PATH" target="*敵行動分岐"]
 *敵行動2完了
 *ドロー2コマンド
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="練気(ヒット)"    exp="" cond="f.Bind < 1 && f.orgasm < 1" target="*ドロー3"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="抵抗する(ヒット)"    exp="" cond="f.Bind > 0 && f.orgasm < 1" target="*ドロー3"]
-[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="忍術(ベット)"    exp="" cond="f.Down == 1 || f.Magic_set!=1" storage="Magic.ks" target="*忍術選択"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="練気(ヒット)"    exp="" cond="f.Bind < 1 " target="*ドロー3"]
+[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="400" text="抵抗する(ヒット)"    exp="" cond="f.Bind > 0 " target="*ドロー3"]
+;[glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="450" text="忍術(ベット)"    exp="" cond="f.Down == 1 || f.Magic_set!=1" storage="Magic.ks" target="*忍術選択"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x1 y="500" text="技能(スキル)"    exp="f.returnTag = '*ドロー2コマンド'"  storage="skill.ks" target="*スキル選択"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="400" text="勝負(オープン)"  exp="" cond="f.Total > f.Target" target="*ハンド判定"]
 [glink color="black" size="18" x=&f.pos_Comand_btn_x2 y="450" text="防御(フォールド)"   exp="" cond="f.Total <= f.En_Hand1" target="*防御"]
@@ -255,10 +250,10 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 *判定成功
 [jump storage="Magic.ks" target="*忍術判定" cond="f.Magic_set > 0"]
 [if exp="f.Rape_mode > 0"]
-[jump storage="&f.enemy_PASS" target="*レイプ脱出判定"]
+[jump storage="&f.enemy_PATH" target="*レイプ脱出判定"]
 
 [elsif exp="f.Rt_Bind > 0"]
-[jump storage="&f.enemy_PASS" target="*拘束脱出判定"]
+[jump storage="&f.enemy_PATH" target="*拘束脱出判定"]
 
 [else]
 [jump storage="MartialArts.ks" target="*武芸判定"]
@@ -267,10 +262,10 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 
 *判定引き分け
 [if exp="f.Rape_mode > 0"]
-[jump storage="&f.enemy_PASS" target="*レイプ脱出判定"]
+[jump storage="&f.enemy_PATH" target="*レイプ脱出判定"]
 
 [elsif exp="f.Rt_Bind > 0"]
-[jump storage="&f.enemy_PASS" target="*拘束引き分け"]
+[jump storage="&f.enemy_PATH" target="*拘束引き分け"]
 
 [else]
 [jump target="*ラウンド終了"]
@@ -279,13 +274,13 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 
 *判定失敗
 [if exp="f.Rape_mode > 0"]
-[jump storage="&f.enemy_PASS" target="*レイプフィニッシュ"]
+[jump storage="&f.enemy_PATH" target="*レイプフィニッシュ"]
 
 [elsif exp="f.Rt_Bind > 0"]
-[jump storage="&f.enemy_PASS" target="*バーストセクハラ攻撃"]
+[jump storage="&f.enemy_PATH" target="*バーストセクハラ攻撃"]
 
 [else]
-[jump storage="&f.enemy_PASS" target="*敵攻撃"]
+[jump storage="&f.enemy_PATH" target="*敵攻撃"]
 [endif]
 [s]
 
@@ -305,10 +300,10 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 *バースト
 #
 バースト[wt2]
-[jump storage="&f.enemy_PASS" target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
-[jump storage="&f.enemy_PASS" target="*バーストセクハラ攻撃" cond="f.Rt_Bind > 0"]
+[jump storage="&f.enemy_PATH" target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
+[jump storage="&f.enemy_PATH" target="*バーストセクハラ攻撃" cond="f.Rt_Bind > 0"]
 ;ここでレイプシーンを分岐させるのもあり？
-[jump storage="&f.enemy_PASS" target="*拘束開始"]
+[jump storage="&f.enemy_PATH" target="*拘束開始"]
 [s]
 
 ;---------------------------------------------
@@ -332,13 +327,16 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 [jump target="*判定失敗"]
 [s]
 
-*反撃
-反撃[wt2]
-[eval exp="f.damage = f.ATP"]
-[eval exp="f.En_HP -= f.damage"]
-[emb exp="f.damage"]のを与えた[p]
-[show_score][update_status]
-[return][s]
+*回避
+[getrand min="1" max="100" var="f.rand"]
+[if exp="f.rand < (f.RES + f.Bonus_Green * 5 ) - (f.En_DEX + f.En_DEX_Plus) "]
+[eval exp="f.Pary = 1"]
+#鈴猫
+甘い！！[r]
+#
+鈴猫は敵の攻撃を回避した[p]
+[endif]
+[return][s]]
 
 *空蝉発動
 #
@@ -376,7 +374,13 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 [emb exp="f.Cards[f.Hand[1]]['txt']"]、[emb exp="f.Cards[f.Hand[2]]['txt']"]、
 [emb exp="f.Cards[f.Hand[3]]['txt']"]、[emb exp="f.Cards[f.Hand[4]]['txt']"]です[p]
 [eval exp="f.BP = 0" cond="f.BP <= 0"][eval exp="f.BP_reserved = 0"]
+;バフリセット
 [eval exp="f.shingan=0 , f.Pary = 0"]
+[eval exp="f.En_Pary = 0"]
+[eval exp="f.critical = 1 , f.Guard = 1"]
+[eval exp="f.Red = 0 , f.Blue = 0 , f.Green = 0 , f.Orange = 0"]
+[eval exp="f.Bonus_Honor = 0 "]
+[eval exp="f.Magic_set = 0 , f.Marts_set = 0"]
 ;絶頂状態の解消
 [if exp="f.Rt_orgasm ==1"]
 [eval exp="f.Rt_orgasm = 0 , f.orgasm = 0"]
@@ -395,13 +399,11 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 [endif]
 ;拘束行動判定フラグリセット
 [eval exp="f.En_HOLD = 0" cond="f.En_HOLD > 0"]
+;敵気力追加
 [eval exp="f.En_MP += f.En_MP_gain"]
-[eval exp="f.En_MP = 0" cond="f.En_BURST > 0"]
+;敵バフ
 [eval exp="f.En_ATP_Plus = 0, f.En_DFP_Plus = 0 , f.En_DEX_Plus = 0 "]
-[eval exp="f.critical = 1 , f.Guard = 1"]
-[eval exp="f.Red = 0 , f.Blue = 0 , f.Green = 0 , f.Orange = 0"]
-[eval exp="f.Bonus_Honor = 0 "]
-[eval exp="f.Magic_set = 0 , f.Marts_set = 0"]
+
 [DeActivate]
 [reflesh_score]
 [ReShuffle]
@@ -410,4 +412,23 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 
 *勝利
 敵を倒した[p]
+[jump storage="&f.next_PATH" target="&f.next_tag"]
+[s]
+
+;絶頂----------------------------------------------------------------------
+*絶頂
+[chara_mod name="suzune" face="絶頂"]
+#鈴猫
+いやあああっ！！らめぇぇぇぇっ！！[p]
+イクっ！！イクイクイクーーーーっ！！[p]
+#
+鈴猫は絶頂した[r]
+体力が50減少[p]
+[eval exp="f.HP -= 50"]
+[eval exp="f.HP = 1" cond="f.HP <= 0"]
+絶頂状態になった[r]
+理性が１減少した[p]
+[eval exp="f.SAN -= 1 , f.orgasm = 1 , f.Rt_orgasm = 2 , f.ERO = 0"]
+[chara_mod name="suzune" face="レイプ目"]
+[return]
 [s]

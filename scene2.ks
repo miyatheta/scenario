@@ -41,5 +41,7 @@
 
 [cm][clearfix]
 @layopt layer=message0 visible=false
-[glink x="400" y="400" text="通常" storage="battle.ks" exp="f.enemy_PASS = 'enemy/tutor.ks'"]
+[set_status]
+[eval exp="f.next_PATH = 'scene3.ks' , f.next_tag = '*start'"]
+[glink x="400" y="400" text="通常" storage="battle.ks" exp="f.enemy_PATH = 'enemy/tutor.ks'"]
 [s]

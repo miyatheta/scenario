@@ -65,7 +65,7 @@
 [eval exp="f.Rape_mode = 1"]
 [endif]
 
-[call storage="&f.enemy_PASS" target="*レイプ開始" cond="f.Rape_mode == 1"]
+[call storage="&f.enemy_PATH" target="*レイプ開始" cond="f.Rape_mode == 1"]
 [eval exp="f.En_Hand1 = 10 , f.En_Hand2 = 7"]
 [eval exp="f.En_Hand1 = 10 , f.En_Hand2 = 10" cond="f.Rape_mode > 0"]
 [show_score]
@@ -101,8 +101,8 @@ f.Deck.splice(0,5);
 
 *拘束ドロー2
 [eval exp="f.Limit=21"][show_score]
-[call storage="&f.enemy_PASS" target="*レイプ序" cond="f.Rape_mode == 1"]
-[call storage="&f.enemy_PASS" target="*レイプ続" cond="f.Rape_mode > 1"]
+[call storage="&f.enemy_PATH" target="*レイプ序" cond="f.Rape_mode == 1"]
+[call storage="&f.enemy_PATH" target="*レイプ続" cond="f.Rape_mode > 1"]
 ２枚目のカードを選択してください[p]
 [eval exp="f.Draw = 0 , f.Down = 2 , f.Path = '*拘束ドロー2完了' "]
 [jump target="*ドロー"]
@@ -136,8 +136,8 @@ f.Deck.splice(0,5);
 [jump target="*敵拘束攻撃1"]
 [s]
 *敵拘束攻撃1
-[call storage="&f.enemy_PASS" target="*敵拘束攻撃1" cond="f.Rape_mode == 0"]
-[call storage="&f.enemy_PASS" target="*レイプ本番" cond="f.Rape_mode > 0"]
+[call storage="&f.enemy_PATH" target="*敵拘束攻撃1" cond="f.Rape_mode == 0"]
+[call storage="&f.enemy_PATH" target="*レイプ本番" cond="f.Rape_mode > 0"]
 
 
 *拘束ドロー3
@@ -174,8 +174,8 @@ f.Deck.splice(0,5);
 [jump target="*敵拘束攻撃2"]
 [s]
 *敵拘束攻撃2
-[call storage="&f.enemy_PASS" target="*敵拘束攻撃2" cond="f.Rape_mode == 0"]
-[call storage="&f.enemy_PASS" target="*レイプ本番" cond="f.Rape_mode > 0"]
+[call storage="&f.enemy_PATH" target="*敵拘束攻撃2" cond="f.Rape_mode == 0"]
+[call storage="&f.enemy_PATH" target="*レイプ本番" cond="f.Rape_mode > 0"]
 
 
 *拘束ドロー5
@@ -240,7 +240,7 @@ error697
 *抵抗コマンド０
 鈴猫は快感に耐えるために身構えた[p]
 [eval exp="f.ERO_DEF = 1"]
-[call storage="&f.enemy_PASS" target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
+[call storage="&f.enemy_PATH" target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
 [jump target="*拘束脱出" ]
 [s]
 *抵抗コマンド1
@@ -282,13 +282,13 @@ error697
 [s]
 
 *拘束バースト
-[call storage="&f.enemy_PASS" target="*拘束バースト" cond="f.Rape_mode == 0"]
+[call storage="&f.enemy_PATH" target="*拘束バースト" cond="f.Rape_mode == 0"]
 [jump target="*拘束ラウンド継続"]
 [s]
 
 *レイプフィニッシュ
 [eval exp="f.ERO_DEF = 0"]
-[call storage="&f.enemy_PASS" target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
+[call storage="&f.enemy_PATH" target="*レイプフィニッシュ" cond="f.Rape_mode > 0"]
 [jump target="*拘束脱出" ]
 [s]
 

@@ -64,7 +64,8 @@
 「かかと落とし」[wt5]
 [eval exp="f.BP -= f.BP_reserved"][show_score]
 [eval exp="f.BASE =8 + (f.Bonus_Red * 0.3)"]
-[call target="*ダメージ計算"]
+[call storage="&f.enemy_PATH" target="*敵回避"]
+[call target="*ダメージ計算" cond="f.En_Pary < 1"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 
@@ -74,7 +75,7 @@
 「回し蹴り」[wt5]
 [eval exp="f.BP -= f.BP_reserved"][show_score]
 [eval exp="f.BASE = 5 + (f.Bonus_Red * 0.3)"]
-[call target="*ダメージ計算"]
+[call target="*ダメージ計算" cond="f.En_Pary < 1"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 
@@ -84,7 +85,9 @@
 「キック」[wt5]
 [eval exp="f.BP -= f.BP_reserved"][show_score]
 [eval exp="f.BASE = 3 + (f.Bonus_Red * 0.3)"]
-[call target="*ダメージ計算"]
+;回避判定
+[call storage="&f.enemy_PATH" target="*敵回避"]
+[call target="*ダメージ計算" cond="f.En_Pary < 1"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 
@@ -94,7 +97,8 @@
 「掌打」[wt5]
 [eval exp="f.BP -= f.BP_reserved"][show_score]
 [eval exp="f.BASE = 1 + (f.Bonus_Red * 0.3)"]
-[call target="*ダメージ計算"]
+[call storage="&f.enemy_PATH" target="*敵回避"]
+[call target="*ダメージ計算" cond="f.En_Pary < 1"]
 [jump storage="battle.ks" target="*勝利判定"]
 [s]
 
@@ -103,7 +107,7 @@
 [eval exp="f.critical = 1.5" ]
 会心の一撃[r]
 [endif]
-[eval exp="tf.argment = f.BASE * (f.ATP * 2) * f.critical"]
+[eval exp="tf.argment = f.BASE * (f.ATP * 2) * f.critical * (1 - f.En_DFP_Plus / 100)"]
 [getMathRound var="f.damage"]
 [eval exp="f.En_HP -= f.damage"]
 [emb exp="f.damage"]のダメージを与えた。[p]
