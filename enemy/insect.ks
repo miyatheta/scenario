@@ -216,6 +216,7 @@ error-battle-970
 #
 鈴猫の感度が上昇した[p]
 [eval exp="f.ERO_down += 1"]
+[update_status][show_score]
 ;f.Bind=拘束力,f.Rt_Bind=拘束状態であることを示すフラグ
 [jump storage="battle.ks" target="*ラウンド終了"]
 [s]

@@ -253,64 +253,66 @@ if(f.orgasm>0){
 
 ;状態異常表示マクロ
 [macro name="bad_status"]
+[eval exp="f.Y = 30"]
 [iscript]
-f.Y = 30 ;
 if(f.Poizon > 0){
   f.Poizon_ptxt = "毒:" + f.Poizon ;
   f.Y += 30 ;
-  f.PoizonY = f.Y;
-}
+} f.PoizonY = f.Y;
 if(f.DPoizon > 0){
   f.DPoizon_ptxt = "猛毒:" + f.DPoizon ;
   f.Y += 30 ;
-  f.DPoizonY = f.Y;
-}
+}  f.DPoizonY = f.Y;
 if(f.Wheeze > 0){
   f.Wheeze_ptxt = "息切れ:" + f.Wheeze ;
   f.Y += 30 ;
-  f.WheezeY = f.Y;
-}
+}  f.WheezeY = f.Y;
 if(f.Estrus > 0){
   f.Estrus_ptxt = "発情:" + f.Estrus ;
   f.Y += 30 ;
-  f.EstrusY = f.Y;
-}
+}  f.EstrusY = f.Y;
 if(f.ERO_down > 0){
   f.EROdown_ptxt = "感度上昇:" + f.ERO_down ;
   f.Y += 30 ;
-  f.EROdownY = f.Y;
-}
+}  f.EROdownY = f.Y;
 if(f.DEF_down > 0){
   f.DEFdown_ptxt = "防御低下:" + f.DEF_down ;
   f.Y += 30 ;
-  f.DEFdownY = f.Y;
-}
+}  f.DEFdownY = f.Y;
 if(f.ATP_down > 0){
   f.ATPdown_ptxt = "攻撃低下:" + f.ATP_down ; ;
   f.Y += 30 ;
-  f.ATPdownY = f.Y;
-}
+}  f.ATPdownY = f.Y;
 if(f.RES_down > 0){
   f.RESdown_ptxt = "回避低下:" + f.RES_down ; ;
   f.Y += 30 ;
-  f.RESdownY = f.Y;
-}
+}  f.RESdownY = f.Y;
 if(f.DEX_down > 0){
   f.DEXdown_ptxt = "命中低下:" + f.DEX_down ; ;
   f.Y += 30 ;
-  f.DEXdownY = f.Y;
-}
+}  f.DEXdownY = f.Y;
 [endscript]
-[ptext layer="2" x="10" y=f.PoizonY text=&f.Poizon_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="Poizon" overwrite="true" ]
-[ptext layer="2" x="10" y=f.DPoizonY text=&f.DPoizon_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="DeadlyPoizon" overwrite="true" ]
-[ptext layer="2" x="10" y=f.WheezeY text=&f.Wheeze_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="Wheeze" overwrite="true" ]
-[ptext layer="2" x="10" y=f.EstrusY text=&f.Estrus_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="Estrus" overwrite="true" ]
-[ptext layer="2" x="10" y=f.EROdownY text=&f.EROdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="EROdown" overwrite="true" ]
-[ptext layer="2" x="10" y=f.DEFdownY text=&f.DEFdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="DEFdown" overwrite="true" ]
-[ptext layer="2" x="10" y=f.ATPdownY text=&f.ATPdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="ATPdown" overwrite="true" ]
-[ptext layer="2" x="10" y=f.RESdownY text=&f.RESdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="RESdown" overwrite="true" ]
-[ptext layer="2" x="10" y=f.DEXdownY text=&f.DEXdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="DEXdown" overwrite="true" ]
+[ptext layer="2" x="10" y=&f.PoizonY text=&f.Poizon_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="Poizon" overwrite="true" ]
+[ptext layer="2" x="10" y=&f.DPoizonY text=&f.DPoizon_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="DeadlyPoizon" overwrite="true" ]
+[ptext layer="2" x="10" y=&f.WheezeY text=&f.Wheeze_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="Wheeze" overwrite="true" ]
+[ptext layer="2" x="10" y=&f.EstrusY text=&f.Estrus_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="Estrus" overwrite="true" ]
+[ptext layer="2" x="10" y=&f.EROdownY text=&f.EROdown_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="EROdown" overwrite="true" ]
+[ptext layer="2" x="10" y=&f.DEFdownY text=&f.DEFdown_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="DEFdown" overwrite="true" ]
+[ptext layer="2" x="10" y=&f.ATPdownY text=&f.ATPdown_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="ATPdown" overwrite="true" ]
+[ptext layer="2" x="10" y=&f.RESdownY text=&f.RESdown_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="RESdown" overwrite="true" ]
+[ptext layer="2" x="10" y=&f.DEXdownY text=&f.DEXdown_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="DEXdown" overwrite="true" ]
+[endmacro]
 
+[macro name="Hyouji_Test"]
+表示テスト[wt5]
+[eval exp="f.Poizon = 5"][show_score][update_status]
+[eval exp="f.DPoizon = 5"][show_score][update_status]
+[eval exp="f.Wheeze = 5"][show_score][update_status]
+[eval exp="f.Estrus = 5"][show_score][update_status]
+[eval exp="f.ERO_down = 5"][show_score][update_status]
+[eval exp="f.DEF_down = 5"][show_score][update_status]
+[eval exp="f.ATP_down = 5"][show_score][update_status]
+表示テスト終了[wt5]
 [endmacro]
 
 ;--------------------------------------------------------------------------------
@@ -320,7 +322,7 @@ if(f.DEX_down > 0){
 [eval exp="tf.argment= (f.BASE * (f.En_ATP + f.DEF_down) * (1+f.En_ATP_Plus/100) ) / f.Guard + f.rand"]
 [getMathRound var="f.damage"]
 [eval exp="f.damage = 0" cond="f.damage < 0"]
-[eval exp="f.HP -= f.damage"]
+[eval exp="f.HP = f.HP - f.damage"]
 [emb exp="f.damage"]のダメージを受けた。[p]
 [endmacro]
 ;被エロダメージ計算

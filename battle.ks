@@ -108,6 +108,7 @@ for(i=0 ; i<n ; i++){
 [eval exp="f.round++"]
 [eval exp="f.Limit=21"]
 [show_score][update_status]
+;[Hyouji_Test]
 
 *敵パターン抽選
 ;敵のヘッドが表示されます[p]
@@ -365,6 +366,7 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 毒によるダメージ(20)[wt2]
 [eval exp="f.HP -= 20"]
 [eval exp="f.Poizon -= 1"]
+[update_status]
 [jump target="*敗北" cond="f.HP <= 0"]
 [endif]
 
@@ -372,12 +374,14 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 毒によるダメージ(40)[wt2]
 [eval exp="f.HP -= 40"]
 [eval exp="f.DPoizon -= 1"]
+[update_status]
 [jump target="*敗北" cond="f.HP <= 0"]
 [endif]
 
 [if exp="f.Wheeze>0"]
 息切れにより呼吸-1[wt2]
 [eval exp="f.BP -= 1"][eval exp="f.BP = 0" cond="f.BP < 0"]
+[update_status]
 [eval exp="f.Wheeze -= 1"]
 [endif]
 
@@ -385,6 +389,7 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 [eval exp="f.BASE = 1"][EROdamage][eval exp="f.ERO += f.damage"]
 [eval exp="f.ERO = 99" cond="f.ERO > 99"]
 発情により[emb exp="f.damage"]上昇[wt2]
+[update_status]
 [eval exp="f.Estrus -= 1"]
 [endif]
 
