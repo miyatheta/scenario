@@ -1,7 +1,7 @@
 #
 ;メッセージウィンドウの表示
 @layopt layer=message0 visible=true
-[bg storage="mori_yoru.jpg" time="100"]
+[bg2 storage="mori_yoru.jpg" time="100"]
 @layopt layer=2 visible=true
 
 [chara_mod name="suzune" face="怒り" ]
@@ -19,7 +19,7 @@
 出てきなさい！！尾けているのは気づいてるわよ！！[p]
 
 [chara_mod name="suzune" face="怒り" ]
-[image layer=2 visible="true" x=800 y=0 folder="fgimage/chara/sample" storage="180616_npc_t_01d.png"]
+[chara_show name="tutor" left="800" top="0" ]
 
 #尾行していた忍者
 ほう。くのいちごときと甘く見たが…[p]

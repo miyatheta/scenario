@@ -1,8 +1,9 @@
 *start
-[freeimage layer="0"]
+[freeimage layer="2"]
+[freeimage layer="3"]
 #忍者
 「ば、バカな！！くノ一ごときに遅れを取るなど」[p]
-[freeimage layer="2"]
+[chara_hide name="tutor"]
 #鈴猫
 「女一人と甘く見たわね！！」[p]
 [さあ、早く近江に向かわないと！！」[p]

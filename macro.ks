@@ -13,6 +13,20 @@
 [DeckShuffle]
 [endmacro]
 
+;ステージ終了時に読み込む
+[macro name="reset_status"]
+[eval exp="f.HP = 2000 , f.MP = 0 , f.BP = 8 , f.SAN = 60 , f.orgasm = 0 , f.dress = 1"]
+[eval exp="f.ATP_down = 0, f.DEF_down = 0 , f.RES_down = 0, f.DEX_down = 0 ,f.ERO_down = 0"]
+[eval exp="f.ATP_plus = 0, f.DEF_plus = 0, f.RES_plus = 0, f.DEX_plus = 0 , f.ERO_plus = 0"]
+[endmacro]
+
+;敵のデータを読み込む前にリセット
+[macro name="reset_enemy_data"]
+[eval exp="f.En_ATP_Plus = 0, f.En_DFP_Plus = 0 , f.En_DEX_Plus = 0 , f.RES_Plus = 0"]
+[eval exp="f.En_Hand1 = 0 , f.En_Hand2 = 0 "]
+[eval exp="f.En_Pary = 0"]
+[eval exp="f.En_Impotenz= 0"]
+[endmacro]
 
 ;----------------------------------------------------------------------------------------
 ;カード関係
@@ -211,6 +225,7 @@ f.Bind_ptxt = "拘束力:" + f.Bind ;
 [endmacro]
 
 [macro name="update_status"]
+[freeimage layer="2"]
 [iscript]
 f.HP_ptxt = "体力:" + f.HP ;
 f.MP_ptxt = "気力:" + f.MP ;
@@ -225,25 +240,40 @@ if(f.orgasm>0){
   f.orgasm_ptxt = "";
 }
 [endscript]
-[ptext layer="0" x="10" y="590" text=&f.HP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="HP" overwrite="true" ]
-[ptext layer="0" x="10" y="620" text=&f.MP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="MP" overwrite="true" ]
-[ptext layer="0" x="10" y="650" text=&f.BP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="Arts" overwrite="true" ]
-[ptext layer="0" x="10" y="680" text=&f.ERO_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="ERO" overwrite="true" ]
-[ptext layer="0" x="150" y="10" text=&f.orgasm_ptxt size="40" color="0xff1493" edge="white" bold="bold" align="left" name="orgasm" overwrite="true" ]
-[ptext layer="0" x="850" y="10" text=&f.En_HP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_HP" overwrite="true" ]
-[ptext layer="0" x="850" y="40" text=&f.En_MP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_MP" overwrite="true" ]
-[ptext layer="0" x="850" y="70" text=&f.En_ERO_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_ERO" overwrite="true" ]
+[ptext layer="2" x="10" y="590" text=&f.HP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="HP" overwrite="true" ]
+[ptext layer="2" x="10" y="620" text=&f.MP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="MP" overwrite="true" ]
+[ptext layer="2" x="10" y="650" text=&f.BP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="Arts" overwrite="true" ]
+[ptext layer="2" x="10" y="680" text=&f.ERO_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="ERO" overwrite="true" ]
+[ptext layer="2" x="150" y="10" text=&f.orgasm_ptxt size="40" color="0xff1493" edge="white" bold="bold" align="left" name="orgasm" overwrite="true" ]
+[ptext layer="2" x="850" y="10" text=&f.En_HP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_HP" overwrite="true" ]
+[ptext layer="2" x="850" y="40" text=&f.En_MP_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_MP" overwrite="true" ]
+[ptext layer="2" x="850" y="70" text=&f.En_ERO_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="En_ERO" overwrite="true" ]
 [bad_status]
 [endmacro]
 
 ;状態異常表示マクロ
 [macro name="bad_status"]
 [iscript]
-f.Y = 10 ;
+f.Y = 30 ;
 if(f.Poizon > 0){
-  f.poizon_ptxt = "毒:" + f.HP ;
-  f.Y += 10 ;
+  f.Poizon_ptxt = "毒:" + f.Poizon ;
+  f.Y += 30 ;
   f.PoizonY = f.Y;
+}
+if(f.DPoizon > 0){
+  f.DPoizon_ptxt = "猛毒:" + f.DPoizon ;
+  f.Y += 30 ;
+  f.DPoizonY = f.Y;
+}
+if(f.Wheeze > 0){
+  f.Wheeze_ptxt = "息切れ:" + f.Wheeze ;
+  f.Y += 30 ;
+  f.WheezeY = f.Y;
+}
+if(f.Estrus > 0){
+  f.Estrus_ptxt = "発情:" + f.Estrus ;
+  f.Y += 30 ;
+  f.EstrusY = f.Y;
 }
 if(f.ERO_down > 0){
   f.EROdown_ptxt = "感度上昇:" + f.ERO_down ;
@@ -271,12 +301,15 @@ if(f.DEX_down > 0){
   f.DEXdownY = f.Y;
 }
 [endscript]
-[ptext layer="0" x="10" y=f.poizonY text=&f.poizon_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="Poizon" overwrite="true" ]
-[ptext layer="0" x="10" y=f.EROdownY text=&f.EROdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="EROdown" overwrite="true" ]
-[ptext layer="0" x="10" y=f.DEFdownY text=&f.DEFdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="DEFdown" overwrite="true" ]
-[ptext layer="0" x="10" y=f.ATPdownY text=&f.ATPdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="ATPdown" overwrite="true" ]
-[ptext layer="0" x="10" y=f.RESdownY text=&f.RESdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="RESdown" overwrite="true" ]
-[ptext layer="0" x="10" y=f.DEXdownY text=&f.DEXdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="DEXdown" overwrite="true" ]
+[ptext layer="2" x="10" y=f.PoizonY text=&f.Poizon_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="Poizon" overwrite="true" ]
+[ptext layer="2" x="10" y=f.DPoizonY text=&f.DPoizon_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="DeadlyPoizon" overwrite="true" ]
+[ptext layer="2" x="10" y=f.WheezeY text=&f.Wheeze_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="Wheeze" overwrite="true" ]
+[ptext layer="2" x="10" y=f.EstrusY text=&f.Estrus_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="Estrus" overwrite="true" ]
+[ptext layer="2" x="10" y=f.EROdownY text=&f.EROdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="EROdown" overwrite="true" ]
+[ptext layer="2" x="10" y=f.DEFdownY text=&f.DEFdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="DEFdown" overwrite="true" ]
+[ptext layer="2" x="10" y=f.ATPdownY text=&f.ATPdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="ATPdown" overwrite="true" ]
+[ptext layer="2" x="10" y=f.RESdownY text=&f.RESdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="RESdown" overwrite="true" ]
+[ptext layer="2" x="10" y=f.DEXdownY text=&f.DEXdown_ptxt size="20" color="0x000000" edge="white" bold="bold" align="left" name="DEXdown" overwrite="true" ]
 
 [endmacro]
 
@@ -284,7 +317,7 @@ if(f.DEX_down > 0){
 ;被ダメージ計算
 [macro name="damaged"]
 [getrand min="1" max="&f.En_ATP" var="f.rand"]
-[eval exp="tf.argment= (f.BASE * (f.En_ATP - f.Bonus_Orange*5 + f.DEF_down) * (1+f.En_ATP_Plus/100) ) / f.Guard + f.rand"]
+[eval exp="tf.argment= (f.BASE * (f.En_ATP + f.DEF_down) * (1+f.En_ATP_Plus/100) ) / f.Guard + f.rand"]
 [getMathRound var="f.damage"]
 [eval exp="f.damage = 0" cond="f.damage < 0"]
 [eval exp="f.HP -= f.damage"]
@@ -292,7 +325,9 @@ if(f.DEX_down > 0){
 [endmacro]
 ;被エロダメージ計算
 [macro name="EROdamage"]
-[eval exp="tf.argment = f.BASE + f.ERO_down"][eval exp="tf.argment = tf.argment * 1.5" cond="f.orgasm > 0"]
+[eval exp="tf.argment = f.BASE + f.ERO_down"]
+[eval exp="tf.argment = tf.argment * 1.5" cond="f.orgasm > 0"]
+[eval exp="tf.argment = tf.argment * 0.5" cond="f.ERO_DEF > 0"]
 [getMathRound var="f.damage"]
 [endmacro]
 ;--------------------------------------------------------------------------------

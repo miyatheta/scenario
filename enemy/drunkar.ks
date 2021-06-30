@@ -142,7 +142,7 @@ error-battle-970
 *敵回避
 ;敵回避判定[wt5]
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand > 100 - (f.En_RES + f.RES_Plus) "]
+[if exp="f.rand > 100 - (f.En_RES + f.RES_Plus - f.Bonus_Orange*10) "]
 [eval exp="f.En_Pary = 1"]
 #忍者
 遅い！！[r]

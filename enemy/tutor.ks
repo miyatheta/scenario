@@ -142,7 +142,7 @@ error-battle-970
 *敵回避
 ;敵回避判定[wt5]
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand > 100 - (f.En_RES + f.RES_Plus) "]
+[if exp="f.rand > 100 - (f.En_RES + f.RES_Plus - f.Bonus_Orange*10) "]
 [eval exp="f.En_Pary = 1"]
 #忍者
 遅い！！[r]
@@ -225,7 +225,7 @@ error-battle-970
 [s]
 
 *セクハラスキル
-[eval exp="f.BASE = 10"][EROdamage]
+[eval exp="f.BASE = 5"][EROdamage]
 #忍者
 へっ！！おとなしくしな！！[p]
 #
@@ -276,14 +276,18 @@ error-battle-970
 [s]
 
 *バーストセクハラ攻撃
-[eval exp="f.BASE = 20"][EROdamage]
+[eval exp="f.BASE = 7"][EROdamage]
 #忍者
-[emb exp="f.En_name"]は鈴猫の秘所を弄った[p]
+へへっ・・・。いつまで耐えられるかな？[p]
+#
+怪しげな液体で粘つく手で[emb exp="f.En_name"]は鈴猫の秘所を弄った[p]
 #鈴猫
 いやぁっ！！[p]
 #
 鈴猫は[emb exp="f.damage"]の快感を受けた[p]
+媚薬の効果により感度が上昇した[p]
 [eval exp="f.ERO += f.damage"][eval exp="f.En_ERO += 10"]
+[eval exp="f.ERO_down += 2"]
 [call storage="battle.ks" target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [update_status]
@@ -452,27 +456,15 @@ error-battle-970
 [else]
 [call storage="Magic.ks" target="*房中術デバフ"]
 [endif]
-
 #
 [emb exp="f.En_name"]の気力と性欲が霧消した[p]
 [eval exp="f.En_MP = 0 ,f.En_ERO = 0"]
-[eval exp="f.ERO += 25" cond="f.orgasm > 0"]
 [update_status]
-[jump target="*絶頂フィニッシュ" cond="f.ERO >= 100"]
-[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
-#忍者
-へへへ、なかなか良かったぜ[p]
-#
-忍者は嫌らしく笑いながらマラを引き抜くと鈴猫の尻を叩いた[p]
-#鈴猫
-ああんっ！！[p]
-#
-その場にくずおれた鈴猫の秘裂からごぽりと精液が溢れた[p]
 [chara_mod name="suzune" face="厳しい"]
 #鈴猫
-くっ！絶対許さないんだから！！[p]
+残念でした！お馬鹿さん！！[p]
 #
-鈴猫はよろよろと立ち上がると[emb exp="f.En_name"]を睨みつけた[p]
+鈴猫は仁王立ちで[emb exp="f.En_name"]を見下ろした[p]
 [jump target="*レイプ終了"]
 [s]
 

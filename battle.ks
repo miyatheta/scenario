@@ -32,7 +32,7 @@
 *ドローボーナス
 [call storage="tutorial.ks" target="*ドローボーナスについて" cond="f.tutorial01 != 1"]
 [if exp="f.drawColor == 'red' "]
-武：攻撃力＆命中率アップ[wt5]
+武：攻撃力[wt5]
 [eval exp="f.Bonus_Red += 1"]
 [elsif exp="f.drawColor == 'blue' "]
 術：気力＋１０[wt5]
@@ -41,7 +41,7 @@
 息：呼吸＋２、回避率アップ[wt5]
 [eval exp="f.Bonus_Green += 1 ,f.BP += 2"][eval exp="f.BP=10" cond="f.BP>10"]
 [elsif exp="f.drawColor == 'orange' "]
-技：技能クールタイム-１[wt5]
+技：技能クールタイム-１、命中率アップ[wt5]
 [eval exp="f.Bonus_Orange += 1"]
 ;技能クールのための処理
 [iscript]
@@ -237,12 +237,10 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 [elsif exp="f.Target == f.Total && f.Total <= f.Limit "]
 引き分け[wt2]
 [eval exp="f.BP = f.BP - f.BP_reserved"][show_score]
-[jump target="*息切れ" cond="f.BP<0"]
 [jump target="*判定引き分け"]
 [else]
 判定失敗[wt2]
 [eval exp="f.BP = f.BP - f.BP_reserved"][show_score]
-[jump target="*息切れ" cond="f.BP<0"]
 [jump target="*判定失敗"]
 [endif]
 [s]
@@ -286,15 +284,7 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 
 *勝利判定
 [jump target="*勝利" cond="f.En_HP <= 0"]
-[jump target="*息切れ" cond="f.BP<0"]
 [jump target="*ラウンド終了"]
-[s]
-
-*息切れ
-#
-鈴猫は息切れを起こした!![wt5]
-身動きが取れない!![wt5]
-[jump target="*バースト"]
 [s]
 
 *バースト
@@ -370,6 +360,34 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 
 *ラウンド終了
 #
+;バッドステータス解決
+[if exp="f.Poizon>0"]
+毒によるダメージ(20)[wt2]
+[eval exp="f.HP -= 20"]
+[eval exp="f.Poizon -= 1"]
+[jump target="*敗北" cond="f.HP <= 0"]
+[endif]
+
+[if exp="f.DPoizon>0"]
+毒によるダメージ(40)[wt2]
+[eval exp="f.HP -= 40"]
+[eval exp="f.DPoizon -= 1"]
+[jump target="*敗北" cond="f.HP <= 0"]
+[endif]
+
+[if exp="f.Wheeze>0"]
+息切れにより呼吸-1[wt2]
+[eval exp="f.BP -= 1"][eval exp="f.BP = 0" cond="f.BP < 0"]
+[eval exp="f.Wheeze -= 1"]
+[endif]
+
+[if exp="f.Estrus>0"]
+[eval exp="f.BASE = 1"][EROdamage][eval exp="f.ERO += f.damage"]
+[eval exp="f.ERO = 99" cond="f.ERO > 99"]
+発情により[emb exp="f.damage"]上昇[wt2]
+[eval exp="f.Estrus -= 1"]
+[endif]
+
 今回、使用した札は[emb exp="f.Cards[f.Hand[0]]['txt']"]、
 [emb exp="f.Cards[f.Hand[1]]['txt']"]、[emb exp="f.Cards[f.Hand[2]]['txt']"]、
 [emb exp="f.Cards[f.Hand[3]]['txt']"]、[emb exp="f.Cards[f.Hand[4]]['txt']"]です[p]
@@ -377,7 +395,7 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 ;バフリセット
 [eval exp="f.shingan=0 , f.Pary = 0"]
 [eval exp="f.En_Pary = 0"]
-[eval exp="f.critical = 1 , f.Guard = 1"]
+[eval exp="f.critical = 1 , f.Guard = 1 , f.ERO_DEF = 0"]
 [eval exp="f.Red = 0 , f.Blue = 0 , f.Green = 0 , f.Orange = 0"]
 [eval exp="f.Bonus_Honor = 0 "]
 [eval exp="f.Magic_set = 0 , f.Marts_set = 0"]
@@ -413,6 +431,10 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 *勝利
 敵を倒した[p]
 [jump storage="&f.next_PATH" target="&f.next_tag"]
+[s]
+
+*敗北
+鈴猫は敗北した[p]
 [s]
 
 ;絶頂----------------------------------------------------------------------

@@ -62,7 +62,7 @@
 [endif]
 鈴猫は印を構えた[wt5]
 [eval exp="f.MP -= 50"]
-[eval exp="f.Magic_set=1"]
+[eval exp="f.Magic_set=91"]
 [jump storage="battle.ks" target="*ドロー2"][s]
 
 *房中術2準備
@@ -73,7 +73,7 @@
 [endif]
 鈴猫は印を構えた[wt5]
 [eval exp="f.MP -= 30"]
-[eval exp="f.Magic_set=1"]
+[eval exp="f.Magic_set=92"]
 [jump storage="battle.ks" target="*ドロー2"][s]
 
 *ダメージ計算

@@ -1,5 +1,5 @@
 *エネミーデータ
-[call storage="enemy/enemy_data.ks" target="*tutor"]
+[call storage="enemy/enemy_data.ks" target="*insect"]
 [return]error101[s]
 
 *ダメージ計算
@@ -95,7 +95,7 @@ f.returnTag = "*敵行動" + f.Down + "完了";
 [elsif exp="f.rand > 60"]
 [jump target="*回避バフ"]
 [elsif exp="f.rand > 40"]
-[jump target="*守備力アップ"]
+[jump target="*気力ダウン"]
 [else]
 ;else後にはデフォルトの行動を書く
 [jump target="*命中バフ"]
@@ -105,7 +105,7 @@ error-battle-970
 [s]
 
 *攻撃バフ
-「牙を剥く」[r]
+「毒針装填」[r]
 [emb exp="f.En_name"]の攻撃力がアップ[wt5]
 [eval exp="f.En_ATP_Plus = 50"]
 [update_status][show_score]
@@ -113,24 +113,24 @@ error-battle-970
 [s]
 
 *回避バフ
-「疾駆」[r]
+「散開する」[r]
 [emb exp="f.En_name"]の回避力がアップ[wt5]
-[eval exp="f.En_RES_Plus = 20"]
+[eval exp="f.En_RES_Plus = 30"]
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
 [s]
 
 *命中バフ
-「突進準備」[r]
+「包囲する」[r]
 [emb exp="f.En_name"]の命中力がアップ[wt5]
-[eval exp="f.En_DEX_Plus = 10"]
+[eval exp="f.En_DEX_Plus = 20"]
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
 [s]
 
 *気力ダウン
 #
-「マーキング」[wt5]
+「羽音」[wt5]
 鈴猫は気力を５喪失した[p]
 [eval exp="f.MP -= 5"][eval exp="f.MP = 0" cond="f.MP < 0"]
 [update_status][show_score]
@@ -144,10 +144,8 @@ error-battle-970
 [getrand min="1" max="100" var="f.rand"]
 [if exp="f.rand > 100 - (f.En_RES + f.RES_Plus - f.Bonus_Orange*10) "]
 [eval exp="f.En_Pary = 1"]
-#犬
-グウウウウウッ！！[r]
 #
-[emb exp="f.En_name"]は鈴猫の攻撃を回避した[p]
+[emb exp="f.En_name"]は羽ばたいて鈴猫の攻撃を回避した[p]
 [endif]
 [return][s]]
 
@@ -167,7 +165,7 @@ error-battle-970
 [jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
 ;失敗の場合ダメージ
 ;ダメージ演出
-[call target="*ダメージ計算"]
+[damaged]
 ;生死の判定
 [update_status][show_score]
 [jump target="*敗北" cond="f.HP <= 0"]
@@ -177,7 +175,7 @@ error-battle-970
 *チャージ攻撃
 [emb exp="f.En_name"]のチャージ攻撃[p]
 #
-「乱れ爪牙」[wt5]
+「毒針」[wt5]
 [eval exp="f.BASE = 5 , f.En_DEX = 0 "]
 ;回避判定
 [call storage="battle.ks" target="*回避"]
@@ -187,7 +185,7 @@ error-battle-970
 [jump storage="battle.ks" target="*空蝉発動" cond="f.invincible > 0"]
 ;失敗の場合ダメージ
 ;ダメージ演出
-[call target="*ダメージ計算"]
+[damaged]
 ;生死の判定
 [update_status][show_score]
 [jump target="*敗北" cond="f.HP <= 0"]
@@ -200,10 +198,12 @@ error-battle-970
 
 ;拘束----------------------------------------------------------------------------
 *拘束開始
+#
 鈴猫は体勢を崩した！！[p]
 [jump target="*インポ状態" cond="f.En_Impotenz > 0"]
 [eval exp="f.BASE = 0, f.En_DEX = 70"]
-[emb exp="f.En_name"]は鈴猫にのしかかった！！[p]
+[emb exp="f.En_name"]が鈴猫に殺到した！！[p]
+「掻痒毒針」[wt5]
 ;回避判定
 [call storage="battle.ks" target="*回避"]
 ;回避成功の場合ジャンプ
@@ -211,12 +211,9 @@ error-battle-970
 ;無敵の場合ジャンプ
 [jump storage="battle.ks" target="*空蝉発動拘束時" cond="f.invincible > 0"]
 ;失敗の場合拘束
-#鈴猫
-いやっ！！離しなさいよ！！[p]
-何とか引き離したが鈴猫は大きく呼吸を乱した！！[p]
-鈴猫は呼吸を喪失した[p]
 #
-[eval exp="f.BP -= 3"][eval exp="f.BP = 0 " cond="f.BP < 0"]
+鈴猫の命中率が低下した[p]
+[eval exp="f.DEX_down = 10"]
 ;f.Bind=拘束力,f.Rt_Bind=拘束状態であることを示すフラグ
 [jump storage="battle.ks" target="*ラウンド終了"]
 [s]

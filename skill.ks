@@ -31,6 +31,7 @@ f.skill3_ptxt = f.skill[3]['name'] + 'CT(' +  f.skill[3]['cooltime'] + ')';
 [endif]
 鈴猫は变化の術を使った。衣装を修繕した[wt5]
 [eval exp="f.dress=1"]
+[call storage="As_face.ks"]
 [chara_mod name="suzune" face="怒り" ]
 [eval exp="f.skill[1]['cooltime'] = 15"]
 [jump storage="battle.ks" target="&f.returnTag"]

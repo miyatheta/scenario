@@ -22,6 +22,7 @@
 [chara_face name="suzune" face="レイプ目" storage="chara/suzune/1/レイプ目.png"]
 
 [chara_new name="chikusa" storage="chara/sample/chikusa.png" jname="千草" width=660]
+[chara_new name="tutor" storage="chara/sample/180616_npc_t_01d.png" jname="忍者" width=400]
 
 [iscript]
 f.item=[0,1,2,3,4,5,6,7,8,9];

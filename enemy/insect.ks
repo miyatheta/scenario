@@ -1,5 +1,4 @@
 *エネミーデータ
-[call storage="enemy/enemy_data.ks" target="*insect"]
 [return]error101[s]
 
 *ダメージ計算
@@ -21,7 +20,7 @@
 [if exp="f.En_MP >= 100"]
 [eval exp="f.En_BURST = 1"]
 [eval exp="f.En_Hand1 = 10 , f.En_Hand2 = 9"]
-[emb exp="f.En_name"]が印を切った[p]
+[emb exp="f.En_name"]が隊列を組んだ！！[p]
 
 [elsif exp="f.rand<25"]
 [eval exp="f.En_Hand1 = 7 , f.En_Hand2 = 10"]
@@ -142,7 +141,7 @@ error-battle-970
 *敵回避
 ;敵回避判定[wt5]
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand > 100 - (f.En_RES + f.RES_Plus) "]
+[if exp="f.rand > 100 - (f.En_RES + f.RES_Plus - f.Bonus_Orange*10) "]
 [eval exp="f.En_Pary = 1"]
 #
 [emb exp="f.En_name"]は羽ばたいて鈴猫の攻撃を回避した[p]
@@ -176,7 +175,7 @@ error-battle-970
 [emb exp="f.En_name"]のチャージ攻撃[p]
 #
 「毒針」[wt5]
-[eval exp="f.BASE = 5 , f.En_DEX = 0 "]
+[eval exp="f.BASE = 1 , f.En_DEX = 0 "]
 ;回避判定
 [call storage="battle.ks" target="*回避"]
 ;回避成功の場合ジャンプ
@@ -186,6 +185,9 @@ error-battle-970
 ;失敗の場合ダメージ
 ;ダメージ演出
 [damaged]
+;特殊効果
+[eval exp="f.Poizon = 5"]
+鈴猫は毒状態になった[wt5]
 ;生死の判定
 [update_status][show_score]
 [jump target="*敗北" cond="f.HP <= 0"]
@@ -212,8 +214,8 @@ error-battle-970
 [jump storage="battle.ks" target="*空蝉発動拘束時" cond="f.invincible > 0"]
 ;失敗の場合拘束
 #
-鈴猫の命中率が低下した[p]
-[eval exp="f.DEX_down = 10"]
+鈴猫の感度が上昇した[p]
+[eval exp="f.ERO_down += 1"]
 ;f.Bind=拘束力,f.Rt_Bind=拘束状態であることを示すフラグ
 [jump storage="battle.ks" target="*ラウンド終了"]
 [s]

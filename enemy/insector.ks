@@ -21,7 +21,7 @@
 [if exp="f.En_MP >= 100"]
 [eval exp="f.En_BURST = 1"]
 [eval exp="f.En_Hand1 = 10 , f.En_Hand2 = 9"]
-[emb exp="f.En_name"]が印を切った[p]
+蟲忍が印を切った[p]
 
 [elsif exp="f.rand<25"]
 [eval exp="f.En_Hand1 = 10 , f.En_Hand2 = 10"]
@@ -139,7 +139,7 @@ error-battle-970
 #
 「毒液」[wt5]
 鈴猫は毒状態になった[p]
-[eval exp="f.BP -= 1"][eval exp="f.BP = 0" cond="f.BP < 0"]
+[eval exp="f.Poizon = 5"]
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
 [s]
@@ -149,7 +149,7 @@ error-battle-970
 *敵回避
 ;敵回避判定[wt5]
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand > 100 - (f.En_RES + f.RES_Plus) "]
+[if exp="f.rand > 100 - (f.En_RES + f.RES_Plus - f.Bonus_Orange*10) "]
 [eval exp="f.En_Pary = 1"]
 #蟲忍
 遅い！！[r]
@@ -183,7 +183,8 @@ error-battle-970
 
 *チャージ攻撃
 [emb exp="f.En_name"]のチャージ攻撃[p]
-[eval exp="f.BASE = 5 , f.En_DEX = 0 "]
+「猛毒の吐息」[wt5]
+[eval exp="f.BASE = 1 , f.En_DEX = 30 "]
 ;回避判定
 [call storage="battle.ks" target="*回避"]
 ;回避成功の場合ジャンプ
@@ -193,6 +194,10 @@ error-battle-970
 ;失敗の場合ダメージ
 ;ダメージ演出
 [damaged]
+;特殊効果
+鈴猫は猛毒状態になった[r]
+感度が上昇した[r]
+[eval exp="f.DPoizon = 5 "][eval exp="f.ERO_down += 1"]
 ;生死の判定
 [update_status][show_score]
 [jump target="*敗北" cond="f.HP <= 0"]
@@ -208,8 +213,8 @@ error-battle-970
 鈴猫は体勢を崩した！！[p]
 [jump target="*インポ状態" cond="f.En_Impotenz > 0"]
 [eval exp="f.BASE = 0, f.En_DEX = 70"]
-「隙あり！！」[wt5]
-[emb exp="f.En_name"]は鈴猫に組み付いた[p]
+「そこだ、捕らえよ」[wt5]
+蟲忍の命令に従い[emb exp="f.En_name"]が鈴猫に絡みつく[p]
 ;回避判定
 [call storage="battle.ks" target="*回避"]
 ;回避成功の場合ジャンプ
@@ -232,19 +237,16 @@ error-battle-970
 [s]
 
 *セクハラスキル
-[eval exp="tf.argment = 10 + f.ERO_down"][eval exp="tf.argment = f.argment * 1.5" cond="f.orgasm > 0"]
-[getMathRound var="f.damage"]
 #蟲忍
-そこだ、搾り取れ・・・[p]
-#
-[emb exp="f.En_name"]は鈴猫の胸に吸い付いた[p]
+ふふふ、苦しめ…！[p]
+「媚薬注入」[p]
+[emb exp="f.En_name"]は鈴猫の腿に毒針を突き立てた[p]
 #鈴猫
-あんっ！！[p]
+きゃあっ！？[p]
+（…身体がどんどん熱くなるっ！？）[p]
 #
-鈴猫は[emb exp="f.damage"]の快感を受けた[p]
-[eval exp="f.En_ERO += f.damage"]
-[call storage="battle.ks" target="*絶頂" cond="f.ERO >= 100"]
-[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
+鈴猫は発情状態になった！！[p]
+[eval exp="f.Estrus = 5 "]
 [update_status][show_score]
 [jump storage="battle.ks" target="&f.returnTag"]
 [s]
@@ -265,7 +267,7 @@ error-battle-970
 
 *拘束引き分け
 #蟲忍
-暴れんじゃねえよ！[p]
+大人しくしろ…[p]
 #
 [emb exp="f.En_name"]は鈴猫を締め上げた[r]
 １０のダメージを受けた。[p]
@@ -284,14 +286,16 @@ error-battle-970
 [s]
 
 *バーストセクハラ攻撃
+[eval exp="f.BASE = 10"][EROdamage]
 #蟲忍
-[emb exp="f.En_name"]は鈴猫の秘所を弄った[p]
-#鈴猫
-いやぁっ！！[p]
+そこだ、搾り取れ・・・[p]
 #
-鈴猫は２０の快感を受けた[p]
-[eval exp="f.ERO += 20"][eval exp="f.ERO += 10" cond="f.orgasm > 0"]
-[eval exp="f.En_ERO += 10"]
+蟲忍の号令に[emb exp="f.En_name"]が鈴猫の胸に吸い付いた[p]
+#鈴猫
+あんっ！！[p]
+#
+鈴猫は[emb exp="f.damage"]の快感を受けた[p]
+[eval exp="f.ERO += damage"][eval exp="f.En_ERO += 10"]
 [call storage="battle.ks" target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [update_status]
@@ -335,6 +339,7 @@ error-battle-970
 [return][s]
 
 *レイプスキル
+[eval exp="f.BASE = 10"][EROdamage]
 蟲忍はしっかりと鈴猫の腰を抱え込むと激しく腰を打ち付けた[p]
 [chara_mod name="suzune" face="喘ぎ"]
 #蟲忍
@@ -342,8 +347,8 @@ error-battle-970
 #鈴猫
 んっ！！こんな奴にぃ！！ううんっ！！[p]
 #
-鈴猫は１０の快感を受けた[p]
-[eval exp="f.ERO += 10"][eval exp="f.ERO += 5" cond="f.orgasm > 0"]
+鈴猫は[emb exp="f.damage"]の快感を受けた[p]
+[eval exp="f.ERO += damage"]
 [call storage="battle.ks" target="*絶頂" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
 [update_status]
@@ -411,16 +416,11 @@ error-battle-970
 #
 鈴猫は精の迸りを子宮に感じながら嬌声を上げた[r]
 #
-[if exp="f.ERO_DEF > 0"]
-鈴猫は１０の快感を受けた[p]
-[eval exp="f.ERO += 10"]
-[else]
-鈴猫は５０の快感を受けた[p]
-[eval exp="f.ERO += 50"]
-[endif]
+[eval exp="f.BASE = 50"][EROdamage]
+鈴猫は[emb exp="f.damage"]の快感を受けた[p]
+[eval exp="f.ERO += f.damage"]
 [emb exp="f.En_name"]の気力と性欲が霧消した[p]
 [eval exp="f.En_MP = 0 ,f.En_ERO = 0"]
-[eval exp="f.ERO += 25" cond="f.orgasm > 0"]
 [update_status]
 [jump target="*絶頂フィニッシュ" cond="f.ERO >= 100"]
 [chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
@@ -460,27 +460,15 @@ error-battle-970
 [else]
 [call storage="Magic.ks" target="*房中術デバフ"]
 [endif]
-
 #
 [emb exp="f.En_name"]の気力と性欲が霧消した[p]
 [eval exp="f.En_MP = 0 ,f.En_ERO = 0"]
-[eval exp="f.ERO += 25" cond="f.orgasm > 0"]
 [update_status]
-[jump target="*絶頂フィニッシュ" cond="f.ERO >= 100"]
-[chara_mod name="suzune" face="苦しみ" cond="f.ERO >= 60 && f.orgasm == 0"]
-#蟲忍
-へへへ、なかなか良かったぜ[p]
-#
-蟲忍は嫌らしく笑いながらマラを引き抜くと鈴猫の尻を叩いた[p]
-#鈴猫
-ああんっ！！[p]
-#
-その場にくずおれた鈴猫の秘裂からごぽりと精液が溢れた[p]
 [chara_mod name="suzune" face="厳しい"]
 #鈴猫
-くっ！絶対許さないんだから！！[p]
+残念でした！お馬鹿さん！！[p]
 #
-鈴猫はよろよろと立ち上がると[emb exp="f.En_name"]を睨みつけた[p]
+鈴猫は仁王立ちで[emb exp="f.En_name"]を見下ろした[p]
 [jump target="*レイプ終了"]
 [s]
 

@@ -24,12 +24,26 @@
 
 [clearstack stack="call" ]
 [freeimage layer="0" ]
-[bg storage="japanese04_night_dark.jpg" time="100"]
-[eval exp="f.dress=1"][call storage="asset/As_face.ks"]
+[bg2 storage="japanese04_night_dark.jpg" time="100"]
+[eval exp="f.dress=1"][call storage="As_face.ks"]
 [chara_mod name="suzune" face="柔らか" ]
 [chara_show name="suzune" left="-100" top="-20"]
 @layopt layer=message0 visible=true
 @layopt layer=2 visible=true
+
+#
+豊川のほとり、三河の属城が一つ野田城[p]
+藪の中に埋もれるような小城は今、張り詰めた空気に満ちていた[p]
+物見櫓の兵が見やる先には一面の夜営が広がっている[p]
+篝火に無数の幟が翻り、飯を炊く煙が濛々と立ち昇る[p]
+5百人足らずの野田城は今、3万からなる武田軍に完全包囲されていた[p]
+小城ながらも地形を活かし、先年から増強を重ねた野田城は弱い砦ではない[p]
+武田軍もそのことは承知しており、数日前から完全包囲の陣を敷いたまま力攻めしてこようとはしない[p]
+持久戦、兵糧攻めが狙いだろうか[p]
+幸いにして備蓄はゆうに1ヶ月分はある[p]
+その間に三河の徳川本軍が救援に来てくれればよいのだが[p]
+昨年末に大敗を喫して大将、命からがら逃げ帰ったばかりである[p]
+
 
 #鈴猫
 鈴猫、只今参りました[r]
@@ -38,7 +52,11 @@
 [chara_show name="chikusa" left="200" top="-600" height=1600 width=1600]
 
 #千草
-鈴猫、お館様がお亡くなりになりました[p]
+鈴猫、よく来てくれました[p]
+#
+
+
+お館様がお亡くなりになりました[p]
 
 [chara_mod name="suzune" face="厳しい" ]
 
