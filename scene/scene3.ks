@@ -24,4 +24,4 @@
 息を吹き返した・・・わけではない[r]
 #
 ここまで[p]
-[jump storage="stage1.ks" target="*start"]
+[jump storage="Route_select1.ks" target="*start"]

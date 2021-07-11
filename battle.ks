@@ -440,6 +440,8 @@ if(f.Total > 21 && f.Cards[f.Draw3]['value']==11){
 
 *敗北
 鈴猫は敗北した[p]
+[eval exp="f.next_tag = f.next_tag + 'defeat' "]
+[jump storage="&f.next_PATH" target="&f.next_tag"]
 [s]
 
 ;絶頂----------------------------------------------------------------------

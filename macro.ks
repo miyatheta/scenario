@@ -291,6 +291,11 @@ if(f.DEX_down > 0){
   f.DEXdown_ptxt = "命中低下:" + f.DEX_down ; ;
   f.Y += 30 ;
 }  f.DEXdownY = f.Y;
+if(f.Parasite == 1){
+  f.Parasite_ptxt = "寄生蟲:沈静化" ;
+}elsif(f.Parasite > 1){
+  f.Parasite_ptxt = "寄生蟲:興奮中" ;
+}
 [endscript]
 [ptext layer="2" x="10" y=&f.PoizonY text=&f.Poizon_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="Poizon" overwrite="true" ]
 [ptext layer="2" x="10" y=&f.DPoizonY text=&f.DPoizon_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="DeadlyPoizon" overwrite="true" ]
@@ -301,6 +306,7 @@ if(f.DEX_down > 0){
 [ptext layer="2" x="10" y=&f.ATPdownY text=&f.ATPdown_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="ATPdown" overwrite="true" ]
 [ptext layer="2" x="10" y=&f.RESdownY text=&f.RESdown_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="RESdown" overwrite="true" ]
 [ptext layer="2" x="10" y=&f.DEXdownY text=&f.DEXdown_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="DEXdown" overwrite="true" ]
+[ptext layer="2" x="10" y=500 text=&f.Parasite_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="Parasite" overwrite="true" ]
 [endmacro]
 
 [macro name="Hyouji_Test"]
@@ -312,6 +318,7 @@ if(f.DEX_down > 0){
 [eval exp="f.ERO_down = 5"][show_score][update_status]
 [eval exp="f.DEF_down = 5"][show_score][update_status]
 [eval exp="f.ATP_down = 5"][show_score][update_status]
+[eval exp="f.Parasite = 1"][show_score][update_status]
 表示テスト終了[wt5]
 [endmacro]
 
@@ -329,6 +336,8 @@ if(f.DEX_down > 0){
 [macro name="EROdamage"]
 [eval exp="tf.argment = f.BASE + f.ERO_down"]
 [eval exp="tf.argment = tf.argment * 1.5" cond="f.orgasm > 0"]
+[eval exp="tf.argment = tf.argment * 2" cond="f.Parasite > 1"]
+[eval exp="tf.argment = tf.argment * 2" cond="f.Pregnant > 1"]
 [eval exp="tf.argment = tf.argment * 0.5" cond="f.ERO_DEF > 0"]
 [getMathRound var="f.damage"]
 [endmacro]

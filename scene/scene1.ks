@@ -88,5 +88,5 @@
 [cm][clearfix]
 @freeimage layer="0"
 @layopt layer=message0 visible=false
-[jump storage="scene2.ks"]
+[jump storage="scene/scene2.ks"]
 [s]
