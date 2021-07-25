@@ -90,7 +90,7 @@ f.returnTag = "*敵行動" + f.Down + "完了";
 ;⑧何回目のドローか？
 [Calc_Card]
 [getrand min="1" max="100" var="f.rand"]
-[if exp="f.rand += 20" cond="f.Poizon > 0"]
+[eval exp="f.rand += 20" cond="f.Poizon > 0"]
 [if exp="f.rand > 80"]
 [jump target="*吸収"]
 [elsif exp="f.rand > 60"]

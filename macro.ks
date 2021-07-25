@@ -293,8 +293,10 @@ if(f.DEX_down > 0){
 }  f.DEXdownY = f.Y;
 if(f.Parasite == 1){
   f.Parasite_ptxt = "寄生蟲:沈静化" ;
-}elsif(f.Parasite > 1){
+}else if(f.Parasite > 1){
   f.Parasite_ptxt = "寄生蟲:興奮中" ;
+}else{
+  f.Parasite_ptxt = "" ;
 }
 [endscript]
 [ptext layer="2" x="10" y=&f.PoizonY text=&f.Poizon_ptxt size="20" color="0xdc143c" edge="white" bold="bold" align="left" name="Poizon" overwrite="true" ]

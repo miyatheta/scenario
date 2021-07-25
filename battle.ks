@@ -107,7 +107,8 @@ for(i=0 ; i<n ; i++){
 *ラウンド開始
 [eval exp="f.round++"]
 [eval exp="f.Limit=21"]
-[show_score][update_status]
+[show_score]
+[update_status]
 ;[Hyouji_Test]
 
 *敵パターン抽選
